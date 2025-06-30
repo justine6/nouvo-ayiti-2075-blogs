@@ -1,8 +1,10 @@
 ---
-title: "Our Mission: Restoring Hope in New Haiti"
+title: "New Haiti Info"
 date: "2025-06-27T10:00:00.000Z"
-author: "New Haiti Team 2075"
-excerpt: "New Haiti Team 2075 is dedicated to restoring unity, dignity, and peace across Haiti. Learn more about our mission."
+author:
+  name: New Haiti Team 2075
+  picture: "/images/nouvoayiti2075-logo.png"
+excerpt: "A foundational post welcoming you to the Nouvo Ayiti 2075 blog, setting the stage for our journey towards a brighter future."
 coverImage: "/images/blog/mission-banner.png"
 ogImage:
   url: "/images/blog/mission-banner.png"
