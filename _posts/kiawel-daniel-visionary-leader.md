@@ -1,0 +1,58 @@
+---
+title: "Kiawel Daniel: A Visionary Leader for a New Haiti"
+date: "2025-06-30T00:00:00Z" # Adjust if needed
+author: "New Haiti Team 2075"
+excerpt: "Learn about Kiawel Daniel, the visionary leader behind Nouvo Ayiti 2075, and his commitment to national renewal, social justice, and sustainable development."
+coverImage: "/images/blog/kiawel-daniel-profile.jpg" # Make sure this matches the actual file name and path
+ogImage:
+  url: "/images/blog/kiawel-daniel-profile.jpg" # Same as coverImage, correctly indented
+---
+
+Kiawel Daniel: A Visionary Leader for a New Haiti
+
+Kiawel Daniel is a Haitian entrepreneur, community builder,
+and forward-thinking statesman whose life’s work reflects a deep commitment to
+national renewal, social justice, and sustainable development. With academic
+credentials in both Business Administration (MBA) and Law, Daniel combines
+strategic thinking with legal rigor to address the foundational challenges
+facing modern Haiti.
+
+A self-made businessman, Daniel has successfully launched
+and managed enterprises in sectors ranging from agriculture and logistics to
+education and local manufacturing. His ventures are not only economically
+viable but socially rooted—aimed at job creation, youth empowerment, and
+revitalizing local economies. His business philosophy centers on ethical
+entrepreneurship and investing in Haitian potential.
+
+What distinguishes Daniel is his unique ability to bridge
+divides. In times of national polarization, he has consistently brought
+together voices from civil society, the diaspora, grassroots organizers, and
+faith leaders. His approach is grounded in dialogue, unity, and collective
+responsibility. This capacity to unite divergent groups around a shared vision
+has earned him wide respect as a man of peace and principle.
+
+Daniel’s vision for Haiti is bold yet grounded: a secure,
+sovereign, and sustainable nation that values its people as its greatest asset.
+He champions reforms in healthcare, education, infrastructure, and
+environmental resilience, always linking them back to human dignity. For him,
+rebuilding Haiti is as much about restoring trust and moral leadership as it is
+about cement and steel.
+
+Daniel is currently based in the United States, where he
+serves as a cabinet-level advisor to former U.S. President Donald J. Trump. His
+proximity to global leadership and policy environments further enriches his
+capacity to act as a bridge between Haiti and international allies.
+
+Personally, Daniel is deeply reflective. A lover of history
+and philosophy, he finds balance in music—kompa, jazz, and classical—and
+reconnects with his roots through nature hikes in the Haitian countryside. He
+is fluent in French, Haitian Creole, English, and Spanish, making him an
+effective communicator on both the local and global stage.
+
+Kiawel Daniel is not just a man of vision; he is a man of
+action, compassion, and unwavering dedication. Whether through business,
+community service, or thought leadership, he represents the kind of
+transformative energy Haiti urgently needs.
+
+If leadership is about lifting others, Daniel has spent his
+life doing just that—quietly, steadily, and with fierce love for his homeland.

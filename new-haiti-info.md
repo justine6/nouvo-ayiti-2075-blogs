@@ -1,15 +1,13 @@
 ---
-title: "New Haiti Info"
-date: "2025-06-27T10:00:00.000Z"
-author:
-  name: New Haiti Team 2075
-  picture: "/images/nouvoayiti2075-logo.png"
-excerpt: "A foundational post welcoming you to the Nouvo Ayiti 2075 blog, setting the stage for our journey towards a brighter future."
-coverImage: "/images/blog/mission-banner.png"
+title: "New Haiti Information"
+date: "2025-06-30T00:00:00Z" # Adjust date as needed
+author: "New Haiti Team 2075"
+excerpt: "Learn more about the New Haiti initiative."
+coverImage: "/images/your-new-haiti-image.png" # Update path to an actual image
 ogImage:
-  url: "/images/blog/mission-banner.png"
+  url: "/images/your-new-haiti-image.png" # Update path to an actual image
 ---
-
+# Welcome to New Haiti Information!
 ## The Vision for a Brighter Future
 
 New Haiti Team 2075 is a movement born out of the desire to restore unity, dignity, and peace across Haiti. Our vision is rooted in rebuilding hope, empowering communities, and laying the foundation for a brighter, inclusive future for all Haitians.
