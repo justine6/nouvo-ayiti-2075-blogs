@@ -1,25 +1,27 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from "fs";
+import { join } from "path";
+import matter from "gray-matter";
+import { Post } from "@/interfaces/post";
 
-export function getAllPosts(locale: string) {
-  const dirPath = path.join(process.cwd(), 'src/app/content/articles', locale);
+const postsDirectory = join(process.cwd(), "src/_posts");
 
-  if (!fs.existsSync(dirPath)) {
-    return [];
-  }
+export function getAllPosts(locale: string): Post[] {
+  const slugs = fs.readdirSync(postsDirectory);
 
-  const files = fs.readdirSync(dirPath).filter((file) => file.endsWith('.mdx'));
-
-  return files.map((filename) => {
-    const slug = filename.replace(/\.mdx$/, '');
-    const filePath = path.join(dirPath, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContent);
+  const posts = slugs.map((slug) => {
+    const fullPath = join(postsDirectory, slug);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data } = matter(fileContents);
 
     return {
-      ...data,
-      slug,
+      title: data.title,
+      slug: slug.replace(/\.mdx$/, ""),
+      date: data.date,
+      author: data.author,
+      excerpt: data.excerpt,
+      coverImage: data.coverImage,
     };
   });
+
+  return posts;
 }
