@@ -17,11 +17,11 @@ This project is a blog platform dedicated to sharing the vision and mission of N
 
 ## Features
 
-* **Next.js Framework**: Utilizes the latest features of Next.js for a fast and efficient blog.
-* **Markdown Support**: Blog posts are written in Markdown for easy content creation.
-* **Dynamic Routing**: Automatically generates routes for blog posts based on Markdown files.
-* **Image Optimization**: Handles image loading and optimization (e.g., mission map, logo).
-* **Responsive Design**: Built to look great on various devices.
+- **Next.js Framework**: Utilizes the latest features of Next.js for a fast and efficient blog.
+- **Markdown Support**: Blog posts are written in Markdown for easy content creation.
+- **Dynamic Routing**: Automatically generates routes for blog posts based on Markdown files.
+- **Image Optimization**: Handles image loading and optimization (e.g., mission map, logo).
+- **Responsive Design**: Built to look great on various devices.
 
 ## Getting Started
 
@@ -30,19 +30,23 @@ Follow these instructions to get a copy of the project up and running on your lo
 ### Prerequisites
 
 You'll need the following installed on your machine:
-* Node.js (LTS version recommended)
-* npm (Node Package Manager, comes with Node.js) or Yarn
-* Git
+
+- Node.js (LTS version recommended)
+- npm (Node Package Manager, comes with Node.js) or Yarn
+- Git
 
 ### Installation
 
 1.  **Clone the repository:**
+
     ```bash
     git clone [https://github.com/YOUR_USERNAME/nouvo-ayiti-2075-blogs.git](https://github.com/YOUR_USERNAME/nouvo-ayiti-2075-blogs.git)
     ```
+
     (Replace `YOUR_USERNAME` with your actual GitHub username)
 
 2.  **Navigate into the project directory:**
+
     ```bash
     cd nouvo-ayiti-2075-blogs
     ```
@@ -62,3 +66,4 @@ To run the project in development mode:
 npm run dev
 # or if you use Yarn
 # yarn dev
+```

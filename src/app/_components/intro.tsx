@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 // Keep this import if it was already there and CMS_NAME is used elsewhere.
 // If you are NOT using CMS_NAME anywhere else in your project, you can remove this line.
@@ -23,7 +23,7 @@ export default function Intro() {
       </h1>
       {/* This is the description paragraph. You can modify or remove it if you wish. */}
       <h4 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        A blog about rebuilding hope and empowering communities in{' '}
+        A blog about rebuilding hope and empowering communities in{" "}
         <Link
           href="https://nouvoayiti2075.com" // You can change this to your main website URL if you have one
           className="underline hover:text-blue-600 duration-200 transition-colors"

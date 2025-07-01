@@ -1,28 +1,20 @@
-import { Post } from "@/interfaces/post";
-import fs from "fs";
-import matter from "gray-matter";
-import { join } from "path";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
-const postsDirectory = join(process.cwd(), "_posts");
+export function getPostBySlug(locale: string, slug: string) {
+  const filePath = path.join(process.cwd(), 'src/app/content/articles', locale, `${slug}.mdx`);
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
-}
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
 
-export function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const { data, content } = matter(fileContent);
 
-  return { ...data, slug: realSlug, content } as Post;
-}
-
-export function getAllPosts(): Post[] {
-  const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-  return posts;
+  return {
+    ...data,
+    content,
+    slug,
+  };
 }

@@ -61,9 +61,11 @@ export default function RootLayout({
       <body
         className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
       >
-        <ThemeSwitcher /> {/* This component is often involved in hydration errors related to theme/mode */}
+        <ThemeSwitcher />{" "}
+        {/* This component is often involved in hydration errors related to theme/mode */}
         <div className="min-h-screen">
-          <main>{children}</main> {/* Added <main> tag for semantic HTML, as seen in some starters */}
+          <main>{children}</main>{" "}
+          {/* Added <main> tag for semantic HTML, as seen in some starters */}
         </div>
         <Footer />
       </body>
