@@ -2,19 +2,24 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-export function getPostBySlug(locale: string, slug: string) {
-  const filePath = path.join(process.cwd(), 'src/app/content/articles', locale, `${slug}.mdx`);
+export function getAllPosts(locale: string) {
+  const dirPath = path.join(process.cwd(), 'src/app/content/articles', locale);
 
-  if (!fs.existsSync(filePath)) {
-    return null;
+  if (!fs.existsSync(dirPath)) {
+    return [];
   }
 
-  const fileContent = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContent);
+  const files = fs.readdirSync(dirPath).filter((file) => file.endsWith('.mdx'));
 
-  return {
-    ...data,
-    content,
-    slug,
-  };
+  return files.map((filename) => {
+    const slug = filename.replace(/\.mdx$/, '');
+    const filePath = path.join(dirPath, filename);
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const { data } = matter(fileContent);
+
+    return {
+      ...data,
+      slug,
+    };
+  });
 }
