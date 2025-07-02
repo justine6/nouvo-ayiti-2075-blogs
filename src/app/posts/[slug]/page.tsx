@@ -25,11 +25,13 @@ export default async function Post({ params }: { params: Params }) {
         }
       : raw.author;
 
-  const post: PostType = {
-    ...raw,
-    content,
-    author,
-  };
+const post: PostType = {
+  ...raw,
+  content,
+  author,
+  coverImage: raw.coverImage || "/images/default.jpg",
+};
+
 
   return (
     <main>
