@@ -1,35 +1,39 @@
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/api";
 import markdownToHtml from "@/lib/markdownToHtml";
-import Container from "@app/_components/container";
-import Header from "@app/_components/header";
-import PostBody from "@app/_components/post-body";
-import PostHeader from "@app/_components/post-header";
-import Alert from "@app/_components/alert";
-import type { Metadata } from "next";
-import { CMS_NAME } from "@/lib/constants";
-import type { Post as PostType } from "@/interfaces/post";
+import Container from "@/app/_components/container";
+import Header from "@/app/_components/header";
+import { PostHeader } from "@/app/_components/post-header";
+import { PostBody } from "@/app/_components/post-body";
+import Alert from "@/app/_components/alert";
 
-type Params = {
-  params: {
-    locale: string;
-    slug: string;
+import type { PostType, Params } from "@/interfaces/post";
+
+export default async function Post({ params }: { params: Params }) {
+  const raw = getPostBySlug(params.slug);
+
+  if (!raw) return notFound();
+
+  const content = await markdownToHtml(raw.content || "");
+
+  // Normalize author (in case it's a string in .mdx)
+  const author =
+    typeof raw.author === "string"
+      ? {
+          name: raw.author,
+          picture: "/images/default-author.jpg", // Use your own default
+        }
+      : raw.author;
+
+  const post: PostType = {
+    ...raw,
+    content,
+    author,
   };
-};
-
-
-export default async function Post({ params }: Params) {
-  const post: PostType | null = getPostBySlug("en", params.slug); // ✅ hardcoded fallback to 'en'
-
-
-
-  if (!post) return notFound();
-
-  const content = await markdownToHtml(post.content || "");
 
   return (
     <main>
-      <Alert preview={post.preview} />
+      <Alert preview={!!post.preview} />
       <Container>
         <Header />
         <article className="mb-32">
@@ -39,7 +43,7 @@ export default async function Post({ params }: Params) {
             date={post.date}
             author={post.author}
           />
-          <PostBody content={content} />
+          <PostBody content={post.content} />
         </article>
       </Container>
     </main>

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -12,19 +13,18 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "target": "ES2017",
+    "baseUrl": ".", 
+    "paths": {
+      "@interfaces/*": ["src/interfaces/*"],
+      "@lib/*": ["src/lib/*"],
+      "@app/*": ["src/app/*"],
+      "@/*": ["src/*"]
+    },
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "baseUrl": ".", // 👈 Add this if it’s not already present
-    "paths": {
-      "@app/*": ["src/app/*"],
-      "@lib/*": ["src/lib/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@/*": ["src/*"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -34,4 +34,3 @@
   ],
   "exclude": ["node_modules"]
 }
-
