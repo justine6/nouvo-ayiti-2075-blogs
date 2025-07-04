@@ -14,7 +14,8 @@ export default function Index() {
   return (
     <main>
       {/* Mission Banner */}
-      <section className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+      <section className="relative w-full h-[40vh] md:h-[55vh] overflow-hidden">
+
         <Image
           src="/images/blog/mission-banner.png"
           alt="Map of Haiti"
