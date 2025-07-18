@@ -2,7 +2,18 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import type { PostType } from '@/interfaces/post';
+
+type PostPreviewProps = {
+  title: string;
+  coverImage: string;
+  date: string;
+  excerpt: string;
+  author: {
+    name: string;
+    picture?: string;
+  };
+  slug: string;
+};
 
 export default function PostPreview({
   title,
@@ -11,14 +22,14 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
-}: PostType) {
+}: PostPreviewProps) {
   return (
     <div className="rounded-md border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
       <div className="mb-4">
         <Link href={`/posts/${slug}`}>
           <a>
             <Image
-              src={coverImage}
+              src={coverImage || '/images/blog/default-cover.jpg'}
               alt={`Cover Image for ${title}`}
               width={600}
               height={400}
@@ -37,7 +48,7 @@ export default function PostPreview({
         <p className="text-sm text-gray-500">{date}</p>
         <p className="mt-2 text-gray-700 dark:text-gray-300">{excerpt}</p>
         <div className="mt-4 text-sm italic text-gray-600 dark:text-gray-400">
-          By {author.name}
+          By {author?.name || 'Unknown'}
         </div>
       </div>
     </div>
