@@ -21,16 +21,17 @@ export default async function Post({ params }: { params: Params }) {
     typeof raw.author === "string"
       ? {
           name: raw.author,
-          picture: "/images/default-author.jpg", // Use your own default
+          picture: "/images/blog/default-author.jpg", // Add this image if you want an author avatar
         }
       : raw.author;
 
-const post: PostType = {
-  ...raw,
-  content,
-  author,
-  coverImage: raw.coverImage || "/images/default.jpg",
-};
+  const post: PostType = {
+    ...raw,
+    content,
+    author,
+    coverImage: raw.coverImage || "/images/blog/default-cover.jpg",
+  };
+
 
 
   return (

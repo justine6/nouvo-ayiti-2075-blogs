@@ -1,33 +1,39 @@
-import type { PostType } from "@/interfaces/post";
+import Image from 'next/image';
+import Link from 'next/link';
 
-
-import PostPreview from "@/app/_components/post-preview";
-
-type Props = {
-  posts: PostType[];
+type PostProps = {
+  title: string;
+  date: string;
+  excerpt: string;
+  coverImage?: string;
+  author?: string;
+  slug: string;
 };
 
-export default function MoreStories({ posts }: Props) {
-  if (!posts || posts.length === 0) return null;
+const BlogCard = ({ title, date, excerpt, coverImage, author, slug }: PostProps) => {
+  const imageSrc = coverImage || '/images/blog/default-cover.jpg';
 
   return (
-    <section>
-      <h2 className="mb-8 text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
-        More Stories
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-20 md:gap-x-16 mb-32">
-        {posts.map((post) => (
-          <PostPreview
-            key={post.slug}
-            title={post.title}
-            coverImage={post.coverImage}
-            date={post.date}
-            author={post.author}
-            slug={post.slug}
-            excerpt={post.excerpt}
-          />
-        ))}
-      </div>
-    </section>
+    <div className="mb-8">
+      <Link href={`/posts/${slug}`}>
+        <a className="group block">
+          <div className="relative h-48 w-full overflow-hidden rounded-md shadow-md">
+            <Image
+              src={imageSrc}
+              alt={`Cover image for ${title}`}
+              layout="fill"
+              objectFit="cover"
+              className="transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <h3 className="mt-4 text-xl font-semibold">{title}</h3>
+          <p className="text-sm text-gray-500">{date}</p>
+          <p className="mt-2 text-gray-700">{excerpt}</p>
+          {author && <p className="mt-1 text-sm italic">By {author}</p>}
+        </a>
+      </Link>
+    </div>
   );
-}
+};
+
+export default BlogCard;

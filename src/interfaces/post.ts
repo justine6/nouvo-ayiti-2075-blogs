@@ -12,6 +12,7 @@ export type PostType = {
   coverImage: string;
   content: string;
   preview: boolean;
+  tags?: string[]; // ✅ Add this line to support tags
 };
 
 export type Params = {
