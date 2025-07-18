@@ -22,16 +22,15 @@ coverImage = '/images/blog/default-cover.png',
       <Link href={`/posts/${slug}`}>
         <a className="block group">
           {/* Cover Image with Overlay */}
-          <div className="relative h-48 w-full overflow-hidden rounded-t-md">
-            <Image
-              src={coverImage}
-              alt={`Cover image for ${title}`}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/20 pointer-events-none rounded-t-md" />
-          </div>
+<div className="relative h-40 w-full overflow-hidden rounded-t-md">
+  <Image
+    src={coverImage}
+    alt={`Cover image for ${title}`}
+    layout="fill"
+    objectFit="cover"
+  />
+</div>
+
 
           {/* Content */}
           <div className="p-4">
