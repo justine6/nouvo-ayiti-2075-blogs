@@ -11,8 +11,9 @@ export default function BlogCard({
   slug,
   excerpt,
   date,
-  coverImage = '/images/blog/default-cover.jpg',
-  author = { name: 'Editor', picture: '/images/blog/default-author.jpg' },
+coverImage = '/images/blog/default-cover.png',
+
+  author = { name: 'Editor', picture: '/images/blog/default-author.png' },
   tags = [],
   onTagClick,
 }: BlogCardProps) {
