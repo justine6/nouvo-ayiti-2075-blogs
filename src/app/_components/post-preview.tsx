@@ -1,15 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Author } from "@/interfaces/author";
+'use client';
 
-type Props = {
-  title: string;
-  coverImage: string;
-  date: string;
-  excerpt: string;
-  author: Author;
-  slug: string;
-};
+import Image from 'next/image';
+import Link from 'next/link';
+import type { PostType } from '@/interfaces/post';
 
 export default function PostPreview({
   title,
@@ -18,28 +11,35 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
-}: Props) {
+}: PostType) {
   return (
-    <div>
-      <div className="mb-5">
+    <div className="rounded-md border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+      <div className="mb-4">
         <Link href={`/posts/${slug}`}>
-          <Image
-            src={coverImage}
-            alt={`Cover Image for ${title}`}
-            width={600}
-            height={400}
-            className="rounded-lg object-cover"
-          />
+          <a>
+            <Image
+              src={coverImage}
+              alt={`Cover Image for ${title}`}
+              width={600}
+              height={400}
+              className="rounded-t-md object-cover w-full h-auto"
+            />
+          </a>
         </Link>
       </div>
-      <h3 className="text-3xl mb-3 leading-snug">
-        <Link href={`/posts/${slug}`} className="hover:underline">
-          {title}
-        </Link>
-      </h3>
-      <div className="text-sm mb-2 text-gray-500">{date}</div>
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-      <div className="text-sm italic">By {author.name}</div>
+
+      <div className="p-4">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:underline">
+          <Link href={`/posts/${slug}`}>
+            <a>{title}</a>
+          </Link>
+        </h3>
+        <p className="text-sm text-gray-500">{date}</p>
+        <p className="mt-2 text-gray-700 dark:text-gray-300">{excerpt}</p>
+        <div className="mt-4 text-sm italic text-gray-600 dark:text-gray-400">
+          By {author.name}
+        </div>
+      </div>
     </div>
   );
 }

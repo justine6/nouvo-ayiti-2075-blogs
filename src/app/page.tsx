@@ -1,21 +1,26 @@
-import Image from 'next/image';
+// src/app/_components/more-stories.tsx
 
-export default function Home() {
+'use client';
+
+import PostPreview from '@app/_components/post-preview';
+
+import type { PostType } from '@interfaces/post';
+
+type Props = {
+  posts: PostType[];
+};
+
+const MoreStories = ({ posts }: Props) => {
   return (
-    <section className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
-<Image
-  src="/images/blog/mission-banner.png"
-  alt="Map of Haiti"
-  fill
-  className="object-cover"
-  priority
-/>
-
-      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-        <h1 className="text-white text-3xl md:text-5xl font-bold text-center px-4">
-          Nouvo Ayiti 2075 — Restoring Dignity
-        </h1>
+    <section className="py-8 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6">More Stories</h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <PostPreview key={post.slug} {...post} />
+        ))}
       </div>
     </section>
   );
-}
+};
+
+export default MoreStories;

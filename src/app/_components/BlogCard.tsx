@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import type { PostType } from '@/interfaces/post';
@@ -11,8 +13,7 @@ export default function BlogCard({
   slug,
   excerpt,
   date,
-coverImage = '/images/blog/default-cover.png',
-
+  coverImage = '/images/blog/default-cover.png',
   author = { name: 'Editor', picture: '/images/blog/default-author.png' },
   tags = [],
   onTagClick,
@@ -21,18 +22,19 @@ coverImage = '/images/blog/default-cover.png',
     <div className="rounded-md border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
       <Link href={`/posts/${slug}`}>
         <a className="block group">
-          {/* Cover Image with Overlay */}
-<div className="relative h-40 w-full overflow-hidden rounded-t-md">
-  <Image
-    src={coverImage}
-    alt={`Cover image for ${title}`}
-    layout="fill"
-    objectFit="cover"
-  />
-</div>
+          {/* Cover Image */}
+          <div className="relative h-40 w-full overflow-hidden rounded-t-md">
+            <Image
+              src={coverImage}
+              alt={`Cover image for ${title}`}
+              layout="fill"
+              objectFit="cover"
+              className="transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+          </div>
 
-
-          {/* Content */}
+          {/* Text Content */}
           <div className="p-4">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:underline">
               {title}
@@ -63,7 +65,7 @@ coverImage = '/images/blog/default-cover.png',
             <div className="mt-4 flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
               <Image
                 src={author.picture}
-                alt={author.name}
+                alt={`Photo of ${author.name}`}
                 width={28}
                 height={28}
                 className="rounded-full"

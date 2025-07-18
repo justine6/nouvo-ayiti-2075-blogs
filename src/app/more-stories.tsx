@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import PostPreview from '@app/_components/post-preview';
+
 type PostProps = {
   title: string;
   date: string;
