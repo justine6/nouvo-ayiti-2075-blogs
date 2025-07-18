@@ -20,7 +20,7 @@ export default function BlogCard({
     <div className="rounded-md border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
       <Link href={`/posts/${slug}`}>
         <a className="block group">
-          {/* Cover Image */}
+          {/* Cover Image with Overlay */}
           <div className="relative h-48 w-full overflow-hidden rounded-t-md">
             <Image
               src={coverImage}
@@ -29,6 +29,7 @@ export default function BlogCard({
               objectFit="cover"
               className="transition-transform duration-300 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-black/20 pointer-events-none rounded-t-md" />
           </div>
 
           {/* Content */}
