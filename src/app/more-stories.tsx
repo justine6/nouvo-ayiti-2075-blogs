@@ -1,41 +1,18 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Link from "next/link";
 
-import PostPreview from '@app/_components/post-preview';
-
-type PostProps = {
-  title: string;
-  date: string;
-  excerpt: string;
-  coverImage?: string;
-  author?: string;
+type MoreStoriesProps = {
   slug: string;
+  title: string;
 };
 
-const BlogCard = ({ title, date, excerpt, coverImage, author, slug }: PostProps) => {
-  const imageSrc = coverImage || '/images/blog/default-cover.jpg';
-
+const MoreStories = ({ slug, title }: MoreStoriesProps) => {
   return (
-    <div className="mb-8">
-      <Link href={`/posts/${slug}`}>
-        <a className="group block">
-          <div className="relative h-48 w-full overflow-hidden rounded-md shadow-md">
-            <Image
-              src={imageSrc}
-              alt={`Cover image for ${title}`}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
-          <h3 className="mt-4 text-xl font-semibold">{title}</h3>
-          <p className="text-sm text-gray-500">{date}</p>
-          <p className="mt-2 text-gray-700">{excerpt}</p>
-          {author && <p className="mt-1 text-sm italic">By {author}</p>}
-        </a>
+    <div className="mb-4">
+      <Link href={`/posts/${slug}`} className="text-blue-600 hover:underline">
+        {title}
       </Link>
     </div>
   );
 };
 
-export default BlogCard;
+export default MoreStories;

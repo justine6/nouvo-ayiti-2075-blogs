@@ -1,80 +1,62 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import type { PostType } from '@/interfaces/post';
 
-type BlogCardProps = PostType & {
+type PostProps = {
+  title: string;
+  date: string;
+  excerpt: string;
+  coverImage?: string;
+  author?: string;
+  slug: string;
+  tags?: string[];
   onTagClick?: (tag: string) => void;
 };
 
-export default function BlogCard({
+const BlogCard = ({
   title,
-  slug,
-  excerpt,
   date,
-  coverImage = '/images/blog/default-cover.png',
-  author = { name: 'Editor', picture: '/images/blog/default-author.png' },
-  tags = [],
+  excerpt,
+  coverImage,
+  author,
+  slug,
+  tags,
   onTagClick,
-}: BlogCardProps) {
+}: PostProps) => {
+  const imageSrc = coverImage || '/images/blog/default-cover.jpg';
+
   return (
-    <div className="rounded-md border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
-      <Link href={`/posts/${slug}`}>
-        <a className="block group">
-          {/* Cover Image */}
-          <div className="relative h-40 w-full overflow-hidden rounded-t-md">
-            <Image
-              src={coverImage}
-              alt={`Cover image for ${title}`}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-          </div>
-
-          {/* Text Content */}
-          <div className="p-4">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:underline">
-              {title}
-            </h3>
-            <p className="text-sm text-gray-500">{date}</p>
-            <p className="mt-2 text-gray-700 dark:text-gray-300">{excerpt}</p>
-
-            {/* Tags */}
-            {tags.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onTagClick?.(tag);
-                    }}
-                    aria-label={`Filter blog posts by tag: ${tag}`}
-                    className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full hover:scale-105 transition"
-                  >
-                    #{tag}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Author */}
-            <div className="mt-4 flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-              <Image
-                src={author.picture}
-                alt={`Photo of ${author.name}`}
-                width={28}
-                height={28}
-                className="rounded-full"
-              />
-              <span>By {author.name}</span>
-            </div>
-          </div>
-        </a>
+    <div className="mb-8">
+      <Link href={`/posts/${slug}`} className="group block">
+        <div className="relative h-48 w-full overflow-hidden rounded-md shadow-md">
+          <Image
+            src={imageSrc}
+            alt={`Cover image for ${title}`}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+        <h3 className="mt-4 text-xl font-semibold">{title}</h3>
+        <p className="text-sm text-gray-500">{date}</p>
+        <p className="mt-2 text-gray-700">{excerpt}</p>
+        {author && <p className="mt-1 text-sm italic">By {author}</p>}
       </Link>
+
+      {/* ✅ Optional: render tags */}
+      {tags && tags.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => onTagClick?.(tag)}
+              className="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              #{tag}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default BlogCard;
