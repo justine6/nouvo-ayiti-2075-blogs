@@ -1,4 +1,4 @@
-name: CI Checks
+name: Validate Dictionaries
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run build
-        run: npm run build
+      - name: Run dictionary validation
+        run: npm run check-dicts
