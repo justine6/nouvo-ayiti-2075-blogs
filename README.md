@@ -69,5 +69,19 @@ npm run dev
 ```
 # Nouvo Ayiti 2075 Blogs
 
+# Nouvo Ayiti 2075 Blogs
+
 [![CI Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml)
-[![Validate Dicts](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml)
+[![Validate Dictionaries](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml)
+
+---
+
+## Getting Started
+
+### Installation
+(Replace `<YOUR_USERNAME>` with your actual GitHub username)
+
+**Navigate into the project directory:**
+
+```bash
+cd nouvo-ayiti-2075-blogs

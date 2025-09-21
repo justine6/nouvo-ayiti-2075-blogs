@@ -1,10 +1,5 @@
 {
   "title": "Kontakte nou",
   "subtitle": "Nou ta renmen tande nouvèl ou.",
-  "form": {
-    "name": "Non ou",
-    "email": "Imèl ou",
-    "message": "Mesaj ou",
-    "submit": "Voye"
-  }
+  "form": "[object Object]"
 }

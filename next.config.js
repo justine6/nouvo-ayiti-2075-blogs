@@ -1,13 +1,8 @@
-import { fileURLToPath } from "url";
-import path from "path";
-
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
-    outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
-  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

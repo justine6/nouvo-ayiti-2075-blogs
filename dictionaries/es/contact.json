@@ -1,10 +1,5 @@
 {
   "title": "Contáctanos",
   "subtitle": "Nos encantaría saber de ti.",
-  "form": {
-    "name": "Tu Nombre",
-    "email": "Tu Correo",
-    "message": "Tu Mensaje",
-    "submit": "Enviar"
-  }
+  "form": "[object Object]"
 }

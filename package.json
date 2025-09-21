@@ -10,9 +10,15 @@
     "lint": "next lint",
     "check-blogs": "node scripts/check-blog-dicts.js",
     "check-dicts": "node scripts/check-dicts.js",
-    "clean": "rm -rf .next"
+    "clean": "rm -rf .next",
+    "prepare": "husky",
+    "export-dicts": "node scripts/export-dictionaries.js",
+    "import-dicts": "node scripts/json-to-csv.js",
+    "export-combined": "node scripts/jsons-to-combined-csv.js",
+    "import-combined": "node scripts/combined-csv-to-jsons.js"
   },
   "dependencies": {
+    "csv-parser": "^3.2.0",
     "next": "15.5.3",
     "react": "18.3.1",
     "react-dom": "18.3.1"
@@ -22,6 +28,7 @@
     "@types/react": "19.1.13",
     "eslint": "^9.0.0",
     "eslint-config-next": "15.5.3",
+    "husky": "^9.1.7",
     "typescript": "^5.6.3"
   }
 }

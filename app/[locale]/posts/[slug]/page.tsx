@@ -1,54 +1,45 @@
-import Container from "@/app/components/Container";
-import Intro from "@/app/components/Intro";
-import HeroPost from "@/app/components/HeroPost";
-import MoreStories from "@/app/components/MoreStories";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { notFound } from "next/navigation";
+import { getDictionary, type Locale } from "@/lib/i18n/get-dictionary";
 import { getAllPosts } from "@/lib/get-all-posts";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
+
 type Props = {
-  params: { slug: string; locale: string };
+  params: { slug: string; locale: Locale };
 };
 
 export default async function PostPage({ params }: Props) {
   const { slug, locale } = params;
+
+  // Load dictionary + posts
   const dict = await getDictionary(locale);
+  const posts = await getAllPosts(locale);
 
-  // Load posts for this locale
-  let posts = getAllPosts(locale);
-  let post = posts.find((p) => p.slug === slug);
-
-  // Fallback to English if not found
-  const isFallback = !post && locale !== "en";
-  if (isFallback) {
-    posts = getAllPosts("en");
-    post = posts.find((p) => p.slug === slug);
+  // Find the post by slug
+  const post = posts.find((p) => p.slug === slug);
+  if (!post) {
+    notFound();
   }
 
-  if (!post) return notFound();
-
   return (
-    <Container>
-      <article className="prose lg:prose-xl mx-auto p-8">
-        <h1>{post.title}</h1>
-        <p className="text-gray-500">{post.date}</p>
-        <MDXRemote source={post.content} />
+    <div className="container mx-auto px-4 py-8">
+      {/* Post title */}
+      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
 
-        {/* Back to list button */}
-        <div className="mt-8">
-          <a
-            href={`/${locale}/blog`}
-            className="text-blue-600 hover:underline"
-          >
-            ← {dict.blog.backToList}
-          </a>
-        </div>
-      </article>
+      {/* Post content */}
+      <article
+        className="prose dark:prose-invert max-w-none"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
 
-      {/* Optional: show related stories */}
-      <section className="mt-12">
-        <h2>{dict.blog.moreStories}</h2>
-        <MoreStories posts={posts.filter((p) => p.slug !== slug)} />
-      </section>
-    </Container>
+      {/* Navigation */}
+      <div className="mt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-300">
+        <a href={`/${locale}`} className="hover:underline mb-4 sm:mb-0">
+          {dict.backToList || "← Back to all posts"}
+        </a>
+
+        <a href={`/${locale}/#more`} className="hover:underline">
+          {dict.moreStories || "More stories"}
+        </a>
+      </div>
+    </div>
   );
 }
