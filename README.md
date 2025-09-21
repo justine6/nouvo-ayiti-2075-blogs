@@ -67,3 +67,7 @@ npm run dev
 # or if you use Yarn
 # yarn dev
 ```
+# Nouvo Ayiti 2075 Blogs
+
+[![CI Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml)
+[![Validate Dicts](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml)

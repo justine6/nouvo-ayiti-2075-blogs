@@ -8,10 +8,11 @@
     "strict": true,
     "baseUrl": ".",
 "paths": {
-  "@interfaces/*": ["interfaces/*"],
-  "@lib/*": ["lib/*"],
-  "@app/*": ["app/*"],
-  "@/*": ["src/*"]
+  "@/lib/*": ["src/lib/*"],
+  "@/app/*": ["app/*"],
+  "@/components/*": ["app/components/*"],
+  "@/interfaces/*": ["interfaces/*"],
+  "@/src/*": ["src/*"]
 },
     "plugins": [
       { "name": "next" }

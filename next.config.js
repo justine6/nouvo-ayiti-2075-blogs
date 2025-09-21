@@ -1,16 +1,13 @@
-import withMDX from "@next/mdx";
+import { fileURLToPath } from "url";
+import path from "path";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   reactStrictMode: true,
-
-  i18n: {
-    locales: ["en", "fr", "ht", "es"], // supported languages
-    defaultLocale: "en",               // fallback language
+  experimental: {
+    appDir: true,
+    outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
   },
 };
 
-export default withMDX({
-  extension: /\.mdx?$/,
-})(nextConfig);
+export default nextConfig;

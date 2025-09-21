@@ -1,76 +1,45 @@
-'use client';
-
-import { useState } from 'react';
-import SearchInput from '@/app/_components/SearchInput';
-import BlogCard from '@/app/_components/BlogCard';
-import TagFilter from '@/app/_components/TagFilter';
-import type { PostType } from '@/interfaces/post';
+import { notFound } from "next/navigation";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getAllPosts } from "@/lib/get-all-posts";
+import Container from "@/app/components/Container";
+import BlogCard from "@/app/components/BlogCard";
 
 type Props = {
-  allPosts: PostType[];
+  params: { locale: string };
 };
 
-export default function BlogPage({ allPosts }: Props) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+export default async function BlogIndex({ params }: Props) {
+  const { locale } = params;
+  const dict = await getDictionary(locale);
 
-  const allTags = Array.from(
-    new Set(allPosts.flatMap((post) => post.tags ?? []))
-  ).sort();
+  // Load posts for the current locale
+  let posts = getAllPosts(locale);
 
-  const filteredPosts = allPosts.filter((post) => {
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-
-    const matchesTag = selectedTag ? post.tags?.includes(selectedTag) : true;
-
-    return matchesSearch && matchesTag;
-  });
+  // Fallback to English if none are found
+  if (!posts || posts.length === 0) {
+    if (locale !== "en") {
+      posts = getAllPosts("en");
+    } else {
+      return notFound();
+    }
+  }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold mb-4">Blog</h1>
+    <Container>
+      <section className="prose lg:prose-xl mx-auto p-8">
+        <h1>{dict.blog.title}</h1>
+        <p className="text-gray-600">{dict.blog.subtitle}</p>
 
-      <SearchInput onSearch={setSearchQuery} />
-
-      <TagFilter
-        allTags={allTags}
-        activeTag={selectedTag}
-        onTagSelect={setSelectedTag}
-      />
-
-      {/* Filter Info Banner */}
-      {selectedTag && (
-        <div className="mb-6 flex items-center justify-between flex-wrap gap-4 bg-blue-50 dark:bg-blue-900 border border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-100 px-4 py-3 rounded-md shadow-sm">
-          <span>
-            🎯 <span className="font-semibold">Showing posts tagged:</span>{' '}
-            <span className="italic">#{selectedTag}</span>
-          </span>
-          <button
-            onClick={() => setSelectedTag(null)}
-            className="text-sm text-blue-700 dark:text-blue-200 hover:underline underline-offset-2"
-          >
-            ✕ Clear filter
-          </button>
-        </div>
-      )}
-
-      {filteredPosts.length > 0 ? (
-        <div className="grid gap-8 md:grid-cols-2">
-          {filteredPosts.map((post) => (
-            <BlogCard
-              key={post.slug}
-              {...post}
-              onTagClick={(tag) =>
-                setSelectedTag((prev) => (prev === tag ? null : tag))
-              }
-            />
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-500">No matching posts found.</p>
-      )}
-    </div>
+        {posts.length === 0 ? (
+          <p>{dict.blog.noPosts}</p>
+        ) : (
+          <div className="grid gap-6 mt-8 md:grid-cols-2">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        )}
+      </section>
+    </Container>
   );
 }

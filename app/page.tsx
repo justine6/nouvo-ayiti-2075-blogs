@@ -1,39 +1,35 @@
-import Image from "next/image";
-import Container from "@/app/_components/container";
-import Intro from "@/app/_components/intro";
-import { HeroPost } from "@/app/_components/hero-post";
-import { MoreStories } from "@/app/_components/more-stories";
-import { getAllPosts } from "@/lib/api";
+import Container from "@/app/components/Container";
+import Intro from "@/app/components/Intro";
+import HeroPost from "@/app/components/HeroPost";
+import MoreStories from "@/app/components/MoreStories";
+import { getAllPosts } from "@/lib/get-all-posts";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import type { Locale } from "@/lib/i18n/settings";
 
-export default function Index() {
-  const allPosts = getAllPosts();
+type Props = {
+  params: { locale: Locale };
+};
 
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+export default async function HomePage({ params }: Props) {
+  const { locale } = params;
+  const dict = await getDictionary(locale);
+
+  // ✅ Load posts for this locale
+  let posts = getAllPosts(locale);
+
+  // ✅ Fallback to English if none exist
+  if (!posts || posts.length === 0) {
+    posts = getAllPosts("en");
+  }
+
+  const heroPost = posts[0];
+  const morePosts = posts.slice(1);
 
   return (
     <main>
-      {/* Mission Banner */}
-      <section className="relative w-full h-[40vh] md:h-[55vh] overflow-hidden">
-
-<Image
-  src="/images/blog/mission-banner.png"
-  alt="Map of Haiti"
-  width={1200}
-  height={600}
-  className="object-cover w-full"
-  priority
-/>
-
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h1 className="text-white text-3xl md:text-5xl font-bold text-center px-4">
-            Nouvo Ayiti 2075 — Restoring Dignity
-          </h1>
-        </div>
-      </section>
-
       <Container>
         <Intro />
+
         {heroPost && (
           <HeroPost
             title={heroPost.title}
@@ -44,7 +40,15 @@ export default function Index() {
             excerpt={heroPost.excerpt}
           />
         )}
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+
+        {morePosts.length > 0 && (
+          <>
+            <h2 className="mt-12 mb-6 text-2xl font-bold">
+              {dict.blog.moreStories}
+            </h2>
+            <MoreStories posts={morePosts} />
+          </>
+        )}
       </Container>
     </main>
   );

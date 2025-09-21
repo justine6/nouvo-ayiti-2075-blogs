@@ -1,54 +1,46 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug } from "@/lib/api";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import Container from "@/app/components/Container";
+import type { Params } from "@/interfaces/post";
+import { getAllPosts } from "@/lib/get-all-posts";
 import markdownToHtml from "@/lib/markdownToHtml";
-import Container from "@/app/_components/container";
-import Header from "@/app/_components/header";
-import { PostHeader } from "@/app/_components/post-header";
-import { PostBody } from "@/app/_components/post-body";
-import Alert from "@/app/_components/alert";
+import type { Dictionary } from "@/lib/i18n/types";
+import Link from "next/link";
 
-import type { PostType, Params } from "@/interfaces/post";
+type Props = {
+  params: { slug: string; locale: string };
+};
 
-export default async function Post({ params }: { params: Params }) {
-  const raw = getPostBySlug(params.slug);
+export default async function PostPage({ params }: Props) {
+  const { slug, locale } = await Promise.resolve(params);
 
-  if (!raw) return notFound();
+  const dict: Dictionary = await getDictionary(locale);
 
-  const content = await markdownToHtml(raw.content || "");
+  const posts = getAllPosts(locale);
+  const post = posts.find((p) => p.slug === slug);
 
-  // Normalize author (in case it's a string in .mdx)
-  const author =
-    typeof raw.author === "string"
-      ? {
-          name: raw.author,
-          picture: "/images/blog/default-author.jpg", // Add this image if you want an author avatar
-        }
-      : raw.author;
+  if (!post) {
+    return notFound();
+  }
 
-  const post: PostType = {
-    ...raw,
-    content,
-    author,
-    coverImage: raw.coverImage || "/images/blog/default-cover.jpg",
-  };
-
-
+  const content = await markdownToHtml(post.content || "");
 
   return (
-    <main>
-      <Alert preview={!!post.preview} />
-      <Container>
-        <Header />
-        <article className="mb-32">
-          <PostHeader
-            title={post.title}
-            coverImage={post.coverImage}
-            date={post.date}
-            author={post.author}
-          />
-          <PostBody content={post.content} />
-        </article>
-      </Container>
-    </main>
+    <Container>
+      <article className="prose prose-lg mx-auto py-8">
+        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+        <div className="text-gray-500 text-sm mb-6">{post.date}</div>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      </article>
+
+      <div className="mt-8">
+        <Link
+          href={`/${locale}/blog`}
+          className="text-blue-600 hover:underline"
+        >
+          ← {dict.blog.backToList}
+        </Link>
+      </div>
+    </Container>
   );
 }
