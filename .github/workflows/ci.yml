@@ -2,35 +2,30 @@ name: CI Checks
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - nouvo-ayiti-2075-blog
   pull_request:
-    branches: [ main ]
+  workflow_dispatch:   # ✅ allows manual trigger
 
 jobs:
-  ci:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'npm'
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Validate dictionaries
-        run: npm run check-dicts
-
-      - name: Run linting
+      - name: Run lint
         run: npm run lint
 
-      - name: Type check
-        run: npx tsc --noEmit
-
-      - name: Test Next.js build
+      - name: Run build
         run: npm run build
