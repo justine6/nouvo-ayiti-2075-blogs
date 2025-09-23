@@ -1,5 +1,9 @@
 # Nouvo Ayiti 2075 Blogs
 
+[![Validate Dictionaries](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-dicts.yml)
+
+# Nouvo Ayiti 2075 Blogs
+
 This project is a blog platform dedicated to sharing the vision and mission of Nouvo Ayiti 2075, focusing on themes of unity, dignity, and peace in Haiti. It's built using Next.js, a powerful React framework, and leverages Markdown for content management.
 
 ## Table of Contents

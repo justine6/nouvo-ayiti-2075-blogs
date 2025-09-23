@@ -1,16 +1,57 @@
-File,Key,en (English),fr (Français),ht (Kreyòl),es (Español)
-contact,title,Contact Us,Contactez-nous,Kontakte nou,Contáctanos
-contact,subtitle,We'd love to hear from you.,Nous serions ravis de recevoir de vos nouvelles.,Nou ta renmen tande nouvèl ou.,Nos encantaría saber de ti.
-contact,form,[object Object],[object Object],[object Object],[object Object]
-home,title,New Haiti Team 2075,Nouvelle Équipe Haïti 2075,Nouvo Ekip Ayiti 2075,Nuevo Equipo Haití 2075
-home,subtitle,Restoring Dignity. Rebuilding Hope.,Restaurer la dignité. Reconstruire l'espoir.,Retabli Diyite. Rebati Lespwa.,Restaurar la dignidad. Reconstruir la esperanza.
-home,readMore,Read the Vision,Lire la Vision,Li Vizyon an,Leer la Visión
-home,joinNow,Join the Movement,Rejoindre le Mouvement,Antre nan Mouvman an,Unirse al Movimiento
-home,watchVideos,Watch Videos,Regarder les vidéos,Gade Videyo yo,Ver Videos
-newsletter,title,Stay Connected,Stay Connected,Stay Connected,Stay Connected
-newsletter,description,Subscribe to receive updates, news, and stories of hope.,Subscribe to receive updates, news, and stories of hope.,Subscribe to receive updates, news, and stories of hope.,Subscribe to receive updates, news, and stories of hope.
-newsletter,placeholder,Enter your email,Enter your email,Enter your email,Enter your email
-newsletter,subscribe,Subscribe,Subscribe,Subscribe,Subscribe
-vision,title,Our Vision for 2075,Our Vision for 2075,Our Vision for 2075,Our Vision for 2075
-vision,intro,A future grounded in dignity, hope, and community.,A future grounded in dignity, hope, and community.,A future grounded in dignity, hope, and community.,A future grounded in dignity, hope, and community.
-vision,readMore,Read More,Read More,Read More,Read More
+"File","Key","en","fr","ht","es"
+"about","title","About Us","À propos de nous","Konsènan Nou","Sobre Nosotros"
+"about","content","Learn more about Nouvo Ayiti 2075, our mission, and our vision for Haiti’s future.","","",""
+"about","metaTitle","About - Nouvo Ayiti 2075","À propos - Nouvo Ayiti 2075","Konsènan Nou - Nouvo Ayiti 2075","Sobre Nosotros - Nouvo Ayiti 2075"
+"about","metaDescription","Discover Nouvo Ayiti 2075's mission, vision, and commitment to restoring dignity, rebuilding hope, and renewing vision for Haiti.","Découvrez Nouvo Ayiti 2075. Apprenez-en davantage sur notre mission, notre équipe et notre vision pour restaurer la dignité et reconstruire l'espoir en Haïti.","Aprann plis sou Nouvo Ayiti 2075. Dekouvri misyon nou, ekip nou, ak vizyon nou pou retabli diyite epi rebati espwa nan Ayiti.","Conozca Nouvo Ayiti 2075. Descubra nuestra misión, nuestro equipo y nuestra visión para restaurar la dignidad y reconstruir la esperanza en Haití."
+"about","intro","","Nouvo Ayiti 2075 est un mouvement dédié à restaurer la dignité, reconstruire l'espoir et renouveler la vision pour le peuple haïtien. Notre mission est d'unir les communautés, inspirer le leadership et créer un changement durable.","Nouvo Ayiti 2075 se yon mouvman ki dedye pou retabli diyite, rebati espwa, epi renouvle vizyon pou pèp Ayisyen an. Misyon nou se ini kominote yo, enspire lidèchip, epi kreye chanjman dirab.","Nouvo Ayiti 2075 es un movimiento dedicado a restaurar la dignidad, reconstruir la esperanza y renovar la visión para el pueblo de Haití. Nuestra misión es unir comunidades, inspirar liderazgo y crear un cambio sostenible."
+"about","teamHeading","","Notre Équipe","Ekip Nou","Nuestro Equipo"
+"about","teamIntro","","Nous sommes un collectif de dirigeants passionnés, de bénévoles et de membres de la communauté travaillant ensemble pour créer un avenir meilleur pour Haïti.","Nou se yon gwoup lidè pasyone, volontè, ak manm kominote k ap travay ansanm pou konstwi yon pi bon avni pou Ayiti.","Somos un colectivo de líderes apasionados, voluntarios y miembros de la comunidad que trabajan juntos para construir un futuro mejor para Haití."
+"blog","title","Our Blog","Notre Blog","Blog Nou","Nuestro Blog"
+"blog","subtitle","Stories, updates, and visions for the future.","Histoires, mises à jour et visions pour l'avenir.","Istwa, mizajou, ak vizyon pou lavni.","Historias, actualizaciones y visiones para el futuro."
+"blog","moreStories","More Stories","Plus d'histoires","Plis Istwa","Más historias"
+"blog","readMore","Read More","Lire plus","Li Plis","Leer más"
+"blog","noPosts","No posts available yet.","Aucun article disponible pour le moment.","Pa gen okenn atik disponib pou kounye a.","Aún no hay publicaciones disponibles."
+"blog","viewAll","View All Posts","Voir tous les articles","Gade Tout Atik yo","Ver todas las publicaciones"
+"blog","metaTitle","Blog - Nouvo Ayiti 2075","Blog - Nouvo Ayiti 2075","Blog - Nouvo Ayiti 2075","Blog - Nouvo Ayiti 2075"
+"blog","metaDescription","Discover stories, insights, and updates from Nouvo Ayiti 2075.","Découvrez des histoires, des réflexions et des mises à jour de Nouvo Ayiti 2075.","Dekouvri istwa, panse, ak mizajou ki sòti nan Nouvo Ayiti 2075.","Descubre historias, reflexiones y actualizaciones de Nouvo Ayiti 2075."
+"contact","title","Contact Us","Contactez-nous","Kontakte Nou","Contáctanos"
+"contact","address","848 Brickell Avenue Suite PH5, Miami FL 33131","848 Brickell Avenue Suite PH5, Miami FL 33131","848 Brickell Avenue Suite PH5, Miami FL 33131","848 Brickell Avenue Suite PH5, Miami FL 33131"
+"contact","email","nouvoayiti2075@gmail.com","nouvoayiti2075@gmail.com","nouvoayiti2075@gmail.com","nouvoayiti2075@gmail.com"
+"contact","phone","+1 (918) 640-8249","+1 (918) 640-8249","+1 (918) 640-8249","+1 (918) 640-8249"
+"contact","metaTitle","Contact - Nouvo Ayiti 2075","Contact - Nouvo Ayiti 2075","Kontak - Nouvo Ayiti 2075","Contacto - Nouvo Ayiti 2075"
+"contact","metaDescription","Get in touch with Nouvo Ayiti 2075. Contact us by email, phone, or visit our Miami office as we work together to restore dignity and rebuild hope for Haiti.","Contactez Nouvo Ayiti 2075 pour des questions, des collaborations ou pour rejoindre notre mouvement.","Antre an kontak ak Nouvo Ayiti 2075 pou kesyon, kolaborasyon, oswa pou w rantre nan mouvman an.","Ponte en contacto con Nouvo Ayiti 2075 para preguntas, colaboraciones o para unirte a nuestro movimiento."
+"footer","copyright","Todos los derechos reservados.","Tous droits réservés.","Tout dwa rezève.","All rights reserved."
+"footer","links.privacy","Política de Privacidad","Politique de confidentialité","Règleman sou vi prive","Privacy Policy"
+"footer","links.terms","Términos de Servicio","Conditions d'utilisation","Tèm Sèvis","Terms of Service"
+"footer","metaTitle","Pie de página - Nouvo Ayiti 2075","Pied de page - Nouvo Ayiti 2075","Pye Paj - Nouvo Ayiti 2075","Footer - Nouvo Ayiti 2075"
+"footer","metaDescription","Explora los enlaces del pie de página de Nouvo Ayiti 2075, incluyendo política de privacidad y términos de servicio.","Explorez les liens du pied de page de Nouvo Ayiti 2075, y compris la politique de confidentialité et les conditions d'utilisation.","Eksplore pye paj Nouvo Ayiti 2075 ak lyen rapid pou règleman sou vi prive, kondisyon, ak resous esansyèl yo.","Explore the footer section of Nouvo Ayiti 2075 with quick links to privacy, terms, and essential site resources."
+"home","hero.title","New Haiti Team 2075","Nouvelle Équipe Haïti 2075","Nouvo Ekip Ayiti 2075","Nuevo Equipo Haití 2075"
+"home","hero.subtitle","Restoring Dignity. Rebuilding Hope.","Restaurer la dignité. Reconstruire l'espoir.","Retabli diyite. Rebati espwa. Renouvle vizyon.","Restaurar la dignidad. Reconstruir la esperanza."
+"home","hero.goToMain","Go to Main Website","Aller au site principal","Ale sou sit prensipal la","Ir al sitio principal"
+"home","hero.readMore","Read the Vision","Lire la Vision","Li Vizyon an","Leer la Visión"
+"home","hero.joinNow","Join the Movement","Rejoindre le Mouvement","Antre nan mouvman an","Únete al Movimiento"
+"home","hero.watchVideos","Watch Videos","Regarder les vidéos","Gade videyo yo","Ver Videos"
+"home","mission.heading","Our Mission","Notre Mission","Misyond nou","Nuestra Misión"
+"home","mission.paragraph","We are rebuilding Haiti with dignity, innovation, and a shared vision.","Nous reconstruisons Haïti avec dignité, innovation et une vision partagée.","Nou ap rebati Ayiti ak diyite, inovasyon, ak yon vizyon pataje.","Estamos reconstruyendo Haití con dignidad, innovación y una visión compartida."
+"home","footer.copyright","All rights reserved.","Tous droits réservés.","Tout dwa rezève.","Todos los derechos reservados."
+"home","footer.links.privacy","Privacy Policy","Politique de confidentialité","Règleman sou konfidansyalite","Política de Privacidad"
+"home","footer.links.terms","Terms of Service","Conditions d'utilisation","Tèm Sèvis","Términos de Servicio"
+"home","metaTitle","Home - Nouvo Ayiti 2075","Accueil - Nouvo Ayiti 2075","Akèy - Nouvo Ayiti 2075","Inicio - Nouvo Ayiti 2075"
+"home","metaDescription","Welcome to Nouvo Ayiti 2075. Restoring dignity, rebuilding hope, and renewing vision for Haiti’s future.","Bienvenue à Nouvo Ayiti 2075. Restaurer la dignité, reconstruire l'espoir et renouveler la vision pour l'avenir d'Haïti.","Byenvini nan Nouvo Ayiti 2075. Retabli diyite, rebati espwa, epi renouvle vizyon pou lavni Ayiti.","Bienvenido a Nouvo Ayiti 2075. Restaurar la dignidad, reconstruir la esperanza y renovar la visión para el futuro de Haití."
+"newsletter","title","Stay Connected","Restez connecté","Rete Konekte","Mantente Conectado"
+"newsletter","description","Subscribe to receive updates, news, and stories of hope.","Abonnez-vous pour recevoir des mises à jour, des nouvelles et des histoires porteuses d'espoir.","Abòne pou resevwa nouvèl, mizajou, ak istwa espwa.","Suscríbete para recibir actualizaciones, noticias e historias de esperanza."
+"newsletter","placeholder","Enter your email","Entrez votre email","Antre imel ou","Introduce tu correo electrónico"
+"newsletter","subscribe","Subscribe","S'abonner","Abòne","Suscribirse"
+"newsletter","metaTitle","","Newsletter - Nouvo Ayiti 2075","Bilten - Nouvo Ayiti 2075","Boletín - Nouvo Ayiti 2075"
+"newsletter","metaDescription","","Restez connecté avec Nouvo Ayiti 2075. Abonnez-vous pour recevoir les dernières mises à jour, nouvelles et histoires porteuses d'espoir.","Rete konekte ak Nouvo Ayiti 2075. Abòne pou resevwa dènye nouvèl, mizajou, ak istwa espwa.","Mantente conectado con Nouvo Ayiti 2075. Suscríbete para recibir las últimas actualizaciones, noticias e historias de esperanza."
+"projects","title","Our Projects","Nos Projets","Pwojè Nou yo","Nuestros Proyectos"
+"projects","intro","Discover our key initiatives designed to restore dignity, rebuild hope, and renew vision across Haiti.","Découvrez nos principales initiatives conçues pour restaurer la dignité, reconstruire l'espoir et renouveler la vision à travers Haïti.","Dekouvri inisyativ kle nou yo ki fèt pou retabli diyite, rebati espwa, epi renouvle vizyon atravè Ayiti.","Descubra nuestras principales iniciativas diseñadas para restaurar la dignidad, reconstruir la esperanza y renovar la visión en Haití."
+"projects","motto","Each project is a promise to the future.","Chaque projet est une promesse pour l'avenir.","Chak pwojè se yon pwomès pou lavni.","Cada proyecto es una promesa para el futuro."
+"projects","items","[{""title"":""Clean Water"",""description"":""Bringing safe drinking water to every community.""},{""title"":""Education for All"",""description"":""Providing quality education and resources for children and youth.""},{""title"":""Healthcare Access"",""description"":""Expanding healthcare services to underserved communities.""}]","[{""title"":""Eau potable"",""description"":""Apporter de l'eau potable à chaque communauté.""},{""title"":""Éducation pour tous"",""description"":""Fournir une éducation de qualité et des ressources pour les enfants et les jeunes.""},{""title"":""Accès aux soins"",""description"":""Étendre les services de santé aux communautés défavorisées.""}]","[{""title"":""Dlo Pwòp"",""description"":""Pote dlo pou bwè ki an sekirite nan chak kominote.""},{""title"":""Edikasyon pou Tout Moun"",""description"":""Bay timoun ak jèn yo bon jan edikasyon ak resous.""},{""title"":""Aksè a Sante"",""description"":""Elaji sèvis swen sante nan kominote ki pi bezwen yo.""}]","[{""title"":""Agua Limpia"",""description"":""Llevar agua potable a cada comunidad.""},{""title"":""Educación para Todos"",""description"":""Brindar educación de calidad y recursos para niños y jóvenes.""},{""title"":""Acceso a la Salud"",""description"":""Ampliar los servicios de salud a las comunidades más necesitadas.""}]"
+"projects","metaTitle","Projects - Nouvo Ayiti 2075","Projets - Nouvo Ayiti 2075","Pwojè - Nouvo Ayiti 2075","Proyectos - Nouvo Ayiti 2075"
+"projects","metaDescription","Explore Nouvo Ayiti 2075 projects. From clean water to education and healthcare, we are working to rebuild Haiti with dignity and hope.","Découvrez les projets de Nouvo Ayiti 2075. De l'eau potable à l'éducation et aux soins de santé, nous travaillons à rebâtir Haïti avec dignité et espoir.","Eksplore pwojè Nouvo Ayiti 2075. Soti nan dlo pwòp rive nan edikasyon ak sante, n ap travay pou rebati Ayiti ak diyite ak espwa.","Explore los proyectos de Nouvo Ayiti 2075. Desde agua limpia hasta educación y salud, trabajamos para reconstruir Haití con dignidad y esperanza."
+"vision","title","Our Vision for 2075","Notre vision pour 2075","Vizyond nou pou 2075","Nuestra visión para 2075"
+"vision","intro","A future grounded in dignity, hope, and community.","Un avenir fondé sur la dignité, l'espoir et la communauté.","Yon avni ki chita sou diyite, espwa, ak kominote.","Un futuro basado en la dignidad, la esperanza y la comunidad."
+"vision","readMore","Read More","Lire plus","Li plis","Leer más"
+"vision","metaTitle","Vision - Nouvo Ayiti 2075","Vision - Nouvo Ayiti 2075","Vizyond - Nouvo Ayiti 2075","Visión - Nouvo Ayiti 2075"
+"vision","metaDescription","Discover Nouvo Ayiti 2075’s vision for the future: a nation grounded in dignity, hope, and community.","Découvrez la vision de Nouvo Ayiti 2075 : un avenir fondé sur la dignité, l'espoir et la communauté.","Dekouvri vizyon Nouvo Ayiti 2075: yon avni ki chita sou diyite, espwa, ak kominote.","Descubre la visión de Nouvo Ayiti 2075: un futuro basado en la dignidad, la esperanza y la comunidad."

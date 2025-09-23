@@ -1,19 +1,17 @@
-import type { Locale } from "@/lib/i18n/get-dictionary";
-
-type IntroProps = {
-  title: string;    // from dict.title
-  subtitle: string; // from dict.subtitle
-  locale: Locale;
+type Props = {
+  title?: string;
+  subtitle?: string;
+  locale: string;
 };
 
-export default function Intro({ title, subtitle }: IntroProps) {
+export default function Intro({ title, subtitle, locale }: Props) {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 text-gray-900 dark:text-gray-100">
-        {title}
-      </h1>
-      <p className="text-lg mt-5 md:pl-8 text-gray-600 dark:text-gray-300">
-        {subtitle}
+    <section className="text-center py-10">
+      <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+        {title || "Nouvo Ayiti 2075"}
+      </h2>
+      <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">
+        {subtitle || "Restoring Dignity. Rebuilding Hope."}
       </p>
     </section>
   );

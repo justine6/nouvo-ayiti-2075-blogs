@@ -1,7 +1,7 @@
-import Container from "@/app/components/Container";
-import Intro from "@/app/components/Intro";
-import HeroPost from "@/app/components/HeroPost";
-import MoreStories from "@/app/components/MoreStories";
+import Container from "@/components/Container";
+import Intro from "@/components/Intro";
+import HeroPost from "@/components/HeroPost";
+import MoreStories from "@/components/MoreStories";
 import { getAllPosts } from "@/lib/get-all-posts";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/settings";
@@ -14,10 +14,10 @@ export default async function HomePage({ params }: Props) {
   const { locale } = params;
   const dict = await getDictionary(locale);
 
-  // ✅ Load posts for this locale
+  // Load posts for this locale
   let posts = getAllPosts(locale);
 
-  // ✅ Fallback to English if none exist
+  // Fallback to English if none exist
   if (!posts || posts.length === 0) {
     posts = getAllPosts("en");
   }
@@ -32,22 +32,18 @@ export default async function HomePage({ params }: Props) {
 
         {heroPost && (
           <HeroPost
-            title={heroPost.title}
-            coverImage={heroPost.coverImage}
-            date={heroPost.date}
-            author={heroPost.author}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
+            post={heroPost}
+            locale={locale}
+            readMoreLabel={dict.blog.readMore}
           />
         )}
 
         {morePosts.length > 0 && (
-          <>
-            <h2 className="mt-12 mb-6 text-2xl font-bold">
-              {dict.blog.moreStories}
-            </h2>
-            <MoreStories posts={morePosts} />
-          </>
+          <MoreStories
+            posts={morePosts}
+            locale={locale}
+            readMoreLabel={dict.blog.readMore}
+          />
         )}
       </Container>
     </main>

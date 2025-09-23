@@ -1,97 +1,137 @@
-// scripts/check-dicts.js
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
-const locales = ["en", "fr", "ht", "es"];
-const dictionaries = ["home.json", "blog.json", "contact.json", "newsletter.json", "vision.json"];
+// ✅ Define required keys for each dictionary file
+const requiredKeys = {
+  "contact.json": [
+    "title",
+    "subtitle",
+    "address",
+    "email",
+    "phone",
+    "form",
+    "metaTitle",
+    "metaDescription"
+  ],
+  "newsletter.json": [
+    "title",
+    "description",
+    "placeholder",
+    "subscribe",
+    "metaTitle",
+    "metaDescription"
+  ],
+  "vision.json": [
+    "intro",
+    "title",
+    "readMore",
+    "metaTitle",
+    "metaDescription"
+  ],
+  "footer.json": [
+    "copyright",
+    "links",
+    "address",
+    "email",
+    "phone",
+    "metaTitle",
+    "metaDescription"
+  ]
+};
 
-// Flatten nested keys for comparison
-function flattenKeys(obj, prefix = "") {
-  return Object.keys(obj).reduce((keys, k) => {
-    const value = obj[k];
-    const fullKey = prefix ? `${prefix}.${k}` : k;
-    if (value && typeof value === "object" && !Array.isArray(value)) {
-      keys.push(...flattenKeys(value, fullKey));
-    } else {
-      keys.push(fullKey);
-    }
-    return keys;
-  }, []);
-}
+// 📂 Dictionary folder path
+const dictDir = path.join(__dirname, "..", "dictionaries");
 
-// Deep set helper for filling missing keys
-function setDeep(obj, path, value) {
-  const parts = path.split(".");
-  let current = obj;
-  for (let i = 0; i < parts.length - 1; i++) {
-    if (!current[parts[i]]) current[parts[i]] = {};
-    current = current[parts[i]];
-  }
-  current[parts[parts.length - 1]] = value;
-}
+// ✅ Check if `--strict` flag was passed
+const isStrict = process.argv.includes("--strict");
 
+// 🔹 Helper: load JSON file safely
 function loadJSON(filePath) {
   try {
-    const raw = fs.readFileSync(filePath, "utf8");
-    return JSON.parse(raw);
+    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
   } catch (err) {
-    console.error(`❌ Error in ${filePath}: ${err.message}`);
-    process.exitCode = 1;
+    console.error(`❌ Failed to parse ${filePath}:`, err.message);
     return null;
   }
 }
 
-for (const dict of dictionaries) {
-  console.log(`\n📖 Checking dictionary: ${dict}`);
+// 🔹 Helper: validate keys
+function validateKeys(dictName, dict, requiredKeys) {
+  const keys = Object.keys(dict);
+  let valid = true;
 
-  const referenceFile = path.join("dictionaries", "en", dict);
-  if (!fs.existsSync(referenceFile)) {
-    console.warn(`⚠️ Missing reference file: ${referenceFile}`);
-    continue;
+  // ✅ Check missing keys
+  requiredKeys.forEach((key) => {
+    if (!keys.includes(key)) {
+      console.error(`❌ ${dictName} is missing required key: "${key}"`);
+      valid = false;
+    }
+  });
+
+  // ✅ Strict mode → also check for extra keys
+  if (isStrict) {
+    keys.forEach((key) => {
+      if (!requiredKeys.includes(key)) {
+        console.error(`❌ ${dictName} has extra key: "${key}"`);
+        valid = false;
+      }
+    });
   }
 
-  const reference = loadJSON(referenceFile);
-  const referenceKeys = flattenKeys(reference);
-
-  for (const locale of locales) {
-    const filePath = path.join("dictionaries", locale, dict);
-
-    if (!fs.existsSync(filePath)) {
-      console.warn(`⚠️ Missing: ${filePath}`);
-      continue;
-    }
-
-    const data = loadJSON(filePath);
-    if (!data) continue;
-
-    const keys = flattenKeys(data);
-    const missing = referenceKeys.filter((k) => !keys.includes(k));
-    const extra = keys.filter((k) => !referenceKeys.includes(k));
-
-    if (missing.length === 0 && extra.length === 0) {
-      console.log(`✅ ${locale}/${dict} keys match!`);
+  if (valid) {
+    if (isStrict) {
+      console.log(`✅ ${dictName} keys match perfectly!`);
     } else {
-      if (missing.length > 0) {
-        console.warn(`⚠️ ${locale}/${dict} is missing keys: ${missing.join(", ")}`);
-
-        // Auto-fix: copy from English with empty string placeholder
-        for (const key of missing) {
-          const refParts = key.split(".");
-          let refValue = reference;
-          for (const part of refParts) {
-            refValue = refValue?.[part];
-          }
-          setDeep(data, key, refValue || ""); // fallback: ""
-        }
-
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
-        console.log(`🛠️  Auto-fixed ${locale}/${dict} (filled missing keys).`);
-      }
-      if (extra.length > 0) {
-        console.warn(`ℹ️ ${locale}/${dict} has extra keys: ${extra.join(", ")}`);
-      }
+      console.log(`✅ ${dictName} has all required keys!`);
     }
+  }
+
+  return valid;
+}
+
+// 🔹 Run validations
+function runValidation() {
+  console.log(
+    `🔍 Running dictionary validation in ${
+      isStrict ? "STRICT" : "LIGHT"
+    } mode...\n`
+  );
+
+  const locales = ["en", "fr", "ht", "es"];
+  const dictFiles = Object.keys(requiredKeys);
+
+  let allValid = true;
+
+  locales.forEach((locale) => {
+    dictFiles.forEach((file) => {
+      const filePath = path.join(dictDir, locale, file);
+
+      if (!fs.existsSync(filePath)) {
+        console.error(`❌ Missing file: ${filePath}`);
+        allValid = false;
+        return;
+      }
+
+      const dict = loadJSON(filePath);
+      if (!dict) {
+        allValid = false;
+        return;
+      }
+
+      if (!validateKeys(`${locale}/${file}`, dict, requiredKeys[file])) {
+        allValid = false;
+      }
+    });
+  });
+
+  console.log("\n✨ Dictionary validation finished!");
+
+  if (!allValid) {
+    console.error("❌ Validation failed. Fix the above issues before proceeding.");
+    process.exit(1);
+  } else {
+    console.log("✅ All dictionaries are valid!");
   }
 }
 
-console.log("\n🎉 Dictionary validation + auto-fix finished!");
+runValidation();

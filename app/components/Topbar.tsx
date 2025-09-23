@@ -1,64 +1,40 @@
-"use client";
+// components/Topbar.tsx
 
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
-export default function Topbar() {
-  const [isOpen, setIsOpen] = useState(false);
+type TopbarProps = {
+  dict?: {
+    home?: string;
+    about?: string;
+    projects?: string;
+    blog?: string;
+    contact?: string;
+  };
+  locale: string;
+};
+
+export default function Topbar({ dict = {}, locale }: TopbarProps) {
+  const warn = (key: string, fallback: string) => {
+    if (process.env.NODE_ENV === "development" && !dict[key as keyof typeof dict]) {
+      console.warn(`⚠️ Missing translation for Topbar.${key}, using fallback "${fallback}"`);
+    }
+    return dict[key as keyof typeof dict] ?? fallback;
+  };
 
   return (
-    <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo / Title */}
-        <h1 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+    <header className="bg-white shadow-md">
+      <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+        <Link href={`/${locale}`} className="text-xl font-bold">
           Nouvo Ayiti 2075
-        </h1>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          <a href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-            Home
-          </a>
-          <a href="/blog" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-            Blog
-          </a>
-          <a href="/#about" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-            About
-          </a>
-          <a href="/#contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-            Contact
-          </a>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <nav className="md:hidden bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col px-4 py-2 space-y-2">
-            <a href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" onClick={() => setIsOpen(false)}>
-              Home
-            </a>
-            <a href="/blog" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" onClick={() => setIsOpen(false)}>
-              Blog
-            </a>
-            <a href="/#about" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" onClick={() => setIsOpen(false)}>
-              About
-            </a>
-            <a href="/#contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" onClick={() => setIsOpen(false)}>
-              Contact
-            </a>
-          </div>
-        </nav>
-      )}
+        </Link>
+        <ul className="flex space-x-6">
+          <li><Link href={`/${locale}`}>{warn("home", "Home")}</Link></li>
+          <li><Link href={`/${locale}/about`}>{warn("about", "About")}</Link></li>
+          <li><Link href={`/${locale}/projects`}>{warn("projects", "Projects")}</Link></li>
+          <li><Link href={`/${locale}/blog`}>{warn("blog", "Blog")}</Link></li>
+          <li><Link href={`/${locale}/contact`}>{warn("contact", "Contact")}</Link></li>
+        </ul>
+      </nav>
     </header>
   );
 }

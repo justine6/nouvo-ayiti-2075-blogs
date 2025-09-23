@@ -1,27 +1,19 @@
 import BlogCard from "@/components/BlogCard";
-import type { Locale } from "@/lib/i18n/get-dictionary";
+import type { Post } from "@/lib/get-all-posts";
 
 type MoreStoriesProps = {
-  posts: {
-    slug: string;
-    title: string;
-    excerpt: string;
-    coverImage?: string;
-  }[];
-  locale: Locale;
-  moreStoriesLabel?: string; // from dict.moreStories
-  readMoreLabel?: string;    // from dict.readMore
+  posts: Post[];
+  locale: string;
+  readMoreLabel: string;
 };
 
-export default function MoreStories({ posts, locale, moreStoriesLabel, readMoreLabel }: MoreStoriesProps) {
-  if (!posts || posts.length === 0) return null;
+export default function MoreStories({ posts, locale, readMoreLabel }: MoreStoriesProps) {
+  if (!posts?.length) return null;
 
   return (
-    <section id="more" className="mt-16">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
-        {moreStoriesLabel || "More stories"}
-      </h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section className="mt-12">
+      <h2 className="text-2xl font-bold mb-6">More Stories</h2>
+      <div className="grid gap-6 md:grid-cols-2">
         {posts.map((post) => (
           <BlogCard
             key={post.slug}
@@ -34,4 +26,3 @@ export default function MoreStories({ posts, locale, moreStoriesLabel, readMoreL
     </section>
   );
 }
-

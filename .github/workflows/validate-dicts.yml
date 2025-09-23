@@ -15,14 +15,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run dictionary validation
-        run: npm run check-dicts
+      # ✅ JSON-only validation
+      - name: Run dictionary validation (JSON only)
+        run: npm run check-required

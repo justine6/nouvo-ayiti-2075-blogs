@@ -1,5 +1,14 @@
 {
   "title": "Contactez-nous",
-  "subtitle": "Nous serions ravis de recevoir de vos nouvelles.",
-  "form": "[object Object]"
+  "subtitle": "Nous serions ravis d’avoir de vos nouvelles",
+  "address": "848 Brickell Avenue Suite PH5, Miami FL 33131",
+  "email": "nouvoayiti2075@gmail.com",
+  "phone": "+1 (918) 640-8249",
+  "form": {
+    "name": "Votre nom",
+    "message": "Votre message",
+    "submit": "Envoyer"
+  },
+  "metaTitle": "Contact - Nouvo Ayiti 2075",
+  "metaDescription": "Contactez Nouvo Ayiti 2075. Rejoignez-nous pour des questions, des collaborations ou notre mission."
 }

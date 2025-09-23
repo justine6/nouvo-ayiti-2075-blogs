@@ -1,28 +1,48 @@
-name: Validate Dictionaries
+name: Validate & Sync Translations (CSV)
 
 on:
-  push:
-    branches:
-      - main
-      - nouvo-ayiti-2075-blog
-  pull_request:
-  workflow_dispatch:
+  workflow_dispatch:   # 🚧 only runs manually for now
 
 jobs:
-  validate:
+  validate-csv:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # allow auto-commits if needed
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run dictionary validation
+      - name: Run full dictionary validation
         run: npm run check-dicts
+
+      - name: Export combined CSV
+        run: npm run export-combined
+
+      - name: Check JSON ↔ CSV sync
+        id: sync
+        run: |
+          if ! npm run check-sync; then
+            echo "out_of_sync=true" >> $GITHUB_ENV
+          else
+            echo "out_of_sync=false" >> $GITHUB_ENV
+          fi
+
+      - name: Commit updated CSV
+        if: env.out_of_sync == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add all_translations.csv
+          git commit -m "🔄 Auto-update all_translations.csv from CI"
+          git push

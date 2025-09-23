@@ -1,68 +1,37 @@
-import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import Container from "@/components/Container";
-import BlogCard from "@/components/BlogCard";         // ✅ BlogCard from PostCard
-import MoreStories from "@/components/MoreStories";   // ✅ MoreStories from PostCard
 import { getAllPosts } from "@/lib/get-all-posts";
+import Container from "@/components/Container";
+import BlogCard from "@/components/BlogCard";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import type { Locale } from "@/lib/i18n/settings";
 
 type Props = {
-  params: { slug: string; locale: string };
+  params: { locale: Locale };
 };
 
-export default function PostPage({ params }: Props) {
-  const { slug, locale } = params;
+// ✅ Blog Page
+export default async function BlogPage({ params }: Props) {
+  const { locale } = await params;  // <-- fix
 
-  // Load posts for this locale
-  let posts = getAllPosts(locale);
-  let post = posts.find((p) => p.slug === slug);
-
-  // Fallback to English if not found
-  const isFallback = !post && locale !== "en";
-  if (isFallback) {
-    posts = getAllPosts("en");
-    post = posts.find((p) => p.slug === slug);
-  }
-
-  if (!post) return notFound();
+  const dict = await getDictionary(locale);
+  const posts = getAllPosts(locale);
 
   return (
     <Container>
-      <article className="prose lg:prose-xl mx-auto p-8">
-        <h1>{post.title}</h1>
-        <p className="text-gray-500">{post.date}</p>
-        <MDXRemote source={post.content} />
-      </article>
-
-      {/* ✅ Featured BlogCard (optional, e.g., highlight current post) */}
-      <section className="mt-12">
-        <BlogCard
-          slug={post.slug}
-          title={post.title}
-          date={post.date}
-          excerpt={post.excerpt}
-          coverImage={post.coverImage}
-        />
-      </section>
-
-      {/* ✅ More Stories Section */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-bold mb-6">More Stories</h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          {posts
-            .filter((p) => p.slug !== slug) // skip current post
-            .slice(0, 4) // limit to 4
-            .map((p) => (
-              <MoreStories
-                key={p.slug}
-                slug={p.slug}
-                title={p.title}
-                date={p.date}
-                excerpt={p.excerpt}
-                coverImage={p.coverImage}
-              />
-            ))}
-        </div>
-      </section>
+      <h1>{dict.blog.metaTitle}</h1>
+      {/* render posts */}
     </Container>
   );
+}
+
+// ✅ Metadata
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;  // <-- fix
+  const dict = await getDictionary(locale);
+
+  return {
+    title: dict.blog.metaTitle || "Blog - Nouvo Ayiti 2075",
+    description:
+      dict.blog.metaDescription ||
+      "Discover stories, insights, and updates from Nouvo Ayiti 2075."
+  };
 }

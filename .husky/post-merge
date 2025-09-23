@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔄 Post-merge hook triggered!"
+echo "🔍 Validating dictionaries..."
+npm run check-dicts
+
+echo "🔄 Exporting combined CSV..."
+npm run export-combined
+
+echo "🔎 Checking JSONs ↔ CSV sync..."
+npm run check-sync

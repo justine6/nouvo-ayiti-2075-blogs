@@ -1,6 +1,8 @@
 {
   "title": "Stay Connected",
-  "description": "Subscribe to receive updates",
+  "description": "Subscribe to receive updates, announcements, and inspiration from Nouvo Ayiti 2075.",
   "placeholder": "Enter your email",
-  "subscribe": "Subscribe"
+  "subscribe": "Subscribe",
+  "metaTitle": "Newsletter - Nouvo Ayiti 2075",
+  "metaDescription": "Subscribe to the Nouvo Ayiti 2075 newsletter and stay connected with updates, announcements, and stories of hope."
 }

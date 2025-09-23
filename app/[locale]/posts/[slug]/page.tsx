@@ -1,45 +1,27 @@
-import { notFound } from "next/navigation";
-import { getDictionary, type Locale } from "@/lib/i18n/get-dictionary";
-import { getAllPosts } from "@/lib/get-all-posts";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import type { Locale } from "@/lib/i18n/settings";
+import HeroSection from "@/components/HeroSection";
+import Container from "@/components/Container";
 
 type Props = {
-  params: { slug: string; locale: Locale };
+  params: { locale: Locale };
 };
 
-export default async function PostPage({ params }: Props) {
-  const { slug, locale } = params;
-
-  // Load dictionary + posts
+export default async function HomePage({ params }: Props) {
+  const { locale } = params;
   const dict = await getDictionary(locale);
-  const posts = await getAllPosts(locale);
-
-  // Find the post by slug
-  const post = posts.find((p) => p.slug === slug);
-  if (!post) {
-    notFound();
-  }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Post title */}
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+    <main>
+      {/* ✅ Hero with map + locale-aware main site link */}
+      <HeroSection locale={locale} />
 
-      {/* Post content */}
-      <article
-        className="prose dark:prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
-
-      {/* Navigation */}
-      <div className="mt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-300">
-        <a href={`/${locale}`} className="hover:underline mb-4 sm:mb-0">
-          {dict.backToList || "← Back to all posts"}
-        </a>
-
-        <a href={`/${locale}/#more`} className="hover:underline">
-          {dict.moreStories || "More stories"}
-        </a>
-      </div>
-    </div>
+      <Container>
+        {/* ✅ Blog site doesn’t need ProjectsSection or NewsletterSection */}
+        <p className="text-center text-gray-500 mt-8">
+          {dict.blog?.welcome || "Welcome to the Nouvo Ayiti 2075 blog."}
+        </p>
+      </Container>
+    </main>
   );
 }

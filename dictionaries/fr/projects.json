@@ -1,0 +1,12 @@
+{
+  "title": "Nos Projets",
+  "intro": "Découvrez nos principales initiatives conçues pour restaurer la dignité, reconstruire l'espoir et renouveler la vision à travers Haïti.",
+  "motto": "Chaque projet est une promesse pour l'avenir.",
+  "items": [
+    { "title": "Eau potable", "description": "Apporter de l'eau potable à chaque communauté." },
+    { "title": "Éducation pour tous", "description": "Fournir une éducation de qualité et des ressources pour les enfants et les jeunes." },
+    { "title": "Accès aux soins", "description": "Étendre les services de santé aux communautés défavorisées." }
+  ],
+  "metaTitle": "Projets - Nouvo Ayiti 2075",
+  "metaDescription": "Découvrez les projets de Nouvo Ayiti 2075. De l'eau potable à l'éducation et aux soins de santé, nous travaillons à rebâtir Haïti avec dignité et espoir."
+}

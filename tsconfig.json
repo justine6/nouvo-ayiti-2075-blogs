@@ -1,34 +1,40 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "jsx": "preserve",
-    "incremental": true,
-    "strict": true,
-    "baseUrl": ".",
-"paths": {
-  "@/lib/*": ["src/lib/*"],
-  "@/app/*": ["app/*"],
-  "@/components/*": ["app/components/*"],
-  "@/interfaces/*": ["interfaces/*"],
-  "@/src/*": ["src/*"]
-},
-    "plugins": [
-      { "name": "next" }
-    ],
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+
+    // ✅ Base URL & Aliases
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["app/components/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@lib/*": ["app/lib/*"],
+      "@app/*": ["app/*"],
+      "@/*": ["app/*"]
+    },
+
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
