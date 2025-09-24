@@ -10,15 +10,12 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
   reactStrictMode: true,
 
-  // Silence the multiple lockfiles warning
-  outputFileTracingRoot: __dirname,
-
   webpack: (config) => {
-    // Example alias for imports
+    // Example aliases for imports
     config.resolve.alias["@"] = path.join(__dirname, "app");
     config.resolve.alias["@components"] = path.join(
       __dirname,
-      "app/components",
+      "app/components"
     );
     config.resolve.alias["@lib"] = path.join(__dirname, "app/lib");
     return config;

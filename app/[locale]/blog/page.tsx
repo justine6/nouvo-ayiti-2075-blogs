@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/i18n/settings";
 import PageSection from "@/components/PageSection";
 import PageHeading from "@/components/PageHeading";
 import BlogCard from "@/components/BlogCard";
-import { getAllPosts } from "@/lib/get-all-posts";
+import { getAllPosts, type Post } from "@/lib/get-all-posts";
 
 type Props = {
   params: { locale: Locale };
@@ -13,7 +13,8 @@ export default async function BlogPage({ params }: Props) {
   const { locale } = params;
   const dict = await getDictionary(locale);
 
-  let posts = getAllPosts(locale);
+  // Explicitly type posts
+  let posts: Post[] = getAllPosts(locale);
   if (!posts || posts.length === 0) {
     posts = getAllPosts("en");
   }

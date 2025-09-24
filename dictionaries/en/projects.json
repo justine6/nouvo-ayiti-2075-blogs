@@ -1,21 +1,9 @@
 {
-  "title": "Our Projects",
-  "intro": "Discover our key initiatives designed to restore dignity, rebuild hope, and renew vision across Haiti.",
-  "motto": "Each project is a promise to the future.",
-  "items": [
-    {
-      "title": "Clean Water",
-      "description": "Bringing safe drinking water to every community."
-    },
-    {
-      "title": "Education for All",
-      "description": "Providing quality education and resources for children and youth."
-    },
-    {
-      "title": "Healthcare Access",
-      "description": "Expanding healthcare services to underserved communities."
-    }
-  ],
+  "projectsSection": {
+    "title": "Our Projects",
+    "intro": "Discover our key initiatives to restore dignity, rebuild hope, and renew vision across Haiti.",
+    "motto": "Each project is a promise to the future."
+  },
   "metaTitle": "Projects - Nouvo Ayiti 2075",
-  "metaDescription": "Explore Nouvo Ayiti 2075 projects. From clean water to education and healthcare, we are working to rebuild Haiti with dignity and hope."
+  "metaDescription": "Explore Nouvo Ayiti 2075 projects focused on dignity, hope, and vision for Haiti's future."
 }
