@@ -6,7 +6,9 @@ type BlogSectionProps = {
 export default function BlogSection({ dict = {}, locale }: BlogSectionProps) {
   const warn = (key: keyof typeof dict, fallback: string) => {
     if (process.env.NODE_ENV === "development" && !dict[key]) {
-      console.warn(`⚠️ Missing translation for BlogSection.${key}, using fallback "${fallback}"`);
+      console.warn(
+        `⚠️ Missing translation for BlogSection.${key}, using fallback "${fallback}"`,
+      );
     }
     return dict[key] ?? fallback;
   };

@@ -36,7 +36,10 @@ export default function LanguageSwitcher({
   };
 
   // ✅ reorder locales: current first
-  const orderedLocales = [currentLocale, ...locales.filter((l) => l !== currentLocale)];
+  const orderedLocales = [
+    currentLocale,
+    ...locales.filter((l) => l !== currentLocale),
+  ];
 
   if (mode === "icon") {
     return (

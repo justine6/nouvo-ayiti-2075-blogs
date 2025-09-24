@@ -7,7 +7,11 @@ type MoreStoriesProps = {
   readMoreLabel: string;
 };
 
-export default function MoreStories({ posts, locale, readMoreLabel }: MoreStoriesProps) {
+export default function MoreStories({
+  posts,
+  locale,
+  readMoreLabel,
+}: MoreStoriesProps) {
   if (!posts?.length) return null;
 
   return (

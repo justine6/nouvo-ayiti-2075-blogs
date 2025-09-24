@@ -71,6 +71,7 @@ npm run dev
 # or if you use Yarn
 # yarn dev
 ```
+
 # Nouvo Ayiti 2075 Blogs
 
 # Nouvo Ayiti 2075 Blogs
@@ -83,9 +84,11 @@ npm run dev
 ## Getting Started
 
 ### Installation
+
 (Replace `<YOUR_USERNAME>` with your actual GitHub username)
 
 **Navigate into the project directory:**
 
 ```bash
 cd nouvo-ayiti-2075-blogs
+```

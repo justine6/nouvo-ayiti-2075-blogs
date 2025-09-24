@@ -14,12 +14,12 @@ export type PostType = {
   coverImage: string;
   content: string;
   preview: boolean;
-  locale: string;      // ✅ NEW: always track the post's language
-  tags?: string[];     // ✅ Optional tags for categorization
+  locale: string; // ✅ NEW: always track the post's language
+  tags?: string[]; // ✅ Optional tags for categorization
 };
 
 // Params shape for dynamic routes
 export type Params = {
   slug: string;
-  locale: string;      // ✅ NEW: include locale for localized routes
+  locale: string; // ✅ NEW: include locale for localized routes
 };

@@ -8,7 +8,11 @@ type BlogCardProps = {
   readMoreLabel: string;
 };
 
-export default function BlogCard({ post, locale, readMoreLabel }: BlogCardProps) {
+export default function BlogCard({
+  post,
+  locale,
+  readMoreLabel,
+}: BlogCardProps) {
   // ✅ Default to logo if no coverImage provided
   const coverImage = post.coverImage || "/images/nouvoayiti2075-logo.png";
 
@@ -24,13 +28,18 @@ export default function BlogCard({ post, locale, readMoreLabel }: BlogCardProps)
       </div>
       <div className="p-4">
         <h3 className="text-xl font-bold">
-          <Link href={`/${locale}/posts/${post.slug}`} className="hover:underline">
+          <Link
+            href={`/${locale}/posts/${post.slug}`}
+            className="hover:underline"
+          >
             {post.title}
           </Link>
         </h3>
         {post.excerpt && (
           <p className="mt-2 text-gray-700">
-            {post.excerpt.length > 120 ? post.excerpt.slice(0, 120) + "..." : post.excerpt}
+            {post.excerpt.length > 120
+              ? post.excerpt.slice(0, 120) + "..."
+              : post.excerpt}
           </p>
         )}
         <Link

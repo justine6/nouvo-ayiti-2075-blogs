@@ -1,56 +1,50 @@
 // scripts/jsons-to-combined-csv.js
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Define locales and display names
-const locales = {
-  en: "en (English)",
-  fr: "fr (Français)",
-  ht: "ht (Kreyòl)",
-  es: "es (Español)",
-};
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const inputDir = path.join(process.cwd(), "dictionaries");
-const outputFile = path.join(process.cwd(), "all_translations.csv");
+const locales = ['en', 'fr', 'ht', 'es'];
+const dictionariesDir = path.resolve(__dirname, '../dictionaries');
+const outputFile = path.resolve(__dirname, '../blog_translations.csv');
 
-// Collect base files from the 'en' folder (assuming all locales mirror 'en')
-const baseFiles = fs
-  .readdirSync(path.join(inputDir, "en"))
-  .filter((f) => f.endsWith(".json"));
+function flattenJson(obj, prefix = '') {
+  return Object.entries(obj).flatMap(([key, value]) => {
+    const fullKey = prefix ? `${prefix}.${key}` : key;
+    return typeof value === 'object' && value !== null
+      ? flattenJson(value, fullKey)
+      : [[fullKey, value]];
+  });
+}
 
-// Prepare rows
-let csv = ["File,Key," + Object.values(locales).join(",")];
+function run() {
+  console.log('📑 Combining all JSONs into a single CSV...');
 
-baseFiles.forEach((file) => {
-  const baseName = file.replace(".json", "");
+  const rows = [['locale', 'file', 'key', 'value']];
 
-  // Load dictionaries for each locale
-  const dictionaries = {};
-  for (const locale of Object.keys(locales)) {
-    const filePath = path.join(inputDir, locale, file);
-    if (fs.existsSync(filePath)) {
-      dictionaries[locale] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    } else {
-      dictionaries[locale] = {};
+  for (const locale of locales) {
+    const dir = path.join(dictionariesDir, locale);
+    if (!fs.existsSync(dir)) continue;
+
+    for (const file of fs.readdirSync(dir)) {
+      if (!file.endsWith('.json')) continue;
+      const filePath = path.join(dir, file);
+      const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const flat = flattenJson(json);
+      flat.forEach(([key, value]) => {
+        rows.push([locale, file.replace('.json', ''), key, value]);
+      });
     }
   }
 
-  // Collect keys
-  const keys = new Set();
-  Object.values(dictionaries).forEach((dict) =>
-    Object.keys(dict).forEach((key) => keys.add(key))
-  );
+  const csv = rows
+    .map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(','))
+    .join('\n');
+  fs.writeFileSync(outputFile, csv, 'utf8');
 
-  // Build rows for this file
-  for (const key of keys) {
-    const row = [baseName, key];
-    for (const locale of Object.keys(locales)) {
-      row.push(dictionaries[locale][key] || "");
-    }
-    csv.push(row.join(","));
-  }
-});
+  console.log(`✅ Combined CSV written to ${outputFile}`);
+}
 
-// Save combined CSV
-fs.writeFileSync(outputFile, csv.join("\n"), "utf-8");
-console.log(`✅ Exported combined CSV: ${outputFile}`);
+run();

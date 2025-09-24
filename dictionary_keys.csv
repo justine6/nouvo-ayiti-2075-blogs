@@ -1,0 +1,5 @@
+file,keys
+vision.json,title|intro|content|metaTitle|metaDescription
+newsletter.json,title|description|content|metaTitle|metaDescription
+footer.json,copyright|links
+topbar.json,home|about|projects|blog|contact|vision|language

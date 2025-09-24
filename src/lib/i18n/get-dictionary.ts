@@ -10,7 +10,9 @@ export async function getDictionary(locale: Locale): Promise<Dictionary> {
       blog: blog.default,
     };
   } catch (error) {
-    console.warn(`⚠️ Missing dictionary for locale: ${locale}, falling back to English`);
+    console.warn(
+      `⚠️ Missing dictionary for locale: ${locale}, falling back to English`,
+    );
 
     const home = await import("../../../dictionaries/en/home.json");
     const blog = await import("../../../dictionaries/en/blog.json");

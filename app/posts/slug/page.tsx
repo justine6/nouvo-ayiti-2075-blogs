@@ -10,7 +10,7 @@ type Props = {
 
 // ✅ Blog Page
 export default async function BlogPage({ params }: Props) {
-  const { locale } = await params;  // <-- fix
+  const { locale } = await params; // <-- fix
 
   const dict = await getDictionary(locale);
   const posts = getAllPosts(locale);
@@ -25,13 +25,13 @@ export default async function BlogPage({ params }: Props) {
 
 // ✅ Metadata
 export async function generateMetadata({ params }: Props) {
-  const { locale } = await params;  // <-- fix
+  const { locale } = await params; // <-- fix
   const dict = await getDictionary(locale);
 
   return {
     title: dict.blog.metaTitle || "Blog - Nouvo Ayiti 2075",
     description:
       dict.blog.metaDescription ||
-      "Discover stories, insights, and updates from Nouvo Ayiti 2075."
+      "Discover stories, insights, and updates from Nouvo Ayiti 2075.",
   };
 }

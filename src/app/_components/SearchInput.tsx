@@ -1,15 +1,14 @@
+"use client";
 
-'use client';
-
-import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { Search } from "lucide-react";
+import { useState } from "react";
 
 type SearchInputProps = {
   onSearch: (query: string) => void;
 };
 
 export default function SearchInput({ onSearch }: SearchInputProps) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -19,7 +18,10 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
 
   return (
     <div className="mb-6 relative max-w-md w-full">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+      <Search
+        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        size={18}
+      />
       <input
         type="text"
         placeholder="Search blog posts..."

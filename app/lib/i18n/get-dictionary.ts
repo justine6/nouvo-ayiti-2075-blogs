@@ -12,7 +12,7 @@ export async function getDictionary(locale: string) {
       process.cwd(),
       "dictionaries",
       locale,
-      "blog.json"
+      "blog.json",
     );
     const file = await fs.promises.readFile(dictPath, "utf-8");
     return JSON.parse(file);

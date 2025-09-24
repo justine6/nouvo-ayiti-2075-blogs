@@ -1,84 +1,44 @@
 // scripts/export-dictionaries.js
-import fs from "fs";
-import path from "path";
-import { parse } from "json2csv"; // npm install json2csv
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Supported locales
-const locales = ["en", "fr", "ht", "es"];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const dictDir = path.join(process.cwd(), "dictionaries");
-const outputFile = path.join(process.cwd(), "all_translations.csv");
+const locales = ['en', 'fr', 'ht', 'es'];
+const dictionariesDir = path.resolve(__dirname, '../dictionaries');
+const outputFile = path.resolve(__dirname, '../all_dictionaries.json');
 
-// --- Helper: flatten nested JSON into dotted keys ---
-function flatten(obj, prefix = "") {
-  let result = {};
-  for (const [key, value] of Object.entries(obj)) {
-    const newKey = prefix ? `${prefix}.${key}` : key;
-    if (value && typeof value === "object" && !Array.isArray(value)) {
-      result = { ...result, ...flatten(value, newKey) };
-    } else {
-      result[newKey] = value;
+function loadJson(filePath) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (err) {
+    console.error(`❌ Failed to parse JSON: ${filePath}`);
+    process.exit(1);
+  }
+}
+
+function exportDictionaries() {
+  console.log('📦 Exporting all dictionaries into one JSON...');
+
+  const result = {};
+  for (const locale of locales) {
+    result[locale] = {};
+    const dir = path.join(dictionariesDir, locale);
+    if (!fs.existsSync(dir)) {
+      console.warn(`⚠️ Skipping missing locale: ${locale}`);
+      continue;
+    }
+    for (const file of fs.readdirSync(dir)) {
+      if (!file.endsWith('.json')) continue;
+      const key = file.replace('.json', '');
+      result[locale][key] = loadJson(path.join(dir, file));
     }
   }
-  return result;
+
+  fs.writeFileSync(outputFile, JSON.stringify(result, null, 2), 'utf8');
+  console.log(`✅ Export complete! Saved to ${outputFile}`);
 }
 
-// --- Collect all keys across all files/locales ---
-function collectKeys() {
-  const enFiles = fs
-    .readdirSync(path.join(dictDir, "en"))
-    .filter((f) => f.endsWith(".json"));
-  const allKeys = {};
-
-  enFiles.forEach((file) => {
-    const base = file.replace(".json", "");
-    allKeys[base] = new Set();
-
-    locales.forEach((locale) => {
-      const filePath = path.join(dictDir, locale, file);
-      if (fs.existsSync(filePath)) {
-        const jsonObj = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-        const flat = flatten(jsonObj);
-        Object.keys(flat).forEach((k) => allKeys[base].add(k));
-      }
-    });
-  });
-
-  return allKeys;
-}
-
-// --- Build rows for CSV ---
-function buildRows(allKeys) {
-  const rows = [];
-
-  for (const [file, keys] of Object.entries(allKeys)) {
-    keys.forEach((key) => {
-      const row = { File: file, Key: key };
-      locales.forEach((locale) => {
-        const filePath = path.join(dictDir, locale, `${file}.json`);
-        if (fs.existsSync(filePath)) {
-          const jsonObj = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-          const flat = flatten(jsonObj);
-          row[locale] = flat[key] || "";
-        } else {
-          row[locale] = "";
-        }
-      });
-      rows.push(row);
-    });
-  }
-
-  return rows;
-}
-
-// --- Main ---
-(() => {
-  const allKeys = collectKeys();
-  const rows = buildRows(allKeys);
-
-  const fields = ["File", "Key", ...locales];
-  const csv = parse(rows, { fields });
-
-  fs.writeFileSync(outputFile, csv, "utf-8");
-  console.log(`✅ Exported latest translations to ${outputFile}`);
-})();
+exportDictionaries();

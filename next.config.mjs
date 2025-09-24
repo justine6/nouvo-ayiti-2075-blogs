@@ -16,7 +16,10 @@ const nextConfig = {
   webpack: (config) => {
     // Example alias for imports
     config.resolve.alias["@"] = path.join(__dirname, "app");
-    config.resolve.alias["@components"] = path.join(__dirname, "app/components");
+    config.resolve.alias["@components"] = path.join(
+      __dirname,
+      "app/components",
+    );
     config.resolve.alias["@lib"] = path.join(__dirname, "app/lib");
     return config;
   },

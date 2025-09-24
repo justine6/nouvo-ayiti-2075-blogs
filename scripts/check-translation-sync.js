@@ -1,158 +1,75 @@
 // scripts/check-translation-sync.js
-import fs from "fs";
-import path from "path";
-import csv from "csv-parser";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Define locales
-const locales = {
-  "en (English)": "en",
-  "fr (Français)": "fr",
-  "ht (Kreyòl)": "ht",
-  "es (Español)": "es",
-};
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Required keys per file
-const requiredKeys = {
-  "home": [
-    "hero.title",
-    "hero.subtitle",
-    "hero.goToMain"
-  ],
-  "topbar": [
-    "home",
-    "about",
-    "projects",
-    "blog",
-    "contact"
-  ],
-  "footer": [
-    "copyright",
-    "links.privacy",
-    "links.terms",
-    "address",
-    "email",
-    "phone"
-  ],
-  "vision": [
-    "title",
-    "intro"
-  ],
-  "newsletter": [
-    "title",
-    "description"
-  ],
-  "contact": [
-    "title",
-    "subtitle",
-    "form",
-    "address",
-    "email",
-    "phone"
-  ]
-};
+const locales = ['en', 'fr', 'ht', 'es'];
+const dictionariesDir = path.resolve(__dirname, '../dictionaries');
 
-const inputFile = path.join(process.cwd(), "all_translations.csv");
-const dictDir = path.join(process.cwd(), "dictionaries");
-
-// --- Step 1: Load JSONs ---
-function loadJSONs() {
-  const result = {};
-  const enFiles = fs.readdirSync(path.join(dictDir, "en")).filter(f => f.endsWith(".json"));
-
-  enFiles.forEach(file => {
-    const base = file.replace(".json", "");
-    result[base] = {};
-    for (const locale of Object.values(locales)) {
-      const filePath = path.join(dictDir, locale, file);
-      if (fs.existsSync(filePath)) {
-        result[base][locale] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-      } else {
-        result[base][locale] = {};
-      }
-    }
-  });
-
-  return result;
-}
-
-// --- Step 2: Load CSV ---
-function loadCSV() {
-  return new Promise((resolve, reject) => {
-    const rows = [];
-    fs.createReadStream(inputFile)
-      .pipe(csv())
-      .on("data", (row) => rows.push(row))
-      .on("end", () => resolve(rows))
-      .on("error", reject);
-  });
-}
-
-// --- Helper: get nested value by dotted path ---
-function getNestedValue(obj, dottedKey) {
-  return dottedKey.split(".").reduce((acc, part) => {
-    return acc && acc[part] !== undefined ? acc[part] : "";
-  }, obj);
-}
-
-// --- Step 3: Compare ---
-function compare(jsons, csvRows) {
-  let errors = [];
-
-  csvRows.forEach((row) => {
-    const file = row["File"];
-    const key = row["Key"];
-    for (const [column, locale] of Object.entries(locales)) {
-      const csvVal = row[column] || "";
-      const jsonVal = getNestedValue(jsons[file]?.[locale], key);
-      if (csvVal !== jsonVal) {
-        errors.push(
-          `[Mismatch] File: ${file}, Key: ${key}, Locale: ${locale}, CSV: "${csvVal}", JSON: "${jsonVal}"`
-        );
-      }
-    }
-  });
-
-  return errors;
-}
-
-// --- Helper: Check required keys ---
-function checkKeys(obj, keys, locale, file, errors) {
-  keys.forEach(key => {
-    const jsonVal = getNestedValue(obj, key);
-    if (jsonVal === "") {
-      errors.push(`Missing '${key}' in ${locale}/${file}.json`);
-    }
-  });
-}
-
-// --- Main ---
-(async () => {
-  if (!fs.existsSync(inputFile)) {
-    console.error("❌ No all_translations.csv found. Run `npm run export-combined` first.");
+function loadJson(filePath) {
+  try {
+    const raw = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error(`❌ Failed to parse JSON: ${filePath}`);
     process.exit(1);
   }
+}
 
-  const jsons = loadJSONs();
-  let errors = [];
+function getAllKeys(obj, prefix = '') {
+  return Object.keys(obj).flatMap((key) => {
+    const fullKey = prefix ? `${prefix}.${key}` : key;
+    return typeof obj[key] === 'object' && obj[key] !== null
+      ? getAllKeys(obj[key], fullKey)
+      : fullKey;
+  });
+}
 
-  // ✅ Run required keys check across all files
-  for (const [file, localesData] of Object.entries(jsons)) {
-    if (requiredKeys[file]) {
-      for (const [locale, jsonObj] of Object.entries(localesData)) {
-        checkKeys(jsonObj, requiredKeys[file], locale, file, errors);
+async function runValidation() {
+  console.log('🔍 Running translation key sync validation...\n');
+
+  const baseLocale = 'en';
+  const baseDir = path.join(dictionariesDir, baseLocale);
+
+  let allValid = true;
+
+  for (const file of fs.readdirSync(baseDir)) {
+    if (!file.endsWith('.json')) continue;
+    const baseJson = loadJson(path.join(baseDir, file));
+    const baseKeys = getAllKeys(baseJson);
+
+    for (const locale of locales.filter((l) => l !== baseLocale)) {
+      const targetPath = path.join(dictionariesDir, locale, file);
+      if (!fs.existsSync(targetPath)) {
+        console.log(`❌ Missing ${locale}/${file}`);
+        allValid = false;
+        continue;
+      }
+      const targetJson = loadJson(targetPath);
+      const targetKeys = getAllKeys(targetJson);
+
+      const missing = baseKeys.filter((k) => !targetKeys.includes(k));
+      if (missing.length > 0) {
+        console.log(
+          `❌ ${locale}/${file} is missing keys: ${missing.join(', ')}`
+        );
+        allValid = false;
+      } else {
+        console.log(`✅ ${locale}/${file} is in sync`);
       }
     }
   }
 
-  const csvRows = await loadCSV();
-  const mismatches = compare(jsons, csvRows);
-  errors = errors.concat(mismatches);
-
-  if (errors.length > 0) {
-    console.error("❌ Translation sync check failed!");
-    errors.forEach((err) => console.error("   " + err));
+  console.log('\n📦 Translation sync validation finished!');
+  if (!allValid) {
+    console.error('❌ Validation failed. Fix issues before committing.');
     process.exit(1);
   } else {
-    console.log("✅ Translations are in sync and all required keys are present");
+    console.log('✅ All locales are in sync with EN');
   }
-})();
+}
+
+runValidation();

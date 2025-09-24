@@ -1,23 +1,15 @@
 {
-  "hero": {
-    "title": "New Haiti Team 2075",
+  "HeroSection": {
+    "title": "Nouvo Ayiti 2075",
     "subtitle": "Restoring Dignity. Rebuilding Hope.",
-    "goToMain": "Go to Main Website",
     "readMore": "Read the Vision",
     "joinNow": "Join the Movement",
-    "watchVideos": "Watch Videos"
+    "watchVideos": "Watch Videos",
+    "goToMain": "Main Website"
   },
-  "mission": {
-    "heading": "Our Mission",
-    "paragraph": "We are rebuilding Haiti with dignity, innovation, and a shared vision."
-  },
-  "footer": {
-    "copyright": "All rights reserved.",
-    "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
-    }
-  },
-  "metaTitle": "Home - Nouvo Ayiti 2075",
-  "metaDescription": "Welcome to Nouvo Ayiti 2075. Restoring dignity, rebuilding hope, and renewing vision for Haiti’s future."
+  "BlogSection": {
+    "title": "Our Blog",
+    "subtitle": "Stories, updates, and visions for the future.",
+    "viewAll": "View All Posts"
+  }
 }

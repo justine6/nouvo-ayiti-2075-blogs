@@ -1,23 +1,15 @@
 {
-  "hero": {
-    "title": "Nouvelle Équipe Haïti 2075",
+  "HeroSection": {
+    "title": "Nouvelle Haïti 2075",
     "subtitle": "Restaurer la dignité. Reconstruire l'espoir.",
-    "goToMain": "Aller au site principal",
     "readMore": "Lire la Vision",
     "joinNow": "Rejoindre le Mouvement",
-    "watchVideos": "Regarder les vidéos"
+    "watchVideos": "Regarder les vidéos",
+    "goToMain": "Site Principal"
   },
-  "mission": {
-    "heading": "Notre Mission",
-    "paragraph": "Nous reconstruisons Haïti avec dignité, innovation et une vision partagée."
-  },
-  "footer": {
-    "copyright": "Tous droits réservés.",
-    "links": {
-      "privacy": "Politique de confidentialité",
-      "terms": "Conditions d'utilisation"
-    }
-  },
-  "metaTitle": "Accueil - Nouvo Ayiti 2075",
-  "metaDescription": "Bienvenue à Nouvo Ayiti 2075. Restaurer la dignité, reconstruire l'espoir et renouveler la vision pour l'avenir d'Haïti."
+  "BlogSection": {
+    "title": "Notre Blog",
+    "subtitle": "Histoires, mises à jour et visions pour l'avenir.",
+    "viewAll": "Voir tous les articles"
+  }
 }

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { User, Calendar } from 'lucide-react';
-import CoverImage from './cover-image';
-import DateFormatter from './date-formatter';
-import { PostTitle } from '@/app/_components/post-title';
-import { type Author } from '@/interfaces/author';
+import { User, Calendar } from "lucide-react";
+import CoverImage from "./cover-image";
+import DateFormatter from "./date-formatter";
+import { PostTitle } from "@/app/_components/post-title";
+import { type Author } from "@/interfaces/author";
 
 type Props = {
   title: string;
@@ -50,8 +50,13 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
             <User size={16} className="text-blue-600 dark:text-blue-400" />
             <span>By {author.name}</span>
             <span className="mx-1 text-gray-400">|</span>
-            <Calendar size={16} className="text-green-600 dark:text-green-400" />
-            <span><DateFormatter dateString={date} /></span>
+            <Calendar
+              size={16}
+              className="text-green-600 dark:text-green-400"
+            />
+            <span>
+              <DateFormatter dateString={date} />
+            </span>
           </div>
         </div>
       </div>

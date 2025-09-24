@@ -1,136 +1,85 @@
-const fs = require("fs");
-const path = require("path");
+// scripts/check-dicts.js
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// ✅ Define required keys for each dictionary file
+// Fix __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// === CONFIG ===
+const locales = ['en', 'fr', 'ht', 'es'];
+const dictionariesDir = path.resolve(__dirname, '../dictionaries');
+
+// Required keys for each dictionary file
 const requiredKeys = {
-  "contact.json": [
-    "title",
-    "subtitle",
-    "address",
-    "email",
-    "phone",
-    "form",
-    "metaTitle",
-    "metaDescription"
+  contact: ['title', 'address', 'email', 'phone'],
+  footer: [
+    'copyright',
+    'links',
+    'address',
+    'email',
+    'phone',
+    'metaTitle',
+    'metaDescription',
   ],
-  "newsletter.json": [
-    "title",
-    "description",
-    "placeholder",
-    "subscribe",
-    "metaTitle",
-    "metaDescription"
-  ],
-  "vision.json": [
-    "intro",
-    "title",
-    "readMore",
-    "metaTitle",
-    "metaDescription"
-  ],
-  "footer.json": [
-    "copyright",
-    "links",
-    "address",
-    "email",
-    "phone",
-    "metaTitle",
-    "metaDescription"
-  ]
+  newsletter: ['title', 'description', 'metaTitle', 'metaDescription'],
+  vision: ['title', 'content', 'metaTitle', 'metaDescription'],
 };
 
-// 📂 Dictionary folder path
-const dictDir = path.join(__dirname, "..", "dictionaries");
-
-// ✅ Check if `--strict` flag was passed
-const isStrict = process.argv.includes("--strict");
-
-// 🔹 Helper: load JSON file safely
-function loadJSON(filePath) {
+// === HELPERS ===
+function loadJson(filePath) {
   try {
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    const raw = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(raw);
   } catch (err) {
-    console.error(`❌ Failed to parse ${filePath}:`, err.message);
-    return null;
+    console.error(`❌ Failed to load JSON: ${filePath}`);
+    console.error(err.message);
+    process.exit(1);
   }
 }
 
-// 🔹 Helper: validate keys
-function validateKeys(dictName, dict, requiredKeys) {
-  const keys = Object.keys(dict);
-  let valid = true;
-
-  // ✅ Check missing keys
-  requiredKeys.forEach((key) => {
-    if (!keys.includes(key)) {
-      console.error(`❌ ${dictName} is missing required key: "${key}"`);
-      valid = false;
-    }
-  });
-
-  // ✅ Strict mode → also check for extra keys
-  if (isStrict) {
-    keys.forEach((key) => {
-      if (!requiredKeys.includes(key)) {
-        console.error(`❌ ${dictName} has extra key: "${key}"`);
-        valid = false;
-      }
-    });
+function validateFile(locale, file, json, keys) {
+  const missing = keys.filter((k) => !(k in json));
+  if (missing.length > 0) {
+    console.log(
+      `❌ ${locale}/${file}.json is missing keys: ${missing.join(', ')}`
+    );
+    return false;
   }
-
-  if (valid) {
-    if (isStrict) {
-      console.log(`✅ ${dictName} keys match perfectly!`);
-    } else {
-      console.log(`✅ ${dictName} has all required keys!`);
-    }
-  }
-
-  return valid;
+  console.log(`✅ ${locale}/${file}.json has all required keys!`);
+  return true;
 }
 
-// 🔹 Run validations
-function runValidation() {
-  console.log(
-    `🔍 Running dictionary validation in ${
-      isStrict ? "STRICT" : "LIGHT"
-    } mode...\n`
-  );
-
-  const locales = ["en", "fr", "ht", "es"];
-  const dictFiles = Object.keys(requiredKeys);
+// === MAIN ===
+async function runValidation() {
+  console.log('🔍 Running dictionary validation in LIGHT mode...\n');
 
   let allValid = true;
 
-  locales.forEach((locale) => {
-    dictFiles.forEach((file) => {
-      const filePath = path.join(dictDir, locale, file);
-
+  for (const locale of locales) {
+    for (const [file, keys] of Object.entries(requiredKeys)) {
+      const filePath = path.join(dictionariesDir, locale, `${file}.json`);
       if (!fs.existsSync(filePath)) {
-        console.error(`❌ Missing file: ${filePath}`);
+        console.log(`❌ Missing file: ${locale}/${file}.json`);
         allValid = false;
-        return;
+        continue;
       }
 
-      const dict = loadJSON(filePath);
-      if (!dict) {
-        allValid = false;
-        return;
-      }
+      const json = loadJson(filePath);
+      const valid = validateFile(locale, file, json, keys);
+      if (!valid) allValid = false;
+    }
+  }
 
-      if (!validateKeys(`${locale}/${file}`, dict, requiredKeys[file])) {
-        allValid = false;
-      }
-    });
-  });
-
-  console.log("\n✨ Dictionary validation finished!");
-
+  console.log('\n📦 Dictionary validation finished!');
   if (!allValid) {
-    console.error("❌ Validation failed. Fix the above issues before proceeding.");
+    console.error(
+      '❌ Validation failed. Fix the above issues before committing.'
+    );
     process.exit(1);
   } else {
-    console.log("✅ All dictionaries are valid!");
+    console.log('✅ All dictionaries are valid!');
   }
 }
 

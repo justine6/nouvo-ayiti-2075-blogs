@@ -1,8 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🔍 Running dictionary validation..."
-npm run check-dicts || exit 1
+echo "🔍 Running dictionary + meta + ESLint validation..."
 
-echo "🔍 Running metadata validation..."
-npm run check-meta || exit 1
+npm run check-dicts
+npm run check-meta
+npm run lint

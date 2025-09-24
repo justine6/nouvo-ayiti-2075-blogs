@@ -6,7 +6,11 @@ import BlogCard from "@/components/BlogCard";
 import PageHeading from "@/components/PageHeading";
 import PageSection from "@/components/PageSection";
 
-export default async function BlogPage({ params }: { params: { locale: Locale } }) {
+export default async function BlogPage({
+  params,
+}: {
+  params: { locale: Locale };
+}) {
   const posts = await getAllPosts(params.locale);
   const dict = await getDictionary(params.locale);
 

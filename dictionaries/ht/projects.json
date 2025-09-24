@@ -3,9 +3,18 @@
   "intro": "Dekouvri inisyativ kle nou yo ki fèt pou retabli diyite, rebati espwa, epi renouvle vizyon atravè Ayiti.",
   "motto": "Chak pwojè se yon pwomès pou lavni.",
   "items": [
-    { "title": "Dlo Pwòp", "description": "Pote dlo pou bwè ki an sekirite nan chak kominote." },
-    { "title": "Edikasyon pou Tout Moun", "description": "Bay timoun ak jèn yo bon jan edikasyon ak resous." },
-    { "title": "Aksè a Sante", "description": "Elaji sèvis swen sante nan kominote ki pi bezwen yo." }
+    {
+      "title": "Dlo Pwòp",
+      "description": "Pote dlo pou bwè ki an sekirite nan chak kominote."
+    },
+    {
+      "title": "Edikasyon pou Tout Moun",
+      "description": "Bay timoun ak jèn yo bon jan edikasyon ak resous."
+    },
+    {
+      "title": "Aksè a Sante",
+      "description": "Elaji sèvis swen sante nan kominote ki pi bezwen yo."
+    }
   ],
   "metaTitle": "Pwojè - Nouvo Ayiti 2075",
   "metaDescription": "Eksplore pwojè Nouvo Ayiti 2075. Soti nan dlo pwòp rive nan edikasyon ak sante, n ap travay pou rebati Ayiti ak diyite ak espwa."

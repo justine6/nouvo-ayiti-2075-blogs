@@ -1,13 +1,13 @@
 name: Validate & Sync Translations (CSV)
 
 on:
-  workflow_dispatch:   # 🚧 only runs manually for now
+  workflow_dispatch: # 🚧 only runs manually for now
 
 jobs:
   validate-csv:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # allow auto-commits if needed
+      contents: write # allow auto-commits if needed
 
     steps:
       - name: Checkout code

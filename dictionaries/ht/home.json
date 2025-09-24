@@ -1,23 +1,15 @@
 {
-  "hero": {
-    "title": "Nouvo Ekip Ayiti 2075",
-    "subtitle": "Retabli diyite. Rebati espwa. Renouvle vizyon.",
-    "goToMain": "Ale sou sit prensipal la",
-    "readMore": "Li Vizyon an",
+  "HeroSection": {
+    "title": "Nouvo Ayiti 2075",
+    "subtitle": "Rete diyite. Rebati espwa.",
+    "readMore": "Li Vizyond lan",
     "joinNow": "Antre nan mouvman an",
-    "watchVideos": "Gade videyo yo"
+    "watchVideos": "Gade videyo yo",
+    "goToMain": "Sit Prensipal"
   },
-  "mission": {
-    "heading": "Misyond nou",
-    "paragraph": "Nou ap rebati Ayiti ak diyite, inovasyon, ak yon vizyon pataje."
-  },
-  "footer": {
-    "copyright": "Tout dwa rezève.",
-    "links": {
-      "privacy": "Règleman sou konfidansyalite",
-      "terms": "Tèm Sèvis"
-    }
-  },
-  "metaTitle": "Akèy - Nouvo Ayiti 2075",
-  "metaDescription": "Byenvini nan Nouvo Ayiti 2075. Retabli diyite, rebati espwa, epi renouvle vizyon pou lavni Ayiti."
+  "BlogSection": {
+    "title": "Blog Nou",
+    "subtitle": "Istwa, aktyalite, ak vizyon pou lavni.",
+    "viewAll": "Gade tout atik yo"
+  }
 }

@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   if (!fs.existsSync(filePath)) {
     return NextResponse.json(
       { error: `Feed not found for locale: ${locale}` },
-      { status: 404 }
+      { status: 404 },
     );
   }
 
@@ -28,4 +28,3 @@ export async function GET(request: Request) {
 
   return NextResponse.json(jsonData);
 }
-

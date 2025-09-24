@@ -25,7 +25,7 @@ export function getAllPosts(locale: string): PostType[] {
       return {
         ...data,
         slug: realSlug,
-        locale,        // ✅ always include locale
+        locale, // ✅ always include locale
         content,
       } as PostType;
     });
@@ -49,7 +49,7 @@ export function getPostBySlug(slug: string, locale: string): PostType | null {
   return {
     ...data,
     slug,
-    locale,        // ✅ include locale here too
+    locale, // ✅ include locale here too
     content,
   } as PostType;
 }

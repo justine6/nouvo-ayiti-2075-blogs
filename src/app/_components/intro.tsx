@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export default function Intro() {
       </h1>
 
       <h4 className="text-lg md:text-xl text-center md:text-left mt-5 md:pl-8 text-gray-800 dark:text-gray-200">
-        A blog about rebuilding hope and empowering communities in{' '}
+        A blog about rebuilding hope and empowering communities in{" "}
         <Link
           href="https://nouvoayiti2075.com"
           className="underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"

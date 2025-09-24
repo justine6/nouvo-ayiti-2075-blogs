@@ -1,10 +1,10 @@
 // src/app/_components/more-stories.tsx
 
-'use client';
+"use client";
 
-import PostPreview from '@app/_components/post-preview';
+import PostPreview from "@app/_components/post-preview";
 
-import type { PostType } from '@interfaces/post';
+import type { PostType } from "@interfaces/post";
 
 type Props = {
   posts: PostType[];

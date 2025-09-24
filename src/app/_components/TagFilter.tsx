@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 type TagFilterProps = {
   allTags: string[];
@@ -8,7 +8,11 @@ type TagFilterProps = {
   onTagSelect: (tag: string | null) => void;
 };
 
-export default function TagFilter({ allTags, activeTag, onTagSelect }: TagFilterProps) {
+export default function TagFilter({
+  allTags,
+  activeTag,
+  onTagSelect,
+}: TagFilterProps) {
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
       {allTags.map((tag) => (
@@ -17,8 +21,8 @@ export default function TagFilter({ allTags, activeTag, onTagSelect }: TagFilter
           onClick={() => onTagSelect(tag)}
           className={`px-3 py-1 rounded-full border text-sm transition-all ${
             activeTag === tag
-              ? 'bg-blue-600 text-white border-blue-600'
-              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
+              ? "bg-blue-600 text-white border-blue-600"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
           }`}
         >
           #{tag}

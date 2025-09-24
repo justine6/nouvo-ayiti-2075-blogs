@@ -25,9 +25,7 @@ export default function BlogCard({ post, locale, dict }: BlogCardProps) {
         <p className="text-gray-600 mb-2">{post.excerpt}</p>
 
         {post.tags && (
-          <p className="text-sm text-blue-600 mb-2">
-            {post.tags.join(", ")}
-          </p>
+          <p className="text-sm text-blue-600 mb-2">{post.tags.join(", ")}</p>
         )}
 
         <Link
