@@ -1,15 +1,17 @@
 {
+  "metaTitle": "Nouvo Ayiti 2075 - Akèy",
+  "metaDescription": "Byenvini nan Nouvo Ayiti 2075. Rete diyite, rebati espwa, ak renouvle vizyon pou Ayiti.",
   "HeroSection": {
     "title": "Nouvo Ayiti 2075",
     "subtitle": "Rete diyite. Rebati espwa.",
-    "readMore": "Li Vizyond lan",
-    "joinNow": "Antre nan mouvman an",
-    "watchVideos": "Gade videyo yo",
+    "readMore": "Li Vizyon an",
+    "joinNow": "Antre nan Mouvman an",
+    "watchVideos": "Gade Videyo yo",
     "goToMain": "Sit Prensipal"
   },
   "BlogSection": {
     "title": "Blog Nou",
-    "subtitle": "Istwa, aktyalite, ak vizyon pou lavni.",
-    "viewAll": "Gade tout atik yo"
+    "subtitle": "Istwa, mizajou, ak vizyon pou lavni.",
+    "viewAll": "Gade Tout Atik yo"
   }
 }

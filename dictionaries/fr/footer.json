@@ -1,8 +1,12 @@
 {
-  "copyright": "Tous droits réservés.",
+  "address": "123 Rue Principale, Port-au-Prince, Haïti",
+  "email": "info@nouvoayiti2075.com",
+  "phone": "+509 1234-5678",
+  "metaTitle": "Nouvo Ayiti 2075 - Pied de page",
+  "metaDescription": "Restez connecté avec Nouvo Ayiti 2075.",
+  "copyright": "© 2025 Nouvo Ayiti 2075. Tous droits réservés.",
   "links": {
-    "privacy": "Politique de confidentialité",
-    "terms": "Conditions d'utilisation"
-  },
-  "links\r": ""
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d’utilisation"
+  }
 }

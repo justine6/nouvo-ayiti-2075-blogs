@@ -5,5 +5,7 @@
   "blog": "Blog",
   "contact": "Kontak",
   "vision": "Vizyond lan",
-  "language": "Lang"
+  "language": "Lang",
+  "metaTitle": "Placeholder Title - topbar",
+  "metaDescription": "Placeholder description for topbar"
 }

@@ -5,5 +5,7 @@
   "blog": "Blog",
   "contact": "Contacto",
   "vision": "Visión",
-  "language": "Idioma"
+  "language": "Idioma",
+  "metaTitle": "Placeholder Title - topbar",
+  "metaDescription": "Placeholder description for topbar"
 }

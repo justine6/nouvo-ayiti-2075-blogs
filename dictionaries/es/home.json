@@ -1,15 +1,17 @@
 {
+  "metaTitle": "Nouvo Ayiti 2075 - Inicio",
+  "metaDescription": "Bienvenido a Nouvo Ayiti 2075. Restaurando la dignidad, reconstruyendo la esperanza y renovando la visión para Haití.",
   "HeroSection": {
-    "title": "Nueva Haití 2075",
+    "title": "Nouvo Ayiti 2075",
     "subtitle": "Restaurar la dignidad. Reconstruir la esperanza.",
     "readMore": "Leer la Visión",
-    "joinNow": "Únete al Movimiento",
+    "joinNow": "Unete al Movimiento",
     "watchVideos": "Ver Videos",
     "goToMain": "Sitio Principal"
   },
   "BlogSection": {
     "title": "Nuestro Blog",
     "subtitle": "Historias, actualizaciones y visiones para el futuro.",
-    "viewAll": "Ver todas las publicaciones"
+    "viewAll": "Ver Todas las Publicaciones"
   }
 }

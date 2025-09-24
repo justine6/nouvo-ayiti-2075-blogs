@@ -3,5 +3,7 @@
     "title": "Our Blog",
     "subtitle": "Stories, updates, and visions for the future.",
     "viewAll": "View All Posts"
-  }
+  },
+  "metaTitle": "Placeholder Title - blog",
+  "metaDescription": "Placeholder description for blog"
 }
