@@ -1,16 +1,16 @@
 // scripts/patch-missing.cjs
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const locales = ["en", "fr", "ht", "es"];
-const baseDir = path.join(__dirname, "..", "dictionaries");
+const locales = ['en', 'fr', 'ht', 'es'];
+const baseDir = path.join(__dirname, '..', 'dictionaries');
 
 for (const locale of locales) {
-  const allPath = path.join(baseDir, locale, "all.json");
+  const allPath = path.join(baseDir, locale, 'all.json');
 
   if (!fs.existsSync(allPath)) continue;
 
-  const data = JSON.parse(fs.readFileSync(allPath, "utf-8"));
+  const data = JSON.parse(fs.readFileSync(allPath, 'utf-8'));
   let updated = false;
 
   // Ensure newsletter
@@ -19,7 +19,7 @@ for (const locale of locales) {
     updated = true;
   }
   if (!data.newsletter.description) {
-    data.newsletter.description = "Placeholder newsletter description";
+    data.newsletter.description = 'Placeholder newsletter description';
     updated = true;
   }
 
@@ -29,7 +29,7 @@ for (const locale of locales) {
     updated = true;
   }
   if (!data.join.title) {
-    data.join.title = "Placeholder join title";
+    data.join.title = 'Placeholder join title';
     updated = true;
   }
   if (!data.join.form) {
@@ -43,11 +43,11 @@ for (const locale of locales) {
     updated = true;
   }
   if (!data.footer.contact) {
-    data.footer.contact = "Placeholder contact";
+    data.footer.contact = 'Placeholder contact';
     updated = true;
   }
   if (!data.footer.rights) {
-    data.footer.rights = "Placeholder rights";
+    data.footer.rights = 'Placeholder rights';
     updated = true;
   }
 

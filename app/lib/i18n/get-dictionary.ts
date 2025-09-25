@@ -21,10 +21,3 @@ export async function getDictionary(locale: string) {
     return {};
   }
 }
-
-
-
-
-
-
-

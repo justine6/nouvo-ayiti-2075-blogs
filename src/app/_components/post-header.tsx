@@ -63,8 +63,3 @@ export function PostHeader({ title, coverImage, date, author }: Props) {
     </>
   );
 }
-
-
-
-
-

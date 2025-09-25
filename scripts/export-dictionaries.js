@@ -44,15 +44,15 @@ function exportDictionaries() {
 exportDictionaries();
 
 // --- AUTO-MERGE AFTER EXPORT --- //
-import { spawnSync } from "child_process";
-import path from "path";
+import { spawnSync } from 'child_process';
+import path from 'path';
 
-const mergeScript = path.resolve(__dirname, "merge-dictionaries.js");
-console.log("\n🔄 Running merge-dictionaries.js after export...");
+const mergeScript = path.resolve(__dirname, 'merge-dictionaries.js');
+console.log('\n🔄 Running merge-dictionaries.js after export...');
 
-const result = spawnSync("node", [mergeScript], { stdio: "inherit" });
+const result = spawnSync('node', [mergeScript], { stdio: 'inherit' });
 
 if (result.error) {
-  console.error("❌ Failed to run merge-dictionaries.js:", result.error);
+  console.error('❌ Failed to run merge-dictionaries.js:', result.error);
   process.exit(1);
 }

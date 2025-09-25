@@ -18,10 +18,3 @@ export default function PageSection({
     </section>
   );
 }
-
-
-
-
-
-
-

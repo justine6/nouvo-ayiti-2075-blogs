@@ -111,8 +111,3 @@ export const ThemeSwitcher = () => {
     </>
   );
 };
-
-
-
-
-

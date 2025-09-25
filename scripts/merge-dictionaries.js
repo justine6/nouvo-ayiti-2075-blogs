@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
 // Deep merge function
 function deepMerge(target, source) {
   for (const key of Object.keys(source)) {
     if (
       source[key] &&
-      typeof source[key] === "object" &&
+      typeof source[key] === 'object' &&
       !Array.isArray(source[key])
     ) {
       if (!target[key]) target[key] = {};
@@ -21,7 +21,7 @@ function deepMerge(target, source) {
 
 // Collect args
 const args = process.argv.slice(2);
-const outFlagIndex = args.indexOf("-o");
+const outFlagIndex = args.indexOf('-o');
 let outPath = null;
 
 if (outFlagIndex !== -1) {
@@ -31,7 +31,7 @@ if (outFlagIndex !== -1) {
 
 let merged = {};
 for (const file of args) {
-  const data = JSON.parse(fs.readFileSync(file, "utf-8"));
+  const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
   merged = deepMerge(merged, data);
 }
 
@@ -44,7 +44,7 @@ if (outPath) {
 }
 
 // Default multilingual output
-const locales = ["en", "fr", "ht", "es"];
+const locales = ['en', 'fr', 'ht', 'es'];
 for (const locale of locales) {
   const outFile = path.resolve(`dictionaries/${locale}/all.json`);
   fs.mkdirSync(path.dirname(outFile), { recursive: true });

@@ -12,9 +12,10 @@ describe("check-dicts.js", () => {
         stdio: ["pipe", "pipe", "pipe"],
       });
     } catch (err: any) {
-      output =
-        (err.stdout?.toString() || "") + (err.stderr?.toString() || "");
+      output = (err.stdout?.toString() || "") + (err.stderr?.toString() || "");
     }
-    expect(output).toMatch(/Missing|passed strict validation|failed strict validation/i);
+    expect(output).toMatch(
+      /Missing|passed strict validation|failed strict validation/i,
+    );
   });
 });

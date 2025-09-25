@@ -30,10 +30,3 @@ export default function MoreStories({
     </section>
   );
 }
-
-
-
-
-
-
-

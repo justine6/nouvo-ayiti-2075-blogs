@@ -1,8 +1,8 @@
 // scripts/check-dicts.js
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import { z } from "zod";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { z } from 'zod';
 
 // Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -65,31 +65,33 @@ const allSchema = baseSchema.extend({
 // Helper: load JSON
 // ----------------------
 function loadJson(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
 // ----------------------
 // Validation logic
 // ----------------------
-const dictionariesDir = path.join(__dirname, "..", "dictionaries");
-const locales = fs.readdirSync(dictionariesDir).filter((f) => /^[a-z]{2}$/.test(f));
+const dictionariesDir = path.join(__dirname, '..', 'dictionaries');
+const locales = fs
+  .readdirSync(dictionariesDir)
+  .filter((f) => /^[a-z]{2}$/.test(f));
 
 for (const locale of locales) {
   const localeDir = path.join(dictionariesDir, locale);
-  const files = fs.readdirSync(localeDir).filter((f) => f.endsWith(".json"));
+  const files = fs.readdirSync(localeDir).filter((f) => f.endsWith('.json'));
 
   for (const file of files) {
     const filePath = path.join(localeDir, file);
     const data = loadJson(filePath);
 
     try {
-      if (file === "join.json") {
+      if (file === 'join.json') {
         joinSchema.parse(data);
-      } else if (file === "contact.json") {
+      } else if (file === 'contact.json') {
         contactSchema.parse(data);
-      } else if (file === "projects.json") {
+      } else if (file === 'projects.json') {
         projectsSchema.parse(data);
-      } else if (file === "all.json") {
+      } else if (file === 'all.json') {
         allSchema.parse(data);
       } else {
         // fallback: require at least metaTitle + metaDescription
@@ -105,4 +107,4 @@ for (const locale of locales) {
   }
 }
 
-console.log("📦 Dictionary validation finished!");
+console.log('📦 Dictionary validation finished!');

@@ -36,10 +36,3 @@ export default function Footer({ dict = {} }: FooterProps) {
     </footer>
   );
 }
-
-
-
-
-
-
-

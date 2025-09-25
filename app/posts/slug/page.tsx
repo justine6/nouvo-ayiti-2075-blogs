@@ -44,10 +44,3 @@ export default async function PostPage({ params }: Params) {
     </article>
   );
 }
-
-
-
-
-
-
-

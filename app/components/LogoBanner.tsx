@@ -15,10 +15,3 @@ export default function LogoBanner() {
     </section>
   );
 }
-
-
-
-
-
-
-

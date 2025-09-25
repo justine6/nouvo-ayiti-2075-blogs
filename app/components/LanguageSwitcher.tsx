@@ -92,10 +92,3 @@ export default function LanguageSwitcher({
     </select>
   );
 }
-
-
-
-
-
-
-

@@ -1,12 +1,12 @@
 // scripts/patch-meta.cjs
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const locales = ["en", "fr", "ht", "es"];
-const dictDir = path.join(process.cwd(), "dictionaries");
+const locales = ['en', 'fr', 'ht', 'es'];
+const dictDir = path.join(process.cwd(), 'dictionaries');
 
 // === Dry-run flag ===
-const dryRun = process.argv.includes("--dry-run");
+const dryRun = process.argv.includes('--dry-run');
 
 // Loop through all locale folders
 for (const locale of locales) {
@@ -17,13 +17,13 @@ for (const locale of locales) {
   }
 
   // Process all JSON files inside this locale folder
-  const files = fs.readdirSync(localeDir).filter((f) => f.endsWith(".json"));
+  const files = fs.readdirSync(localeDir).filter((f) => f.endsWith('.json'));
 
   for (const file of files) {
     const filePath = path.join(localeDir, file);
     let updated = false;
 
-    const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
     if (!data.metaTitle) {
       data.metaTitle = `Placeholder metaTitle for ${locale}/${file}`;

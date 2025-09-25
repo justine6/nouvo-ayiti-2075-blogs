@@ -38,8 +38,3 @@ export default function BlogCard({ post, locale, dict }: BlogCardProps) {
     </div>
   );
 }
-
-
-
-
-
