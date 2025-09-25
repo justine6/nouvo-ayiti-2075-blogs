@@ -1,0 +1,11 @@
+{
+  "title": "Antre Avèk Nou",
+  "form": {
+    "name": "Non",
+    "email": "Imèl",
+    "phone": "Telefòn",
+    "location": "Kote",
+    "message": "Mesaj (opsyonèl)",
+    "submit": "Antre Kounye a"
+  }
+}

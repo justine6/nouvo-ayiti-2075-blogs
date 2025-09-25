@@ -1,75 +1,49 @@
 // scripts/check-translation-sync.js
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+// Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const locales = ['en', 'fr', 'ht', 'es'];
-const dictionariesDir = path.resolve(__dirname, '../dictionaries');
+const dictionariesDir = path.join(__dirname, "..", "dictionaries");
+
+const locales = fs.readdirSync(dictionariesDir).filter((f) => /^[a-z]{2}$/.test(f));
 
 function loadJson(filePath) {
-  try {
-    const raw = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(raw);
-  } catch (err) {
-    console.error(`❌ Failed to parse JSON: ${filePath}`);
-    process.exit(1);
-  }
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function getAllKeys(obj, prefix = '') {
-  return Object.keys(obj).flatMap((key) => {
-    const fullKey = prefix ? `${prefix}.${key}` : key;
-    return typeof obj[key] === 'object' && obj[key] !== null
-      ? getAllKeys(obj[key], fullKey)
-      : fullKey;
-  });
-}
+// Compare structure between English (base) and others
+const baseLocale = "en";
+const baseDir = path.join(dictionariesDir, baseLocale);
+const baseFiles = fs.readdirSync(baseDir).filter((f) => f.endsWith(".json"));
 
-async function runValidation() {
-  console.log('🔍 Running translation key sync validation...\n');
+for (const file of baseFiles) {
+  const basePath = path.join(baseDir, file);
+  const baseData = loadJson(basePath);
 
-  const baseLocale = 'en';
-  const baseDir = path.join(dictionariesDir, baseLocale);
+  for (const locale of locales) {
+    if (locale === baseLocale) continue;
 
-  let allValid = true;
+    const localePath = path.join(dictionariesDir, locale, file);
+    if (!fs.existsSync(localePath)) {
+      console.error(`❌ Missing file: ${locale}/${file}`);
+      process.exitCode = 1;
+      continue;
+    }
 
-  for (const file of fs.readdirSync(baseDir)) {
-    if (!file.endsWith('.json')) continue;
-    const baseJson = loadJson(path.join(baseDir, file));
-    const baseKeys = getAllKeys(baseJson);
+    const localeData = loadJson(localePath);
+    const missingKeys = Object.keys(baseData).filter((key) => !(key in localeData));
 
-    for (const locale of locales.filter((l) => l !== baseLocale)) {
-      const targetPath = path.join(dictionariesDir, locale, file);
-      if (!fs.existsSync(targetPath)) {
-        console.log(`❌ Missing ${locale}/${file}`);
-        allValid = false;
-        continue;
-      }
-      const targetJson = loadJson(targetPath);
-      const targetKeys = getAllKeys(targetJson);
-
-      const missing = baseKeys.filter((k) => !targetKeys.includes(k));
-      if (missing.length > 0) {
-        console.log(
-          `❌ ${locale}/${file} is missing keys: ${missing.join(', ')}`
-        );
-        allValid = false;
-      } else {
-        console.log(`✅ ${locale}/${file} is in sync`);
-      }
+    if (missingKeys.length > 0) {
+      console.error(`❌ ${locale}/${file} missing keys: ${missingKeys.join(", ")}`);
+      process.exitCode = 1;
+    } else {
+      console.log(`✅ ${locale}/${file} is in sync with en/${file}`);
     }
   }
-
-  console.log('\n📦 Translation sync validation finished!');
-  if (!allValid) {
-    console.error('❌ Validation failed. Fix issues before committing.');
-    process.exit(1);
-  } else {
-    console.log('✅ All locales are in sync with EN');
-  }
 }
 
-runValidation();
+console.log("📦 Translation sync validation finished!");

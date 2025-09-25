@@ -14,23 +14,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-
-    // ✅ Base URL & Aliases
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["app/components/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@lib/*": ["app/lib/*"],
-      "@app/*": ["app/*"],
-      "@/*": ["app/*"]
+      "@components/*": ["src/components/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@lib/*": ["src/lib/*"],
+      "@app/*": ["src/*"],
+      "@/*": ["src/*"],
+      "~/*": ["src/*"]
     },
-
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "plugins": [{ "name": "next" }]
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next"]
 }

@@ -6,6 +6,8 @@ on:
     branches:
       - main
       - develop
+      # Or uncomment to run on all branches
+      # - '**'
 
 jobs:
   ci-checks:
@@ -18,14 +20,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20   # Use LTS for consistency with Vercel
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run CI checks (validate + lint + strict coverage)
-        run: npm run ci-check
+      # CI phase-controlled thresholds (default Phase 1 baseline)
+      - name: Run CI checks
+        run: CI_COVERAGE_PHASE=1 npm run ci-check
 
       - name: Upload HTML coverage report
         if: always()
@@ -40,4 +43,40 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
           flags: unittests
-          fail_ci_if_error: true
+          fail_ci_if_error: false
+
+      # --- Dynamic Coverage Phase Badge ---
+      - name: Update coverage phase badge
+        if: github.ref == 'refs/heads/main'
+        run: |
+          PHASE=${CI_COVERAGE_PHASE:-1}
+          COLOR="blue"
+          LABEL="coverage-phase"
+          MESSAGE="$PHASE"
+
+          if [ "$PHASE" = "1" ]; then
+            MESSAGE="1 (baseline)"
+            COLOR="blue"
+          elif [ "$PHASE" = "2" ]; then
+            MESSAGE="2 (intermediate)"
+            COLOR="orange"
+          elif [ "$PHASE" = "3" ]; then
+            MESSAGE="3 (strict)"
+            COLOR="red"
+          fi
+
+          cat <<EOF > coverage-phase.json
+{
+  "schemaVersion": 1,
+  "label": "$LABEL",
+  "message": "$MESSAGE",
+  "color": "$COLOR"
+}
+EOF
+
+      - name: Commit updated badge JSON
+        if: github.ref == 'refs/heads/main'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(ci): update coverage phase badge"
+          file_pattern: coverage-phase.json

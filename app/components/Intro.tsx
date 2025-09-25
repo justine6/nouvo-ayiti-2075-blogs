@@ -16,3 +16,10 @@ export default function Intro({ title, subtitle, locale }: Props) {
     </section>
   );
 }
+
+
+
+
+
+
+

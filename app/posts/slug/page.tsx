@@ -1,37 +1,53 @@
-import { getAllPosts } from "@/lib/get-all-posts";
-import Container from "@/components/Container";
-import BlogCard from "@/components/BlogCard";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import type { Locale } from "@/lib/i18n/settings";
+import { getPostBySlug, getAllPosts } from "@/lib/get-all-posts";
 
-type Props = {
-  params: { locale: Locale };
+type Params = {
+  params: { slug: string };
 };
 
-// ✅ Blog Page
-export default async function BlogPage({ params }: Props) {
-  const { locale } = await params; // <-- fix
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
-  const dict = await getDictionary(locale);
-  const posts = getAllPosts(locale);
+export async function generateMetadata({ params }: Params) {
+  const post = await getPostBySlug(params.slug);
+
+  return {
+    title: post?.metaTitle ?? "Nouvo Ayiti 2075 - Blog",
+    description:
+      post?.metaDescription ??
+      "Stories, updates, and visions from Nouvo Ayiti 2075.",
+  };
+}
+
+export default async function PostPage({ params }: Params) {
+  const post = await getPostBySlug(params.slug);
+
+  if (!post) {
+    return (
+      <div className="prose mx-auto py-10">
+        <h1>Post not found</h1>
+        <p>This blog post could not be loaded.</p>
+      </div>
+    );
+  }
 
   return (
-    <Container>
-      <h1>{dict.blog.metaTitle}</h1>
-      {/* render posts */}
-    </Container>
+    <article className="prose mx-auto py-10">
+      <h1>{post.title ?? "Untitled Post"}</h1>
+      <p className="text-gray-500">{post.date ?? "Date unavailable"}</p>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: post.content ?? "<p>Content coming soon.</p>",
+        }}
+      />
+    </article>
   );
 }
 
-// ✅ Metadata
-export async function generateMetadata({ params }: Props) {
-  const { locale } = await params; // <-- fix
-  const dict = await getDictionary(locale);
 
-  return {
-    title: dict.blog.metaTitle || "Blog - Nouvo Ayiti 2075",
-    description:
-      dict.blog.metaDescription ||
-      "Discover stories, insights, and updates from Nouvo Ayiti 2075.",
-  };
-}
+
+
+
+
+

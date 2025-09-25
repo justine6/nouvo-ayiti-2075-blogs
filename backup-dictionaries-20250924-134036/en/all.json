@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "Nouvo Ayiti 2075",
+    "subtitle": "Restoring Dignity. Rebuilding Hope. Renewing Vision.",
+    "readMore": "Read the Vision",
+    "joinNow": "Join the Movement",
+    "metaTitle": "Hero - Nouvo Ayiti 2075",
+    "metaDescription": "Discover Nouvo Ayiti 2075 — restoring dignity, rebuilding hope, and renewing vision for Haiti."
+  },
+  "mission": {
+    "heading": "Our Mission",
+    "paragraph": "We are rebuilding Haiti with dignity, innovation, and vision."
+  },
+  "projects": {
+    "title": "Our Projects",
+    "intro": "Discover our initiatives for Haiti's transformation.",
+    "motto": "Each project is a promise to the future.",
+    "metaTitle": "Projects - Nouvo Ayiti 2075",
+    "metaDescription": "Discover the projects of Nouvo Ayiti 2075 — restoring dignity, rebuilding hope, and renewing vision."
+  },
+  "blog": {
+    "title": "Our Blog",
+    "subtitle": "Stories, updates, and visions for the future.",
+    "viewAll": "View All Posts",
+    "readMore": "Read More",
+    "noPosts": "No posts available.",
+    "metaTitle": "Blog - Nouvo Ayiti 2075",
+    "metaDescription": "Discover stories, updates, and visions for Haiti's future with Nouvo Ayiti 2075."
+  },
+  "newsletter": {
+    "title": "Stay Connected",
+    "description": "Subscribe to receive updates, news, and stories of hope."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Wed love to hear from you. Reach out to Nouvo Ayiti 2075 today.",
+    "metaTitle": "Contact - Nouvo Ayiti 2075",
+    "metaDescription": "Contact Nouvo Ayiti 2075 to get involved, ask questions, or learn more about our mission."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "intro": "A brighter Haiti by 2075, grounded in dignity, hope, and unity.",
+    "metaTitle": "Vision - Nouvo Ayiti 2075",
+    "metaDescription": "Explore our long-term vision for Haiti 2075  restoring dignity, rebuilding hope, and renewing vision."
+  },
+  "join": {
+    "title": "Join Us",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "message": "Message (optional)",
+      "submit": "Join Now"
+    }
+  },
+  "about": {
+    "heading": "About Us",
+    "paragraph": "Nouvo Ayiti 2075 is a movement dedicated to restoring dignity, rebuilding hope, and renewing vision for the people of Haiti.",
+    "teamHeading": "Our Team",
+    "teamIntro": "We are a collective of passionate leaders, volunteers, and community members working together to build a brighter future for Haiti.",
+    "metaTitle": "About - Nouvo Ayiti 2075",
+    "metaDescription": "Discover Nouvo Ayiti 2075. Learn more about our mission, our team, and our vision to restore dignity and rebuild hope in Haiti."
+  },
+  "footer": {
+    "contact": "Contact Us",
+    "address": "123 Main Street, Port-au-Prince, Haiti",
+    "phone": "+509 1234-5678",
+    "email": "info@nouvoayiti2075.com",
+    "links": "Quick Links",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": " 2025 Nouvo Ayiti 2075. All rights reserved."
+  }
+}

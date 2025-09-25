@@ -1,11 +1,13 @@
 {
-  "home": "Inicio",
-  "about": "Acerca de",
-  "projects": "Proyectos",
-  "blog": "Blog",
-  "contact": "Contacto",
-  "vision": "Visión",
-  "language": "Idioma",
-  "metaTitle": "Placeholder Title - topbar",
-  "metaDescription": "Placeholder description for topbar"
+  "metaTitle": "Barra de navegación - Nouvo Ayiti 2075",
+  "metaDescription": "Navegación y acceso rápido para Nouvo Ayiti 2075.",
+  "topbar": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "vision": "Visión",
+    "language": "Idioma"
+  }
 }

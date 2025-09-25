@@ -1,54 +1,38 @@
 // scripts/check-required-only.js
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+// Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const locales = ['en', 'fr', 'ht', 'es'];
-const dictionariesDir = path.resolve(__dirname, '../dictionaries');
+const dictionariesDir = path.join(__dirname, "..", "dictionaries");
 
-// Example required keys (adjust as needed)
-const required = ['title', 'metaTitle', 'metaDescription'];
+// Required keys for all dictionaries
+const requiredKeys = ["metaTitle", "metaDescription"];
 
-function loadJson(filePath) {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  } catch (err) {
-    console.error(`❌ Failed to parse JSON: ${filePath}`);
-    process.exit(1);
-  }
-}
+function validateRequired(filePath, locale, file) {
+  const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  const missing = requiredKeys.filter((key) => !data[key]);
 
-async function runValidation() {
-  console.log('🔍 Running required-only validation...\n');
-
-  let allValid = true;
-
-  for (const locale of locales) {
-    const files = fs.readdirSync(path.join(dictionariesDir, locale));
-    for (const file of files) {
-      if (!file.endsWith('.json')) continue;
-      const json = loadJson(path.join(dictionariesDir, locale, file));
-
-      const missing = required.filter((k) => !(k in json));
-      if (missing.length > 0) {
-        console.log(`❌ ${locale}/${file} missing: ${missing.join(', ')}`);
-        allValid = false;
-      } else {
-        console.log(`✅ ${locale}/${file} has all required keys`);
-      }
-    }
-  }
-
-  console.log('\n📦 Required-only validation finished!');
-  if (!allValid) {
-    console.error('❌ Validation failed.');
-    process.exit(1);
+  if (missing.length > 0) {
+    console.error(`❌ ${locale}/${file} is missing required keys: ${missing.join(", ")}`);
+    process.exitCode = 1;
   } else {
-    console.log('✅ All dictionaries have required keys');
+    console.log(`✅ ${locale}/${file} has all required keys`);
   }
 }
 
-runValidation();
+const locales = fs.readdirSync(dictionariesDir).filter((f) => /^[a-z]{2}$/.test(f));
+
+for (const locale of locales) {
+  const localeDir = path.join(dictionariesDir, locale);
+  const files = fs.readdirSync(localeDir).filter((f) => f.endsWith(".json"));
+
+  for (const file of files) {
+    validateRequired(path.join(localeDir, file), locale, file);
+  }
+}
+
+console.log("📦 Required keys validation finished!");

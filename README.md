@@ -1,10 +1,28 @@
 # Nouvo Ayiti 2075 Blogs
 
 ![CI](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg)
-[![codecov](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs/branch/main/graph/badge.svg?token=${{ secrets.CODECOV_TOKEN }})](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs)
+[![codecov](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs/branch/main/graph/badge.svg)](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs)
+![Coverage Phase](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/justine6/nouvo-ayiti-2075-blogs/main/coverage-phase.json)
 [![Vercel Deployment](https://vercel.com/button)](https://vercel.com/justine6/nouvo-ayiti-2075-blogs/deployments)
 
 🌍 **Live Site:** [https://nouvoayiti2075.com](https://nouvoayiti2075.com)
+
+---
+
+## 🚀 Development Setup
+
+Follow these steps to run the project locally:
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/justine6/nouvo-ayiti-2075-blogs.git
+cd nouvo-ayiti-2075-blogs
+
+
+
+<!-- Coverage Phase Badge -->
+![Coverage Phase](https://img.shields.io/badge/coverage--phase-1%20(baseline)-blue)
+
 
 <!-- Uncomment when ready
 ![CSV Sync](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-csv.yml/badge.svg)
@@ -83,3 +101,28 @@ npm run validated
 
 # Run full CI pipeline locally
 npm run ci-check
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions to improve **Nouvo Ayiti 2075 Blogs**!  
+Please follow these guidelines:
+
+### 1. Branching
+- Create feature branches from `develop` (e.g. `feature/add-footer`).
+- Open a pull request into `develop` for review.
+- Merges into `main` are reserved for production-ready code.
+
+### 2. Commit Style
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
+- `feat:` for new features  
+- `fix:` for bug fixes  
+- `docs:` for documentation updates  
+- `test:` for tests only  
+- `chore:` for build, tooling, or CI changes  
+
+Examples:
+```bash
+git commit -m "feat: add French translations for newsletter section"
+git commit -m "fix: correct missing key in ht/join.json"

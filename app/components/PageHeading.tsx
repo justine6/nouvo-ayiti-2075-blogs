@@ -10,3 +10,10 @@ export default function PageHeading({ children }: PageHeadingProps) {
     </h1>
   );
 }
+
+
+
+
+
+
+

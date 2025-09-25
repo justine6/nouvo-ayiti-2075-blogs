@@ -1,8 +1,8 @@
 {
-  "title": "Our Vision for Haiti 2075",
-  "intro": "We see a renewed Haiti built on dignity, hope, and unity.",
-  "description": "Our vision is to restore dignity, rebuild hope, and renew the shared vision of Haiti by investing in education, health, infrastructure, and innovation that empower every Haitian citizen.",
-  "content": "Through Nouvo Ayiti 2075, we are building a Haiti that inspires and creates equal opportunities for all.",
   "metaTitle": "Vision - Nouvo Ayiti 2075",
-  "metaDescription": "Discover the vision of Nouvo Ayiti 2075: restoring dignity, rebuilding hope, and renewing Haiti’s future."
+  "metaDescription": "Discover our long-term vision for Haiti in 2075.",
+  "vision": {
+    "title": "Our Vision for Ayiti 2075",
+    "intro": "A future grounded in dignity, rebuilt with hope, and guided by vision."
+  }
 }

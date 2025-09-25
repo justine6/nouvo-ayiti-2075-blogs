@@ -1,86 +1,108 @@
 // scripts/check-dicts.js
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { z } from "zod";
 
 // Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// === CONFIG ===
-const locales = ['en', 'fr', 'ht', 'es'];
-const dictionariesDir = path.resolve(__dirname, '../dictionaries');
+// ----------------------
+// Define schemas
+// ----------------------
 
-// Required keys for each dictionary file
-const requiredKeys = {
-  contact: ['title', 'address', 'email', 'phone'],
-  footer: [
-    'copyright',
-    'links',
-    'address',
-    'email',
-    'phone',
-    'metaTitle',
-    'metaDescription',
-  ],
-  newsletter: ['title', 'description', 'metaTitle', 'metaDescription'],
-  vision: ['title', 'content', 'metaTitle', 'metaDescription'],
-};
+// Common metadata required everywhere
+const baseSchema = z.object({
+  metaTitle: z.string(),
+  metaDescription: z.string(),
+});
 
-// === HELPERS ===
+// join.json
+const joinSchema = baseSchema.extend({
+  join: z.object({
+    title: z.string(),
+    form: z.object({
+      name: z.string(),
+      email: z.string(),
+      phone: z.string(),
+      location: z.string(),
+      message: z.string(),
+      submit: z.string(),
+    }),
+  }),
+});
+
+// contact.json
+const contactSchema = baseSchema.extend({
+  contact: z.object({
+    form: z.object({
+      name: z.string(),
+      email: z.string(),
+      message: z.string(),
+      submit: z.string(),
+    }),
+  }),
+});
+
+// projects.json
+const projectsSchema = baseSchema.extend({
+  education: z.object({ label: z.string() }),
+  healthcare: z.object({ label: z.string() }),
+  infrastructure: z.object({ label: z.string() }),
+  agriculture: z.object({ label: z.string() }),
+  environment: z.object({ label: z.string() }),
+  technology: z.object({ label: z.string() }),
+});
+
+// all.json (merged dictionaries)
+const allSchema = baseSchema.extend({
+  join: joinSchema.shape.join.optional(),
+  contact: contactSchema.shape.contact.optional(),
+});
+
+// ----------------------
+// Helper: load JSON
+// ----------------------
 function loadJson(filePath) {
-  try {
-    const raw = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(raw);
-  } catch (err) {
-    console.error(`❌ Failed to load JSON: ${filePath}`);
-    console.error(err.message);
-    process.exit(1);
-  }
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function validateFile(locale, file, json, keys) {
-  const missing = keys.filter((k) => !(k in json));
-  if (missing.length > 0) {
-    console.log(
-      `❌ ${locale}/${file}.json is missing keys: ${missing.join(', ')}`
-    );
-    return false;
-  }
-  console.log(`✅ ${locale}/${file}.json has all required keys!`);
-  return true;
-}
+// ----------------------
+// Validation logic
+// ----------------------
+const dictionariesDir = path.join(__dirname, "..", "dictionaries");
+const locales = fs.readdirSync(dictionariesDir).filter((f) => /^[a-z]{2}$/.test(f));
 
-// === MAIN ===
-async function runValidation() {
-  console.log('🔍 Running dictionary validation in LIGHT mode...\n');
+for (const locale of locales) {
+  const localeDir = path.join(dictionariesDir, locale);
+  const files = fs.readdirSync(localeDir).filter((f) => f.endsWith(".json"));
 
-  let allValid = true;
+  for (const file of files) {
+    const filePath = path.join(localeDir, file);
+    const data = loadJson(filePath);
 
-  for (const locale of locales) {
-    for (const [file, keys] of Object.entries(requiredKeys)) {
-      const filePath = path.join(dictionariesDir, locale, `${file}.json`);
-      if (!fs.existsSync(filePath)) {
-        console.log(`❌ Missing file: ${locale}/${file}.json`);
-        allValid = false;
-        continue;
+    try {
+      if (file === "join.json") {
+        joinSchema.parse(data);
+      } else if (file === "contact.json") {
+        contactSchema.parse(data);
+      } else if (file === "projects.json") {
+        projectsSchema.parse(data);
+      } else if (file === "all.json") {
+        allSchema.parse(data);
+      } else {
+        // fallback: require at least metaTitle + metaDescription
+        baseSchema.parse(data);
       }
 
-      const json = loadJson(filePath);
-      const valid = validateFile(locale, file, json, keys);
-      if (!valid) allValid = false;
+      console.log(`✅ ${locale}/${file} passed strict validation`);
+    } catch (err) {
+      console.error(`❌ ${locale}/${file} failed strict validation`);
+      console.error(err.errors ?? err.message ?? err);
+      process.exitCode = 1;
     }
-  }
-
-  console.log('\n📦 Dictionary validation finished!');
-  if (!allValid) {
-    console.error(
-      '❌ Validation failed. Fix the above issues before committing.'
-    );
-    process.exit(1);
-  } else {
-    console.log('✅ All dictionaries are valid!');
   }
 }
 
-runValidation();
+console.log("📦 Dictionary validation finished!");

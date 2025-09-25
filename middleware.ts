@@ -5,7 +5,8 @@ const PUBLIC_FILE = /\.(.*)$/;
 const SUPPORTED_LOCALES = ["en", "fr", "ht", "es"];
 const DEFAULT_LOCALE = "en";
 
-export function middleware(request: NextRequest) {
+// ✅ Declare middleware function
+const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
   // ✅ Ignore static files, API, and favicon
@@ -63,7 +64,11 @@ export function middleware(request: NextRequest) {
       : DEFAULT_LOCALE;
 
   return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
-}
+};
+
+// ✅ Named and default export
+export { middleware };
+export default middleware;
 
 export const config = {
   matcher: ["/((?!_next|api|favicon.ico).*)"], // ✅ ignore internals & favicon

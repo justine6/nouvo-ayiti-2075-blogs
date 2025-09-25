@@ -1,134 +1,37 @@
-param(
-    [switch]$All,
-    [string]$FileName,
-    [string[]]$RequiredKeys,
-    [switch]$DryRun,
-    [switch]$Verbose   # ✅ New flag
-)
+# ================================================
+# Update-Dictionaries.ps1
+# Launcher for Full / Incremental updates
+# ================================================
 
-# Ensure script can run even if ExecutionPolicy is restricted
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-
-# ===============================
-# 1. Locate CSV (root first, then scripts/)
-# ===============================
-$csvPathRoot   = "dictionary_keys.csv"
-$csvPathScript = "scripts\dictionary_keys.csv"
-
-if (Test-Path $csvPathRoot) {
-    $csvPath = $csvPathRoot
-    if ($Verbose) { Write-Host "📄 Using CSV from root: $csvPath" -ForegroundColor Cyan }
-} elseif (Test-Path $csvPathScript) {
-    $csvPath = $csvPathScript
-    if ($Verbose) { Write-Host "📄 Using CSV from scripts/: $csvPath" -ForegroundColor Cyan }
-} else {
-    Write-Host "⚠️ No CSV file found in root or scripts/. Exiting..." -ForegroundColor Red
-    exit 1
-}
-
-# ===============================
-# 2. Load CSV
-# ===============================
-$csv = Import-Csv $csvPath
-
-# ===============================
-# 3. Stats counters
-# ===============================
-$Patched = 0
-$Created = 0
-$Skipped = 0
-$Errors  = 0
-
-# ===============================
-# 4. Decide which files to process
-# ===============================
-$filesToProcess = @()
-
-if ($All) {
-    $filesToProcess = $csv
-} elseif ($FileName -and $RequiredKeys) {
-    $filesToProcess = @(@{ file = $FileName; keys = ($RequiredKeys -join "|") })
-} else {
-    Write-Host "⚠️ Must specify -All OR -FileName with -RequiredKeys" -ForegroundColor Yellow
-    exit 1
-}
-
-# ===============================
-# 5. Process each dictionary file
-# ===============================
-$localeRoot = "dictionaries"
-$locales = Get-ChildItem -Path $localeRoot -Directory | Select-Object -ExpandProperty Name
-
-foreach ($row in $filesToProcess) {
-    $fileName = $row.file
-    $requiredKeys = $row.keys -split "\|"
-
-    if ([string]::IsNullOrWhiteSpace($fileName)) {
-        if ($Verbose) { Write-Host "⚠️ Skipping row because fileName is empty." -ForegroundColor Yellow }
-        continue
-    }
-
-    foreach ($locale in $locales) {
-        $path = Join-Path $localeRoot -ChildPath "$locale\$fileName"
-
-        if ([string]::IsNullOrWhiteSpace($path)) {
-            if ($Verbose) { Write-Host "⚠️ Skipping row because path is empty (file=$fileName, locale=$locale)" -ForegroundColor Yellow }
-            continue
-        }
-
-        try {
-            if (-not (Test-Path $path)) {
-                Write-Host "⚠️ $path does not exist, creating..." -ForegroundColor Yellow
-                $json = @{}
-                $Created++
-            } else {
-                if ($Verbose) { Write-Host "📂 Loading existing file: $path" -ForegroundColor DarkGray }
-                $json = Get-Content $path -Raw | ConvertFrom-Json
-                if (-not $json) { $json = @{} }
-            }
-
-            $updated = $false
-
-            foreach ($key in $requiredKeys) {
-                if (-not ($json.PSObject.Properties.Name -contains $key)) {
-                    if ($DryRun) {
-                        Write-Host "[DryRun] Would add key '$key' to $path" -ForegroundColor Cyan
-                    } else {
-                        $json | Add-Member -NotePropertyName $key -NotePropertyValue "" -Force
-                    }
-                    $updated = $true
-                } elseif ($Verbose) {
-                    Write-Host "ℹ️ Key '$key' already exists in $path" -ForegroundColor DarkGray
-                }
-            }
-
-            if ($updated -and -not $DryRun) {
-                $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
-                Write-Host "✅ Patched $path with required keys." -ForegroundColor Green
-                $Patched++
-            } elseif (-not $updated) {
-                if ($Verbose) { Write-Host "➖ No changes needed for $path." -ForegroundColor DarkGray }
-                $Skipped++
-            }
-
-        } catch {
-            Write-Host ("❌ Error processing {0}: {1}" -f $path, $_.Exception.Message) -ForegroundColor Red
-            $Errors++
-        }
-    }
-}
-
-# ===============================
-# 6. Summary
-# ===============================
+Write-Host "===============================================" -ForegroundColor Cyan
+Write-Host " Nouvo Ayiti 2075 – Dictionary Update " -ForegroundColor Cyan
+Write-Host "===============================================" -ForegroundColor Cyan
+Write-Host "1. Full Update (overwrite all metadata)"
+Write-Host "2. Incremental Update (fill only missing metadata)"
 Write-Host ""
-Write-Host "===== Summary =====" -ForegroundColor Cyan
-Write-Host " Patched : $Patched" -ForegroundColor Green
-Write-Host " Created : $Created" -ForegroundColor Yellow
-Write-Host " Skipped : $Skipped" -ForegroundColor DarkGray
-if ($Errors -gt 0) {
-    Write-Host " Errors  : $Errors" -ForegroundColor Red
-} else {
-    Write-Host " Errors  : $Errors" -ForegroundColor Green
+
+$choice = Read-Host "Enter your choice (1 or 2)"
+
+switch ($choice) {
+    "1" {
+        Write-Host "📝 Running FULL metadata update..." -ForegroundColor Yellow
+        & "$PSScriptRoot\Update-Dictionaries-Full.ps1"
+    }
+    "2" {
+        Write-Host "📝 Running INCREMENTAL metadata update..." -ForegroundColor Yellow
+        & "$PSScriptRoot\Update-Dictionaries-Incremental.ps1"
+    }
+    default {
+        Write-Host "❌ Invalid choice. Please run again and enter 1 or 2." -ForegroundColor Red
+        exit 1
+    }
 }
-Write-Host "===================" -ForegroundColor Cyan
+
+# --- AUTO VALIDATION ---
+Write-Host "===============================================" -ForegroundColor Cyan
+Write-Host " 🔍 Running metadata validation..." -ForegroundColor Cyan
+
+npm run merge-dicts
+npm run check-meta
+
+Write-Host "✅ Update + validation completed!" -ForegroundColor Green

@@ -1,7 +1,10 @@
 {
-  "title": "Mantente Conectado",
-  "description": "Suscríbete para recibir actualizaciones, noticias e historias de esperanza.",
-  "content": "Únete a nuestro boletín para seguir el camino de la reconstrucción de Haití con dignidad, innovación y unidad.",
   "metaTitle": "Boletín - Nouvo Ayiti 2075",
-  "metaDescription": "Mantente conectado con Nouvo Ayiti 2075. Suscríbete para recibir actualizaciones, noticias e historias inspiradoras de la transformación de Haití."
+  "metaDescription": "Mantente conectado con actualizaciones, anuncios e inspiración de Nouvo Ayiti 2075.",
+  "newsletter": {
+    "title": "Mantente Conectado",
+    "description": "Suscríbete para recibir actualizaciones, anuncios e historias de esperanza.",
+    "placeholder": "Introduce tu correo electrónico",
+    "subscribe": "Suscribirse"
+  }
 }

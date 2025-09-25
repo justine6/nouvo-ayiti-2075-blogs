@@ -19,5 +19,24 @@
     "prettier/prettier": "error",
     "no-unused-vars": "warn",
     "no-console": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "alias": {
+        "map": [
+          ["@components", "./src/components"],
+          ["@interfaces", "./src/interfaces"],
+          ["@lib", "./src/lib"],
+          ["@app", "./src"],
+          ["@", "./src"],
+          ["~", "./src"]
+        ],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

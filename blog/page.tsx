@@ -43,3 +43,9 @@ export default async function BlogIndex({ params }: Props) {
     </Container>
   );
 }
+
+
+
+
+
+

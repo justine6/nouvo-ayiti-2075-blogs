@@ -111,3 +111,10 @@ export default function HeroSection({ locale, dict = {} }: HeroSectionProps) {
     </section>
   );
 }
+
+
+
+
+
+
+

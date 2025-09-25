@@ -42,3 +42,10 @@ export default function BlogSection({ dict = {}, locale }: BlogSectionProps) {
     </section>
   );
 }
+
+
+
+
+
+
+

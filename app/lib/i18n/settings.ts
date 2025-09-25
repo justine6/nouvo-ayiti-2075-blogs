@@ -6,3 +6,10 @@ export const locales = ["en", "fr", "ht", "es"] as const;
 export const defaultLocale = "en";
 
 export type Locale = (typeof locales)[number];
+
+
+
+
+
+
+

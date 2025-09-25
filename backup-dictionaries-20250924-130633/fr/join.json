@@ -1,0 +1,11 @@
+{
+  "title": "Rejoignez-Nous",
+  "form": {
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "location": "Lieu",
+    "message": "Message (optionnel)",
+    "submit": "Rejoindre Maintenant"
+  }
+}
