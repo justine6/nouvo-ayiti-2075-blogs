@@ -39,4 +39,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
+# local developer overrides
+.no-auto-browser
+.devserver-opened
+
+# Vitest coverage reports
+coverage/

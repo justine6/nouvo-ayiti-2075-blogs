@@ -1,48 +1,43 @@
-name: Validate & Sync Translations (CSV)
+name: CI
 
 on:
-  workflow_dispatch: # 🚧 only runs manually for now
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
 
 jobs:
-  validate-csv:
+  ci-checks:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # allow auto-commits if needed
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run full dictionary validation
-        run: npm run check-dicts
+      - name: Run CI checks (validate + lint + strict coverage)
+        run: npm run ci-check
 
-      - name: Export combined CSV
-        run: npm run export-combined
+      - name: Upload HTML coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
 
-      - name: Check JSON ↔ CSV sync
-        id: sync
-        run: |
-          if ! npm run check-sync; then
-            echo "out_of_sync=true" >> $GITHUB_ENV
-          else
-            echo "out_of_sync=false" >> $GITHUB_ENV
-          fi
-
-      - name: Commit updated CSV
-        if: env.out_of_sync == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add all_translations.csv
-          git commit -m "🔄 Auto-update all_translations.csv from CI"
-          git push
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          flags: unittests
+          fail_ci_if_error: true

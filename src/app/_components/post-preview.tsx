@@ -34,3 +34,8 @@ const PostPreview = ({ slug, title, coverImage }: PostPreviewProps) => {
 };
 
 export default PostPreview;
+
+
+
+
+

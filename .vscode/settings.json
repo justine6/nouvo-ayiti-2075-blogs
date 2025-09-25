@@ -1,0 +1,23 @@
+{
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "javascript.preferences.importModuleSpecifier": "shortest",
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  "path-intellisense.mappings": {
+    "@components": "${workspaceFolder}/src/components",
+    "@interfaces": "${workspaceFolder}/src/interfaces",
+    "@lib": "${workspaceFolder}/src/lib",
+    "@app": "${workspaceFolder}/src",
+    "@": "${workspaceFolder}/src",
+    "~": "${workspaceFolder}/src"
+  },
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

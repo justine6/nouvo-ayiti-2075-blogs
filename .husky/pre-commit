@@ -1,8 +1,18 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🔍 Running dictionary + meta + ESLint validation..."
+echo "🔍 Running pre-commit checks..."
 
-npm run check-dicts
-npm run check-meta
-npm run lint
+# Step 1: Auto-patch dictionaries
+npm run patch-missing
+
+# Step 2: Rebuild dictionaries
+npm run patch-dicts
+
+# Step 3: Validate metadata + dictionaries
+npm run validated
+
+# Step 4: ESLint + Prettier only on staged files
+npx lint-staged
+
+echo "✅ Pre-commit checks passed!"

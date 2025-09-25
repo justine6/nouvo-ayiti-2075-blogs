@@ -13,3 +13,8 @@ const Avatar = ({ name, picture }: Props) => {
 };
 
 export default Avatar;
+
+
+
+
+

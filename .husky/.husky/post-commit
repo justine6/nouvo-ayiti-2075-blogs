@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run full validation + lint + tests
+npm run ci-check
+
+# Format and lint only staged files
+npx lint-staged
+
+echo "✅ Pre-commit checks completed successfully!"

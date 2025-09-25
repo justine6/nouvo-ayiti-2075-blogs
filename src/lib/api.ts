@@ -47,3 +47,8 @@ export function getAllPosts(): PostType[] {
 
   return posts;
 }
+
+
+
+
+
