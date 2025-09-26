@@ -14,9 +14,7 @@ export async function generateMetadata({ params }: Params) {
 
   return {
     title: post?.metaTitle ?? "Nouvo Ayiti 2075 - Blog",
-    description:
-      post?.metaDescription ??
-      "Stories, updates, and visions from Nouvo Ayiti 2075.",
+    description: post?.metaDescription ?? "Stories, updates, and visions from Nouvo Ayiti 2075.",
   };
 }
 

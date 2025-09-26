@@ -20,9 +20,7 @@ export default function BlogIndexPage({ params }: Props) {
             date={post.date}
             excerpt={post.excerpt}
             coverImage={post.coverImage}
-            author={
-              typeof post.author === "string" ? post.author : post.author?.name
-            }
+            author={typeof post.author === "string" ? post.author : post.author?.name}
             slug={post.slug}
           />
         ))}

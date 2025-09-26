@@ -8,11 +8,7 @@ type TagFilterProps = {
   onTagSelect: (tag: string | null) => void;
 };
 
-export default function TagFilter({
-  allTags,
-  activeTag,
-  onTagSelect,
-}: TagFilterProps) {
+export default function TagFilter({ allTags, activeTag, onTagSelect }: TagFilterProps) {
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
       {allTags.map((tag) => (

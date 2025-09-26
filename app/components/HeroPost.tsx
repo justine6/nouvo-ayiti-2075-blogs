@@ -8,11 +8,7 @@ type HeroPostProps = {
   readMoreLabel: string;
 };
 
-export default function HeroPost({
-  post,
-  locale,
-  readMoreLabel,
-}: HeroPostProps) {
+export default function HeroPost({ post, locale, readMoreLabel }: HeroPostProps) {
   // ✅ Default to logo if no coverImage provided
   const coverImage = post.coverImage || "/images/nouvoayiti2075-logo.png";
 
@@ -29,19 +25,14 @@ export default function HeroPost({
       </div>
 
       <h3 className="mt-4 text-2xl md:text-3xl font-bold">
-        <Link
-          href={`/${locale}/posts/${post.slug}`}
-          className="hover:underline"
-        >
+        <Link href={`/${locale}/posts/${post.slug}`} className="hover:underline">
           {post.title}
         </Link>
       </h3>
 
       <p className="text-gray-600 text-sm mt-1">{post.date}</p>
 
-      {post.excerpt && (
-        <p className="mt-2 text-lg text-gray-700">{post.excerpt}</p>
-      )}
+      {post.excerpt && <p className="mt-2 text-lg text-gray-700">{post.excerpt}</p>}
 
       <Link
         href={`/${locale}/posts/${post.slug}`}

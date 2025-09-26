@@ -19,10 +19,7 @@ export default function MoreStories({ posts, locale, dict }: Props) {
           <article key={post.slug} className="border rounded-lg p-4 shadow-sm">
             <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
             <p className="text-gray-600 mb-4">{post.excerpt}</p>
-            <Link
-              href={`/${locale}/posts/${post.slug}`}
-              className="text-blue-600 hover:underline"
-            >
+            <Link href={`/${locale}/posts/${post.slug}`} className="text-blue-600 hover:underline">
               {dict.blog.readMore}
             </Link>
           </article>

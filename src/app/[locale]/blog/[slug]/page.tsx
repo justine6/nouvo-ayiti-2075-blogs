@@ -34,10 +34,7 @@ export default async function PostPage({ params }: Props) {
       </article>
 
       <div className="mt-8">
-        <Link
-          href={`/${locale}/blog`}
-          className="text-blue-600 hover:underline"
-        >
+        <Link href={`/${locale}/blog`} className="text-blue-600 hover:underline">
           ← {dict.blog.backToList}
         </Link>
       </div>

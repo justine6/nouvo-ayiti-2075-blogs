@@ -8,12 +8,7 @@ export async function getDictionary(locale: string) {
   }
 
   try {
-    const dictPath = path.join(
-      process.cwd(),
-      "dictionaries",
-      locale,
-      "blog.json",
-    );
+    const dictPath = path.join(process.cwd(), "dictionaries", locale, "blog.json");
     const file = await fs.promises.readFile(dictPath, "utf-8");
     return JSON.parse(file);
   } catch (error) {

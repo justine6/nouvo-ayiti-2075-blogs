@@ -7,11 +7,7 @@ type MoreStoriesProps = {
   readMoreLabel: string;
 };
 
-export default function MoreStories({
-  posts,
-  locale,
-  readMoreLabel,
-}: MoreStoriesProps) {
+export default function MoreStories({ posts, locale, readMoreLabel }: MoreStoriesProps) {
   if (!posts?.length) return null;
 
   return (
@@ -19,12 +15,7 @@ export default function MoreStories({
       <h2 className="text-2xl font-bold mb-6">More Stories</h2>
       <div className="grid gap-6 md:grid-cols-2">
         {posts.map((post) => (
-          <BlogCard
-            key={post.slug}
-            post={post}
-            locale={locale}
-            readMoreLabel={readMoreLabel}
-          />
+          <BlogCard key={post.slug} post={post} locale={locale} readMoreLabel={readMoreLabel} />
         ))}
       </div>
     </section>

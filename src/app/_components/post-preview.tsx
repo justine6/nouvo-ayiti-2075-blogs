@@ -22,10 +22,7 @@ const PostPreview = ({ slug, title, coverImage }: PostPreviewProps) => {
         />
       </Link>
       <div className="p-4">
-        <Link
-          href={`/posts/${slug}`}
-          className="text-lg font-semibold hover:underline"
-        >
+        <Link href={`/posts/${slug}`} className="text-lg font-semibold hover:underline">
           {title}
         </Link>
       </div>

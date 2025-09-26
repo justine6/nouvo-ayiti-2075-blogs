@@ -34,10 +34,7 @@ const middleware = (request: NextRequest) => {
       locale = localeFromCookie;
     } else {
       // Detect from browser Accept-Language header
-      const lang = request.headers
-        .get("accept-language")
-        ?.split(",")[0]
-        .split("-")[0];
+      const lang = request.headers.get("accept-language")?.split(",")[0].split("-")[0];
       if (lang && SUPPORTED_LOCALES.includes(lang)) {
         locale = lang;
       }
