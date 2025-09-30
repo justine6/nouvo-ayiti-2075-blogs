@@ -16,8 +16,3 @@ const MoreStories = ({ slug, title }: MoreStoriesProps) => {
 };
 
 export default MoreStories;
-
-
-
-
-

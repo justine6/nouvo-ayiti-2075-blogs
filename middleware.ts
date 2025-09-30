@@ -5,7 +5,8 @@ const PUBLIC_FILE = /\.(.*)$/;
 const SUPPORTED_LOCALES = ["en", "fr", "ht", "es"];
 const DEFAULT_LOCALE = "en";
 
-export function middleware(request: NextRequest) {
+// ✅ Declare middleware function
+const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
   // ✅ Ignore static files, API, and favicon
@@ -33,10 +34,7 @@ export function middleware(request: NextRequest) {
       locale = localeFromCookie;
     } else {
       // Detect from browser Accept-Language header
-      const lang = request.headers
-        .get("accept-language")
-        ?.split(",")[0]
-        .split("-")[0];
+      const lang = request.headers.get("accept-language")?.split(",")[0].split("-")[0];
       if (lang && SUPPORTED_LOCALES.includes(lang)) {
         locale = lang;
       }
@@ -63,7 +61,11 @@ export function middleware(request: NextRequest) {
       : DEFAULT_LOCALE;
 
   return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
-}
+};
+
+// ✅ Named and default export
+export { middleware };
+export default middleware;
 
 export const config = {
   matcher: ["/((?!_next|api|favicon.ico).*)"], // ✅ ignore internals & favicon

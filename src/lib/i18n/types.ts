@@ -47,8 +47,3 @@ export type Dictionary = {
   home: HomeDictionary;
   blog: BlogDictionary;
 };
-
-
-
-
-

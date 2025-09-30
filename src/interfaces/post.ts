@@ -23,8 +23,3 @@ export type Params = {
   slug: string;
   locale: string; // ✅ NEW: include locale for localized routes
 };
-
-
-
-
-

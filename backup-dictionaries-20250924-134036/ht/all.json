@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "Nouvo Ayiti 2075",
+    "subtitle": "Rete Diyite. Rebati Espwa. Renouvle Vizyon.",
+    "readMore": "Li Vizyon an",
+    "joinNow": "Antre nan Mouvman an",
+    "metaTitle": "Ewo - Nouvo Ayiti 2075",
+    "metaDescription": "Dekouvri Nouvo Ayiti 2075 — retabli diyite, rebati espwa, ak renouvle vizyon pou Ayiti."
+  },
+  "mission": {
+    "heading": "Misyo Nou",
+    "paragraph": "Nou ap rebati Ayiti avèk diyite, inovasyon, ak vizyon."
+  },
+  "projects": {
+    "title": "Pwojè Nou",
+    "intro": "Dekouvri inisyativ nou yo pou transfòmasyon Ayiti.",
+    "motto": "Chak pwojè se yon pwomès pou lavni.",
+    "metaTitle": "Pwojè - Nouvo Ayiti 2075",
+    "metaDescription": "Dekouvri pwojè Nouvo Ayiti 2075  retabli diyite, rebati espwa, ak renouvle vizyon."
+  },
+  "blog": {
+    "title": "Blog Nou",
+    "subtitle": "Istwa, mizajou, ak vizyon pou lavni.",
+    "viewAll": "Gade tout atik yo",
+    "readMore": "Li plis",
+    "noPosts": "Pa gen atik disponib.",
+    "metaTitle": "Blog - Nouvo Ayiti 2075",
+    "metaDescription": "Dekouvri istwa, mizajou, ak vizyon pou lavni Ayiti avèk Nouvo Ayiti 2075."
+  },
+  "newsletter": {
+    "title": "Rete Konekte",
+    "description": "Abòne pou resevwa mizajou, nouvèl, ak istwa espwa."
+  },
+  "contact": {
+    "title": "Kontakte Nou",
+    "description": "Nou ta renmen tande pale de ou. Rantre an kontak ak Nouvo Ayiti 2075 jodi a.",
+    "metaTitle": "Kontak - Nouvo Ayiti 2075",
+    "metaDescription": "Kontakte Nouvo Ayiti 2075 pou patisipe, poze kesyon, oswa aprann plis sou misyon nou."
+  },
+  "vision": {
+    "title": "Vizyon Nou",
+    "intro": "Yon Ayiti miyò an 2075, chita sou diyite, espwa, ak inite.",
+    "metaTitle": "Vizyon - Nouvo Ayiti 2075",
+    "metaDescription": "Eksplore vizyon alontèm nou pou Ayiti 2075  retabli diyite, rebati espwa, ak renouvle vizyon."
+  },
+  "join": {
+    "title": "Antre Avèk Nou",
+    "form": {
+      "name": "Non",
+      "email": "Imèl",
+      "phone": "Telefòn",
+      "location": "Kote",
+      "message": "Mesaj (opsyonèl)",
+      "submit": "Antre Kounye a"
+    }
+  },
+  "about": {
+    "heading": "Konsènan Nou",
+    "paragraph": "Nouvo Ayiti 2075 se yon mouvman ki dedye pou retabli diyite, rebati espwa, ak renouvle vizyon pou pèp Ayiti a.",
+    "teamHeading": "Ekip Nou",
+    "teamIntro": "Nou se yon kolektif lidè, volontè, ak manm kominote ki gen pasyon, k ap travay ansanm pou bati yon avni miyò.",
+    "metaTitle": "Konsènan Nou - Nouvo Ayiti 2075",
+    "metaDescription": "Dekouvri Nouvo Ayiti 2075. Aprann plis sou misyon nou, ekip nou, ak vizyon nou pou Ayiti."
+  },
+  "footer": {
+    "contact": "Kontakte Nou",
+    "address": "123 Ri Prensipal, Pòtoprens, Ayiti",
+    "phone": "+509 1234-5678",
+    "email": "info@nouvoayiti2075.com",
+    "links": "Lyens Rapid",
+    "privacy": "Règleman sou Konfidansyalite",
+    "terms": "Tèm Sèvis",
+    "rights": " 2025 Nouvo Ayiti 2075. Tout dwa rezève."
+  }
+}

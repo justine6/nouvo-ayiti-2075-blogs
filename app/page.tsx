@@ -31,19 +31,11 @@ export default async function HomePage({ params }: Props) {
         <Intro />
 
         {heroPost && (
-          <HeroPost
-            post={heroPost}
-            locale={locale}
-            readMoreLabel={dict.blog.readMore}
-          />
+          <HeroPost post={heroPost} locale={locale} readMoreLabel={dict.blog.readMore} />
         )}
 
         {morePosts.length > 0 && (
-          <MoreStories
-            posts={morePosts}
-            locale={locale}
-            readMoreLabel={dict.blog.readMore}
-          />
+          <MoreStories posts={morePosts} locale={locale} readMoreLabel={dict.blog.readMore} />
         )}
       </Container>
     </main>

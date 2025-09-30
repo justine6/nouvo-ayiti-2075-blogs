@@ -10,8 +10,3 @@ const DateFormatter = ({ dateString }: Props) => {
 };
 
 export default DateFormatter;
-
-
-
-
-

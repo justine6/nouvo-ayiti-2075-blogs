@@ -24,9 +24,7 @@ export default async function BlogPage({ params }: Props) {
       <PageHeading>{dict.blog?.title || "Blog"}</PageHeading>
 
       {posts.length === 0 ? (
-        <p className="text-gray-600 text-center">
-          {dict.blog?.noPosts || "No posts available."}
-        </p>
+        <p className="text-gray-600 text-center">{dict.blog?.noPosts || "No posts available."}</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
           {posts.map((post) => (

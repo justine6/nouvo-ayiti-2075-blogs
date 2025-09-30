@@ -17,10 +17,7 @@ export async function GET(request: Request) {
   const filePath = path.join(publicDir, feedFile);
 
   if (!fs.existsSync(filePath)) {
-    return NextResponse.json(
-      { error: `Feed not found for locale: ${locale}` },
-      { status: 404 },
-    );
+    return NextResponse.json({ error: `Feed not found for locale: ${locale}` }, { status: 404 });
   }
 
   const fileContent = fs.readFileSync(filePath, "utf-8");
@@ -28,8 +25,3 @@ export async function GET(request: Request) {
 
   return NextResponse.json(jsonData);
 }
-
-
-
-
-

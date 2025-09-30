@@ -18,10 +18,7 @@ type Props = {
   mode?: "dropdown" | "icon";
 };
 
-export default function LanguageSwitcher({
-  variant = "desktop",
-  mode = "dropdown",
-}: Props) {
+export default function LanguageSwitcher({ variant = "desktop", mode = "dropdown" }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -36,10 +33,7 @@ export default function LanguageSwitcher({
   };
 
   // ✅ reorder locales: current first
-  const orderedLocales = [
-    currentLocale,
-    ...locales.filter((l) => l !== currentLocale),
-  ];
+  const orderedLocales = [currentLocale, ...locales.filter((l) => l !== currentLocale)];
 
   if (mode === "icon") {
     return (

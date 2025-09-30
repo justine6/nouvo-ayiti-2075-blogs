@@ -17,9 +17,7 @@ type HeroSectionProps = {
 export default function HeroSection({ locale, dict = {} }: HeroSectionProps) {
   const warn = (key: keyof NonNullable<typeof dict>, fallback: string) => {
     if (process.env.NODE_ENV === "development" && !dict[key]) {
-      console.warn(
-        `⚠️ Missing translation for HeroSection.${key}, using fallback "${fallback}"`,
-      );
+      console.warn(`⚠️ Missing translation for HeroSection.${key}, using fallback "${fallback}"`);
     }
     return dict[key] ?? fallback;
   };

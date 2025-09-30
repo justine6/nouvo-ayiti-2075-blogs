@@ -1,12 +1,9 @@
 {
-  "address": "123 Ri Prensipal, Pòtoprens, Ayiti",
-  "email": "info@nouvoayiti2075.com",
-  "phone": "+509 1234-5678",
-  "metaTitle": "Nouvo Ayiti 2075 - Pye Paj",
-  "metaDescription": "Rete konekte ak Nouvo Ayiti 2075.",
-  "copyright": "© 2025 Nouvo Ayiti 2075. Tout dwa rezève.",
-  "links": {
-    "privacy": "Règle sou Konfidansyalite",
+  "metaTitle": "Pye paj - Nouvo Ayiti 2075",
+  "metaDescription": "Seksyon pye paj ak enfòmasyon kontak, lyen ak copyright.",
+  "footer": {
+    "rights": "Tout dwa rezève",
+    "privacy": "Règleman sou Vi Prive",
     "terms": "Tèm Sèvis"
   }
 }

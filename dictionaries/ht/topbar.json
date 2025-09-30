@@ -1,11 +1,13 @@
 {
-  "home": "Akèy",
-  "about": "Konsènan",
-  "projects": "Pwojè yo",
-  "blog": "Blog",
-  "contact": "Kontak",
-  "vision": "Vizyond lan",
-  "language": "Lang",
-  "metaTitle": "Placeholder Title - topbar",
-  "metaDescription": "Placeholder description for topbar"
+  "metaTitle": "Ba navigasyon - Nouvo Ayiti 2075",
+  "metaDescription": "Navigasyon ak aksè rapid pou Nouvo Ayiti 2075.",
+  "topbar": {
+    "home": "Akèy",
+    "about": "Konsènan",
+    "projects": "Pwojè",
+    "blog": "Blog",
+    "contact": "Kontak",
+    "vision": "Vizyond",
+    "language": "Lang"
+  }
 }

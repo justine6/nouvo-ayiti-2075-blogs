@@ -32,8 +32,3 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
     </div>
   );
 }
-
-
-
-
-

@@ -24,22 +24,12 @@ export default function BlogCard({ post, locale, dict }: BlogCardProps) {
         <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
         <p className="text-gray-600 mb-2">{post.excerpt}</p>
 
-        {post.tags && (
-          <p className="text-sm text-blue-600 mb-2">{post.tags.join(", ")}</p>
-        )}
+        {post.tags && <p className="text-sm text-blue-600 mb-2">{post.tags.join(", ")}</p>}
 
-        <Link
-          href={`/${locale}/posts/${post.slug}`}
-          className="text-blue-600 hover:underline"
-        >
+        <Link href={`/${locale}/posts/${post.slug}`} className="text-blue-600 hover:underline">
           {dict.blog.readMore}
         </Link>
       </div>
     </div>
   );
 }
-
-
-
-
-

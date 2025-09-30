@@ -1,0 +1,11 @@
+{
+  "title": "Únete a Nosotros",
+  "form": {
+    "name": "Nombre",
+    "email": "Correo",
+    "phone": "Teléfono",
+    "location": "Ubicación",
+    "message": "Mensaje (opcional)",
+    "submit": "Unirse Ahora"
+  }
+}

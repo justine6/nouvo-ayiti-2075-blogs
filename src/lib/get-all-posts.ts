@@ -53,8 +53,3 @@ export function getPostBySlug(slug: string, locale: string): PostType | null {
     content,
   } as PostType;
 }
-
-
-
-
-

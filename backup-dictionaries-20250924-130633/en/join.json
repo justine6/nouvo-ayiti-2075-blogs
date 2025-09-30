@@ -1,0 +1,11 @@
+{
+  "title": "Join Us",
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "message": "Message (optional)",
+    "submit": "Join Now"
+  }
+}

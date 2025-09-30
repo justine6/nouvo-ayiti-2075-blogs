@@ -1,23 +1,27 @@
-// app/[locale]/page.tsx
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/lib/settings";
+import type { SiteDictionary } from "@/lib/types";
+
 import HeroSection from "@/components/HeroSection";
-import BlogSection from "@/components/BlogSection";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import type { Locale } from "@/lib/i18n/settings";
+import MissionSection from "@/components/MissionSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import Footer from "@/components/Footer";
+// import BlogSection from "@/components/BlogSection";
 
 type Props = {
   params: { locale: Locale };
 };
 
 export default async function HomePage({ params }: Props) {
-  const dict = await getDictionary(params.locale);
+  const dict: SiteDictionary = await getDictionary(params.locale);
 
   return (
-    <main>
-      {/* ✅ Hero Section */}
-      <HeroSection locale={params.locale} dict={dict.home?.hero} />
-
-      {/* ✅ Blog Section */}
-      <BlogSection locale={params.locale} dict={dict.blog} />
-    </main>
+    <>
+      <HeroSection locale={params.locale} dict={dict.hero} />
+      <MissionSection locale={params.locale} dict={dict.mission} />
+      <ProjectsSection locale={params.locale} dict={dict.projects} />
+      {/* <BlogSection locale={params.locale} dict={dict.blog!} /> */}
+      <Footer locale={params.locale} dict={dict.footer} />
+    </>
   );
 }

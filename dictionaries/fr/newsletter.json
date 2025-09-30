@@ -1,7 +1,10 @@
 {
-  "title": "Restez Connecté",
-  "description": "Abonnez-vous pour recevoir des mises à jour, des nouvelles et des histoires porteuses d'espoir.",
-  "content": "Rejoignez notre newsletter pour suivre le parcours de la reconstruction d’Haïti avec dignité, innovation et unité.",
-  "metaTitle": "Newsletter - Nouvo Ayiti 2075",
-  "metaDescription": "Restez connecté avec Nouvo Ayiti 2075. Abonnez-vous pour des mises à jour, des nouvelles et des histoires inspirantes de la transformation d'Haïti."
+  "metaTitle": "Bulletin - Nouvo Ayiti 2075",
+  "metaDescription": "Restez connectés avec des mises à jour, annonces et inspirations de Nouvo Ayiti 2075.",
+  "newsletter": {
+    "title": "Restez Connecté",
+    "description": "Abonnez-vous pour recevoir des mises à jour, des annonces et des histoires d’espoir.",
+    "placeholder": "Entrez votre email",
+    "subscribe": "S’abonner"
+  }
 }
