@@ -1,5 +1,9 @@
 # 🌍 Nouvo Ayiti 2075 Blogs
 
+![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main)
+![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main)
+![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg?branch=main)
+
 Welcome to the **Nouvo Ayiti 2075 Blogs** repository.  
 This project powers our multilingual blog platform with full validation, CI/CD, and reset workflows.
 
