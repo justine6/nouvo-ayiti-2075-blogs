@@ -1,7 +1,7 @@
 # 🌍 Nouvo Ayiti 2075 Blogs
 
 ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main)
-![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset-quiet.yml/badge.svg?branch=main)
+![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main)
 ![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg?branch=main)
 
 Welcome to the **Nouvo Ayiti 2075 Blogs** repository.  
@@ -19,9 +19,9 @@ This project powers our multilingual blog platform with full validation, CI/CD, 
 
 | Workflow        | Badge | Purpose |
 |-----------------|-------|---------|
-| **All Checks**  | ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg) | Orchestrates Reset Quiet + CI Check. Ensures both succeed before merge. |
-| **Reset Quiet** | ![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg) | PowerShell-based reset + dictionary sync. Produces per-run logs as artifacts. |
-| **CI Check**    | ![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg) | Node.js validations: lint, coverage, strict dictionary checks. Blocks merges if failing. |
+| **All Checks**  | ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main) | Orchestrates Reset Quiet + CI Check. Ensures both succeed before merge. |
+| **Reset Quiet** | ![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main) | PowerShell-based reset + dictionary sync. Produces per-run logs as artifacts. |
+| **CI Check**    | ![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg?branch=main) | Node.js validations: lint, coverage, strict dictionary checks. Blocks merges if failing. |
 
 > ✅ Artifacts are named with `<env>-<run_number>-<timestamp>` for clarity.
 
@@ -46,21 +46,15 @@ Direct download links are printed in job logs for convenience.
 
 ---
 
-## 🔍 Quick Reference Table
-
-| Workflow        | Trigger             | Artifacts                                     | Retention | Summary Output |
-|-----------------|---------------------|-----------------------------------------------|-----------|----------------|
-| **All Checks**  | PRs / Pushes / Manual | `all-checks-summary-<env>-<run>-<ts>`        | 90d prod / 30d others | ✅/❌ with links to failing jobs |
-| **Reset Quiet** | PRs / Pushes / Manual | `reset-summary-<env>-<run>-<ts>`             | 90d prod / 30d others | ✅/❌ summary tab + logs |
-| **CI Check**    | PRs / Pushes         | (no artifacts, strict validation only)        | N/A       | Inline ESLint + Prettier comments |
-
----
-
 ## 📊 Workflow Orchestration
 
-This shows how **All Checks** orchestrates Reset Quiet and CI Check.
-
-![Workflow Orchestration](./workflow_orchestration.png)
+```mermaid
+flowchart TD
+    A[All Checks Workflow] --> B[Reset Quiet Job]
+    A --> C[CI Check Job]
+    B --> D[Verify: Success/Fail Summary]
+    C --> D
+```
 
 - **All Checks** runs both **Reset Quiet** and **CI Check**.  
 - **Verify** only passes if **both jobs succeed**.  
@@ -70,9 +64,19 @@ This shows how **All Checks** orchestrates Reset Quiet and CI Check.
 
 ## 📊 Local → CI Flow
 
-This shows how local developer commands connect into the CI pipelines.
+```mermaid
+flowchart TD
+    A[Local Dev Commands] --> B[check-all]
+    A --> C[ci-check]
+    A --> D[ci-repair]
 
-![Local to CI Flow](./local_ci_flow.png)
+    B --> E[Warnings Only]
+    C --> F[Strict Validations in CI]
+    D --> G[Auto-fixes + PR Suggestions]
+
+    F --> H[CI Workflow]
+    H --> I[All Checks Orchestration]
+```
 
 - **check-all** → Friendly local run, warnings only.  
 - **ci-check** → Strict validations (same rules as CI).  
