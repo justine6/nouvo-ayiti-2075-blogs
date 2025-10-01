@@ -1,7 +1,7 @@
 # 🌍 Nouvo Ayiti 2075 Blogs
 
 ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main)
-![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main)
+![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset-quiet.yml/badge.svg?branch=main)
 ![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg?branch=main)
 
 Welcome to the **Nouvo Ayiti 2075 Blogs** repository.  
