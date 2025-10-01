@@ -1,85 +1,119 @@
-# Nouvo Ayiti 2075 Blogs
+# 🌍 Nouvo Ayiti 2075 Blogs
 
-![CI](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg)
-[![codecov](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs/branch/main/graph/badge.svg?token=${{ secrets.CODECOV_TOKEN }})](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs)
-[![Vercel Deployment](https://vercel.com/button)](https://vercel.com/justine6/nouvo-ayiti-2075-blogs/deployments)
-
-🌍 **Live Site:** [https://nouvoayiti2075.com](https://nouvoayiti2075.com)
-
-<!-- Uncomment when ready
-![CSV Sync](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-csv.yml/badge.svg)
--->
+Welcome to the **Nouvo Ayiti 2075 Blogs** repository.  
+This project powers our multilingual blog platform with full validation, CI/CD, and reset workflows.
 
 ---
 
-## 📌 Project Overview
-Nouvo Ayiti 2075 Blogs is part of the **Nouvo Ayiti 2075 initiative**, designed to share articles, insights, and updates that align with the vision of restoring dignity, rebuilding hope, and renewing vision for Haiti.
+## 🚀 Live Site
 
-This repository powers the blog site, built with **Next.js**, **TailwindCSS**, and multilingual support across **English, French, Haitian Creole, and Spanish**.
-
----
-
-## 🚦 CI/CD Status
-
-### ✅ CI (Build, Test & Validate)
-- Runs automatically on every **push** and **pull request** to `main`.
-- Ensures:
-  - Dictionaries are merged (`merge-dicts`)
-  - Translations are strictly validated (`check-dicts:strict`)
-  - Metadata and required keys are checked
-  - Linting passes
-  - Unit tests pass
-  - Next.js builds successfully
-
-Badge:  
-![CI](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg)
+👉 [https://nouvo-ayiti-2075-blogs.vercel.app](https://nouvo-ayiti-2075-blogs.vercel.app)
 
 ---
 
-### 🌐 Vercel Deployment
-- Tracks the live deployment status of this project on Vercel.  
-- Clicking the badge will take you to the deployment dashboard.  
+## 🛡️ Workflow Status
 
-Badge:  
-[![Vercel Deployment](https://vercel.com/button)](https://vercel.com/justine6/nouvo-ayiti-2075-blogs/deployments)  
+| Workflow        | Badge | Purpose |
+|-----------------|-------|---------|
+| **All Checks**  | ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg) | Orchestrates Reset Quiet + CI Check. Ensures both succeed before merge. |
+| **Reset Quiet** | ![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg) | PowerShell-based reset + dictionary sync. Produces per-run logs as artifacts. |
+| **CI Check**    | ![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg) | Node.js validations: lint, coverage, strict dictionary checks. Blocks merges if failing. |
 
-🌍 **Live Site:** [https://nouvoayiti2075.com](https://nouvoayiti2075.com)
-
----
-
-### 🔄 CSV Sync (Manual for now)
-- Runs **on-demand** via GitHub Actions (`workflow_dispatch`).  
-- Validates dictionary files.  
-- Exports a combined CSV of translations.  
-- Checks JSON ↔ CSV sync and auto-commits updates if needed.  
-
-Badge (commented out until ready):  
-![CSV Sync](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/validate-csv.yml/badge.svg)
+> ✅ Artifacts are named with `<env>-<run_number>-<timestamp>` for clarity.
 
 ---
 
-## 🛠️ Tech Stack
-- [Next.js](https://nextjs.org/)  
-- [TailwindCSS](https://tailwindcss.com/)  
-- [Vitest](https://vitest.dev/) for testing  
-- [Zod](https://zod.dev/) for runtime schema validation  
-- GitHub Actions for CI/CD  
-- Husky for local pre-commit & pre-push checks  
-- Vercel for deployment  
+## 📦 Artifact Conventions
+
+- **Reset Quiet**  
+  ```
+  reset-summary-<env>-<run_number>-<timestamp>
+  ```
+- **All Checks**  
+  ```
+  all-checks-summary-<env>-<run_number>-<timestamp>
+  ```
+
+Retention policy:  
+- `prod` → 90 days  
+- `dev` / `staging` → 30 days  
+
+Direct download links are printed in job logs for convenience.
 
 ---
 
-## 🚀 Getting Started
+## 🔍 Quick Reference Table
 
+| Workflow        | Trigger             | Artifacts                                     | Retention | Summary Output |
+|-----------------|---------------------|-----------------------------------------------|-----------|----------------|
+| **All Checks**  | PRs / Pushes / Manual | `all-checks-summary-<env>-<run>-<ts>`        | 90d prod / 30d others | ✅/❌ with links to failing jobs |
+| **Reset Quiet** | PRs / Pushes / Manual | `reset-summary-<env>-<run>-<ts>`             | 90d prod / 30d others | ✅/❌ summary tab + logs |
+| **CI Check**    | PRs / Pushes         | (no artifacts, strict validation only)        | N/A       | Inline ESLint + Prettier comments |
+
+---
+
+## 📊 Workflow Orchestration
+
+This shows how **All Checks** orchestrates Reset Quiet and CI Check.
+
+![Workflow Orchestration](./workflow_orchestration.png)
+
+- **All Checks** runs both **Reset Quiet** and **CI Check**.  
+- **Verify** only passes if **both jobs succeed**.  
+- Failure summaries link to the logs of the failing job(s).
+
+---
+
+## 📊 Local → CI Flow
+
+This shows how local developer commands connect into the CI pipelines.
+
+![Local to CI Flow](./local_ci_flow.png)
+
+- **check-all** → Friendly local run, warnings only.  
+- **ci-check** → Strict validations (same rules as CI).  
+- **ci-repair** → Runs auto-fixes, helps prepare code for PRs.  
+- CI Workflow results are orchestrated into **All Checks**.  
+
+---
+
+## 🧭 Developer Setup
+
+### Install dependencies
 ```bash
-# Install dependencies
 npm install
+```
 
-# Run dev server
-npm run dev
+### Run checks locally
+```bash
+npm run check-all
+```
 
-# Validate translations
-npm run validated
+### Run strict CI check locally
+```bash
+npm run ci-check:dry-run
+```
 
-# Run full CI pipeline locally
-npm run ci-check
+---
+
+## ⚠️ Common Issues
+
+- **Missing dictionary key** → Run:
+  ```bash
+  npm run patch-missing
+  ```
+
+- **Lint errors** → Run:
+  ```bash
+  npm run lint --fix
+  ```
+
+---
+
+## 📖 Documentation
+
+See the full workflow guide: [workflow.md](./workflow.md)
+
+---
+
+✍️ Maintained by **Nouvo Ayiti 2075 Team**
