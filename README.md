@@ -1,52 +1,127 @@
-# Nouvo Ayiti 2075 Blogs
+# 🌍 Nouvo Ayiti 2075 Blogs
+
+![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main)
+![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main)
+![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg?branch=main)
+
+Welcome to the **Nouvo Ayiti 2075 Blogs** repository.  
+This project powers our multilingual blog platform with full validation, CI/CD, and reset workflows.
+
+---
+
+## 🚀 Live Site
+
+👉 [https://nouvo-ayiti-2075-blogs.vercel.app](https://nouvo-ayiti-2075-blogs.vercel.app)
 
 ---
 
 ## 🛡️ Workflow Status
 
-- [![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml)  
-  Runs **Reset Quiet + CI** together. Produces a summary artifact:  
-  `all-checks-summary-<env>-<run_number>-<timestamp>`
+| Workflow        | Badge | Purpose |
+|-----------------|-------|---------|
+| **All Checks**  | ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main) | Orchestrates Reset Quiet + CI Check. Ensures both succeed before merge. |
+| **Reset Quiet** | ![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main) | PowerShell-based reset + dictionary sync. Produces per-run logs as artifacts. |
+| **CI Check**    | ![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg?branch=main) | Node.js validations: lint, coverage, strict dictionary checks. Blocks merges if failing. |
 
-- [![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml)  
-  Environment-specific reset workflow. Produces logs + summary artifacts:  
-  `reset-summary-<env>-<run_number>-<timestamp>`
-
-- [![CI Check](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/ci.yml)  
-  Runs linting, Prettier checks, and strict validations. Produces:  
-  `ci-summary-<run_number>-<timestamp>`
-
-- [![CodeQL](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/codeql.yml/badge.svg)](https://github.com/justine6/nouvo-ayiti-2075-blogs/security/code-scanning)  
-  Automated security analysis.
+> ✅ Artifacts are named with `<env>-<run_number>-<timestamp>` for clarity.
 
 ---
 
-## 🔧 Maintenance & Dependencies
+## 📦 Artifact Conventions
 
-[![Dependabot Status](https://img.shields.io/badge/Dependabot-enabled-brightgreen?logo=dependabot)](https://github.com/justine6/nouvo-ayiti-2075-blogs/network/updates)  
-![Node.js](https://img.shields.io/badge/node-20.x-green)  
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+- **Reset Quiet**  
+  ```
+  reset-summary-<env>-<run_number>-<timestamp>
+  ```
+- **All Checks**  
+  ```
+  all-checks-summary-<env>-<run_number>-<timestamp>
+  ```
+
+Retention policy:  
+- `prod` → 90 days  
+- `dev` / `staging` → 30 days  
+
+Direct download links are printed in job logs for convenience.
 
 ---
 
-## 📊 Quality & Deployment
+## 📊 Workflow Orchestration
 
-[![codecov](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs/branch/main/graph/badge.svg)](https://codecov.io/gh/justine6/nouvo-ayiti-2075-blogs)  
-![Coverage Phase](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/justine6/nouvo-ayiti-2075-blogs/main/coverage-phase.json)  
-[![Vercel Deployment](https://vercel.com/button)](https://vercel.com/justine6/nouvo-ayiti-2075-blogs/deployments)
+```mermaid
+flowchart TD
+    A[All Checks Workflow] --> B[Reset Quiet Job]
+    A --> C[CI Check Job]
+    B --> D[Verify: Success/Fail Summary]
+    C --> D
+```
+
+- **All Checks** runs both **Reset Quiet** and **CI Check**.  
+- **Verify** only passes if **both jobs succeed**.  
+- Failure summaries link to the logs of the failing job(s).
 
 ---
 
-🌍 **Live Site:** [https://nouvoayiti2075.com](https://nouvoayiti2075.com)
+## 📊 Local → CI Flow
+
+```mermaid
+flowchart TD
+    A[Local Dev Commands] --> B[check-all]
+    A --> C[ci-check]
+    A --> D[ci-repair]
+
+    B --> E[Warnings Only]
+    C --> F[Strict Validations in CI]
+    D --> G[Auto-fixes + PR Suggestions]
+
+    F --> H[CI Workflow]
+    H --> I[All Checks Orchestration]
+```
+
+- **check-all** → Friendly local run, warnings only.  
+- **ci-check** → Strict validations (same rules as CI).  
+- **ci-repair** → Runs auto-fixes, helps prepare code for PRs.  
+- CI Workflow results are orchestrated into **All Checks**.  
 
 ---
 
-## 🚀 Development Setup
+## 🧭 Developer Setup
 
-Follow these steps to run the project locally:
-
-### 1. Clone the repository
-
+### Install dependencies
 ```bash
-git clone https://github.com/justine6/nouvo-ayiti-2075-blogs.git
-cd nouvo-ayiti-2075-blogs
+npm install
+```
+
+### Run checks locally
+```bash
+npm run check-all
+```
+
+### Run strict CI check locally
+```bash
+npm run ci-check:dry-run
+```
+
+---
+
+## ⚠️ Common Issues
+
+- **Missing dictionary key** → Run:
+  ```bash
+  npm run patch-missing
+  ```
+
+- **Lint errors** → Run:
+  ```bash
+  npm run lint --fix
+  ```
+
+---
+
+## 📖 Documentation
+
+See the full workflow guide: [workflow.md](./workflow.md)
+
+---
+
+✍️ Maintained by **Nouvo Ayiti 2075 Team**

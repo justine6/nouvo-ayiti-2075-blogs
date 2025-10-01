@@ -1,9 +1,9 @@
 import { execSync } from "child_process";
 import path from "path";
 
-const scriptPath = path.resolve(__dirname, "../scripts/check-dicts.js");
+const scriptPath = path.resolve(__dirname, "../scripts/check-dicts.mjs");
 
-describe("check-dicts.js", () => {
+describe("check-dicts.mjs", () => {
   it("prints diagnostics (missing keys or validation results)", () => {
     let output = "";
     try {

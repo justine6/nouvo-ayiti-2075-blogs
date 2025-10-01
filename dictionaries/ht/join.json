@@ -1,0 +1,13 @@
+{
+  "intro": "Ranpli fòm ki anba a pou w antre epi rete konekte ak Nouvo Ayiti 2075.",
+  "form": {
+    "name": "Non Konplè",
+    "submit": "Antre Kounye a",
+    "email": "Adrès Imèl",
+    "success": "Mèsi paske w te antre! Nou pral pran kontak avèk ou byento.",
+    "location": "Kote",
+    "phone": "Nimewo Telefòn",
+    "message": "Mesaj (opsyonèl)"
+  },
+  "title": "Antre nan Mouvman an"
+}

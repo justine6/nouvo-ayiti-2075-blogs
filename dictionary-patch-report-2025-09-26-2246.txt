@@ -1,0 +1,45 @@
+🔍 Checking .\dictionaries\en\newsletter.json
+🔍 Checking .\dictionaries\en\join.json
+🔍 Checking .\dictionaries\en\home.json
+🔍 Checking .\dictionaries\en\projects.json
+🔍 Checking .\dictionaries\en\about.json
+🔍 Checking .\dictionaries\en\contact.json
+🔍 Checking .\dictionaries\en\vision.json
+🔍 Checking .\dictionaries\en\blog.json
+🔍 Checking .\dictionaries\fr\newsletter.json
+🔍 Checking .\dictionaries\fr\join.json
+🔍 Checking .\dictionaries\fr\home.json
+🔍 Checking .\dictionaries\fr\projects.json
+🔍 Checking .\dictionaries\fr\about.json
+🔍 Checking .\dictionaries\fr\contact.json
+🔍 Checking .\dictionaries\fr\vision.json
+🔍 Checking .\dictionaries\fr\blog.json
+🔍 Checking .\dictionaries\ht\newsletter.json
+🔍 Checking .\dictionaries\ht\join.json
+🔍 Checking .\dictionaries\ht\home.json
+🔍 Checking .\dictionaries\ht\projects.json
+🔍 Checking .\dictionaries\ht\about.json
+🔍 Checking .\dictionaries\ht\contact.json
+🔍 Checking .\dictionaries\ht\vision.json
+🔍 Checking .\dictionaries\ht\blog.json
+🔍 Checking .\dictionaries\es\newsletter.json
+🔍 Checking .\dictionaries\es\join.json
+🔍 Checking .\dictionaries\es\home.json
+🔍 Checking .\dictionaries\es\projects.json
+🔍 Checking .\dictionaries\es\about.json
+🔍 Checking .\dictionaries\es\contact.json
+🔍 Checking .\dictionaries\es\vision.json
+🔍 Checking .\dictionaries\es\blog.json
+
+========== SUMMARY ==========
+ Files Created : 0
+  Files Patched : 0
+ Keys Added     : 0
+=============================
+
+===== PER-LOCALE SUMMARY =====
+es  Created: 0, Patched: 0, Keys Added: 0
+ht  Created: 0, Patched: 0, Keys Added: 0
+fr  Created: 0, Patched: 0, Keys Added: 0
+en  Created: 0, Patched: 0, Keys Added: 0
+==============================

@@ -1,26 +1,32 @@
 ---
-name:  Feature Request
+name: Feature Request
 about: Suggest an idea or improvement for this project
 title: "[FEATURE] "
 labels: enhancement
 ---
 
-##  Summary
+## Summary
+
 <!-- A clear and concise description of what youd like to see. -->
 
-##  Motivation
+## Motivation
+
 <!-- Why is this feature important? What problem does it solve? -->
 
-##  Proposed Solution
+## Proposed Solution
+
 <!-- How do you suggest implementing it? -->
 
-##  Alternatives Considered
+## Alternatives Considered
+
 <!-- Any other approaches you thought of? Why not those? -->
 
-##  Acceptance Criteria
+## Acceptance Criteria
+
 - [ ] Clear definition of done
 - [ ] Tests or validation criteria
 - [ ] Documentation updates (if needed)
 
-##  Additional Context
+## Additional Context
+
 <!-- Add screenshots, diagrams, or references if helpful -->

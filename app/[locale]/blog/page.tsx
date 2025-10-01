@@ -1,42 +1,34 @@
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import type { Locale } from "@/lib/i18n/settings";
-import PageSection from "@/components/PageSection";
-import PageHeading from "@/components/PageHeading";
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/lib/settings";
+import { getAllPosts } from "@/lib/get-all-posts";
+
 import BlogCard from "@/components/BlogCard";
-import { getAllPosts, type Post } from "@/lib/get-all-posts";
 
 type Props = {
   params: { locale: Locale };
 };
 
-export default async function BlogPage({ params }: Props) {
-  const { locale } = params;
+export default async function BlogIndexPage({ params }: Props) {
+  const locale = params?.locale || "en";
   const dict = await getDictionary(locale);
 
-  // Explicitly type posts
-  let posts: Post[] = getAllPosts(locale);
-  if (!posts || posts.length === 0) {
-    posts = getAllPosts("en");
-  }
+  const posts = getAllPosts(locale) || [];
 
   return (
-    <PageSection>
-      <PageHeading>{dict.blog?.title || "Blog"}</PageHeading>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">{dict.blog?.title || "Blog"}</h1>
 
-      {posts.length === 0 ? (
-        <p className="text-gray-600 text-center">{dict.blog?.noPosts || "No posts available."}</p>
-      ) : (
-        <div className="grid gap-6 md:grid-cols-2">
+      {/* 🔹 Show fallback if no posts */}
+      {posts.length === 0 && <p className="text-center text-gray-500 my-12">{dict.blog.noPosts}</p>}
+
+      {/* 🔹 Render posts if available */}
+      {posts.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
-            <BlogCard
-              key={post.slug}
-              post={post}
-              locale={locale}
-              readMoreLabel={dict.blog?.readMore || "Read More"}
-            />
+            <BlogCard key={post.slug} post={post} />
           ))}
         </div>
       )}
-    </PageSection>
+    </div>
   );
 }

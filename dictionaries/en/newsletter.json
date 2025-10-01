@@ -1,10 +1,6 @@
 {
-  "metaTitle": "Newsletter - Nouvo Ayiti 2075",
-  "metaDescription": "Stay connected with updates, announcements, and inspiration from Nouvo Ayiti 2075.",
-  "newsletter": {
-    "title": "Stay Connected",
-    "description": "Subscribe to receive updates, announcements, and inspiration from Nouvo Ayiti 2075.",
-    "placeholder": "Enter your email",
-    "subscribe": "Subscribe"
-  }
+  "description": "Subscribe to receive updates, news, and stories of hope.",
+  "subscribe": "Subscribe",
+  "placeholder": "Enter your email",
+  "title": "Stay Connected"
 }

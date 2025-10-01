@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Params) {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug(params?.slug || "default-slug");
 
   return {
     title: post?.metaTitle ?? "Nouvo Ayiti 2075 - Blog",
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Params) {
 }
 
 export default async function PostPage({ params }: Params) {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug(params?.slug || "default-slug");
 
   if (!post) {
     return (

@@ -1,5 +1,3 @@
-// components/Topbar.tsx
-
 import Link from "next/link";
 
 type TopbarProps = {
@@ -17,14 +15,28 @@ type TopbarProps = {
 
 export default function Topbar({ dict, locale }: TopbarProps) {
   return (
-    <nav className="flex gap-6 p-4 bg-gray-100">
-      <Link href={`/${locale}`}>{dict?.home}</Link>
-      <Link href={`/${locale}/about`}>{dict?.about}</Link>
-      <Link href={`/${locale}/projects`}>{dict?.projects}</Link>
-      <Link href={`/${locale}/blog`}>{dict?.blog}</Link>
-      <Link href={`/${locale}/contact`}>{dict?.contact}</Link>
-      <Link href={`/${locale}/vision`}>{dict?.vision}</Link>
-      {/* Language switcher would use dict?.language */}
+    <nav className="flex justify-between items-center p-4 shadow-md bg-white">
+      <div className="font-bold text-lg">Nouvo Ayiti 2075</div>
+      <ul className="flex gap-4">
+        <li>
+          <Link href={`/${locale}`}>{dict?.home ?? "Home"}</Link>
+        </li>
+        <li>
+          <Link href={`/${locale}/about`}>{dict?.about ?? "About"}</Link>
+        </li>
+        <li>
+          <Link href={`/${locale}/projects`}>{dict?.projects ?? "Projects"}</Link>
+        </li>
+        <li>
+          <Link href={`/${locale}/blog`}>{dict?.blog ?? "Blog"}</Link>
+        </li>
+        <li>
+          <Link href={`/${locale}/contact`}>{dict?.contact ?? "Contact"}</Link>
+        </li>
+        <li>
+          <Link href={`/${locale}/vision`}>{dict?.vision ?? "Vision"}</Link>
+        </li>
+      </ul>
     </nav>
   );
 }

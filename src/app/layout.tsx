@@ -1,11 +1,41 @@
+import type { SiteDictionary } from "@/lib/types";
+import type { Locale } from "@/lib/settings";
 import Footer from "@/app/_components/footer";
+
+type Props = {
+  params: { locale: Locale };
+};
 import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
+
+type Props = {
+  params: { locale: Locale };
+};
 import type { Metadata } from "next";
+
+type Props = {
+  params: { locale: Locale };
+};
 import { Inter } from "next/font/google";
+
+type Props = {
+  params: { locale: Locale };
+};
 import cn from "classnames";
+
+type Props = {
+  params: { locale: Locale };
+};
 import { ThemeSwitcher } from "./_components/theme-switcher"; // Keep this as is
 
+type Props = {
+  params: { locale: Locale };
+};
+
 import "./globals.css";
+
+type Props = {
+  params: { locale: Locale };
+};
 
 const inter = Inter({ subsets: ["latin"] });
 

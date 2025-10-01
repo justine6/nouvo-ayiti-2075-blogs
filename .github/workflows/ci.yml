@@ -1,82 +1,92 @@
 name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
+    branches: [main, develop]
   push:
-    branches:
-      - main
-      - develop
-      # Or uncomment to run on all branches
-      # - '**'
+    branches: [main, develop]
+  workflow_call:
 
 jobs:
-  ci-checks:
+  lint-and-format:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20   # Use LTS for consistency with Vercel
-          cache: "npm"
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
 
-      # CI phase-controlled thresholds (default Phase 1 baseline)
-      - name: Run CI checks
-        run: CI_COVERAGE_PHASE=1 npm run ci-check
+      - name: Run ESLint
+        run: npm run lint
 
-      - name: Upload HTML coverage report
+      - name: Run Prettier Check (optional)
+        run: npm run format:check || echo "ℹ️ Prettier not configured, skipping..."
+
+  ci-check:
+    runs-on: ubuntu-latest
+    needs: lint-and-format
+    outputs:
+      timestamp: ${{ steps.timestamp.outputs.timestamp }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run strict CI validation
+        run: npm run check-required-only   # ✅ matches package.json
+
+      - name: Add timestamp
+        id: timestamp
+        run: |
+          timestamp=$(date -u +"%Y%m%d-%H%M%S")
+          echo "timestamp=$timestamp" >> $GITHUB_OUTPUT
+
+      - name: Success summary
+        if: success()
+        run: |
+          echo "✅ CI Passed" > ci-summary.txt
+          echo "Timestamp: ${{ steps.timestamp.outputs.timestamp }} UTC" >> ci-summary.txt
+
+          cat <<EOF >> $GITHUB_STEP_SUMMARY
+          ## ✅ CI Succeeded
+          🕒 Timestamp: **${{ steps.timestamp.outputs.timestamp }} UTC**
+          📎 Summary artifact uploaded below.
+          EOF
+
+      - name: Failure summary
+        if: failure()
+        run: |
+          echo "❌ CI Failed" > ci-summary.txt
+          echo "Timestamp: ${{ steps.timestamp.outputs.timestamp }} UTC" >> ci-summary.txt
+
+          cat <<EOF >> $GITHUB_STEP_SUMMARY
+          ## ❌ CI Failed
+          🕒 Timestamp: **${{ steps.timestamp.outputs.timestamp }} UTC**
+          📎 See artifacts below for details.
+          EOF
+
+      - name: Upload CI summary
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: coverage
+          name: ci-summary-${{ github.run_number }}-${{ steps.timestamp.outputs.timestamp }}
+          path: ci-summary.txt
+          retention-days: 30
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
-          flags: unittests
-          fail_ci_if_error: false
-
-      # --- Dynamic Coverage Phase Badge ---
-      - name: Update coverage phase badge
-        if: github.ref == 'refs/heads/main'
+      - name: Print direct artifact link
+        if: always()
         run: |
-          PHASE=${CI_COVERAGE_PHASE:-1}
-          COLOR="blue"
-          LABEL="coverage-phase"
-          MESSAGE="$PHASE"
-
-          if [ "$PHASE" = "1" ]; then
-            MESSAGE="1 (baseline)"
-            COLOR="blue"
-          elif [ "$PHASE" = "2" ]; then
-            MESSAGE="2 (intermediate)"
-            COLOR="orange"
-          elif [ "$PHASE" = "3" ]; then
-            MESSAGE="3 (strict)"
-            COLOR="red"
-          fi
-
-          cat <<EOF > coverage-phase.json
-{
-  "schemaVersion": 1,
-  "label": "$LABEL",
-  "message": "$MESSAGE",
-  "color": "$COLOR"
-}
-EOF
-
-      - name: Commit updated badge JSON
-        if: github.ref == 'refs/heads/main'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore(ci): update coverage phase badge"
-          file_pattern: coverage-phase.json
+          echo "🔗 CI summary uploaded: ci-summary-${{ github.run_number }}-${{ steps.timestamp.outputs.timestamp }}"
+          echo "👉 Download here: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"

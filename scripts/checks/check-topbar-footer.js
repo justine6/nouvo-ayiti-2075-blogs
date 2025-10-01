@@ -1,59 +1,61 @@
-// scripts/check-topbar-footer.js
-import fs from "fs";
-import path from "path";
+// scripts/checks/check-topbar-footer.js
+// Ensures topbar.json and footer.json exist and contain required keys.
 
-const locales = ["en", "fr", "ht", "es"];
-const basePath = path.join(process.cwd(), "dictionaries");
+import fs from 'fs';
+import path from 'path';
 
-// ✅ Expected schemas
-const expectedTopbarKeys = [
-  "home",
-  "about",
-  "projects",
-  "blog",
-  "contact",
-  "vision",
-  "language",
+const dictionariesDir = path.join(process.cwd(), 'dictionaries');
+
+// Required keys for topbar and footer
+const requiredTopbarKeys = [
+  'home',
+  'about',
+  'projects',
+  'blog',
+  'contact',
+  'vision',
+  'language',
 ];
+const requiredFooterKeys = ['title', 'description', 'contact', 'rights'];
 
-// ⚡ Expanded schema for footer
-const expectedFooterKeys = ["rights", "poweredBy", "privacy", "terms"];
-
-function validateFile(filePath, expectedKeys, wrapperKey) {
+function loadJson(filePath) {
   if (!fs.existsSync(filePath)) {
     console.error(`❌ Missing file: ${filePath}`);
+    process.exitCode = 1;
+    return null;
+  }
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+function checkFile(locale, fileName, requiredKeys) {
+  const filePath = path.join(dictionariesDir, `${locale}.json`);
+  const dict = loadJson(filePath);
+  if (!dict) return;
+
+  if (!(fileName in dict)) {
+    console.error(`❌ ${locale}.json missing section: ${fileName}`);
+    process.exitCode = 1;
     return;
   }
 
-  const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  const section = dict[fileName];
+  const missing = requiredKeys.filter((k) => !(k in section));
 
-  // ✅ Look inside wrapper object
-  const target = wrapperKey ? data[wrapperKey] : data;
-
-  if (!target) {
-    console.error(`❌ Missing wrapper key "${wrapperKey}" in ${filePath}`);
-    return;
-  }
-
-  const missing = expectedKeys.filter((key) => !(key in target));
-  const extra = Object.keys(target).filter((key) => !expectedKeys.includes(key));
-
-  if (missing.length === 0 && extra.length === 0) {
-    console.log(`✅ ${filePath} is valid`);
+  if (missing.length > 0) {
+    console.error(
+      `❌ ${locale}.json → ${fileName} missing keys: ${missing.join(', ')}`
+    );
+    process.exitCode = 1;
   } else {
-    if (missing.length > 0) {
-      console.warn(`⚠️ Missing keys in ${filePath}: ${missing.join(", ")}`);
-    }
-    if (extra.length > 0) {
-      console.warn(`⚠️ Extra keys in ${filePath}: ${extra.join(", ")}`);
-    }
+    console.log(`✅ ${locale}.json → ${fileName} is valid`);
   }
 }
 
-locales.forEach((locale) => {
-  const topbarPath = path.join(basePath, locale, "topbar.json");
-  const footerPath = path.join(basePath, locale, "footer.json");
+const locales = ['en', 'fr', 'ht', 'es'];
 
-  validateFile(topbarPath, expectedTopbarKeys, "topbar");
-  validateFile(footerPath, expectedFooterKeys, "footer");
-});
+for (const locale of locales) {
+  checkFile(locale, 'topbar', requiredTopbarKeys);
+  checkFile(locale, 'footer', requiredFooterKeys);
+}
+
+console.log('\n📦 Topbar/Footer validation finished!');

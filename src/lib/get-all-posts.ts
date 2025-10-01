@@ -1,23 +1,22 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
-import type { PostType } from "@/interfaces/post";
+import type { PostType } from "@/types";
 
-const postsDirectory = join(process.cwd(), "src/content/posts");
+const postsDirectory = join(process.cwd(), "content/posts");
 
-/**
- * Get all posts for a given locale
- */
-export function getAllPosts(locale: string): PostType[] {
-  const dir = join(postsDirectory, locale);
+export function getAllPosts(locale?: string): PostType[] {
+  const safeLocale = locale || "en";
+  const dir = join(postsDirectory, safeLocale);
+
   if (!fs.existsSync(dir)) return [];
 
   const slugs = fs.readdirSync(dir);
 
   const posts: PostType[] = slugs
-    .filter((slug) => slug.endsWith(".mdx") || slug.endsWith(".md"))
+    .filter((slug) => slug.endsWith(".mdx"))
     .map((slug) => {
-      const realSlug = slug.replace(/\.mdx?$/, "");
+      const realSlug = slug.replace(/\.mdx$/, "");
       const fullPath = join(dir, slug);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(fileContents);
@@ -25,20 +24,18 @@ export function getAllPosts(locale: string): PostType[] {
       return {
         ...data,
         slug: realSlug,
-        locale, // ✅ always include locale
+        locale: safeLocale, // always include locale
         content,
       } as PostType;
     });
 
   // sort by date descending
-  return posts.sort((a, b) => (a.date > b.date ? -1 : 1));
+  return posts.sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0));
 }
 
-/**
- * Get a single post by slug for a given locale
- */
-export function getPostBySlug(slug: string, locale: string): PostType | null {
-  const dir = join(postsDirectory, locale);
+export function getPostBySlug(slug: string, locale?: string): PostType | null {
+  const safeLocale = locale || "en";
+  const dir = join(postsDirectory, safeLocale);
   const fullPath = join(dir, `${slug}.mdx`);
 
   if (!fs.existsSync(fullPath)) return null;
@@ -49,7 +46,7 @@ export function getPostBySlug(slug: string, locale: string): PostType | null {
   return {
     ...data,
     slug,
-    locale, // ✅ include locale here too
+    locale: safeLocale,
     content,
   } as PostType;
 }

@@ -1,9 +1,11 @@
-#  Pull Request
+# Pull Request
 
-##  Description
+## Description
+
 <!-- Describe the purpose of this PR. What problem does it solve? -->
 
-##  Checklist (Contributor)
+## Checklist (Contributor)
+
 Before opening this PR, I have:
 
 - [ ] Run `npm install` (if dependencies changed).
@@ -13,7 +15,8 @@ Before opening this PR, I have:
 - [ ] Verified coding standards with `npm run lint -- --fix`.
 - [ ] Simulated CI with `npm run ci-check:dry-run`.
 
-##  Checklist (Reviewer)
+## Checklist (Reviewer)
+
 - [ ] Code changes are clear and maintainable.
 - [ ] Translations/dictionaries are consistent.
 - [ ] No lint or coverage issues remain.
@@ -22,4 +25,5 @@ Before opening this PR, I have:
 ---
 
 ### ℹ Notes for Reviewers
+
 <!-- Add any special instructions or considerations for the reviewer here. -->

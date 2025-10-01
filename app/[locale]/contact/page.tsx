@@ -1,11 +1,17 @@
+// ✅ Safe locale fallback applied
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/settings";
 import LogoBanner from "@/components/LogoBanner";
 import PageHeading from "@/components/PageHeading";
 import PageSection from "@/components/PageSection";
 
-export default async function ContactPage({ params }: { params: { locale: Locale } }) {
-  const dict = await getDictionary(params.locale);
+type Props = {
+  params: { locale: Locale };
+};
+
+export default async function ContactPage({ params }: Props) {
+  const locale = params?.locale || "en"; // ✅ ensures no undefined
+  const dict = await getDictionary(params?.locale || "en");
 
   return (
     <>

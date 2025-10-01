@@ -1,0 +1,107 @@
+name: Reset Quiet
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment (dev/staging/prod)"
+        required: false
+        default: "dev"
+  workflow_call:
+    inputs:
+      environment:
+        description: "Target environment (dev/staging/prod)"
+        required: false
+        type: string
+        default: "dev"
+
+jobs:
+  reset_quiet:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve environment (with fallback + retention)
+        id: resolve_env
+        shell: pwsh
+        run: |
+          $envValue = "${{ inputs.environment }}"
+          if ([string]::IsNullOrEmpty($envValue)) {
+            $envValue = "dev"
+          }
+
+          # Default retention: 30 days
+          $retention = 30
+          if ($envValue -eq "prod") {
+            $retention = 90
+          }
+
+          # Timestamp in UTC
+          $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+
+          Write-Host "🌍 Running Reset Quiet for environment: $envValue"
+          Write-Host "🗂️ Log retention set to $retention days"
+          Write-Host "🕒 Timestamp: $timestamp"
+
+          echo "env_selected=$envValue" >> $env:GITHUB_OUTPUT
+          echo "retention_days=$retention" >> $env:GITHUB_OUTPUT
+          echo "timestamp=$timestamp" >> $env:GITHUB_OUTPUT
+
+      - name: Run reset-quiet.ps1
+        shell: pwsh
+        run: |
+          pwsh -ExecutionPolicy Bypass `
+            -File .\scripts\reset-quiet.ps1 `
+            -Environment "${{ steps.resolve_env.outputs.env_selected }}" `
+            -Quiet
+
+      - name: Success summary
+        if: success()
+        shell: pwsh
+        run: |
+          $envVal = "${{ steps.resolve_env.outputs.env_selected }}"
+          $retention = "${{ steps.resolve_env.outputs.retention_days }}"
+          $timestamp = "${{ steps.resolve_env.outputs.timestamp }}"
+          @"
+          ## ✅ Reset Quiet Succeeded
+          Environment: **$envVal**  
+          Retention: **$retention days**  
+          Timestamp: **$timestamp UTC**
+
+          📎 Logs are uploaded as artifacts below.
+          "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8
+
+      - name: Failure summary
+        if: failure()
+        shell: pwsh
+        run: |
+          $envVal = "${{ steps.resolve_env.outputs.env_selected }}"
+          $timestamp = "${{ steps.resolve_env.outputs.timestamp }}"
+          @"
+          ## ❌ Reset Quiet Failed
+          Environment: **$envVal**  
+          Timestamp: **$timestamp UTC**
+
+          Please review the uploaded logs for details:
+          👉 https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8
+
+      - name: Upload reset-summary logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reset-summary-${{ steps.resolve_env.outputs.env_selected }}-${{ github.run_number }}-${{ steps.resolve_env.outputs.timestamp }}
+          path: |
+            logs/reset-summary.log
+            logs/reset-summary-*.log
+            reset-summary.txt
+          if-no-files-found: warn
+          retention-days: ${{ steps.resolve_env.outputs.retention_days }}
+
+      - name: Print direct artifact link
+        if: always()
+        run: |
+          echo "🔗 Reset Quiet logs uploaded: reset-summary-${{ steps.resolve_env.outputs.env_selected }}-${{ github.run_number }}-${{ steps.resolve_env.outputs.timestamp }}"
+          echo "👉 Download here: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"

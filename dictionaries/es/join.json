@@ -1,0 +1,13 @@
+{
+  "intro": "Complete el formulario a continuación para unirse y mantenerse conectado con Nouvo Ayiti 2075.",
+  "form": {
+    "name": "Nombre Completo",
+    "submit": "Unirse Ahora",
+    "email": "Correo Electrónico",
+    "success": "Gracias por unirte! Nos pondremos en contacto pronto.",
+    "location": "Ubicación",
+    "phone": "Número de Teléfono",
+    "message": "Mensaje (opcional)"
+  },
+  "title": "Únete al Movimiento"
+}

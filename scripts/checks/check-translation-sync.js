@@ -7,49 +7,62 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dictionariesDir = path.join(__dirname, '..', 'dictionaries');
+// Point to the root-level dictionaries folder
+const dictionariesDir = path.join(process.cwd(), 'dictionaries');
 
-const locales = fs
-  .readdirSync(dictionariesDir)
-  .filter((f) => /^[a-z]{2}$/.test(f));
+// Locales
+const locales = ['fr', 'ht', 'es'];
+const baseLocale = 'en';
 
+// Helper: load JSON
 function loadJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
-// Compare structure between English (base) and others
-const baseLocale = 'en';
-const baseDir = path.join(dictionariesDir, baseLocale);
-const baseFiles = fs.readdirSync(baseDir).filter((f) => f.endsWith('.json'));
+// Base file (English)
+const basePath = path.join(dictionariesDir, `${baseLocale}.json`);
+if (!fs.existsSync(basePath)) {
+  console.error(`❌ Missing base dictionary: ${baseLocale}.json`);
+  process.exit(1);
+}
 
-for (const file of baseFiles) {
-  const basePath = path.join(baseDir, file);
-  const baseData = loadJson(basePath);
+const baseData = loadJson(basePath);
+const baseKeys = Object.keys(baseData);
 
-  for (const locale of locales) {
-    if (locale === baseLocale) continue;
+// Compare with each locale
+let hasIssues = false;
 
-    const localePath = path.join(dictionariesDir, locale, file);
-    if (!fs.existsSync(localePath)) {
-      console.error(`❌ Missing file: ${locale}/${file}`);
-      process.exitCode = 1;
-      continue;
+for (const locale of locales) {
+  const localePath = path.join(dictionariesDir, `${locale}.json`);
+
+  if (!fs.existsSync(localePath)) {
+    console.error(`❌ Missing dictionary file: ${locale}.json`);
+    hasIssues = true;
+    continue;
+  }
+
+  const localeData = loadJson(localePath);
+  const localeKeys = Object.keys(localeData);
+
+  const missing = baseKeys.filter((k) => !localeKeys.includes(k));
+  const extra = localeKeys.filter((k) => !baseKeys.includes(k));
+
+  if (missing.length === 0 && extra.length === 0) {
+    console.log(`✅ ${locale}.json is in sync with en.json`);
+  } else {
+    hasIssues = true;
+    if (missing.length > 0) {
+      console.error(`❌ ${locale}.json is missing keys: ${missing.join(', ')}`);
     }
-
-    const localeData = loadJson(localePath);
-    const missingKeys = Object.keys(baseData).filter(
-      (key) => !(key in localeData)
-    );
-
-    if (missingKeys.length > 0) {
-      console.error(
-        `❌ ${locale}/${file} missing keys: ${missingKeys.join(', ')}`
-      );
-      process.exitCode = 1;
-    } else {
-      console.log(`✅ ${locale}/${file} is in sync with en/${file}`);
+    if (extra.length > 0) {
+      console.warn(`⚠️ ${locale}.json has extra keys: ${extra.join(', ')}`);
     }
   }
 }
 
-console.log('📦 Translation sync validation finished!');
+if (hasIssues) {
+  console.error('\n❌ Translation sync check failed.');
+  process.exit(1);
+} else {
+  console.log('\n✅ All dictionaries are in sync!');
+}

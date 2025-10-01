@@ -1,0 +1,10 @@
+{
+  "form": {
+    "name": "Name [en]",
+    "email": "Email [en]",
+    "message": "Message [en]",
+    "submit": "Submit [en]",
+    "success": "Thank you for joining [en]!"
+  },
+  "heading": "Join Us [en]"
+}

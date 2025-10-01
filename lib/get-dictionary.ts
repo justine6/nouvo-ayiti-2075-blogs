@@ -1,12 +1,15 @@
-import type { Locale } from "./settings";
-import type { SiteDictionary } from "./types";
+import { Locale } from "./settings";
+import fs from "fs";
+import path from "path";
 
-export async function getDictionary(locale: Locale): Promise<SiteDictionary> {
+export async function getDictionary(locale: Locale) {
   try {
-    const dict = await import(`../dictionaries/${locale}/all.json`);
-    return dict.default as SiteDictionary;
+    // Path to the unified home.json
+    const filePath = path.join(process.cwd(), "lib/i18n/locales", locale, "home.json");
+    const content = await fs.promises.readFile(filePath, "utf8");
+    return JSON.parse(content);
   } catch (error) {
-    console.error(`Could not load dictionary for locale: ${locale}`, error);
-    return {} as SiteDictionary;
+    console.warn(`⚠️ Missing or invalid home.json for locale "${locale}". Returning empty object.`);
+    return {};
   }
 }

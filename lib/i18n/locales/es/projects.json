@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "title": "Project A",
+      "description": "Description [es]"
+    },
+    {
+      "title": "Project B",
+      "description": "Description [es]"
+    }
+  ],
+  "title": "Projects [es]"
+}

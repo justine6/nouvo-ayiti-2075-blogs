@@ -1,0 +1,792 @@
+[2025-09-29 07:18:28]
+ Created: 0
+ Updated: 0
+⚠️ Skipped: 0
+===========================
+[2025-09-29 07:23:22]
+
+ Created: 0
+/
+
+ Updated: 0
+/
+
+ Skipped: 0
+/
+
+===========================
+[2025-09-29 07:42:33]
+
+ Created: 4
+en/newsletter.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+
+ Updated: 0
+
+
+ Skipped: 24
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+
+===========================
+[2025-09-29 07:50:11]
+
+ Created: 0
+
+
+ Updated: 0
+
+
+ Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+
+===========================
+[2025-09-29 07:57:33]
+
+🆕 Created: 0
+
+
+ Updated: 0
+
+
+ Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+
+===========================
+[2025-09-29 08:07:44]
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+=========================
+[2025-09-29 08:10:50]
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+=========================
+[2025-09-29 08:15:22]
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+=========================
+[2025-09-29 08:25:26]
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+=========================
+[2025-09-29 08:28:39]
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+=========================
+[2025-09-29 08:31:08]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 08:57:20]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 08:57:57]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 10:43:13]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 11:07:08]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:23:08]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:23:28]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:26:00]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:26:20]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:26:37]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:30:18]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:30:22]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================
+[2025-09-29 14:30:29]
+
+Created: 0
+
+
+Updated: 0
+
+
+Skipped: 27
+fr/home.json
+ht/home.json
+es/home.json
+fr/about.json
+ht/about.json
+es/about.json
+fr/projects.json
+ht/projects.json
+es/projects.json
+fr/vision.json
+ht/vision.json
+es/vision.json
+fr/join.json
+ht/join.json
+es/join.json
+fr/contact.json
+ht/contact.json
+es/contact.json
+fr/newsletter.json
+ht/newsletter.json
+es/newsletter.json
+fr/videos.json
+ht/videos.json
+es/videos.json
+fr/blog.json
+ht/blog.json
+es/blog.json
+==============================

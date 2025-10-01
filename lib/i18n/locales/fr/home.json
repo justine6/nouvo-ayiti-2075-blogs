@@ -1,0 +1,64 @@
+﻿{
+  "hero": {
+    "subtitle": "Hero Subtitle [fr]",
+    "joinNow": "Join Now [fr]",
+    "goToMain": "Main Website [fr]",
+    "readMore": "Read More [fr]",
+    "watchVideos": "Watch Videos [fr]",
+    "title": "Hero Title [fr]"
+  },
+  "blogSection": {
+    "blogUnavailable": "Blog currently unavailable [fr]",
+    "readMore": "Read More [fr]",
+    "cta": "Explore Blog [fr]",
+    "paragraph": "Stories and updates [fr]",
+    "title": "Our Blog [fr]",
+    "fallbackNotice": "No blogs available [fr]"
+  },
+  "projects": {
+    "title": "Our Projects [fr]",
+    "motto": "Projects motto [fr]",
+    "intro": "Projects intro [fr]",
+    "items": [
+      {
+        "title": "Sample Project",
+        "description": "Description",
+        "category": "general"
+      }
+    ]
+  },
+  "topbar": {
+    "blog": "Blog [fr]",
+    "contact": "Contact [fr]",
+    "vision": "Vision [fr]",
+    "language": "Language [fr]",
+    "home": "Home [fr]",
+    "projects": "Projects [fr]",
+    "videos": "Videos [fr]",
+    "about": "About [fr]"
+  },
+  "mission": {
+    "heading": "Our Mission [fr]",
+    "paragraph": "Mission text placeholder [fr]"
+  },
+  "footer": {
+    "copyright": " 2025 Nouvo Ayiti [fr]",
+    "poweredBy": "Powered by Team 2075 [fr]"
+  },
+  "newsletter": {
+    "description": "Subscribe for updates [fr]",
+    "title": "Stay Connected [fr]"
+  },
+  "contact": {
+    "placeholder": "Type your message [fr]",
+    "cta": "Send [fr]",
+    "description": "Reach us anytime [fr]",
+    "heading": "Contact Us [fr]",
+    "success": "Message sent! [fr]"
+  },
+  "blogPreview": {
+    "readMore": "Read More [fr]",
+    "title": "More Stories [fr]",
+    "subtitle": "Latest blog previews [fr]"
+  }
+}

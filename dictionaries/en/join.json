@@ -1,0 +1,13 @@
+{
+  "intro": "Fill in the form below to join and stay connected with Nouvo Ayiti 2075.",
+  "form": {
+    "name": "Full Name",
+    "submit": "Join Now",
+    "email": "Email Address",
+    "success": "Thank you for joining! Well be in touch soon.",
+    "location": "Location",
+    "phone": "Phone Number",
+    "message": "Message (optional)"
+  },
+  "title": "Join the Movement"
+}

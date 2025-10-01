@@ -1,45 +1,90 @@
 {
   "name": "nouvo-ayiti-2075-blogs",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
 "scripts": {
-  "lint": "next lint",
-  "check-dicts": "node scripts/checks/check-dicts.js",
+  
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint .",
+  "prepare": "husky install",
+  "postdev": "npm run clean:locks",
+
+  
+  "check-dicts": "powershell -ExecutionPolicy Bypass -File scripts/check-dicts.ps1",
+  "scaffold:dicts": "powershell -ExecutionPolicy Bypass -File ./scripts/scaffold-minimal-dicts.ps1",
+  "i18n-validate": "npm run scaffold-dicts && npm run check-dicts",
   "check-dicts:strict": "node scripts/checks/check-dicts.js --strict",
+  "check-dicts:powershell": "powershell -ExecutionPolicy Bypass -File scripts/check-dictionaries.ps1",
+  "check-dicts:auto": "node scripts/check-dicts-auto.mjs",
+
+
   "check-meta": "node scripts/checks/check-meta.js",
   "check-required-only": "node scripts/checks/check-required-only.js",
   "check-translation-sync": "node scripts/checks/check-translation-sync.js",
+  "check-translation-sync:strict": "node scripts/checks/check-translation-sync.js --strict",
   "check-topbar-footer": "node scripts/checks/check-topbar-footer.js",
-  "check-all": "node scripts/checks/check-all.js",
-  "check-all:dry-run": "echo 🔍 Would run: check-dicts → check-meta → check-required-only → check-translation-sync → check-topbar-footer",
-  "patch-dicts": "node scripts/patches/patch-dicts.js",
-  "patch-missing": "node scripts/patches/patch-missing.js",
-  "fix-footer": "node scripts/patches/fix-footer.js",
-  "fix-all": "node scripts/patches/fix-all.js",
-  "fix-all:dry-run": "echo 🔧 Would run: patch-dicts → patch-missing → fix-footer",
+  "check-topbar-footer:strict": "node scripts/checks/check-topbar-footer.js --strict",
+  "check-all": "node scripts/check-all.mjs",
+  "check-all:strict": "node scripts/check-all.mjs strict",
+  "check-all:dry-run": "echo Would run: check-dicts → check-meta → check-required-only → check-translation-sync → check-topbar-footer",
+
+ 
+  "patch-all": "npm run patch-missing && npm run fix-topbar-footer",
+  "patch-dicts": "powershell -ExecutionPolicy Bypass -File scripts/check-dictionaries.ps1 -patch",
+  "patch-dicts:force": "powershell -ExecutionPolicy Bypass -File scripts/check-dictionaries.ps1 -patch -force",
+  "patch-dicts:powershell": "powershell -ExecutionPolicy Bypass -File scripts/check-dictionaries.ps1 -patch",
+  "patch-missing": "powershell -ExecutionPolicy Bypass -File scripts/patch-missing.ps1",
+  "fix-footer": "powershell -ExecutionPolicy Bypass -File scripts/fix-footer.ps1",
+  "fix-topbar-footer": "npm run fix-footer",
+  "fix-all": "node scripts/patches/fix-all.mjs",
+  "fix-all:dry-run": "echo Would run: patch-dicts → patch-missing → fix-footer",
+
   "repair": "npm run fix-all && npm run check-all",
-  "repair:dry-run": "echo 🔧 Would run: patch-dicts → patch-missing → fix-footer → check-dicts → check-meta → check-required-only → check-translation-sync → check-topbar-footer",
-  "update-dicts:full": "powershell -ExecutionPolicy Bypass -File ./scripts/Update-Dictionaries-Full.ps1",
-  "update-dicts:incremental": "powershell -ExecutionPolicy Bypass -File ./scripts/Update-Dictionaries-Incremental.ps1",
-  "validate": "npm run check-all",
-  "clean:locks": "rimraf .devserver-opened .no-auto-browser",
-  "clean:all": "rimraf .next out build coverage .vercel .devserver-opened .no-auto-browser",
-  "clean:dicts": "node ./scripts/clean-dicts.js",
-  "clean": "npm run clean:all && npm run clean:dicts",
-  "prebuild": "npm run clean:all",
-  "build": "next build",
-  "dev": "next dev",
+  "repair:dry-run": "echo Would run: patch-dicts → patch-missing → fix-footer → check-all",
+  "repair:quick": "npm run patch-all && npm run check-all",
+  "repair:force": "npm run patch-dicts:force && npm run fix-all && npm run check-all",
+  "repair:strict": "npm run patch-all && npm run check-all:strict && npm run lint && npm run coverage:strict",
+
+ 
+  "validate:repair": "pwsh -ExecutionPolicy Bypass -File ./scripts/validate-and-repair-json.ps1",
+  "sync": "pwsh -ExecutionPolicy Bypass -File ./scripts/sync-dicts.ps1",
+  "postreset": "pwsh -ExecutionPolicy Bypass -File ./scripts/postreset.ps1",
+
+  "reset:all": "npm run validate:repair && npm run sync && npm run postreset && pwsh -Command \"Write-Host '=== ✅ Final Reset Summary ===' -ForegroundColor Cyan; Get-ChildItem ./logs -Filter '*.txt' | Sort-Object LastWriteTime -Descending | Select-Object -First 3 | ForEach-Object { Write-Host ('📄 ' + $_.FullName) -ForegroundColor Green; Get-Content $_.FullName | Select-Object -Last 5; Write-Host '---' -ForegroundColor Yellow }; Write-Host '📂 Opening logs folder...' -ForegroundColor Cyan; Start-Process explorer (Resolve-Path ./logs)\"",
+
+  "ci:reset": "npm run validate:repair && npm run sync && npm run postreset --silent",
+ 
   "test": "npm run clean:dicts && vitest",
   "test:coverage": "vitest run --coverage",
   "coverage:strict": "vitest run --coverage --passWithNoTests=false",
   "coverage:report": "vitest run --coverage || true",
   "coverage:view": "npm run test:coverage && npx open-cli coverage/index.html",
-  "prepare": "husky install",
-  "postdev": "npm run clean:locks",
-  "ci-check": "npm run clean && npm run validate && npm run lint && npm run coverage:strict",
-  "ci-check:dry-run": "echo 🧪 Would run CI pipeline: clean → validate → lint → coverage:strict"
+
+  
+  "ci-check": "pwsh -ExecutionPolicy Bypass -File scripts/ci-check.ps1",
+  "ci-check:dry-run": "echo Would run CI pipeline: clean → check-all:strict → lint → coverage:strict",
+  "ci-check:strict": "pwsh -ExecutionPolicy Bypass -File scripts/ci-check.ps1 -strict",
+  "ci-repair": "npm run repair:force && npm run check-all:strict && npm run lint && npm run coverage:strict",
+  "ci-repair:dry-run": "echo Would run CI repair pipeline: repair:force → check-all:strict → lint → coverage:strict",
+
+ 
+  "restore-dicts:node": "node scripts/restore-dicts.js",
+  "restore-dicts:force": "node scripts/restore-dicts.js --force",
+  "restore-dicts:powershell": "powershell -ExecutionPolicy Bypass -File scripts/check-dictionaries.ps1 -restore",
+  "update-dicts:full": "powershell -ExecutionPolicy Bypass -File scripts/Update-Dictionaries-Full.ps1",
+  "update-dicts:incremental": "powershell -ExecutionPolicy Bypass -File scripts/Update-Dictionaries-Incremental.ps1",
+  "generate-types": "powershell -ExecutionPolicy Bypass -File scripts/generate-types.ps1"
 },
 
+  "husky": {
+    "hooks": { 
+      "pre-commit": "lint-staged && npm run check-dicts:powershell",
+      "pre-push": "npm run ci-check"
+    }
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
@@ -73,6 +118,7 @@
     "tailwindcss": "^4.1.13",
     "ts-node": "^10.9.2",
     "typescript": "5.9.2",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^2.1.9"
   },
   "dependencies": {

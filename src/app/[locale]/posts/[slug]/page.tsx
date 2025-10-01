@@ -1,7 +1,7 @@
+import type { SiteDictionary } from "@/lib/types";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Container from "@/app/components/Container";
-import BlogCard from "@/app/components/BlogCard";
 import MoreStories from "@/app/components/MoreStories";
 import { getAllPosts } from "@/lib/get-all-posts";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -9,29 +9,35 @@ import type { Locale } from "@/lib/i18n/types";
 
 type Props = {
   params: {
-    slug: string;
-    locale: Locale;
+    slug?: string; // ✅ make optional
+    locale?: Locale; // ✅ make optional
   };
 };
 
 export default async function PostPage({ params }: Props) {
-  const { slug, locale } = params;
+  const locale: Locale = params?.locale || "en"; // ✅ fallback
+  const slug = params?.slug;
 
-  // Load dictionary for translations
-  const dict = await getDictionary(locale);
+  if (!slug) {
+    return notFound(); // ✅ prevent "undefined" slug crash
+  }
+
+  // Load dictionary
+  const dict: SiteDictionary = await getDictionary(params?.locale || "en");
 
   // Load posts for this locale
   let posts = getAllPosts(locale);
   let post = posts.find((p) => p.slug === slug);
 
   // Fallback to English if not found
-  const isFallback = !post && locale !== "en";
-  if (isFallback) {
+  if (!post && locale !== "en") {
     posts = getAllPosts("en");
     post = posts.find((p) => p.slug === slug);
   }
 
-  if (!post) return notFound();
+  if (!post) {
+    return notFound(); // ✅ clean 404 if post doesn’t exist
+  }
 
   return (
     <Container>
@@ -51,7 +57,7 @@ export default async function PostPage({ params }: Props) {
         </a>
       </div>
 
-      {/* More stories section */}
+      {/* More stories */}
       <section className="mt-16">
         <h2 className="text-2xl font-bold mb-6">{dict.blog.moreStories}</h2>
         <MoreStories posts={posts.filter((p) => p.slug !== slug)} />

@@ -1,0 +1,13 @@
+{
+  "intro": "Remplissez le formulaire ci-dessous pour rejoindre et rester connecté avec Nouvo Ayiti 2075.",
+  "form": {
+    "name": "Nom Complet",
+    "submit": "Rejoindre",
+    "email": "Adresse E-mail",
+    "success": "Merci de nous avoir rejoints ! Nous vous contacterons bientôt.",
+    "location": "Localisation",
+    "phone": "Numéro de Téléphone",
+    "message": "Message (facultatif)"
+  },
+  "title": "Rejoindre le Mouvement"
+}

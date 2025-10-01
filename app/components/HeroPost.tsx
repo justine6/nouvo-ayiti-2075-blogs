@@ -9,7 +9,6 @@ type HeroPostProps = {
 };
 
 export default function HeroPost({ post, locale, readMoreLabel }: HeroPostProps) {
-  // ✅ Default to logo if no coverImage provided
   const coverImage = post.coverImage || "/images/nouvoayiti2075-logo.png";
 
   return (

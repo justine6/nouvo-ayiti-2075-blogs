@@ -18,7 +18,7 @@ function mockRequest(url: string, options: any = {}) {
 
 describe("middleware", () => {
   it("should ignore static files", () => {
-    const req = mockRequest("http://localhost/_next/static/chunk.js");
+    const req = mockRequest("http://localhost/_next/static/chunk.mjs");
     const res = middleware(req);
     // ✅ safer: ensure no redirect
     expect(res?.headers.get("location")).toBeNull();

@@ -1,3 +1,5 @@
+import type { SiteDictionary } from "..\..\..\..\lib\types";
+import type { Locale } from "..\..\..\..\lib\settings";
 import { notFound } from "next/navigation";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import Container from "@/app/components/Container";
@@ -14,7 +16,7 @@ type Props = {
 export default async function PostPage({ params }: Props) {
   const { slug, locale } = await Promise.resolve(params);
 
-  const dict: Dictionary = await getDictionary(locale);
+  const dict: Dictionary = await getDictionary(params?.locale || "en");
 
   const posts = getAllPosts(locale);
   const post = posts.find((p) => p.slug === slug);

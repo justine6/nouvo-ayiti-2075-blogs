@@ -1,3 +1,5 @@
+import type { SiteDictionary } from "@/lib/types";
+import type { Locale } from "@/lib/settings";
 import { getAllPosts } from "@/lib/api";
 import BlogCard from "@/app/_components/BlogCard";
 
@@ -6,7 +8,7 @@ type Props = {
 };
 
 export default function BlogIndexPage({ params }: Props) {
-  const posts = getAllPosts(params.locale);
+  const posts = getAllPosts(params?.locale || "en");
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-10">

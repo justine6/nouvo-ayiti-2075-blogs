@@ -12,7 +12,7 @@ type Props = {
 
 export default async function HomePage({ params }: Props) {
   const { locale } = params;
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale || "en");
 
   // Load posts for this locale
   let posts = getAllPosts(locale);
@@ -25,14 +25,24 @@ export default async function HomePage({ params }: Props) {
   const heroPost = posts[0];
   const morePosts = posts.slice(1);
 
+  // ✅ Graceful empty state
+  if (!heroPost) {
+    return (
+      <main>
+        <Container>
+          <Intro />
+          <p className="text-gray-600 mt-6">{dict.blog?.noPosts || "No posts available yet."}</p>
+        </Container>
+      </main>
+    );
+  }
+
   return (
     <main>
       <Container>
         <Intro />
 
-        {heroPost && (
-          <HeroPost post={heroPost} locale={locale} readMoreLabel={dict.blog.readMore} />
-        )}
+        <HeroPost post={heroPost} locale={locale} readMoreLabel={dict.blog.readMore} />
 
         {morePosts.length > 0 && (
           <MoreStories posts={morePosts} locale={locale} readMoreLabel={dict.blog.readMore} />

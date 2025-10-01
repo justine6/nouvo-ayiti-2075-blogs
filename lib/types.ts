@@ -1,11 +1,14 @@
 // Types for each translation dictionary section
 
-export type HeroDictionary = {
-  title: string;
-  subtitle: string;
-  readMore: string;
-  joinNow: string;
-  watchVideos?: string;
+export type Dictionary = {
+  hero: {
+    title: string;
+    subtitle: string;
+  };
+  newsletter: {
+    title: string;
+    description: string;
+  };
 };
 
 export type MissionDictionary = {
@@ -65,8 +68,8 @@ export type AboutDictionary = {
 };
 
 export type FooterDictionary = {
-  contact: string;
-  rights: string;
+  title: string;
+  intro: string;
 };
 
 // Master dictionary type for a locale

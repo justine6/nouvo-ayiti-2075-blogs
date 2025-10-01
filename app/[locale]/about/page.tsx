@@ -1,21 +1,20 @@
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import type { Locale } from "@/lib/i18n/settings";
-import LogoBanner from "@/components/LogoBanner";
-import PageHeading from "@/components/PageHeading";
-import PageSection from "@/components/PageSection";
+// ✅ Safe locale fallback applied
+import { getDictionary } from "@/lib/get-dictionary";
+import type { Locale } from "@/lib/settings";
+import type { SiteDictionary } from "@/lib/types";
 
-export default async function AboutPage({ params }: { params: { locale: Locale } }) {
-  const dict = await getDictionary(params.locale);
+type Props = {
+  params: { locale: Locale };
+};
+
+export default async function AboutPage({ params }: Props) {
+  const locale = params?.locale || "en"; // ✅ ensures no undefined
+  const dict: SiteDictionary = await getDictionary(params?.locale || "en");
 
   return (
-    <>
-      <LogoBanner />
-      <PageSection>
-        <PageHeading>{dict.topbar.about}</PageHeading>
-        <p className="mt-4 text-gray-700">
-          {dict.about?.intro || "Learn more about the Nouvo Ayiti 2075 movement."}
-        </p>
-      </PageSection>
-    </>
+    <div>
+      <h1>{dict.about?.title}</h1>
+      <p>{dict.about?.intro}</p>
+    </div>
   );
 }

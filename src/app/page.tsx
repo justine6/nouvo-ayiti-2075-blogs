@@ -1,6 +1,8 @@
+import type { SiteDictionary } from "@/lib/types";
+import type { Locale } from "@/lib/settings";
 // src/app/_components/more-stories.tsx
 
-"use client";
+("use client");
 
 import PostPreview from "@app/_components/post-preview";
 
