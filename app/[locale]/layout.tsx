@@ -2,11 +2,13 @@ import type { LocaleLayoutProps, DefaultMetadata, LocaleMetadataMap } from "@/ty
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/settings";
 import "../globals.css";
+
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 
 const baseUrl = "https://projects.jutellane.com"; // adjust if needed
 
+// ✅ Localized SEO metadata
 const localizedMetadata: LocaleMetadataMap = {
   en: {
     title: "Nouvo Ayiti 2075",
@@ -70,21 +72,29 @@ const localizedMetadata: LocaleMetadataMap = {
   },
 };
 
-// ✅ Dynamic metadata
+// ✅ Generate metadata dynamically per locale
 export async function generateMetadata({ params }: LocaleLayoutProps): Promise<DefaultMetadata> {
   const { locale } = params;
   return localizedMetadata[locale] || localizedMetadata["en"];
 }
 
+// ✅ Main layout
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = params;
+
+  // Loads all dicts at once (home, blog, vision, projects, etc.)
   const dict = await getDictionary(locale);
 
   return (
     <html lang={locale}>
       <body className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+        {/* ✅ Localized Topbar */}
         <Topbar dict={dict.topbar} locale={locale} />
-        {children}
+
+        {/* ✅ Page Content */}
+        <main>{children}</main>
+
+        {/* ✅ Localized Footer */}
         <Footer dict={dict.footer} />
       </body>
     </html>

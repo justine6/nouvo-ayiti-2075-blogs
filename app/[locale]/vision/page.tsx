@@ -1,19 +1,19 @@
 import { getDictionary } from "@/lib/get-dictionary";
 import type { Locale } from "@/lib/settings";
 
-import ContactSection from "@/components/ContactSection";
+import VisionSection from "@/components/VisionSection";
 
 type Props = {
   params: { locale: Locale };
 };
 
-export default async function ContactPage({ params }: Props) {
+export default async function VisionPage({ params }: Props) {
   const locale = params?.locale || "en";
   const dict = await getDictionary(locale);
 
   return (
     <div>
-      <ContactSection dict={dict.contact} />
+      <VisionSection dict={dict.vision} />
     </div>
   );
 }

@@ -3,13 +3,30 @@ import fs from "fs";
 import path from "path";
 
 export async function getDictionary(locale: Locale) {
-  try {
-    // Path to the unified home.json
-    const filePath = path.join(process.cwd(), "lib/i18n/locales", locale, "home.json");
-    const content = await fs.promises.readFile(filePath, "utf8");
-    return JSON.parse(content);
-  } catch (error) {
-    console.warn(`⚠️ Missing or invalid home.json for locale "${locale}". Returning empty object.`);
-    return {};
+  // List of all dictionaries you want available
+  const dictionaries = [
+    "home",
+    "blog",
+    "contact",
+    "vision",
+    "newsletter",
+    "projects",
+    "about",
+    "join",
+  ];
+
+  const result: Record<string, any> = {};
+
+  for (const dict of dictionaries) {
+    try {
+      const filePath = path.join(process.cwd(), "lib/i18n/locales", locale, `${dict}.json`);
+      const content = await fs.promises.readFile(filePath, "utf8");
+      result[dict] = JSON.parse(content);
+    } catch {
+      console.warn(`⚠️ Missing or invalid ${dict}.json for locale "${locale}".`);
+      result[dict] = {}; // fallback to empty object if file is missing
+    }
   }
+
+  return result;
 }
