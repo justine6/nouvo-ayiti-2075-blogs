@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🚀 Running pre-push CI check..."
-npm run ci-check
+echo "🚀 Running pre-push dictionary validation..."
+pwsh -ExecutionPolicy Bypass -File scripts/check-dictionaries.ps1
 echo "✅ Pre-push checks passed!"
