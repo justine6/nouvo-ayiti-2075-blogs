@@ -5,12 +5,21 @@ import type { Post } from "@/lib/get-all-posts";
 type BlogCardProps = {
   post: Post;
   locale: string;
-  readMoreLabel: string;
+  readMoreLabel?: string;
 };
 
 export default function BlogCard({ post, locale, readMoreLabel }: BlogCardProps) {
-  // ✅ Default to logo if no coverImage provided
-  const coverImage = post.coverImage || "/images/nouvoayiti2075-logo.png";
+  // ✅ Use ogImage (or fallback to logo)
+  const coverImage = post.ogImage || "/images/nouvoayiti2075-logo.png";
+
+  // ✅ Format the date nicely
+  const formattedDate = post.date
+    ? new Intl.DateTimeFormat(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(new Date(post.date))
+    : null;
 
   return (
     <div className="border rounded-xl shadow-sm overflow-hidden bg-white hover:shadow-md transition">
@@ -19,7 +28,7 @@ export default function BlogCard({ post, locale, readMoreLabel }: BlogCardProps)
           src={coverImage}
           alt={post.title || "Nouvo Ayiti 2075"}
           fill
-          className="object-contain bg-white"
+          className="object-cover bg-gray-100"
         />
       </div>
       <div className="p-4">
@@ -28,6 +37,12 @@ export default function BlogCard({ post, locale, readMoreLabel }: BlogCardProps)
             {post.title}
           </Link>
         </h3>
+
+        {/* 🔹 Show formatted date if available */}
+        {formattedDate && (
+          <p className="text-sm text-gray-500 mt-1">{formattedDate}</p>
+        )}
+
         {post.excerpt && (
           <p className="mt-2 text-gray-700">
             {post.excerpt.length > 120 ? post.excerpt.slice(0, 120) + "..." : post.excerpt}
@@ -37,7 +52,7 @@ export default function BlogCard({ post, locale, readMoreLabel }: BlogCardProps)
           href={`/${locale}/posts/${post.slug}`}
           className="text-blue-600 hover:underline mt-3 inline-block"
         >
-          {readMoreLabel}
+          {readMoreLabel || "Read more"}
         </Link>
       </div>
     </div>

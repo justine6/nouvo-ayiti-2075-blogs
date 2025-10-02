@@ -1,4 +1,4 @@
-export type TopbarDictionary = {
+export type TopBarDictionary = {
   home?: string;
   about?: string;
   projects?: string;
@@ -22,8 +22,8 @@ export type MoreStoriesDictionary = {
 };
 
 export type Dictionary = {
-  topbar: TopbarDictionary;
+  TopBar: TopBarDictionary;
   footer: FooterDictionary;
   hero: HeroDictionary;
-  moreStories: MoreStoriesDictionary;
+  MoreStories: MoreStoriesDictionary;
 };

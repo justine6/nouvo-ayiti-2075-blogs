@@ -53,3 +53,5 @@ dictionary-patch-*.txt
 # (comment this out if you want to keep them in Git)
 # workflow_orchestration.png
 # local_ci_flow.png
+
+.vercel

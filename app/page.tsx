@@ -22,11 +22,11 @@ export default async function HomePage({ params }: Props) {
     posts = getAllPosts("en");
   }
 
-  const heroPost = posts[0];
+  const HeroPost = posts[0];
   const morePosts = posts.slice(1);
 
   // ✅ Graceful empty state
-  if (!heroPost) {
+  if (!HeroPost) {
     return (
       <main>
         <Container>
@@ -42,7 +42,7 @@ export default async function HomePage({ params }: Props) {
       <Container>
         <Intro />
 
-        <HeroPost post={heroPost} locale={locale} readMoreLabel={dict.blog.readMore} />
+        <HeroPost post={HeroPost} locale={locale} readMoreLabel={dict.blog.readMore} />
 
         {morePosts.length > 0 && (
           <MoreStories posts={morePosts} locale={locale} readMoreLabel={dict.blog.readMore} />

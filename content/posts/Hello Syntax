@@ -1,0 +1,11 @@
+---
+title: "Hello Syntax"
+date: "2025-10-01"
+---
+
+Here is some TypeScript:
+
+```ts
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}

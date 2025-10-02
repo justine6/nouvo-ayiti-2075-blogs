@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Topbar from "../Topbar";
+import TopBar from "../TopBar";
 
-describe("Topbar", () => {
+describe("TopBar", () => {
   it("renders navigation links", () => {
-    render(<Topbar />);
+    render(<TopBar />);
     expect(screen.getByText(/Home/i)).toBeInTheDocument();
     expect(screen.getByText(/About/i)).toBeInTheDocument();
     expect(screen.getByText(/Projects/i)).toBeInTheDocument();

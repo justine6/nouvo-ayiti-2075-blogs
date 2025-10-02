@@ -1,3 +1,3 @@
-export default function Topbar() {
-  return <header>Topbar placeholder</header>;
+export default function TopBar() {
+  return <header>TopBar placeholder</header>;
 }

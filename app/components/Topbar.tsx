@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type TopbarProps = {
+type TopBarProps = {
   dict?: {
     home?: string;
     about?: string;
@@ -13,7 +13,7 @@ type TopbarProps = {
   locale: string;
 };
 
-export default function Topbar({ dict, locale }: TopbarProps) {
+export default function TopBar({ dict, locale }: TopBarProps) {
   return (
     <nav className="flex justify-between items-center p-4 shadow-md bg-white">
       <div className="font-bold text-lg">Nouvo Ayiti 2075</div>

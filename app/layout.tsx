@@ -1,18 +1,14 @@
-// app/layout.tsx
-import "./globals.css"; // ✅ adjust path to match your file
-import { ReactNode } from "react";
+import type { DefaultMetadata, LayoutProps } from "@/types/layout";
+import "./globals.css";
 
-export const metadata = {
-  title: "Nouvo Ayiti 2075 Blog",
-  description: "Official content for Nouvo Ayiti 2075 Foundation",
-  metadataBase: new URL("https://nouvoayiti2075.com"),
+export const metadata: DefaultMetadata = {
+  title: "Nouvo Ayiti 2075",
+  description: "Restoring Dignity. Rebuilding Hope. Renewing Vision.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
-      {" "}
-      {/* ✅ fallback lang for root */}
       <body>{children}</body>
     </html>
   );

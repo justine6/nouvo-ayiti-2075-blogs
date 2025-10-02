@@ -1,6 +1,6 @@
 import React from "react";
 
-function Topbar() {
+function TopBar() {
   return (
     <nav>
       <ul>
@@ -24,4 +24,4 @@ function Topbar() {
   );
 }
 
-export default Topbar;
+export default TopBar;
