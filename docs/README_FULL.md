@@ -1,4 +1,4 @@
-# 🌍 Nouvo Ayiti 2075 — Full Technical Documentation
+<# 🌍 Nouvo Ayiti 2075 — Full Technical Documentation
 
 ![All Checks](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/all-checks.yml/badge.svg?branch=main)
 ![Reset Quiet](https://github.com/justine6/nouvo-ayiti-2075-blogs/actions/workflows/reset.yml/badge.svg?branch=main)
@@ -142,3 +142,4 @@ See: `workflow.md`, `SECURITY.md`, and the `scripts/` folder for granular techni
 ---
 
 ✍️ Maintained by **Justine Longla T & Nouvo Ayiti 2075 Team**
+paste the full technical readme content here>
