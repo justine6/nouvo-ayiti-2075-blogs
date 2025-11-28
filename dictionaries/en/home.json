@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "title": "Nouvo Ayiti 2075 — Blog",
+    "subtitle": "Stories, updates, and reflections from the New Haiti movement."
+  },
+  "layout": {
+    "homeLink": "Home",
+    "blogLink": "Blog"
+  },
+  "blog": {
+    "noPosts": "No posts available yet.",
+    "readMore": "Read more"
+  }
+}

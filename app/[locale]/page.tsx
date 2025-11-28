@@ -1,23 +1,54 @@
-import { getDictionary } from "@/lib/get-dictionary";
-import type { Locale } from "@/lib/settings";
-
-import HeroSection from "@/components/HeroSection";
-import MissionSection from "@/components/MissionSection";
-import ProjectsSection from "@/components/ProjectsSection";
+// app/[locale]/page.tsx
+import Container from "@/components/Container";
+import Intro from "@/components/Intro";
+import HeroPost from "@/components/HeroPost";
+import MoreStories from "@/components/MoreStories";
+import { getAllPosts } from "@/lib/get-all-posts";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import type { Locale } from "@/lib/i18n/settings";
 
 type Props = {
   params: { locale: Locale };
 };
 
 export default async function HomePage({ params }: Props) {
-  const locale = params?.locale || "en";
-  const dict = await getDictionary(locale);
+  const { locale } = params;
+  const dict = await getDictionary(locale || "en");
+
+  // Load posts for this locale
+  let posts = getAllPosts(locale);
+
+  // Fallback to English if none exist
+  if (!posts || posts.length === 0) {
+    posts = getAllPosts("en");
+  }
+
+  const heroPost = posts[0];
+  const morePosts = posts.slice(1);
+
+  // ✅ Graceful empty state
+  if (!heroPost) {
+    return (
+      <main>
+        <Container>
+          <Intro />
+          <p className="mt-6 text-gray-600">{dict.blog?.noPosts || "No posts available yet."}</p>
+        </Container>
+      </main>
+    );
+  }
 
   return (
-    <div>
-      <HeroSection dict={dict.hero} />
-      <MissionSection dict={dict.mission} />
-      <ProjectsSection dict={dict.projects} />
-    </div>
+    <main>
+      <Container>
+        <Intro />
+
+        <HeroPost post={heroPost} locale={locale} readMoreLabel={dict.blog.readMore} />
+
+        {morePosts.length > 0 && (
+          <MoreStories posts={morePosts} locale={locale} readMoreLabel={dict.blog.readMore} />
+        )}
+      </Container>
+    </main>
   );
 }
