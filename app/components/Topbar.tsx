@@ -1,59 +1,65 @@
-// components/Topbar.tsx
-
+// app/components/Topbar.tsx
 import Link from "next/link";
+import Image from "next/image";
+import type { Locale } from "@/lib/i18n/settings";
 
 type TopbarProps = {
-  dict?: {
-    home?: string;
-    about?: string;
-    projects?: string;
-    blog?: string;
-    contact?: string;
-  };
-  locale: string;
+  locale: Locale;
 };
 
-export default function Topbar({ dict = {}, locale }: TopbarProps) {
-  const warn = (key: string, fallback: string) => {
-    if (
-      process.env.NODE_ENV === "development" &&
-      !dict[key as keyof typeof dict]
-    ) {
-      console.warn(
-        `⚠️ Missing translation for Topbar.${key}, using fallback "${fallback}"`,
-      );
-    }
-    return dict[key as keyof typeof dict] ?? fallback;
-  };
+export default function Topbar({ locale }: TopbarProps) {
+  const locales: Locale[] = ["en", "fr", "ht", "es"];
 
   return (
-    <header className="bg-white shadow-md">
-      <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
-        <Link href={`/${locale}`} className="text-xl font-bold">
-          Nouvo Ayiti 2075
+    <header className="na-topbar">
+      <div className="na-topbar-inner">
+        {/* Left: Logo + Brand */}
+        <Link
+          href={`/${locale}`}
+          className="flex items-center gap-2 na-topbar-brand"
+        >
+          <Image
+            src="/images/nouvoayiti2075-logo.png"
+            alt="Nouvo Ayiti Logo"
+            width={34}
+            height={34}
+            className="rounded-full border border-gray-300 shadow-sm"
+          />
+          <span>Nouvo Ayiti 2075 — Blog</span>
         </Link>
-        <ul className="flex space-x-6">
-          <li>
-            <Link href={`/${locale}`}>{warn("home", "Home")}</Link>
-          </li>
-          <li>
-            <Link href={`/${locale}/about`}>{warn("about", "About")}</Link>
-          </li>
-          <li>
-            <Link href={`/${locale}/projects`}>
-              {warn("projects", "Projects")}
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${locale}/blog`}>{warn("blog", "Blog")}</Link>
-          </li>
-          <li>
-            <Link href={`/${locale}/contact`}>
-              {warn("contact", "Contact")}
-            </Link>
-          </li>
-        </ul>
-      </nav>
+
+        {/* Middle: Navigation */}
+        <nav className="na-topbar-nav">
+          <Link href={`/${locale}`}>Home</Link>
+          <Link href={`/${locale}/about`}>About</Link>
+          <Link href={`/${locale}/vision`}>Vision</Link>
+          <Link href={`/${locale}/blog`}>Blog</Link>
+          <Link href={`/${locale}/projects`}>Projects</Link>
+          <Link href={`/${locale}/contact`}>Contact</Link>
+        </nav>
+
+        {/* Right: Signature + Languages */}
+        <div className="na-topbar-right">
+          <span className="na-topbar-signature">
+            Restoring Haiti with Kiawel Daniel
+          </span>
+
+          <nav className="na-topbar-locales">
+            {locales.map((code) => (
+              <Link
+                key={code}
+                href={`/${code}`}
+                className={
+                  "na-locale-link" +
+                  (code === locale ? " na-locale-link--active" : "")
+                }
+              >
+                {code.toUpperCase()}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
     </header>
   );
 }
