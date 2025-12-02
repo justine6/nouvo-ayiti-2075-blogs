@@ -1,0 +1,53 @@
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n/settings";
+
+type TopbarProps = {
+  locale: Locale;
+};
+
+export default function Topbar({ locale }: TopbarProps) {
+  const locales: Locale[] = ["en", "fr", "ht", "es"];
+
+  return (
+    <header className="na-topbar">
+      <div className="na-topbar-inner">
+        {/* Brand */}
+        <Link href={`/${locale}`} className="na-topbar-brand">
+          Nouvo Ayiti 2075 — Blog
+        </Link>
+
+        {/* Main navigation */}
+        <nav className="na-topbar-nav">
+          <Link href={`/${locale}`}>Home</Link>
+          <Link href={`/${locale}/about`}>About</Link>
+          <Link href={`/${locale}/vision`}>Vision</Link>
+          <Link href={`/${locale}/blog`}>Blog</Link>
+          <Link href={`/${locale}/projects`}>Projects</Link>
+          <Link href={`/${locale}/contact`}>Contact</Link>
+        </nav>
+
+        {/* Right side: signature + language links */}
+        <div className="na-topbar-right">
+          <span className="na-topbar-signature">
+            Consulting with Justine Longla T
+          </span>
+
+          <nav className="na-topbar-locales" aria-label="Language">
+            {locales.map((code) => (
+              <Link
+                key={code}
+                href={`/${code}`}
+                className={
+                  "na-locale-link" +
+                  (code === locale ? " na-locale-link--active" : "")
+                }
+              >
+                {code}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+}

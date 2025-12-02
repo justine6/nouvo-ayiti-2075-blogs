@@ -1,0 +1,41 @@
+// app/[locale]/contact/page.tsx
+import type { Locale } from "@/lib/i18n/settings";
+
+type Props = {
+  params: { locale: Locale };
+};
+
+export default function ContactPage({ params }: Props) {
+  const { locale } = params;
+
+  return (
+    <main className="na-page">
+      <section className="na-page-hero">
+        <h1 className="na-page-title">Contact Us</h1>
+        <p className="na-page-lead">
+          To connect with the Ayiti 2075 team, please use the contact channels
+          provided on the main foundation site.
+        </p>
+      </section>
+
+      <section className="na-page-content">
+        <p>
+          This blog site will soon expose a dedicated contact form for
+          content-related questions and collaboration. In the meantime, you can
+          reach the core team here:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Email:</strong> info@nouvoayiti2075.com
+          </li>
+          <li>
+            <strong>Website:</strong> foundation.nouvoayiti2075.com
+          </li>
+        </ul>
+
+        <p className="na-page-locale">Locale: {locale.toUpperCase()}</p>
+      </section>
+    </main>
+  );
+}

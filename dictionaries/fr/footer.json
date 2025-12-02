@@ -1,12 +1,18 @@
 {
-  "address": "123 Rue Principale, Port-au-Prince, Haïti",
-  "email": "info@nouvoayiti2075.com",
-  "phone": "+509 1234-5678",
-  "metaTitle": "Nouvo Ayiti 2075 - Pied de page",
-  "metaDescription": "Restez connecté avec Nouvo Ayiti 2075.",
-  "copyright": "© 2025 Nouvo Ayiti 2075. Tous droits réservés.",
-  "links": {
-    "privacy": "Politique de Confidentialité",
-    "terms": "Conditions d’utilisation"
+  "footer": {
+    "missionLine": "Restaurer la dignité. Rebâtir l’espérance.",
+    "supportLine": "Chaque histoire, chaque projet est un pas vers une Haïti digne, paisible et prospère.",
+    "copyright": "© {year} Nouvo Ayiti 2075. Tous droits réservés.",
+    "builtBy": "Construit avec courage, espérance et solidarité.",
+    "links": {
+      "privacy": "Confidentialité",
+      "terms": "Conditions",
+      "donate": "Faire un don",
+      "newsletter": "Newsletter",
+      "contact": "Contact"
+    },
+    "socialHeading": "Suivre le chemin",
+    "newsletterCta": "Recevoir les nouvelles par e-mail",
+    "languageNote": "Contenu disponible en anglais, français, kreyòl et espagnol."
   }
 }

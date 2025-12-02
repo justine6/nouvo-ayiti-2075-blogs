@@ -1,12 +1,6 @@
 // app/layout.tsx
-import "../src/app/globals.css";
-
-import { ReactNode } from "react";
-
-export const metadata = {
-  title: "Nouvo Ayiti 2075 Blog",
-  description: "Official content for Nouvo Ayiti 2075 Foundation",
-};
+import "./globals.css";
+import type { ReactNode } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

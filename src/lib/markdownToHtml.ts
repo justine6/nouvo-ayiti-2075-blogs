@@ -1,12 +1,7 @@
-import { remark } from "remark";
-import html from "remark-html";
-
-export default async function markdownToHtml(markdown: string) {
-  const result = await remark().use(html).process(markdown);
-  return result.toString();
+/**
+ * Legacy markdown-to-HTML helper.
+ * The new blog does not depend on remark; this stub simply echoes the input.
+ */
+export default async function markdownToHtml(markdown: string): Promise<string> {
+  return markdown;
 }
-
-
-
-
-

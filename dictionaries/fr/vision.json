@@ -1,8 +1,11 @@
 {
-  "title": "Notre Vision pour Haïti 2075",
-  "intro": "Nous voyons une Haïti renouvelée, fondée sur la dignité, l’espoir et l’unité.",
-  "description": "Notre vision est de restaurer la dignité, reconstruire l’espoir et renouveler la vision partagée d’Haïti en investissant dans l’éducation, la santé, les infrastructures et l’innovation qui renforcent chaque citoyen haïtien.",
-  "content": "À travers Nouvo Ayiti 2075, nous bâtissons une Haïti qui inspire et qui offre des opportunités équitables pour tous.",
+  "title": "Notre Vision",
+  "intro": "Une Haïti où chaque personne peut vivre avec dignité, paix et de vraies opportunités.",
+  "points": [
+    "Restaurer la dignité par la justice, l’infrastructure et les services de base.",
+    "Reconstruire l’espérance par l’éducation, le travail et le leadership communautaire.",
+    "Renouveler la vision à long terme en donnant aux Haïtiens les moyens de concevoir et de porter leur propre avenir."
+  ],
   "metaTitle": "Vision - Nouvo Ayiti 2075",
-  "metaDescription": "Découvrez la vision de Nouvo Ayiti 2075 : restaurer la dignité, reconstruire l’espoir et renouveler l’avenir d’Haïti."
+  "metaDescription": "La vision à long terme de Nouvo Ayiti 2075 pour une Haïti digne, paisible et florissante."
 }

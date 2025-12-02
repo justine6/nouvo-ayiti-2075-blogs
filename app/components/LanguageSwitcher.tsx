@@ -5,90 +5,61 @@ import { locales, type Locale } from "@/lib/i18n/settings";
 import { Globe } from "lucide-react";
 import { useState } from "react";
 
-// Flags + full names
-const localeLabels: Record<Locale, string> = {
-  en: "🇺🇸 English",
-  fr: "🇫🇷 Français",
-  ht: "🇭🇹 Kreyòl",
-  es: "🇪🇸 Español",
-};
-
-type Props = {
-  variant?: "desktop" | "mobile";
-  mode?: "dropdown" | "icon";
-};
-
-export default function LanguageSwitcher({
-  variant = "desktop",
-  mode = "dropdown",
-}: Props) {
+export default function LanguageSwitcher() {
   const router = useRouter();
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname ?? "/en/blog"; // ✅ handle possible null
   const [open, setOpen] = useState(false);
 
-  const currentLocale = pathname.split("/")[1] as Locale;
+  // Derive current locale from the first segment of the path: /en/..., /fr/..., etc.
+  const segments = pathname.split("/").filter(Boolean);
+  const maybeLocale = segments[0] as Locale | undefined;
+  const currentLocale: Locale =
+    locales.includes((maybeLocale ?? "en") as Locale)
+      ? (maybeLocale as Locale)
+      : "en";
 
-  const changeLocale = (newLocale: Locale) => {
-    const segments = pathname.split("/");
-    segments[1] = newLocale;
-    router.push(segments.join("/"));
+  function changeLocale(nextLocale: Locale) {
+    if (nextLocale === currentLocale) {
+      setOpen(false);
+      return;
+    }
+
+    const rest = segments.slice(1);
+    const newPath = `/${nextLocale}/${rest.join("/")}`;
+    router.push(newPath);
     setOpen(false);
-  };
-
-  // ✅ reorder locales: current first
-  const orderedLocales = [
-    currentLocale,
-    ...locales.filter((l) => l !== currentLocale),
-  ];
-
-  if (mode === "icon") {
-    return (
-      <div className="relative">
-        {/* Button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex items-center gap-2 px-2 py-1 border rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-          <Globe size={18} />
-          <span>{localeLabels[currentLocale]}</span>
-        </button>
-
-        {/* Dropdown */}
-        {open && (
-          <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-900 border rounded-md shadow-lg z-50">
-            {orderedLocales.map((loc) => (
-              <button
-                key={loc}
-                onClick={() => changeLocale(loc)}
-                className={`block w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                  currentLocale === loc ? "font-semibold text-blue-600" : ""
-                }`}
-              >
-                {localeLabels[loc]}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    );
   }
 
-  // Default: Dropdown
   return (
-    <select
-      onChange={(e) => changeLocale(e.target.value as Locale)}
-      value={currentLocale}
-      className={`${
-        variant === "desktop"
-          ? "border rounded px-2 py-1 text-sm"
-          : "w-full border rounded px-3 py-2 mt-2"
-      }`}
-    >
-      {orderedLocales.map((loc) => (
-        <option key={loc} value={loc}>
-          {localeLabels[loc]}
-        </option>
-      ))}
-    </select>
+    <div className="relative inline-block text-left">
+      <button
+        type="button"
+        className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-medium text-white hover:bg-white/10"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <Globe className="h-4 w-4" />
+        <span className="uppercase">{currentLocale}</span>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-32 rounded-lg bg-white py-1 text-sm shadow-lg ring-1 ring-black/5">
+          {locales.map((loc) => (
+            <button
+              key={loc}
+              type="button"
+              className={`block w-full px-3 py-1 text-left ${
+                loc === currentLocale
+                  ? "font-semibold text-blue-600"
+                  : "text-gray-700"
+              }`}
+              onClick={() => changeLocale(loc as Locale)}
+            >
+              {loc.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

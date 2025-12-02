@@ -1,12 +1,18 @@
 {
-  "address": "123 Calle Principal, Puerto Príncipe, Haití",
-  "email": "info@nouvoayiti2075.com",
-  "phone": "+509 1234-5678",
-  "metaTitle": "Nouvo Ayiti 2075 - Pie de página",
-  "metaDescription": "Mantente conectado con Nouvo Ayiti 2075.",
-  "copyright": "© 2025 Nouvo Ayiti 2075. Todos los derechos reservados.",
-  "links": {
-    "privacy": "Política de Privacidad",
-    "terms": "Términos de Servicio"
+  "footer": {
+    "missionLine": "Restaurar la dignidad. Reconstruir la esperanza.",
+    "supportLine": "Cada historia y cada proyecto es un paso hacia una Haití digna, pacífica y próspera.",
+    "copyright": "© {year} Nouvo Ayiti 2075. Todos los derechos reservados.",
+    "builtBy": "Construido con valentía, esperanza y comunidad.",
+    "links": {
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "donate": "Donar",
+      "newsletter": "Boletín",
+      "contact": "Contacto"
+    },
+    "socialHeading": "Sigue el camino",
+    "newsletterCta": "Recibe novedades por correo electrónico",
+    "languageNote": "Contenido disponible en inglés, francés, criollo haitiano y español."
   }
 }

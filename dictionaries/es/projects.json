@@ -1,9 +1,6 @@
 {
-  "projectsSection": {
-    "title": "Nuestros Proyectos",
-    "intro": "Descubra nuestras iniciativas clave para restaurar la dignidad, reconstruir la esperanza y renovar la visión en Haití.",
-    "motto": "Cada proyecto es una promesa para el futuro."
-  },
+  "title": "Nuestros proyectos",
+  "subtitle": "Cada proyecto es una promesa para el futuro de Haití.",
   "metaTitle": "Proyectos - Nouvo Ayiti 2075",
-  "metaDescription": "Explore los proyectos de Nouvo Ayiti 2075 centrados en la dignidad, la esperanza y la visión para el futuro de Haití."
+  "metaDescription": "Explore los proyectos de Nouvo Ayiti 2075 dedicados a la dignidad, la esperanza y la reconstrucción a largo plazo en Haití."
 }

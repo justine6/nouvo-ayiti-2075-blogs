@@ -1,33 +1,25 @@
 // app/[locale]/layout.tsx
-
-import { ReactNode } from "react";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import type { Locale } from "@/lib/i18n/settings";
-
+import type { ReactNode } from "react";
 import Topbar from "@/components/Topbar";
-import Footer from "@/components/Footer";
+import { locales, defaultLocale, type Locale } from "@/lib/i18n/settings";
 
-type Props = {
+type LayoutProps = {
   children: ReactNode;
-  params: { locale: Locale };
+  params: { locale: string };
 };
 
-export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = params;
-  const dict = await getDictionary(locale);
+export default function LocaleLayout({ children, params }: LayoutProps) {
+  const rawLocale = params.locale;
+  const locale: Locale = locales.includes(rawLocale as Locale)
+    ? (rawLocale as Locale)
+    : defaultLocale;
 
   return (
-    <html lang={locale}>
-      <body>
-        {/* ✅ Localized Topbar */}
-        <Topbar dict={dict.topbar} locale={locale} />
-
-        {/* ✅ Page Content */}
+    <div className="na-page-shell">
+      <Topbar locale={locale} />
+      <div className="na-page-shell-inner">
         {children}
-
-        {/* ✅ Localized Footer */}
-        <Footer dict={dict.footer} />
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }

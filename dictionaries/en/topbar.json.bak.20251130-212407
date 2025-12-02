@@ -1,0 +1,23 @@
+{
+  "topbar": {
+    "brandName": "Nouvo Ayiti 2075",
+    "tagline": "Restaurer la dignité. Rebâtir l’espérance.",
+    "links": {
+      "home": "Accueil",
+      "about": "À propos",
+      "projects": "Projets",
+      "blog": "Blog",
+      "vision": "Vision",
+      "videos": "Vidéos de la vision",
+      "contact": "Contact",
+      "join": "Rejoindre le mouvement"
+    },
+    "languageLabel": "Langue",
+    "openMenuLabel": "Ouvrir le menu de navigation",
+    "closeMenuLabel": "Fermer le menu de navigation"
+  }
+}
+
+
+
+

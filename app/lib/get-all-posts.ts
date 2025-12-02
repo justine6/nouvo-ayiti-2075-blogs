@@ -1,43 +1,68 @@
-// lib/get-all-posts.ts
-
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-// Define the shape of a post
 export interface Post {
   slug: string;
+  title: string;
+  date: string;
+  summary: string;
   content: string;
-  title?: string;
-  date?: string;
-  [key: string]: any; // allow extra fields from frontmatter
+  excerpt?: string;
 }
 
-const postsDirectory = path.join(process.cwd(), "content");
+/**
+ * Keep track of which locales we've already warned about,
+ * so the logs don't get spammed.
+ */
+const warnedLocales = new Set<string>();
 
 export function getAllPosts(locale: string = "en"): Post[] {
-  const localeDir = path.join(postsDirectory, locale);
+  const postsDirectory = path.join(process.cwd(), "content", locale);
 
-  if (!fs.existsSync(localeDir)) {
-    console.warn(`⚠️ Locale folder not found: ${localeDir}, falling back to 'en'`);
-    return getAllPosts("en"); // fallback
+  // If the folder for this locale doesn't exist, handle fallback safely
+  if (!fs.existsSync(postsDirectory)) {
+    if (!warnedLocales.has(locale)) {
+      warnedLocales.add(locale);
+
+      if (locale !== "en") {
+        console.warn(
+          `⚠️ Locale folder not found for "${locale}": ${postsDirectory}. Falling back to "en".`
+        );
+      } else {
+        console.warn(
+          `⚠️ Default locale folder not found at ${postsDirectory}. Returning empty post list.`
+        );
+      }
+    }
+
+    // If we're not already on the default locale, try "en"
+    if (locale !== "en") {
+      return getAllPosts("en");
+    }
+
+    // If we *are* already on "en", don't recurse again — just return []
+    return [];
   }
 
-  const fileNames = fs.readdirSync(localeDir);
+  const fileNames = fs
+    .readdirSync(postsDirectory)
+    .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
 
-  const posts: Post[] = fileNames
-    .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"))
-    .map((fileName) => {
-      const fullPath = path.join(localeDir, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data, content } = matter(fileContents);
+  const posts: Post[] = fileNames.map((fileName) => {
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
 
-      return {
-        slug: fileName.replace(/\.mdx?$/, ""),
-        content,
-        ...(data as Record<string, any>),
-      };
-    });
+    return {
+      slug: fileName.replace(/\.mdx?$/, ""),
+      title: data.title || "",
+      date: data.date || "",
+      summary: data.summary || "",
+      content,
+      excerpt: data.excerpt || data.summary || "",
+    };
+  });
 
   return posts;
 }

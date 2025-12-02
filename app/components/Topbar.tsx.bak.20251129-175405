@@ -1,0 +1,104 @@
+// components/Topbar.tsx
+import Link from "next/link";
+import { locales, defaultLocale, type Locale } from "@/lib/i18n/settings";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+
+type TopbarProps = {
+  locale: Locale | string; // allow string just in case
+};
+
+export default async function Topbar({ locale }: TopbarProps) {
+  // ✅ Normalize locale to a safe value
+  const safeLocale: Locale = locales.includes(locale as Locale)
+    ? (locale as Locale)
+    : defaultLocale;
+
+  const dict = await getDictionary(safeLocale);
+
+  const brandTitle =
+    dict?.brand?.title ?? "Nouvo Ayiti 2075 — Blog";
+
+  const nav = dict?.nav ?? {};
+
+  const navItems = [
+    { key: "home", href: `/${safeLocale}`, label: nav.home ?? "Home" },
+    { key: "about", href: `/${safeLocale}/about`, label: nav.about ?? "About" },
+    {
+      key: "vision",
+      href: `/${safeLocale}/vision`,
+      label: nav.vision ?? "Vision",
+    },
+    { key: "blog", href: `/${safeLocale}/blog`, label: nav.blog ?? "Blog" },
+    {
+      key: "projects",
+      href: `/${safeLocale}/projects`,
+      label: nav.projects ?? "Projects",
+    },
+    {
+      key: "contact",
+      href: `/${safeLocale}/contact`,
+      label: nav.contact ?? "Contact",
+    },
+  ];
+
+  return (
+    <header className="w-full border-b border-gray-200 bg-white/95">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 text-xs">
+        {/* Logo / Brand */}
+        <Link href={`/${safeLocale}`} className="flex items-center gap-2">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
+            NA
+          </span>
+          <span className="font-semibold text-gray-900">
+            {brandTitle}
+          </span>
+        </Link>
+
+        {/* Main nav */}
+        <nav className="flex items-center gap-2">
+          {navItems.map((item, index) => (
+            <span key={item.key} className="flex items-center gap-1">
+              {index > 0 && (
+                <span aria-hidden="true" className="text-gray-400">
+                  •
+                </span>
+              )}
+              <Link
+                href={item.href}
+                className="font-medium text-gray-700 hover:underline"
+              >
+                {item.label}
+              </Link>
+            </span>
+          ))}
+        </nav>
+
+        {/* Locale switcher */}
+        <nav className="flex items-center gap-1">
+          <span aria-hidden="true" className="text-gray-400">
+            •
+          </span>
+          {locales.map((loc, index) => (
+            <span key={loc} className="flex items-center gap-1">
+              {index > 0 && (
+                <span aria-hidden="true" className="text-gray-400">
+                  •
+                </span>
+              )}
+              <Link
+                href={`/${loc}`}
+                className={`hover:underline ${
+                  loc === safeLocale
+                    ? "font-semibold text-gray-900"
+                    : "text-gray-600"
+                }`}
+              >
+                {loc}
+              </Link>
+            </span>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}

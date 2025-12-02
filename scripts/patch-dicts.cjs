@@ -5,7 +5,6 @@ const path = require("path");
 const locales = ["en", "fr", "ht", "es"];
 const dictDir = path.join(process.cwd(), "dictionaries");
 
-// Default content for missing sections
 const defaults = {
   HeroSection: {
     en: {
@@ -14,7 +13,7 @@ const defaults = {
       readMore: "Read the Vision",
       joinNow: "Join the Movement",
       watchVideos: "Watch Videos",
-      goToMain: "Main Website",
+      goToMain: "Main Website"
     },
     fr: {
       title: "Nouvelle Haïti 2075",
@@ -22,7 +21,7 @@ const defaults = {
       readMore: "Lire la Vision",
       joinNow: "Rejoindre le Mouvement",
       watchVideos: "Regarder les vidéos",
-      goToMain: "Site Principal",
+      goToMain: "Site Principal"
     },
     ht: {
       title: "Nouvo Ayiti 2075",
@@ -30,7 +29,7 @@ const defaults = {
       readMore: "Li Vizyond lan",
       joinNow: "Antre nan mouvman an",
       watchVideos: "Gade videyo yo",
-      goToMain: "Sit Prensipal",
+      goToMain: "Sit Prensipal"
     },
     es: {
       title: "Nueva Haití 2075",
@@ -38,16 +37,35 @@ const defaults = {
       readMore: "Leer la Visión",
       joinNow: "Únete al Movimiento",
       watchVideos: "Ver Videos",
-      goToMain: "Sitio Principal",
-    },
+      goToMain: "Sitio Principal"
+    }
   },
-  // (You can add BlogSection, Topbar, Footer here later…)
+  BlogSection: {
+    en: {
+      title: "Our Blog",
+      subtitle: "Stories, updates, and visions for the future.",
+      viewAll: "View All Posts"
+    },
+    fr: {
+      title: "Notre Blog",
+      subtitle: "Histoires, mises à jour et visions pour l'avenir.",
+      viewAll: "Voir tous les articles"
+    },
+    ht: {
+      title: "Blog Nou",
+      subtitle: "Istwa, mizajou, ak vizyon pou lavni.",
+      viewAll: "Gade tout atik yo"
+    },
+    es: {
+      title: "Nuestro Blog",
+      subtitle: "Historias, actualizaciones y visiones para el futuro.",
+      viewAll: "Ver todas las publicaciones"
+    }
+  }
 };
 
-// === Dry-run flag ===
 const dryRun = process.argv.includes("--dry-run");
 
-// Loop through locales and patch files
 for (const locale of locales) {
   const filePath = path.join(dictDir, locale, "home.json");
 
@@ -59,26 +77,24 @@ for (const locale of locales) {
   let updated = false;
   const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
-  // Loop through default sections (HeroSection, etc.)
   for (const section of Object.keys(defaults)) {
     if (!data[section]) {
-      // If section missing entirely → add it
       data[section] = defaults[section][locale];
       console.log(`✅ Added missing section '${section}' in ${filePath}`);
       updated = true;
     } else {
-      // Section exists → check missing keys
       for (const key of Object.keys(defaults[section][locale])) {
         if (!data[section][key]) {
           data[section][key] = defaults[section][locale][key];
-          console.log(`🟡 Added missing key '${key}' in section '${section}' (${locale})`);
+          console.log(
+            `🟡 Added missing key '${key}' in section '${section}' (${locale})`
+          );
           updated = true;
         }
       }
     }
   }
 
-  // Save if updated
   if (updated) {
     if (!dryRun) {
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));

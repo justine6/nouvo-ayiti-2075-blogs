@@ -1,0 +1,196 @@
+/* --- Nouvo Ayiti 2075 blog & projects layout helpers --- */
+
+.na-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.na-page-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.na-page-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.na-page-lead {
+  font-size: 1.05rem;
+  color: #444;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.na-page-locale {
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: right;
+}
+
+.na-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.na-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e3e6ee;
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.na-card--project {
+  border-top: 4px solid #1d4ed8;
+}
+
+.na-card--post {
+  border-top: 4px solid #16a34a;
+}
+
+.na-card-title {
+  font-size: 1.2rem;
+  font-weight: 650;
+  margin: 0 0 0.5rem;
+}
+
+.na-card-meta {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.na-card-body {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.na-card-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.na-card-link:hover {
+  text-decoration: underline;
+}
+/* === Base reset / typography (light) ======================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* A simple centered shell for pages */
+.na-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* === Topbar ================================================= */
+
+.na-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.na-topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.na-topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.na-topbar-logo-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2563eb, #ea4335);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.na-topbar-title {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.na-topbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.na-topbar-nav a {
+  text-decoration: none;
+  color: #374151;
+  position: relative;
+  padding-bottom: 0.2rem;
+}
+
+.na-topbar-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #2563eb;
+  transition: width 150ms ease-out;
+}
+
+.na-topbar-nav a:hover {
+  color: #111827;
+}
+
+.na-topbar-nav a:hover::after {
+  width: 100%;
+}
+
+/* Keep your existing .na-page, .na-project-card, blog styles, etc. below
+   or above this block as needed. */

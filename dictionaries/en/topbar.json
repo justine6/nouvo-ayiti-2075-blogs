@@ -1,11 +1,19 @@
 {
-  "home": "Home",
-  "about": "About",
-  "projects": "Projects",
-  "blog": "Blog",
-  "contact": "Contact",
-  "vision": "Vision",
-  "language": "Language",
-  "metaTitle": "Placeholder Title - topbar",
-  "metaDescription": "Placeholder description for topbar"
+  "topbar": {
+    "brandName": "Nouvo Ayiti 2075",
+    "tagline": "Restoring dignity. Rebuilding hope.",
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "blog": "Blog",
+      "vision": "Vision",
+      "videos": "Vision Videos",
+      "contact": "Contact",
+      "join": "Join the Movement"
+    },
+    "languageLabel": "Language",
+    "openMenuLabel": "Open navigation menu",
+    "closeMenuLabel": "Close navigation menu"
+  }
 }

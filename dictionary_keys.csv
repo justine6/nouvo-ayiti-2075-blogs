@@ -1,4 +1,5 @@
 file,keys
+home.json,metaTitle|metaDescription|HeroSection.title|HeroSection.subtitle|HeroSection.readMore|HeroSection.joinNow|HeroSection.watchVideos|HeroSection.goToMain|BlogSection.title|BlogSection.subtitle|BlogSection.viewAll
 vision.json,title|intro|content|metaTitle|metaDescription
 newsletter.json,title|description|content|metaTitle|metaDescription
 footer.json,copyright|links

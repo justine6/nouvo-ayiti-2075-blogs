@@ -1,0 +1,154 @@
+"use client";
+
+import Link from "next/link";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
+type TopbarProps = {
+  locale: string;
+};
+
+const NAV_LABELS: Record<
+  string,
+  { home: string; about: string; blog: string; projects: string; contact: string }
+> = {
+  en: {
+    home: "Home",
+    about: "About",
+    blog: "Blog",
+    projects: "Projects",
+    contact: "Contact",
+  },
+  fr: {
+    home: "Accueil",
+    about: "À propos",
+    blog: "Blog",
+    projects: "Projets",
+    contact: "Contact",
+  },
+  ht: {
+    home: "Lakay",
+    about: "Sou nou",
+    blog: "Blog",
+    projects: "Pwojè yo",
+    contact: "Kontak",
+  },
+  es: {
+    home: "Inicio",
+    about: "Acerca de",
+    blog: "Blog",
+    projects: "Proyectos",
+    contact: "Contacto",
+  },
+};
+
+export default function Topbar({ locale }: TopbarProps) {
+  const base = `/${locale}`;
+  const labels = NAV_LABELS[locale] ?? NAV_LABELS.en;
+
+  return (
+    <header className="na-topbar">
+      <div className="na-topbar-inner">
+        <Link href={base} className="na-topbar-brand">
+          <span className="na-topbar-logo-circle">NA</span>
+          <span className="na-topbar-title">Nouvo Ayiti 2075 — Blog</span>
+        </Link>
+
+        <nav>
+          <ul className="na-topbar-nav">
+            <li>
+              <Link href={base}>{labels.home}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/about`}>{labels.about}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/blog`}>{labels.blog}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/projects`}>{labels.projects}</Link>
+cd C:\Users\justi\projects\nouvo-ayiti-2075-blogs
+
+# Backup the current Topbar just in case
+Copy-Item 'app/components/Topbar.tsx' 'app/components/Topbar.tsx.bak-$(Get-Date -Format "yyyyMMdd-HHmmss")'
+
+@'
+"use client";
+
+import Link from "next/link";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
+type TopbarProps = {
+  locale: string;
+};
+
+const NAV_LABELS: Record<
+  string,
+  { home: string; about: string; blog: string; projects: string; contact: string }
+> = {
+  en: {
+    home: "Home",
+    about: "About",
+    blog: "Blog",
+    projects: "Projects",
+    contact: "Contact",
+  },
+  fr: {
+    home: "Accueil",
+    about: "À propos",
+    blog: "Blog",
+    projects: "Projets",
+    contact: "Contact",
+  },
+  ht: {
+    home: "Lakay",
+    about: "Sou nou",
+    blog: "Blog",
+    projects: "Pwojè yo",
+    contact: "Kontak",
+  },
+  es: {
+    home: "Inicio",
+    about: "Acerca de",
+    blog: "Blog",
+    projects: "Proyectos",
+    contact: "Contacto",
+  },
+};
+
+export default function Topbar({ locale }: TopbarProps) {
+  const base = `/${locale}`;
+  const labels = NAV_LABELS[locale] ?? NAV_LABELS.en;
+
+  return (
+    <header className="na-topbar">
+      <div className="na-topbar-inner">
+        <Link href={base} className="na-topbar-brand">
+          <span className="na-topbar-logo-circle">NA</span>
+          <span className="na-topbar-title">Nouvo Ayiti 2075 — Blog</span>
+        </Link>
+
+        <nav>
+          <ul className="na-topbar-nav">
+            <li>
+              <Link href={base}>{labels.home}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/about`}>{labels.about}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/blog`}>{labels.blog}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/projects`}>{labels.projects}</Link>
+            </li>
+            <li>
+              <Link href={`${base}/contact`}>{labels.contact}</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <LanguageSwitcher locale={locale} />
+      </div>
+    </header>
+  );
+}

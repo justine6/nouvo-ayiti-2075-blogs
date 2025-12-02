@@ -1,54 +1,50 @@
+// app/components/PostCard.tsx
 import Link from "next/link";
-import Image from "next/image";
 import type { Post } from "@/lib/get-all-posts";
 
-type BlogCardProps = {
+type PostCardProps = {
   post: Post;
   locale: string;
   readMoreLabel: string;
 };
 
-export default function BlogCard({
-  post,
-  locale,
-  readMoreLabel,
-}: BlogCardProps) {
-  // ✅ Default to logo if no coverImage provided
-  const coverImage = post.coverImage || "/images/nouvoayiti2075-logo.png";
+export default function PostCard({ post, locale, readMoreLabel }: PostCardProps) {
+  const dateLabel =
+    post.date &&
+    new Date(post.date).toLocaleDateString(locale, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
 
   return (
-    <div className="border rounded-xl shadow-sm overflow-hidden bg-white hover:shadow-md transition">
-      <div className="relative w-full h-48">
-        <Image
-          src={coverImage}
-          alt={post.title || "Nouvo Ayiti 2075"}
-          fill
-          className="object-contain bg-white"
-        />
-      </div>
-      <div className="p-4">
-        <h3 className="text-xl font-bold">
-          <Link
-            href={`/${locale}/posts/${post.slug}`}
-            className="hover:underline"
-          >
-            {post.title}
-          </Link>
+    <article className="flex flex-col justify-between rounded-xl border border-gray-100 bg-white/90 p-4 shadow-sm">
+      <header className="space-y-1">
+        <h3 className="text-base font-semibold text-gray-900">
+          {post.title}
         </h3>
-        {post.excerpt && (
-          <p className="mt-2 text-gray-700">
-            {post.excerpt.length > 120
-              ? post.excerpt.slice(0, 120) + "..."
-              : post.excerpt}
+        {dateLabel && (
+          <p className="text-xs text-gray-500">
+            {dateLabel}
           </p>
         )}
+      </header>
+
+      {post.excerpt && (
+        <p className="mt-2 line-clamp-3 text-sm text-gray-700">
+          {post.excerpt}
+        </p>
+      )}
+
+      <div className="mt-3">
         <Link
           href={`/${locale}/posts/${post.slug}`}
-          className="text-blue-600 hover:underline mt-3 inline-block"
+          className="inline-flex items-center text-xs font-semibold text-blue-600 hover:text-blue-700"
         >
           {readMoreLabel}
+          <span aria-hidden="true" className="ml-1">→</span>
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

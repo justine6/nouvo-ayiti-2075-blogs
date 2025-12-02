@@ -1,0 +1,22 @@
+// lib/i18n/get-dictionary.ts
+import "server-only";
+
+import type { Locale } from "./settings";
+
+// Map each locale to its JSON loader
+const dictionaries = {
+  en: () => import("./en.json").then((m) => m.default),
+  fr: () => import("./fr.json").then((m) => m.default),
+  ht: () => import("./ht.json").then((m) => m.default),
+  es: () => import("./es.json").then((m) => m.default),
+} as const;
+
+// Optional: exported type for stronger typing elsewhere
+export type AppDictionary = Awaited<ReturnType<(typeof dictionaries)["en"]>>;
+
+// Main helper
+export async function getDictionary(locale: Locale): Promise<AppDictionary> {
+  // Fallback safely to "en" if for some reason an invalid locale sneaks in
+  const loader = dictionaries[locale] ?? dictionaries.en;
+  return loader();
+}

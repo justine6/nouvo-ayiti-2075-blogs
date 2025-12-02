@@ -1,0 +1,78 @@
+// app/[locale]/page.tsx
+
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n/settings";
+import { getHomeDictionary } from "@/lib/i18n/get-dictionary";
+
+type Props = {
+  params: { locale: Locale };
+};
+
+export default async function LocaleHomePage({ params }: Props) {
+  const { locale } = params;
+
+  const dict = await getHomeDictionary(locale);
+  const hero = dict.HeroSection ?? {};
+  const blog = dict.BlogSection ?? {};
+
+  return (
+    <main className="na-page">
+      <section className="na-page-hero">
+        <h1 className="na-page-title">
+          {hero.title ?? "Nouvo Ayiti 2075"}
+        </h1>
+        <p className="na-page-lead">
+          {hero.subtitle ??
+            "Restoring dignity, rebuilding hope, and renewing vision for Haiti."}
+        </p>
+
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link
+            href={`/${locale}/vision`}
+            className="na-btn-primary"
+          >
+            {hero.readMore ?? "Read the Vision"}
+          </Link>
+
+          <Link
+            href={`/${locale}/join`}
+            className="na-btn-secondary"
+          >
+            {hero.joinNow ?? "Join the Movement"}
+          </Link>
+
+          <Link
+            href={`/${locale}/videos`}
+            className="na-btn-ghost"
+          >
+            {hero.watchVideos ?? "Watch Videos"}
+          </Link>
+
+          <Link
+            href="https://nouvoayiti2075.com"
+            className="na-btn-link"
+          >
+            {hero.goToMain ?? "Main Website"}
+          </Link>
+        </div>
+      </section>
+
+      <section className="na-section mt-10">
+        <h2 className="na-section-title">
+          {blog.title ?? "Our Blog"}
+        </h2>
+        <p className="na-section-lead">
+          {blog.subtitle ?? "Stories, updates, and visions for the future."}
+        </p>
+        <div className="mt-4">
+          <Link
+            href={`/${locale}/blog`}
+            className="na-link"
+          >
+            {blog.viewAll ?? "View All Posts"}
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}

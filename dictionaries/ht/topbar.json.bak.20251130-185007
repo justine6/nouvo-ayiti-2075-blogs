@@ -1,0 +1,19 @@
+{
+  "topbar": {
+    "brandName": "Nouvo Ayiti 2075",
+    "tagline": "Retabli diyite. Rebati lespwa.",
+    "links": {
+      "home": "Akèy",
+      "about": "Sou nou",
+      "projects": "Pwojè yo",
+      "blog": "Blog",
+      "vision": "Vizyon",
+      "videos": "Videyo vizyon yo",
+      "contact": "Kontak",
+      "join": "Antre nan mouvman an"
+    },
+    "languageLabel": "Lang",
+    "openMenuLabel": "Louvri meni navigasyon an",
+    "closeMenuLabel": "Fèmen meni navigasyon an"
+  }
+}

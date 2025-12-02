@@ -1,6 +1,7 @@
 /* app/globals.css */
 
-/* Basic reset + typography */
+/* ========== BASIC RESET + TYPOGRAPHY ========== */
+
 *,
 *::before,
 *::after {
@@ -19,14 +20,20 @@ body {
   color: #111827;
 }
 
-/* Simple page wrapper */
+/* ========== PAGE WRAPPERS ========== */
+
 .na-page {
   max-width: 960px;
   margin: 2.5rem auto;
   padding: 0 1.5rem 3rem;
 }
 
-/* Page hero / heading */
+/* Shell that pushes content below the fixed topbar */
+.na-page-shell {
+  padding-top: 5rem; /* adjust if your topbar height changes */
+}
+
+/* Optional generic page hero */
 .na-page-hero {
   margin-bottom: 2rem;
   text-align: center;
@@ -41,67 +48,78 @@ body {
   margin: 0;
   color: #4b5563;
 }
-/* Shell that pushes content below the fixed topbar */
-.na-page-shell {
-  padding-top: 5rem; /* adjust if your topbar is taller/shorter */
-}
-.na-topbar {
-  position: sticky; /* or `relative` if you don't want it to follow scroll */
-  top: 0;
-  z-index: 30;
-  background: #ffffff;
-}
 
-/* Topbar container */
+/* ================== TOPBAR (POLISHED) ================== */
+
 .na-topbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 40;
-
   background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* push content down so hero isn’t hidden by topbar */
+.na-page-shell {
+  padding-top: 4.25rem;
 }
 
 .na-topbar-inner {
   max-width: 72rem; /* ~1152px */
   margin: 0 auto;
-  padding: 0.5rem 1.25rem;
-
+  padding: 0.55rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
-/* Brand */
+/* ----- Brand left ----- */
+
 .na-topbar-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: #111827;
 }
 
 .na-topbar-logo-circle {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 9999px;
-  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
-  background: radial-gradient(circle at 30% 30%, #fde68a, #b91c1c);
-  color: #f9fafb;
+  overflow: hidden;              /* Ensures clean round crop */
+  background: #ffffff;           /* Clean white background */
+  box-shadow: 0 4px 18px rgba(212, 0, 0, 0.25); /* 🔴 subtle red glow */
 }
 
-.na-topbar-title {
+.na-topbar-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;            /* Keeps proportions */
+}
+
+.na-topbar-brand-text {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
   font-size: 0.95rem;
 }
 
-/* Nav */
+.na-topbar-tagline {
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* ----- Nav center ----- */
+
 .na-topbar-nav-wrap {
   flex: 1;
 }
@@ -109,37 +127,225 @@ body {
 .na-topbar-nav {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   font-size: 0.9rem;
 }
 
-.na-topbar-nav a {
+.na-topbar-link {
   position: relative;
-  padding-bottom: 0.1rem;
+  text-decoration: none;
+  color: #374151;
+  padding-bottom: 0.15rem;
+  transition: color 150ms ease;
 }
 
-.na-topbar-nav a::after {
+.na-topbar-link::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -0.15rem;
+  bottom: -0.2rem;
   width: 0;
   height: 2px;
-  background: #b91c1c;
-  transition: width 0.18s ease-out;
+  background: #d40000;           /* 🔴 red underline */
+  border-radius: 999px;
+  transition: width 150ms ease-out;
 }
 
-.na-topbar-nav a:hover::after {
+.na-topbar-link:hover {
+  color: #111827;
+}
+
+.na-topbar-link:hover::after {
   width: 100%;
 }
 
-/* Right side: language switcher */
+.na-topbar-link-active {
+  color: #111827;
+  font-weight: 600;
+}
+
+.na-topbar-link-active::after {
+  width: 100%;
+}
+
+/* ----- Right: language pills + signature ----- */
+
 .na-topbar-right {
   display: flex;
   align-items: center;
+  gap: 0.9rem;
 }
 
-/* Small screens: stack a bit tighter */
+/* Language switcher pills */
+
+.na-lang-switch {
+  display: inline-flex;
+  padding: 0.15rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  gap: 0.1rem;
+}
+
+.na-lang-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff80;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+}
+
+.na-lang-btn:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Base language pill */
+.na-lang-pill {
+  min-width: 2.4rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #222222;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border: 1px solid #dddddd;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.na-lang-pill:hover {
+  background-color: #e5e5e5;
+  color: #000000;
+}
+
+/* Active — black pill */
+.na-lang-pill-active {
+  background: #000000;           /* ⚫ black */
+  color: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+  transform: translateY(-1px);
+}
+/* --- Tiny "Join the movement" CTA — HAITI RED --- */
+.na-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  background: #d21034; /* Haitian red */
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45);
+  white-space: nowrap;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    filter 150ms ease;
+}
+
+.na-topbar-cta:hover {
+  background: #b50e2c;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65);
+  filter: brightness(1.03);
+}
+
+/* Signature */
+
+.na-topbar-signature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.na-topbar-signature-person {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.na-topbar-signature-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 2px #f9fafb,
+    0 10px 30px rgba(0, 0, 0, 0.45); /* ⚫ darker, neutral shadow */
+}
+
+.na-topbar-signature-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ----- Responsive tweaks ----- */
+
+@media (max-width: 900px) {
+  .na-topbar-inner {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .na-topbar-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .na-topbar-right {
+    order: 2;
+  }
+
+  .na-page-shell {
+    padding-top: 4.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .na-topbar-inner {
+    padding-inline: 1rem;
+  }
+
+  .na-topbar-brand-text {
+    display: none; /* keep things clean on tiny screens */
+  }
+
+  .na-topbar-nav {
+    gap: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .na-topbar-signature {
+    display: none;
+  }
+}
+
+/* Small screens (alternate breakpoint) */
+
 @media (max-width: 768px) {
   .na-topbar-inner {
     padding-inline: 0.75rem;
@@ -156,213 +362,7 @@ body {
   }
 }
 
-/* Projects grid */
-.na-project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.na-project-card {
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
-  padding: 1.25rem 1.5rem;
-  background: #ffffff;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-}
-
-.na-project-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-}
-
-.na-project-body {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #4b5563;
-}
-
-/* Blog list */
-.na-post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.na-post-card {
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1.25rem;
-}
-
-.na-post-title {
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
-.na-post-date {
-  font-size: 0.85rem;
-  color: #6b7280;
-  margin-bottom: 0.5rem;
-}
-
-.na-post-read {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2563eb;
-  text-decoration: none;
-}
-
-.na-post-read:hover {
-  text-decoration: underline;
-}
-.na-hero {
-  padding: 2.5rem 1.5rem 3.5rem;
-}
-
-.na-hero-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-}
-
-.na-hero-copy {
-  text-align: center;
-}
-
-.na-hero-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.na-hero-subtitle {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.na-hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.na-hero-link {
-  font-size: 0.9rem;
-  text-decoration: underline;
-}
-/* ===== Nouvo Ayiti 2075 Blog hero ===== */
-
-.na-hero {
-  padding: 4rem 1.5rem 3rem;
-}
-
-.na-hero-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  flex-wrap: wrap; /* stack on small screens */
-}
-
-/* Left side: text */
-.na-hero-copy {
-  flex: 1 1 340px;
-  text-align: left;
-}
-
-.na-hero-title {
-  font-size: 2.25rem;
-  line-height: 1.2;
-  font-weight: 700;
-  margin: 0 0 0.75rem;
-}
-
-.na-hero-subtitle {
-  margin: 0 0 1.5rem;
-  font-size: 1rem;
-}
-
-/* Links row under the subtitle */
-.na-hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-  margin-top: 0.5rem;
-}
-
-.na-hero-link {
-  font-size: 0.95rem;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* Right side: map */
-.na-hero-map {
-  flex: 0 0 360px;
-  display: flex;
-  justify-content: center;
-}
-
-.na-hero-map img {
-  max-width: 420px;
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Small screens: stack hero content */
-@media (max-width: 768px) {
-  .na-hero {
-    padding-top: 2.5rem;
-  }
-
-  .na-hero-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .na-hero-map {
-    width: 100%;
-    justify-content: flex-start;
-  }
-}
-
-/* Map image */
-.na-hero-map img {
-  display: block;
-  max-width: 340px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-}
-
-/* Desktop: side-by-side */
-@media (min-width: 900px) {
-  .na-hero-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .na-hero-copy {
-    flex: 1;
-    text-align: left;
-  }
-
-  .na-hero-map {
-    flex: 0 0 auto;
-  }
-}
-/* ===== NAVBAR ===== */
+/* ========== SECONDARY NAVBAR (IF USED ON OTHER PAGES) ========== */
 
 .na-navbar {
   border-bottom: 1px solid #eee;
@@ -430,59 +430,567 @@ body {
     text-align: center;
   }
 }
+/* --- Logo image in topbar --- */
+.na-topbar-logo-img {
+  border-radius: 9999px;
+  /* subtle Haitian-red glow instead of purple */
+  box-shadow: 0 8px 20px rgba(210, 16, 52, 0.35);
+}
 
-/* ===== HERO LAYOUT TWEAKS ===== */
+/* --- Tiny "Join the movement" CTA — HAITI RED --- */
+.na-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  background: #d21034;                  /* Haitian flag red */
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45);
+  white-space: nowrap;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    filter 150ms ease;
+}
+
+.na-topbar-cta:hover {
+  background: #b50e2c;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65);
+  filter: brightness(1.03);
+}
+
+/* ============================================
+   HERO (POLISHED BAND, CROPPED MAP)
+   ============================================ */
 
 .na-hero {
-  padding: 3rem 1.5rem 4rem;
+  margin: 3.25rem auto 3rem;
+  padding: 2.25rem 1.5rem 3rem;
+  max-width: 1040px;                 /* keeps it as a nice band */
+  border-radius: 1.5rem;
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.10);
 }
 
-.na-hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 3rem;
-  align-items: center;
-}
-
-.na-hero-copy {
-  max-width: 540px;
-}
-
-.na-hero-map {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Stack on mobile */
-@media (max-width: 768px) {
-  .na-hero-inner {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .na-hero-map {
-    justify-content: center;
-    margin-top: 1.5rem;
-  }
-}
-/* ===== Hero with background map (safe) ===== */
-
+/* Background wrapper */
 .na-hero-bg {
   position: relative;
-  isolation: isolate; /* NEW stacking context */
+  isolation: isolate;
+  min-height: 360px;
+  overflow: hidden;
+  border-radius: 1.5rem;
   color: #ffffff;
-  min-height: 380px;
 }
 
+/* -------------- Background Map (Final Crop) -------------- */
 .na-hero-bg-map {
   position: absolute;
   inset: 0;
-  z-index: -1; /* always behind hero content */
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: url("/images/haiti-map-hero.png");
+  background-repeat: no-repeat;
+
+  /* 🎯 Force the map to stay LEFT so the right extension disappears */
+  background-position: left center;
+
+  /* 🎯 Zoom in so Haiti fills the hero and cuts off the right side cleanly */
+  background-size: 165% auto;
+
+  opacity: 0.48;   /* Map now clearly visible */
+  transform: scale(1.00);
+  transition: transform 10s ease-out;
 }
 
+/* Gentle zoom hover */
+.na-hero:hover .na-hero-bg-map {
+  transform: scale(1.05);
+}
+
+
+/* -------------- Overlay -------------- */
 .na-hero-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+
+  /* Softer overlay: keep dignity glow but don’t hide the map */
+  background:
+    radial-gradient(circle at 18% 20%, rgba(0, 0, 0, 0.28), transparent 60%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.08));
+  mix-blend-mode: multiply;
+}
+
+/* -------------- Foreground Content -------------- */
+.na-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  padding: 2rem 1.25rem 0;
+}
+
+/* -------------- Foreground Content -------------- */
+.na-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  padding: 2rem 1rem;
+}
+
+/* Headline + subtitle */
+.na-hero-title {
+  font-size: clamp(2.4rem, 4vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.5rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.na-hero-subtitle {
+  font-size: 1rem;
+  opacity: 0.95;
+  max-width: 420px;
+}
+
+/* Buttons */
+.na-hero-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Primary button */
+.na-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.75rem 1.8rem;
+  border-radius: 999px;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.6);
+  transition: all 0.15s ease-out;
+}
+
+.na-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 50px rgba(79, 70, 229, 0.75);
+}
+/* -------------- Background Map (tight Haiti crop) -------------- */
+.na-hero-bg-map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: url("/images/haiti-map-hero.png");
+  background-repeat: no-repeat;
+
+  /* 🔧 Focus hard on the left side (Haiti) */
+  background-position: 0% center;   /* shove image fully left */
+
+  /* 🔧 Zoom more so the right-side globe & extra sea are out of frame */
+  background-size: 220% auto;
+
+  opacity: 0.46;                    /* map still clearly visible */
+  transform: scale(1.0);
+  transition: transform 10s ease-out;
+}
+
+/* Gentle zoom */
+.na-hero:hover .na-hero-bg-map {
+  transform: scale(1.05);
+}
+
+/* Secondary button */
+.na-btn-secondary {
+  padding: 0.75rem 1.8rem;
+  border-radius: 999px;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+
+  backdrop-filter: blur(8px);
+  transition: all 0.15s ease-out;
+}
+
+.na-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+/* =========================================================
+   HERO BUTTONS — HAITI NATIONAL COLORS
+   ========================================================= */
+
+/* 🔴 Watch Videos (primary) */
+.na-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  background: linear-gradient(135deg, #D21034, #A50C2A); /* Haitian red */
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 28px rgba(210, 16, 52, 0.55);
+  transition: all 0.25s ease;
+}
+
+.na-btn-primary:hover {
+  background: linear-gradient(135deg, #B50E2C, #8C0A24);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(210, 16, 52, 0.7);
+}
+
+/* ⚫ Read the Vision (secondary) */
+.na-btn-secondary {
+  padding: 0.85rem 1.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+  backdrop-filter: none;
+  transition: all 0.25s ease;
+}
+
+.na-btn-secondary:hover {
+  background: #111111;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .na-hero {
+    margin-top: 3.25rem;
+    padding: 2.25rem 1rem 3rem;
+  }
+  .na-hero-inner {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+/* ========== BLOG PREVIEW (HOME) ========== */
+
+.na-blog-preview {
+  margin-top: 3rem;
+}
+
+.na-blog-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.na-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.na-section-subtitle {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.na-link-strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.na-link-strong:hover {
+  text-decoration: underline;
+}
+
+/* Mini-grid of blog cards */
+
+.na-blog-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .na-blog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.na-card {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.na-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  border-color: #4f46e5;
+}
+
+.na-card-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.na-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.na-card-title a:hover {
+  text-decoration: underline;
+}
+
+.na-card-meta {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.na-card-body {
+  margin-top: 0.6rem;
+  font-size: 0.88rem;
+  color: #4b5563;
+}
+
+.na-card-link {
+  margin-top: 0.9rem;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.na-card-link:hover {
+  text-decoration: underline;
+}
+
+/* Legacy blog-mini-grid hook (if used somewhere else) */
+
+.na-blog-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.na-blog-card {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+}
+
+.na-blog-card-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #5b21ff;
+  text-decoration: none;
+}
+
+.na-blog-card-link:hover {
+  text-decoration: underline;
+}
+
+/* ========== PROJECTS PAGE GRID ========== */
+
+.na-project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.na-project-card {
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+}
+
+.na-project-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.na-project-body {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+/* ========== BLOG LIST PAGE ========== */
+
+.na-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.na-post-card {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1.25rem;
+}
+
+.na-post-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.na-post-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.na-post-read {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.na-post-read:hover {
+  text-decoration: underline;
+}
+
+/* Generic grid + card hook (used by multiple sections) */
+
+.na-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+.na-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: #ffffff;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+}
+.na-section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+/* --- Logo image in topbar --- */
+.na-topbar-logo-img {
+  border-radius: 9999px;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+}
+
+/* --- Tiny "Join the movement" CTA --- */
+.na-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.45);
+  white-space: nowrap;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    filter 140ms ease;
+}
+
+.na-topbar-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.6);
+  filter: brightness(1.05);
+}
+/* ============================================
+   FINAL OVERRIDE — TOPBAR CTA (HAITI RED)
+   ============================================ */
+
+.na-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  background: #d21034 !important;          /* 🔴 Haitian red */
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45) !important;
+  white-space: nowrap;
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    filter 150ms ease;
+}
+
+.na-topbar-cta:hover {
+  background: #b50e2c !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65) !important;
+  filter: brightness(1.03);
+}
+/* ===== FIX: Trim map overflow on the right ===== */
+.na-hero {
+  overflow: hidden !important;
 }
