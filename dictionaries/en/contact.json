@@ -2,7 +2,10 @@
   "title": "Contact us",
   "intro": "Reach out to the Nouvo Ayiti 2075 movement for collaboration, questions, or support.",
   "addressLabel": "Address",
+  "addressValue": "",
   "emailLabel": "Email",
+  "emailValue": "",
   "phoneLabel": "Phone",
-  "footerNote": "We look forward to hearing from you."
+  "phoneValue": "",
+  "footer": "We look forward to hearing from you."
 }

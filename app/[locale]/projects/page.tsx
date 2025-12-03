@@ -1,43 +1,32 @@
-import type { Project } from "@/lib/get-projects";
-import { getProjects } from "@/lib/get-projects";
-
-const supportedLocales = ["en", "fr", "ht", "es"] as const;
-type Locale = (typeof supportedLocales)[number];
+// app/[locale]/projects/page.tsx
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n/settings";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
 
 type ProjectsPageProps = {
-  params: { locale: string };
+  params: { locale: Locale };
 };
 
-export default function ProjectsPage({ params }: ProjectsPageProps) {
-  const rawLocale = params.locale;
-  const locale: Locale = supportedLocales.includes(rawLocale as Locale)
-    ? (rawLocale as Locale)
-    : "en";
+export default async function ProjectsPage({ params }: ProjectsPageProps) {
+  const locale = (params?.locale ?? "en") as Locale;
 
-  const projects: Project[] = getProjects(locale);
+  // Load translations specific to the projects page
+  const dict = (await getDictionary(locale, "projectsPage")) as any;
 
   return (
     <main className="na-page">
-      <section className="na-page-hero">
-        <h1 className="na-page-title">Projects</h1>
-        <p className="na-page-lead">
-          Highlights of key initiatives that support the Nouvo Ayiti 2075 vision.
-        </p>
-      </section>
+      <section className="na-page-section">
+        <h1 className="na-page-title">{dict.title}</h1>
 
-      <section className="na-section">
-        {projects.length === 0 ? (
-          <p>No projects are listed yet.</p>
-        ) : (
-          <ul className="na-project-list">
-            {projects.map((p) => (
-              <li key={p.slug} className="na-project-item">
-                <h2>{p.title}</h2>
-                {p.summary && <p>{p.summary}</p>}
-              </li>
-            ))}
-          </ul>
-        )}
+        <p className="na-page-subtitle">{dict.intro}</p>
+
+        <p className="na-page-text">
+          {dict.followupPrefix}
+          <Link href={`/${locale}/blog`} className="na-link">
+            {dict.blogLinkLabel}
+          </Link>
+          .
+        </p>
       </section>
     </main>
   );

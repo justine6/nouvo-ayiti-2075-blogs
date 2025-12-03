@@ -3,9 +3,9 @@ title: "New Haiti Information"
 date: "2025-06-30T00:00:00Z" # Adjust date as needed
 author: "New Haiti Team 2075"
 excerpt: "Learn more about the New Haiti initiative."
-coverImage: "/images/your-new-haiti-image.png" # Update path to an actual image
+coverImage: "/haiti-map-hero" # Update path to an actual image
 ogImage:
-  url: "/images/your-new-haiti-image.png" # Update path to an actual image
+  url: "/images/haiti-map-hero" # Update path to an actual image
 ---
 
 # Welcome to New Haiti Information!

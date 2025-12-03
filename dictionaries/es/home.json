@@ -13,5 +13,10 @@
     "title": "Nuestro Blog"
   },
   "metaTitle": "Nouvo Ayiti 2075 – Inicio",
-  "metaDescription": "Bienvenido a Nouvo Ayiti 2075. Restaurar la dignidad, reconstruir la esperanza y renovar la visión de Haití."
+  "metaDescription": "Bienvenido a Nouvo Ayiti 2075. Restaurar la dignidad, reconstruir la esperanza y renovar la visión de Haití.",
+  "ProjectsSection": {
+    "title": "Our Projects",
+    "subtitle": "Each project is a promise to the future of Haiti.",
+    "viewAll": "View all projects"
+  }
 }

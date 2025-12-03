@@ -41,7 +41,9 @@ export default async function VisionPage({ params }: Props) {
         </ul>
       )}
 
-      <p className="mt-6 text-sm text-gray-500">Locale: {locale.toUpperCase()}</p>
+      <p className="mt-6 text-sm text-gray-500">
+        Locale: {locale.toUpperCase()}
+      </p>
     </main>
   );
 }

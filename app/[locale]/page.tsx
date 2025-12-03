@@ -1,19 +1,20 @@
 // app/[locale]/page.tsx
-
 import Link from "next/link";
-import { getHomeDictionary } from "@/lib/i18n/get-dictionary";
+
+import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getAllPosts } from "@/lib/get-all-posts";
 import { getProjects } from "@/lib/get-projects";
 import { locales, defaultLocale, type Locale } from "@/lib/i18n/settings";
-import { redirect } from "next/navigation";
 
-type Props = {
+type HomePageProps = {
   params: { locale: string };
 };
 
 type HeroSectionDict = {
+  goToMain?: string;
   title?: string;
   subtitle?: string;
+  joinNow?: string;
   watchVideos?: string;
   readMore?: string;
 };
@@ -31,18 +32,16 @@ type HomeDictShape = {
   blog?: BlogSectionDict;
 };
 
-export default async function LocaleHome({ params }: Props) {
+export default async function LocaleHome({ params }: HomePageProps) {
   const rawLocale = params.locale;
 
-  // Ensure we only use a supported locale
   const locale: Locale = locales.includes(rawLocale as Locale)
     ? (rawLocale as Locale)
     : defaultLocale;
 
-  // Load full home dictionary for this locale
-  const dict = (await getHomeDictionary(locale)) as HomeDictShape;
+  // 🔑 read from dictionaries/en|fr|ht|es/home.json
+  const dict = (await getDictionary(locale, "home")) as HomeDictShape;
 
-  // Resolve hero and blog sections (with fallbacks)
   const hero = dict.HeroSection ?? dict.hero ?? {};
   const blogSection = dict.BlogSection ?? dict.blog ?? {};
 
@@ -51,6 +50,8 @@ export default async function LocaleHome({ params }: Props) {
   const heroSubtitle = hero.subtitle ?? "Restoring dignity. Raising hope.";
   const heroPrimaryLabel = hero.watchVideos ?? "Watch Videos";
   const heroSecondaryLabel = hero.readMore ?? "Read the Vision";
+  const joinNowLabel = hero.joinNow ?? "Join the Movement";
+  const goToMainLabel = hero.goToMain ?? "Main Site";
 
   // --- BLOG SECTION COPY ---
   const blogTitle = blogSection.title ?? "Our Blog";
@@ -59,15 +60,12 @@ export default async function LocaleHome({ params }: Props) {
     "Stories, updates, and visions for the future.";
   const blogViewAll = blogSection.viewAll ?? "View All Posts";
 
-  // Latest 3 blog posts for homepage mini-grid
   const posts = getAllPosts(locale).slice(0, 3);
-
-  // Mini project grid for homepage
-  const projects = getProjects(locale);
+  const projects = getProjects(locale).slice(0, 3);
 
   return (
     <main className="na-page">
-      {/* HERO – Style B + Style E combo */}
+      {/* HERO */}
       <section className="na-hero na-hero-bg rounded-3xl overflow-hidden shadow-xl">
         {/* Background Haiti map */}
         <div className="na-hero-bg-map">
@@ -79,7 +77,7 @@ export default async function LocaleHome({ params }: Props) {
           <div className="na-hero-bg-overlay" />
         </div>
 
-        {/* Foreground content */}
+        {/* Foreground */}
         <div className="na-hero-inner">
           <div className="na-hero-copy">
             <h1 className="na-hero-title">{heroTitle}</h1>
@@ -97,14 +95,32 @@ export default async function LocaleHome({ params }: Props) {
                 {heroSecondaryLabel}
               </Link>
             </div>
+
+            <div className="na-hero-links">
+              <Link
+                href={`/${locale}/join`}
+                className="na-link-strong mr-4"
+              >
+                {joinNowLabel}
+              </Link>
+
+              {/* Optional: link out to the main Nouvo Ayiti 2075 site */}
+              <a
+                href="https://nouvoayiti2075.com"
+                className="na-link-subtle"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {goToMainLabel}
+              </a>
+            </div>
           </div>
 
-          {/* Reserved for future side illustration if needed */}
           <div className="na-hero-map" />
         </div>
       </section>
 
-      {/* BLOG PREVIEW + MINI GRID */}
+      {/* BLOG PREVIEW */}
       <section className="na-blog-preview">
         <header className="na-blog-header">
           <div>
@@ -121,15 +137,16 @@ export default async function LocaleHome({ params }: Props) {
           {posts.map((post) => (
             <article key={post.slug} className="na-card na-card-blog">
               <h3 className="na-card-title">
-                {/* For now we send them to the blog index;
-                   later this can become /[locale]/blog/[slug] */}
-                <Link href={`/${locale}/blog`}>{post.title}</Link>
+                <Link href={`/${locale}/blog/${post.slug}`}>{post.title}</Link>
               </h3>
 
               <p className="na-card-meta">{post.date}</p>
               <p className="na-card-body">{post.summary}</p>
 
-              <Link href={`/${locale}/blog`} className="na-card-link">
+              <Link
+                href={`/${locale}/blog/${post.slug}`}
+                className="na-card-link"
+              >
                 {heroSecondaryLabel}
               </Link>
             </article>
@@ -156,7 +173,7 @@ export default async function LocaleHome({ params }: Props) {
         </header>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {projects.slice(0, 3).map((project) => (
+          {projects.map((project) => (
             <article
               key={project.slug}
               className="na-card rounded-2xl border border-purple-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -177,4 +194,9 @@ export default async function LocaleHome({ params }: Props) {
       </section>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  const allLocales: Locale[] = ["en", "fr", "ht", "es"];
+  return allLocales.map((locale) => ({ locale }));
 }

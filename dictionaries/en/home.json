@@ -2,15 +2,20 @@
   "HeroSection": {
     "goToMain": "Main Site",
     "title": "Nouvo Ayiti 2075",
-    "joinNow": "Join the Movement",
     "subtitle": "Restoring dignity. Raising hope.",
     "watchVideos": "Watch Videos",
-    "readMore": "Read the Vision"
+    "readMore": "Read the Vision",
+    "joinNow": "Join the Movement"
   },
   "BlogSection": {
+    "title": "Our Blog",
     "subtitle": "Stories, updates, and visions for the future.",
-    "viewAll": "View All Posts",
-    "title": "Our Blog"
+    "viewAll": "View All Posts"
+  },
+  "ProjectsSection": {
+    "title": "Our Projects",
+    "subtitle": "Each project is a promise to the future of Haiti.",
+    "viewAll": "View all projects"
   },
   "metaTitle": "Nouvo Ayiti 2075 – Home",
   "metaDescription": "Welcome to Nouvo Ayiti 2075. Restoring dignity, rebuilding hope, and renewing Haiti’s vision."

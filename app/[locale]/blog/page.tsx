@@ -1,71 +1,46 @@
-import HeroPost from "@/components/blog/HeroPost";
-import PostsGrid from "@/components/blog/PostsGrid";
-import type { Post } from "@/lib/get-all-posts";
-import { getAllPosts } from "@/lib/get-all-posts";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
+// app/[locale]/blog/page.tsx
 
-const supportedLocales = ["en", "fr", "ht", "es"] as const;
-type Locale = (typeof supportedLocales)[number];
+import type { Locale } from "@/lib/i18n/settings";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getAllPosts } from "@/lib/get-all-posts";
+import BlogTopbar from "@/components/layout/BlogTopbar";
+import PostsGrid from "@/components/blog/PostsGrid";
 
 type BlogPageProps = {
-  params: { locale: string };
+  params: { locale: Locale };
 };
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const rawLocale = params.locale;
-  const locale: Locale = supportedLocales.includes(rawLocale as Locale)
-    ? (rawLocale as Locale)
-    : "en";
+  const locale = (params?.locale ?? "en") as Locale;
 
-  // 👇 loosen types so we can safely read title, tagline, etc.
-  const rawDict: any = await getDictionary(locale, "blog");
-  const base: any = (rawDict.blog ?? rawDict) || {};
-  const heading: string =
-    base.title ?? "Welcome to the Ayiti 2075 Blog";
-  const subtitle: string =
-    base.tagline ??
-    "Stories, updates, and visions for the future.";
-  const readMoreLabel: string =
-    base.readMore ??
-    base.readMoreLabel ??
-    (locale === "fr"
-      ? "Lire la suite"
-      : locale === "ht"
-      ? "Li plis"
-      : locale === "es"
-      ? "Leer más"
-      : "Read more");
-  // Try posts for this locale, then fall back to English
-  let posts: Post[] = getAllPosts(locale);
-  if (!posts || posts.length === 0) {
-    posts = getAllPosts("en");
-  }
+  const dict = (await getDictionary(locale, "blogPage")) as any;
 
-  const heroPost = posts[0];
-  const morePosts = posts.slice(1);
+  const blogDict =
+    (dict?.blogSection as any) ?? {
+      title: "Ayiti 2075 Blog",
+      paragraph: "Stories, updates, and visions for the future.",
+      readMore: "Read More",
+    };
+
+  const posts = await getAllPosts(locale);
 
   return (
-    <main className="na-page">
-      <section className="na-page-hero">
-        <h1 className="na-page-title">{heading}</h1>
-        <p className="na-page-lead">{subtitle}</p>
-      </section>
+    <div className="na-blog-page">
+      <BlogTopbar locale={locale} />
 
-      {heroPost && (
-        <HeroPost
-          post={heroPost}
-          locale={locale}
-          readMoreLabel={readMoreLabel}
-        />
-      )}
-
-      {morePosts.length > 0 && (
-        <PostsGrid
-          posts={morePosts}
-          locale={locale}
-          readMoreLabel={readMoreLabel}
-        />
-      )}
-    </main>
+      <main className="na-blog-main">
+        <header className="na-blog-header">
+          <h1 className="na-blog-title">{blogDict.title}</h1>
+          <p className="na-blog-subtitle">{blogDict.paragraph}</p>
+        </header>
+        <PostsGrid posts={posts} locale={locale} readMoreLabel={blogDict.readMore} />
+        <PostsGrid posts={posts} locale={locale} />
+      </main>
+    </div>
   );
+}
+
+export async function generateStaticParams() {
+  const locales: Locale[] = ["en", "fr", "ht", "es"];
+  return locales.map((locale) => ({ locale }));
 }

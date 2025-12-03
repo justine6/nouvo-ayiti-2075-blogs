@@ -4,5 +4,9 @@
   "addressLabel": "Adresse",
   "emailLabel": "E-mail",
   "phoneLabel": "Téléphone",
-  "footerNote": "Nous serons heureux d’avoir de vos nouvelles."
+  "footerNote": "Nous serons heureux d’avoir de vos nouvelles.",
+  "addressValue": "",
+  "emailValue": "",
+  "phoneValue": "",
+  "footer": "We look forward to hearing from you."
 }

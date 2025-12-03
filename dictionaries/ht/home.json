@@ -13,5 +13,10 @@
     "title": "Blòg Nou"
   },
   "metaTitle": "Nouvo Ayiti 2075 – Akèy",
-  "metaDescription": "Byenveni sou Nouvo Ayiti 2075. Retabli diyite, rebati espwa ak renouvle vizyon Ayiti."
+  "metaDescription": "Byenveni sou Nouvo Ayiti 2075. Retabli diyite, rebati espwa ak renouvle vizyon Ayiti.",
+  "ProjectsSection": {
+    "title": "Our Projects",
+    "subtitle": "Each project is a promise to the future of Haiti.",
+    "viewAll": "View all projects"
+  }
 }

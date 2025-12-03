@@ -4,5 +4,9 @@
   "addressLabel": "Adrès",
   "emailLabel": "Imèl",
   "phoneLabel": "Telefòn",
-  "footerNote": "N ap kontan tande nouvèl ou."
+  "footerNote": "N ap kontan tande nouvèl ou.",
+  "addressValue": "",
+  "emailValue": "",
+  "phoneValue": "",
+  "footer": "We look forward to hearing from you."
 }
