@@ -1,25 +1,36 @@
+// app/components/blog/BlogSection.tsx
 import Link from "next/link";
 import type { Post } from "@/lib/get-all-posts";
-import type { BlogDictionary } from "@/lib/i18n/types";
 
 type BlogSectionProps = {
   locale: string;
   posts: Post[];
-  dictionary?: BlogDictionary; // can be undefined on /projects
+  dictionary?: {
+    blogSection?: {
+      title?: string;
+      subtitle?: string;
+      viewAll?: string;
+      blogUnavailable?: string;
+      readMore?: string;
+    };
+  } | null;
 };
 
-export default function BlogSection({ locale, posts, dictionary }: BlogSectionProps) {
+export default function BlogSection({
+  locale,
+  posts,
+  dictionary,
+}: BlogSectionProps) {
   const safeLocale = (locale || "en").trim();
 
-  // ✅ Never crash if dictionary.blogSection is missing
-  const blogSection =
-    (dictionary as any)?.blogSection ?? {
-      title: "Ayiti 2075 Blog",
-      paragraph: "Stories, updates, and visions for the future.",
-      cta: "View all posts",
-      blogUnavailable: "No posts available yet.",
-      readMore: "Read more",
-    };
+  // ✅ Safe fallback if dictionary.blogSection is missing
+  const blogSection = dictionary?.blogSection ?? {
+    title: "Ayiti 2075 Blog",
+    subtitle: "Stories, updates, and visions for the future.",
+    viewAll: "View all posts",
+    blogUnavailable: "No posts available yet.",
+    readMore: "Read more",
+  };
 
   const latestPosts = posts.slice(0, 3);
   const hasPosts = latestPosts.length > 0;
@@ -34,14 +45,14 @@ export default function BlogSection({ locale, posts, dictionary }: BlogSectionPr
               {blogSection.title}
             </h2>
             <p className="text-gray-600 dark:text-gray-300">
-              {blogSection.paragraph}
+              {blogSection.subtitle}
             </p>
           </div>
           <Link
             href={`/${safeLocale}/blog`}
             className="mt-4 md:mt-0 inline-block bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:scale-105 transition-transform"
           >
-            {blogSection.cta}
+            {blogSection.viewAll}
           </Link>
         </div>
 
@@ -61,7 +72,8 @@ export default function BlogSection({ locale, posts, dictionary }: BlogSectionPr
                   {post.title}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                  {post.excerpt || post.summary || blogSection.blogUnavailable}
+                  {/* ✅ `excerpt` removed – only use fields that exist on Post */}
+                  {post.summary || blogSection.blogUnavailable}
                 </p>
                 <Link
                   href={`/${safeLocale}/blog/${post.slug}`}

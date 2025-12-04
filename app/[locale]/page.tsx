@@ -39,8 +39,8 @@ export default async function LocaleHome({ params }: HomePageProps) {
     ? (rawLocale as Locale)
     : defaultLocale;
 
-  // 🔑 read from dictionaries/en|fr|ht|es/home.json
-  const dict = (await getDictionary(locale, "home")) as HomeDictShape;
+  // 🔑 read from dictionaries/en|fr|ht|es via getDictionary
+  const dict = (await getDictionary(locale)) as HomeDictShape;
 
   const hero = dict.HeroSection ?? dict.hero ?? {};
   const blogSection = dict.BlogSection ?? dict.blog ?? {};
@@ -56,12 +56,12 @@ export default async function LocaleHome({ params }: HomePageProps) {
   // --- BLOG SECTION COPY ---
   const blogTitle = blogSection.title ?? "Our Blog";
   const blogSubtitle =
-    blogSection.subtitle ??
-    "Stories, updates, and visions for the future.";
+    blogSection.subtitle ?? "Stories, updates, and visions for the future.";
   const blogViewAll = blogSection.viewAll ?? "View All Posts";
 
-  const posts = getAllPosts(locale).slice(0, 3);
-  const projects = getProjects(locale).slice(0, 3);
+  // NOTE: our helpers return all posts/projects; we just slice
+  const posts = getAllPosts().slice(0, 3);
+  const projects = getProjects().slice(0, 3);
 
   return (
     <main className="na-page">
@@ -97,10 +97,7 @@ export default async function LocaleHome({ params }: HomePageProps) {
             </div>
 
             <div className="na-hero-links">
-              <Link
-                href={`/${locale}/join`}
-                className="na-link-strong mr-4"
-              >
+              <Link href={`/${locale}/join`} className="na-link-strong mr-4">
                 {joinNowLabel}
               </Link>
 
@@ -164,10 +161,7 @@ export default async function LocaleHome({ params }: HomePageProps) {
             </p>
           </div>
 
-          <Link
-            href={`/${locale}/projects`}
-            className="na-link-strong"
-          >
+          <Link href={`/${locale}/projects`} className="na-link-strong">
             View all projects
           </Link>
         </header>
@@ -197,6 +191,5 @@ export default async function LocaleHome({ params }: HomePageProps) {
 }
 
 export async function generateStaticParams() {
-  const allLocales: Locale[] = ["en", "fr", "ht", "es"];
-  return allLocales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }

@@ -1,0 +1,16 @@
+{
+  "blogSection": {
+    "title": "From the Ayiti 2075 Blog",
+    "subtitle": "Stories of hope, progress, and collective action.",
+    "viewAll": "View all posts",
+    "blogUnavailable": "No posts are available yet. Please check back soon.",
+    "readMore": "Read more"
+  },
+  "postPage": {
+    "backToBlog": "Back to all posts",
+    "publishedOn": "Published on"
+  },
+  "common": {
+    "languageName": "English"
+  }
+}

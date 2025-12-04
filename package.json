@@ -97,6 +97,8 @@
     "framer-motion": "^12.23.19",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.555.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "zod": "^4.1.11"
   }
 }

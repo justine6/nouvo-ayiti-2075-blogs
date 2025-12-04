@@ -1,6 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAllPostSlugs, getPostBySlug } from "../../../../lib/get-all-posts";
+import {
+  getAllProjectSlugs,
+  getProjectBySlug,
+} from "../../../../lib/get-projects";
 import { getDictionary } from "../../../../lib/i18n/get-dictionary";
 import {
   SUPPORTED_LOCALES,
@@ -17,7 +20,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
+  const slugs = getAllProjectSlugs();
 
   const params: PageParams[] = [];
   for (const locale of SUPPORTED_LOCALES) {
@@ -32,41 +35,36 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const locale = normalizeLocale(params.locale);
-  const dict = await getDictionary(locale);
-  const post = getPostBySlug(params.slug);
+  await getDictionary(locale);
+  const project = getProjectBySlug(params.slug);
 
-  const baseTitle = dict.blogSection?.title ?? "Ayiti 2075 Blog";
-
-  if (!post) {
+  if (!project) {
     return {
-      title: `${baseTitle} – Post not found`,
+      title: "Project not found – Ayiti 2075 Projects",
     };
   }
 
   return {
-    title: `${post.title} – ${baseTitle}`,
-    description: post.summary,
+    title: `${project.title} – Ayiti 2075 Projects`,
+    description: project.summary,
   };
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function ProjectDetailPage({ params }: PageProps) {
   const locale = normalizeLocale(params.locale);
-  const dictionary = await getDictionary(locale);
-  const post = getPostBySlug(params.slug);
+  const project = getProjectBySlug(params.slug);
 
-  const labels = dictionary.postPage ?? {};
-
-  if (!post) {
+  if (!project) {
     return (
       <main className="min-h-screen bg-white py-10">
         <div className="mx-auto max-w-3xl px-4">
           <p className="text-sm text-neutral-600">
-            Post not found.{" "}
+            Project not found.{" "}
             <Link
-              href={`/${locale}/blog`}
+              href={`/${locale}/projects`}
               className="underline underline-offset-4"
             >
-              {labels.backToBlog ?? "Back to all posts"}
+              Back to projects
             </Link>
           </p>
         </div>
@@ -74,29 +72,32 @@ export default async function BlogPostPage({ params }: PageProps) {
     );
   }
 
-  const formattedDate = new Date(post.date).toLocaleDateString(
-    locale === "ht" ? "en-US" : locale,
-    { year: "numeric", month: "short", day: "numeric" },
-  );
+  // 🔐 Safe date formatting – handles undefined dates
+  const formattedDate = project.date
+    ? new Date(project.date).toLocaleDateString(
+        locale === "ht" ? "en-US" : locale,
+        { year: "numeric", month: "short", day: "numeric" },
+      )
+    : "";
 
   return (
     <main className="min-h-screen bg-white py-10">
       <article className="mx-auto max-w-3xl px-4">
         <p className="text-xs text-neutral-500">
-          {labels.publishedOn ?? "Published on"} {formattedDate}
+          {formattedDate} • {project.status ?? "planned"}
         </p>
-        <h1 className="mt-2 text-3xl font-semibold">{post.title}</h1>
+        <h1 className="mt-2 text-3xl font-semibold">{project.title}</h1>
 
         <div className="mt-6 space-y-4 text-sm leading-relaxed text-neutral-800 whitespace-pre-line">
-          {post.content}
+          {project.content}
         </div>
 
         <div className="mt-8">
           <Link
-            href={`/${locale}/blog`}
+            href={`/${locale}/projects`}
             className="text-sm font-semibold underline underline-offset-4"
           >
-            {labels.backToBlog ?? "Back to all posts"}
+            Back to projects
           </Link>
         </div>
       </article>

@@ -1,196 +1,766 @@
-/* --- Nouvo Ayiti 2075 blog & projects layout helpers --- */
-
-.na-page {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 4rem;
-}
-
-.na-page-hero {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-.na-page-title {
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-.na-page-lead {
-  font-size: 1.05rem;
-  color: #444;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.na-page-locale {
-  margin-top: 2.5rem;
-  font-size: 0.85rem;
-  color: #666;
-  text-align: right;
-}
-
-.na-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-.na-card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e3e6ee;
-  padding: 1.5rem 1.6rem;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-}
-
-.na-card--project {
-  border-top: 4px solid #1d4ed8;
-}
-
-.na-card--post {
-  border-top: 4px solid #16a34a;
-}
-
-.na-card-title {
-  font-size: 1.2rem;
-  font-weight: 650;
-  margin: 0 0 0.5rem;
-}
-
-.na-card-meta {
-  font-size: 0.85rem;
-  color: #6b7280;
-  margin-bottom: 0.75rem;
-}
-
-.na-card-body {
-  font-size: 0.98rem;
-  line-height: 1.5;
-  color: #374151;
-  margin-bottom: 1rem;
-}
-
-.na-card-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #1d4ed8;
-  text-decoration: none;
-}
-
-.na-card-link:hover {
-  text-decoration: underline;
-}
-/* === Base reset / typography (light) ======================= */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: #f9fafb;
-  color: #111827;
-}
-
-/* A simple centered shell for pages */
-.na-shell {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 3rem;
-}
-
 /* === Topbar ================================================= */
 
 .na-topbar {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: #ffffff;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid #e5e7eb;
 }
 
 .na-topbar-inner {
-  max-width: 1100px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0.75rem 1.25rem;
+  padding: 0.6rem 1.25rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1.5rem;
 }
 
+/* Left: brand */
+
 .na-topbar-brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.na-topbar-logo-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #2563eb, #ea4335);
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.85rem;
+.na-topbar-logo {
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.16);
 }
 
 .na-topbar-title {
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  font-size: 1rem;
-  color: #111827;
-}
-
-.na-topbar-nav {
-  list-style: none;
-  display: flex;
-  gap: 1.25rem;
-  margin: 0;
-  padding: 0;
   font-size: 0.95rem;
 }
 
-.na-topbar-nav a {
+/* Middle: nav links */
+
+.na-topbar-nav {
+  display: flex;
+  gap: 0.9rem;
+  font-size: 0.9rem;
+  margin-left: 1.5rem;
+  flex: 1 1 auto;
+}
+
+.na-topbar-link {
   text-decoration: none;
-  color: #374151;
-  position: relative;
-  padding-bottom: 0.2rem;
+  color: #4b5563;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.na-topbar-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background: #2563eb;
-  transition: width 150ms ease-out;
-}
-
-.na-topbar-nav a:hover {
+.na-topbar-link:hover {
   color: #111827;
 }
 
-.na-topbar-nav a:hover::after {
-  width: 100%;
+.na-topbar-link--active {
+  color: #111827;
+  border-color: #c1121f; /* CTA red or your purple */
+  font-weight: 600;
 }
 
-/* Keep your existing .na-page, .na-project-card, blog styles, etc. below
-   or above this block as needed. */
+/* Right cluster */
+
+.na-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 🔴 CTA */
+
+.na-topbar-cta {
+  background: #c1121f;
+  color: #ffffff;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(193, 18, 31, 0.35);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.na-topbar-cta:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(193, 18, 31, 0.45);
+  background-color: #a10e19;
+}
+
+/* Profile (Kiawel) */
+
+.na-topbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.na-topbar-avatar {
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.18);
+}
+
+.na-topbar-signature {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* ------------------------------------------------------ */
+/* 🌐 SHINY LANGUAGE SWITCHER — Premium + animated        */
+/* ------------------------------------------------------ */
+
+.na-topbar-locales {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 4px 7px;
+  border-radius: 9999px;
+
+  /* Smooth glass background */
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+
+  /* ✨ slide / fade in */
+  animation: naLocaleBarIn 0.45s ease-out 0.1s both;
+}
+
+/* Base pill */
+.na-locale-link {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.68);
+  color: #374151;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.25s ease;
+
+  /* Soft inner gloss */
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    0 1px 3px rgba(0, 0, 0, 0.09);
+}
+
+/* Hover effect — glass shimmer */
+.na-locale-link:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(240, 240, 240, 0.75)
+  );
+  transform: translateY(-1px);
+  color: #111827;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Active pill — dark, solid, glowing */
+.na-locale-link--active {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #ffffff;
+  font-weight: 600;
+
+  /* Premium glow */
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 6px rgba(17, 17, 17, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+
+  transform: translateY(0);
+
+  /* ✨ soft heartbeat glow */
+  animation: naLocalePulse 3.2s ease-in-out 0.7s infinite;
+}
+
+/* ---------------- ANIMATIONS FOR LOCALE PILLS ---------------- */
+
+@keyframes naLocaleBarIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes naLocalePulse {
+  0% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 0 6px rgba(17, 17, 17, 0.45),
+      inset 0 1px 2px rgba(255, 255, 255, 0.08);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 3px 10px rgba(193, 18, 31, 0.4),
+      0 0 10px rgba(193, 18, 31, 0.55),
+      inset 0 1px 2px rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px) scale(1.03);
+  }
+  100% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 0 6px rgba(17, 17, 17, 0.45),
+      inset 0 1px 2px rgba(255, 255, 255, 0.08);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Respect prefers-reduced-motion: turn off the looping pulse */
+@media (prefers-reduced-motion: reduce) {
+  .na-topbar-locales {
+    animation: none !important;
+  }
+  .na-locale-link--active {
+    animation: none !important;
+  }
+}
+/* DEBUG: make sure the pill bar styles are being applied */
+.na-topbar-locales {
+  background: rgba(0, 200, 83, 0.3) !important;
+  outline: 2px solid #00c853 !important;
+}
+@keyframes naLocalePulse {
+  0% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 0 6px rgba(17, 17, 17, 0.45),
+      inset 0 1px 2px rgba(255, 255, 255, 0.08);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 4px 14px rgba(193, 18, 31, 0.5),
+      0 0 14px rgba(193, 18, 31, 0.7),
+      inset 0 1px 2px rgba(255, 255, 255, 0.16);
+    transform: translateY(-1px) scale(1.05); /* ⬅ a bit stronger */
+  }
+  100% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 0 6px rgba(17, 17, 17, 0.45),
+      inset 0 1px 2px rgba(255, 255, 255, 0.08);
+    transform: translateY(0) scale(1);
+  }
+}
+/* === FINAL OVERRIDE: language pills — Option A (clean & professional) === */
+/* Place this at the VERY BOTTOM of your CSS file                          */
+
+.na-topbar-locales {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  padding: 4px 8px !important;
+  border-radius: 9999px !important;
+
+  background: rgba(243, 244, 246, 0.95) !important; /* light tray */
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(229, 231, 235, 0.9) !important;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Base pill */
+.na-locale-link {
+  display: inline-block !important;
+  font-size: 0.7rem !important;
+  padding: 0.25rem 0.7rem !important;
+  border-radius: 9999px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+
+  background: #ffffff !important;
+  color: #374151 !important;
+
+  border: 1px solid rgba(209, 213, 219, 0.9) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(0, 0, 0, 0.08) !important;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.12s ease,
+    box-shadow 0.2s ease !important;
+}
+
+/* Hover shimmer (subtle, not flashy) */
+.na-locale-link:hover {
+  background: #f9fafb !important;
+  color: #111827 !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+}
+
+/* Active pill: dark, confident, no animation */
+.na-locale-link--active {
+  background: #111827 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-color: #020617 !important;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12) !important;
+  transform: translateY(0) !important;
+}
+
+/* Base pill */
+.na-locale-link {
+  display: inline-block !important;
+  font-size: 0.7rem !important;
+  padding: 0.25rem 0.7rem !important;
+  border-radius: 9999px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #374151 !important;
+
+  border: 1px solid rgba(209, 213, 219, 0.9) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(0, 0, 0, 0.1) !important;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.25s ease !important;
+}
+
+/* Hover shimmer */
+.na-locale-link:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1),
+    rgba(243, 243, 243, 0.9)
+  ) !important;
+  color: #111827 !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Active pill */
+.na-locale-link--active {
+  background: linear-gradient(135deg, #111827, #1f2937) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-color: #020617 !important;
+
+  box-shadow:
+    0 3px 10px rgba(193, 18, 31, 0.45),
+    0 0 10px rgba(193, 18, 31, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.16) !important;
+
+  transform: translateY(0) scale(1) !important;
+  animation: naLocalePulse 3.2s ease-in-out 0.7s infinite !important;
+}
+
+/* If these keyframes are not already present, keep them too: */
+
+@keyframes naLocaleBarIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes naLocalePulse {
+  0% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 0 6px rgba(17, 17, 17, 0.45),
+      inset 0 1px 2px rgba(255, 255, 255, 0.08);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    box-shadow:
+      0 4px 14px rgba(193, 18, 31, 0.5),
+      0 0 14px rgba(193, 18, 31, 0.75),
+      inset 0 1px 2px rgba(255, 255, 255, 0.16);
+    transform: translateY(-1px) scale(1.05);
+  }
+  100% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      0 0 6px rgba(17, 17, 17, 0.45),
+      inset 0 1px 2px rgba(255, 255, 255, 0.08);
+    transform: translateY(0) scale(1);
+  }
+}
+/* === OVERRIDE EVERYTHING: LANGUAGE PILLS — OPTION A FINAL === */
+
+.na-topbar-locales {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  padding: 4px 8px !important;
+  border-radius: 9999px !important;
+
+  background: rgba(243, 244, 246, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(229, 231, 235, 0.9) !important;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Base pill */
+.na-locale-link {
+  display: inline-block !important;
+  font-size: 0.7rem !important;
+  padding: 0.25rem 0.7rem !important;
+  border-radius: 9999px !important;
+  cursor: pointer !important;
+
+  background: #ffffff !important;
+  color: #374151 !important;
+
+  border: 1px solid rgba(209, 213, 219, 0.9) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(0, 0, 0, 0.08) !important;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.12s ease,
+    box-shadow 0.2s ease !important;
+}
+
+/* Hover */
+.na-locale-link:hover {
+  background: #f9fafb !important;
+  color: #111827 !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+}
+
+/* Active locale */
+.na-locale-link--active {
+  background: #111827 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-color: #020617 !important;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12) !important;
+
+  transform: translateY(0) !important;
+}
+/* -------- Topbar shell -------- */
+
+.na-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.na-topbar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Left: brand */
+
+.na-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.na-topbar-logo {
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.16);
+}
+
+.na-topbar-title {
+  font-size: 0.95rem;
+}
+
+/* Middle: nav links */
+
+.na-topbar-nav {
+  display: flex;
+  gap: 0.9rem;
+  font-size: 0.9rem;
+  margin-left: 1.5rem;
+  flex: 1 1 auto;
+}
+
+.na-topbar-link {
+  text-decoration: none;
+  color: #4b5563;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.na-topbar-link:hover {
+  color: #111827;
+}
+
+.na-topbar-link--active {
+  color: #111827;
+  border-color: #c1121f;
+  font-weight: 600;
+}
+
+/* Right cluster */
+
+.na-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 🔴 RED PILL CTA */
+
+.na-topbar-cta {
+  background: #c1121f;
+  color: #ffffff;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(193, 18, 31, 0.35);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.na-topbar-cta:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(193, 18, 31, 0.45);
+  background-color: #a10e19;
+}
+
+/* Profile (Kiawel) */
+
+.na-topbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.na-topbar-avatar {
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.18);
+}
+
+.na-topbar-signature {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* -------- Language pills -------- */
+
+.na-topbar-locales {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 4px 7px;
+  border-radius: 9999px;
+  background: rgba(243, 244, 246, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.na-locale-link {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.8);
+  color: #374151;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.na-locale-link:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111827;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.na-locale-link--active {
+  background: #111827;
+  color: #ffffff;
+  font-weight: 600;
+  border-color: #1f2937;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+/* ====== Locale Switcher Styling ====== */
+
+.na-topbar-locales {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.na-locale-link {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.na-locale-link:hover {
+  background: #e5e7eb;
+}
+
+.na-locale-link--active {
+  background: #111827;
+  color: white;
+  border-color: #111827;
+}
+/* ------------------------------------------------------ */
+/* 🌐 Language switcher — rounded glass pills              */
+/* ------------------------------------------------------ */
+
+.na-topbar-locales {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 4px 7px;
+  border-radius: 9999px;
+
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Base pill */
+.na-locale-link {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.78);
+  color: #374151;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    0 1px 3px rgba(15, 23, 42, 0.12);
+
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.15s ease;
+}
+
+/* Hover shimmer */
+.na-locale-link:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(243, 244, 246, 0.8)
+  );
+  color: #111827;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 3px 8px rgba(15, 23, 42, 0.18);
+}
+
+/* Active pill */
+.na-locale-link--active {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #ffffff;
+  font-weight: 600;
+  border-color: #111827;
+
+  box-shadow:
+    0 2px 6px rgba(15, 23, 42, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
+
+  transform: translateY(0);
+}

@@ -1,46 +1,40 @@
-// app/[locale]/blog/page.tsx
+import type { Metadata } from "next";
+import BlogSection from "../../components/BlogSection";
+import { getAllPosts } from "../../../lib/get-all-posts";
+import { getDictionary } from "../../../lib/i18n/get-dictionary";
+import { normalizeLocale } from "../../../lib/i18n/settings";
 
-import type { Locale } from "@/lib/i18n/settings";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { getAllPosts } from "@/lib/get-all-posts";
-import BlogTopbar from "@/components/layout/BlogTopbar";
-import PostsGrid from "@/components/blog/PostsGrid";
-
-type BlogPageProps = {
-  params: { locale: Locale };
+type PageProps = {
+  params: {
+    locale: string;
+  };
 };
 
-export default async function BlogPage({ params }: BlogPageProps) {
-  const locale = (params?.locale ?? "en") as Locale;
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const locale = normalizeLocale(params.locale);
+  const dict = await getDictionary(locale);
 
-  const dict = (await getDictionary(locale, "blogPage")) as any;
+  const title = dict.blogSection?.title ?? "Ayiti 2075 Blog";
+  const description =
+    dict.blogSection?.subtitle ??
+    "Stories and updates from the Nouvo Ayiti 2075 movement.";
 
-  const blogDict =
-    (dict?.blogSection as any) ?? {
-      title: "Ayiti 2075 Blog",
-      paragraph: "Stories, updates, and visions for the future.",
-      readMore: "Read More",
-    };
-
-  const posts = await getAllPosts(locale);
-
-  return (
-    <div className="na-blog-page">
-      <BlogTopbar locale={locale} />
-
-      <main className="na-blog-main">
-        <header className="na-blog-header">
-          <h1 className="na-blog-title">{blogDict.title}</h1>
-          <p className="na-blog-subtitle">{blogDict.paragraph}</p>
-        </header>
-        <PostsGrid posts={posts} locale={locale} readMoreLabel={blogDict.readMore} />
-        <PostsGrid posts={posts} locale={locale} />
-      </main>
-    </div>
-  );
+  return {
+    title,
+    description,
+  };
 }
 
-export async function generateStaticParams() {
-  const locales: Locale[] = ["en", "fr", "ht", "es"];
-  return locales.map((locale) => ({ locale }));
+export default async function BlogIndexPage({ params }: PageProps) {
+  const locale = normalizeLocale(params.locale);
+  const posts = getAllPosts();
+  const dictionary = await getDictionary(locale);
+
+  return (
+    <main className="min-h-screen bg-white py-10">
+      <BlogSection locale={locale} posts={posts} dictionary={dictionary} />
+    </main>
+  );
 }

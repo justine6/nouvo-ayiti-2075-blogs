@@ -1,39 +1,31 @@
-// app/[locale]/page.tsx
+import type { Metadata } from "next";
 
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import type { Locale } from "@/lib/i18n/settings";
-
-import { getAllPosts } from "@/lib/get-all-posts";
-
-import HeroSection from "@/components/blog/HeroSection";
-import BlogSection from "@/components/blog/BlogSection";
-import Footer from "@/components/blog/Footer";
-
-type HomePageProps = {
-  params: { locale: Locale };
+type PageProps = {
+  params: {
+    locale: string;
+  };
 };
 
-export default async function HomePage({ params }: HomePageProps) {
-  const locale = params.locale || "en";
+export function generateMetadata(): Metadata {
+  return {
+    title: "Contact – Ayiti 2075 Blog",
+    description: "Get in touch with the Nouvo Ayiti 2075 team.",
+  };
+}
 
-  // Load home translations
-  const dict = await getDictionary(locale, "home");
-
-  // Load all blog posts
-  const posts = await getAllPosts();
+export default function ContactPage({ params }: PageProps) {
+  const { locale } = params;
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
-      {/* HERO */}
-      <HeroSection locale={locale} dictionary={dict} />
-
-      {/* BLOG SECTION */}
-      <div className="mt-12">
-        <BlogSection locale={locale} posts={posts} dictionary={dict} />
-      </div>
-
-      {/* FOOTER */}
-      <Footer locale={locale} dictionary={dict} />
+    <main className="min-h-screen bg-white py-10">
+      <section className="mx-auto max-w-3xl px-4">
+        <h1 className="text-3xl font-semibold">Contact</h1>
+        <p className="mt-4 text-sm text-neutral-700">
+          This is a placeholder contact page for the Ayiti 2075 blog (
+          <span className="font-mono">{locale}</span> locale). Later you can add
+          real contact forms or links.
+        </p>
+      </section>
     </main>
   );
 }

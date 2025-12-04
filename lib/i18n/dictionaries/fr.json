@@ -1,0 +1,16 @@
+{
+  "blogSection": {
+    "title": "Du blog Ayiti 2075",
+    "subtitle": "Histoires d'espoir, de progrès et d'action collective.",
+    "viewAll": "Voir tous les articles",
+    "blogUnavailable": "Aucun article n'est disponible pour l'instant. Revenez bientôt.",
+    "readMore": "Lire la suite"
+  },
+  "postPage": {
+    "backToBlog": "Retour à tous les articles",
+    "publishedOn": "Publié le"
+  },
+  "common": {
+    "languageName": "Français"
+  }
+}

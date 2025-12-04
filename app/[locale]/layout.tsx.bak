@@ -16,10 +16,10 @@ export default function LocaleLayout({ children, params }: LayoutProps) {
 
   return (
     <div className="na-page-shell">
-      {/* ✅ Global top bar with Kiawel avatar, red CTA & language pills */}
       <Topbar locale={locale} />
-
-      <div className="na-page-shell-inner">{children}</div>
+      <div className="na-page-shell-inner">
+        {children}
+      </div>
     </div>
   );
 }

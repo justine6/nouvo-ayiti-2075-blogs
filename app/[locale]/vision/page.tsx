@@ -17,7 +17,7 @@ export default async function VisionPage({ params }: Props) {
     ? (rawLocale as Locale)
     : defaultLocale;
 
-  const dict = (await getDictionary(locale, "vision")) as VisionDict;
+  const dict = (await getDictionary(locale)) as VisionDict;
 
   const title = dict.title ?? "Our Vision";
   const intro =

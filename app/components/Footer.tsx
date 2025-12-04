@@ -1,4 +1,3 @@
-// components/Footer.tsx
 import Link from "next/link";
 
 type FooterProps = {
@@ -12,17 +11,10 @@ type FooterProps = {
 };
 
 export default function Footer({ dict = {} }: FooterProps) {
-  const warn = (
-    path: string,
-    value: string | undefined,
-    fallback: string,
-  ): string => {
+  const warn = (path: string, value: string | undefined, fallback: string) => {
     if (process.env.NODE_ENV === "development" && !value) {
-      // Wrap in String(...) to avoid any implicit-conversion complaints
       console.warn(
-        `⚠️ Missing translation for Footer.${String(
-          path,
-        )}, using fallback "${String(fallback)}"`,
+        `⚠️ Missing translation for Footer.${path}, using fallback "${fallback}"`,
       );
     }
     return value ?? fallback;

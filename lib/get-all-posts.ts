@@ -1,6 +1,4 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+// lib/get-all-posts.ts
 
 export interface Post {
   slug: string;
@@ -8,43 +6,37 @@ export interface Post {
   date: string;
   summary: string;
   content: string;
-  excerpt?: string;
+  coverImage?: string;
 }
 
-/**
- * Read all markdown posts from content/<locale>.
- * If the locale folder is missing, return an empty list instead of recursing.
- */
-export function getAllPosts(locale: string = "en"): Post[] {
-  const safeLocale = (locale ?? "en").trim() || "en";
+// For now we keep a simple in-memory list.
+// You can tweak the text however you like.
+const POSTS: Post[] = [
+  {
+    slug: "welcome-to-ayiti-2075-blog",
+    title: "Welcome to the Ayiti 2075 Blog",
+    date: "2025-01-14",
+    summary:
+      "Why this blog exists, how it supports the Nouvo Ayiti 2075 vision, and what kind of updates you will find here.",
+    content: `Welcome to the Nouvo Ayiti 2075 blog — a home for ideas, progress,
+and the living heartbeat of a nation transforming itself.
 
-  const postsDirectory = path.join(process.cwd(), "content", safeLocale);
+Here, we’ll share project updates, reflections from the field, and stories
+from partners and communities working to restore Haiti with dignity and hope.`,
+    coverImage: "/images/nouvoayiti2075-logo.png",
+  },
+];
 
-  if (!fs.existsSync(postsDirectory)) {
-    console.warn(
-      `⚠️ Locale folder not found: ${postsDirectory}. Returning empty post list.`
-    );
-    return [];
-  }
+// Optional locale arg for future i18n – we ignore it for now but keep it typed.
+export function getAllPosts(locale?: string): Post[] {
+  void locale; // mark param as "used" for eslint
+  return POSTS;
+}
 
-  const fileNames = fs
-    .readdirSync(postsDirectory)
-    .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
+export function getAllPostSlugs(): string[] {
+  return POSTS.map((post) => post.slug);
+}
 
-  const posts: Post[] = fileNames.map((fileName) => {
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug: fileName.replace(/\.mdx?$/, ""),
-      title: data.title || "",
-      date: data.date || "",
-      summary: data.summary || "",
-      content,
-      excerpt: data.excerpt || data.summary || "",
-    };
-  });
-
-  return posts;
+export function getPostBySlug(slug: string): Post | undefined {
+  return POSTS.find((post) => post.slug === slug);
 }
