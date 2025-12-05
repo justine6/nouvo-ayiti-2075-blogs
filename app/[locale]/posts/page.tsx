@@ -46,7 +46,7 @@ export default function PostsIndexPage({ params }: PageProps) {
                 key={post.slug}
                 className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm hover:border-purple-300 hover:shadow-md transition"
               >
-                <h2 className="text-lg font-semibold">
+                <h2 className="mt-3 text-lg font-semibold text-amber-800">
                   {/* Keep detail pages under /blog/[slug] */}
                   <Link href={`/${locale}/blog/${post.slug}`}>
                     {post.title}

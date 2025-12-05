@@ -1,9 +1,6 @@
 /* app/globals.css */
 
 /* ========== BASIC RESET + TYPOGRAPHY ========== */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 *,
 *::before,
@@ -19,8 +16,8 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  background: transparent;
-  color: inherit; /* lets Tailwind utilities take over */
+  background: #f9fafb;
+  color: #111827;
 }
 
 /* ========== PAGE WRAPPERS ========== */
@@ -32,11 +29,14 @@ body {
 }
 
 /* Shell that pushes content below the fixed topbar */
+
 .na-page-shell {
-  padding-top: 5rem; /* adjust if your topbar height changes */
+  padding-top: 5rem;
+  /* adjust if your topbar height changes */
 }
 
 /* Optional generic page hero */
+
 .na-page-hero {
   margin-bottom: 2rem;
   text-align: center;
@@ -66,12 +66,14 @@ body {
 }
 
 /* push content down so hero isn’t hidden by topbar */
+
 .na-page-shell {
   padding-top: 4.25rem;
 }
 
 .na-topbar-inner {
-  max-width: 72rem; /* ~1152px */
+  max-width: 72rem;
+  /* ~1152px */
   margin: 0 auto;
   padding: 0.55rem 1.5rem;
   display: flex;
@@ -97,15 +99,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Ensures clean round crop */
-  background: #ffffff; /* Clean white background */
-  box-shadow: 0 4px 18px rgba(212, 0, 0, 0.25); /* 🔴 subtle red glow */
+  overflow: hidden;
+  /* Ensures clean round crop */
+  background: #ffffff;
+  /* Clean white background */
+  box-shadow: 0 4px 18px rgba(212, 0, 0, 0.25);
+  /* 🔴 subtle red glow */
 }
 
 .na-topbar-logo-img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Keeps proportions */
+  -o-object-fit: contain;
+  object-fit: contain;
+  /* Keeps proportions */
 }
 
 .na-topbar-brand-text {
@@ -152,7 +159,8 @@ body {
   bottom: -0.2rem;
   width: 0;
   height: 2px;
-  background: #d40000; /* 🔴 red underline */
+  background: #d40000;
+  /* 🔴 red underline */
   border-radius: 999px;
   transition: width 150ms ease-out;
 }
@@ -208,6 +216,7 @@ body {
 }
 
 /* Base language pill */
+
 .na-lang-pill {
   min-width: 2.4rem;
   padding: 0.25rem 0.7rem;
@@ -236,14 +245,18 @@ body {
 }
 
 /* Active — black pill */
+
 .na-lang-pill-active {
-  background: #000000; /* ⚫ black */
+  background: #000000;
+  /* ⚫ black */
   color: #ffffff;
   border-color: #000000;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
   transform: translateY(-1px);
 }
+
 /* --- Tiny "Join the movement" CTA — HAITI RED --- */
+
 .na-topbar-cta {
   display: inline-flex;
   align-items: center;
@@ -253,8 +266,8 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-
-  background: #d21034; /* Haitian red */
+  background: #d21034;
+  /* Haitian red */
   color: #ffffff;
   box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45);
   white-space: nowrap;
@@ -291,10 +304,12 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 999px;
+  -o-object-fit: cover;
   object-fit: cover;
   box-shadow:
     0 0 0 2px #f9fafb,
-    0 10px 30px rgba(0, 0, 0, 0.45); /* ⚫ darker, neutral shadow */
+    0 10px 30px rgba(0, 0, 0, 0.45);
+  /* ⚫ darker, neutral shadow */
 }
 
 .na-topbar-signature-name {
@@ -334,7 +349,8 @@ body {
   }
 
   .na-topbar-brand-text {
-    display: none; /* keep things clean on tiny screens */
+    display: none;
+    /* keep things clean on tiny screens */
   }
 
   .na-topbar-nav {
@@ -433,7 +449,9 @@ body {
     text-align: center;
   }
 }
+
 /* --- Logo image in topbar --- */
+
 .na-topbar-logo-img {
   border-radius: 9999px;
   /* subtle Haitian-red glow instead of purple */
@@ -441,6 +459,7 @@ body {
 }
 
 /* --- Tiny "Join the movement" CTA — HAITI RED --- */
+
 .na-topbar-cta {
   display: inline-flex;
   align-items: center;
@@ -450,8 +469,8 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-
-  background: #d21034; /* Haitian flag red */
+  background: #d21034;
+  /* Haitian flag red */
   color: #ffffff;
   box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45);
   white-space: nowrap;
@@ -475,12 +494,14 @@ body {
 .na-hero {
   margin: 3.25rem auto 3rem;
   padding: 2.25rem 1.5rem 3rem;
-  max-width: 1040px; /* keeps it as a nice band */
+  max-width: 1040px;
+  /* keeps it as a nice band */
   border-radius: 1.5rem;
   box-shadow: 0 22px 45px rgba(15, 23, 42, 0.1);
 }
 
 /* Background wrapper */
+
 .na-hero-bg {
   position: relative;
   isolation: isolate;
@@ -491,37 +512,36 @@ body {
 }
 
 /* -------------- Background Map (Final Crop) -------------- */
+
 .na-hero-bg-map {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-
   background-image: url("/images/haiti-map-hero.png");
   background-repeat: no-repeat;
-
   /* 🎯 Force the map to stay LEFT so the right extension disappears */
   background-position: left center;
-
   /* 🎯 Zoom in so Haiti fills the hero and cuts off the right side cleanly */
   background-size: 165% auto;
-
-  opacity: 0.48; /* Map now clearly visible */
+  opacity: 0.48;
+  /* Map now clearly visible */
   transform: scale(1);
   transition: transform 10s ease-out;
 }
 
 /* Gentle zoom hover */
+
 .na-hero:hover .na-hero-bg-map {
   transform: scale(1.05);
 }
 
 /* -------------- Overlay -------------- */
+
 .na-hero-bg-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-
   /* Softer overlay: keep dignity glow but don’t hide the map */
   background:
     radial-gradient(circle at 18% 20%, rgba(0, 0, 0, 0.28), transparent 60%),
@@ -530,36 +550,35 @@ body {
 }
 
 /* -------------- Foreground Content -------------- */
+
 .na-hero-inner {
   position: relative;
   z-index: 2;
   max-width: 1100px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.5rem;
-
   padding: 2rem 1.25rem 0;
 }
 
 /* -------------- Foreground Content -------------- */
+
 .na-hero-inner {
   position: relative;
   z-index: 2;
   max-width: 1100px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.5rem;
-
   padding: 2rem 1rem;
 }
 
 /* Headline + subtitle */
+
 .na-hero-title {
   font-size: clamp(2.4rem, 4vw, 3.1rem);
   font-weight: 800;
@@ -575,6 +594,7 @@ body {
 }
 
 /* Buttons */
+
 .na-hero-actions {
   margin-top: 1.5rem;
   display: flex;
@@ -583,20 +603,17 @@ body {
 }
 
 /* Primary button */
+
 .na-btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 0.75rem 1.8rem;
   border-radius: 999px;
-
   font-weight: 600;
   font-size: 0.95rem;
-
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
   color: white;
-
   box-shadow: 0 16px 40px rgba(79, 70, 229, 0.6);
   transition: all 0.15s ease-out;
 }
@@ -605,44 +622,43 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 22px 50px rgba(79, 70, 229, 0.75);
 }
+
 /* -------------- Background Map (tight Haiti crop) -------------- */
+
 .na-hero-bg-map {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-
   background-image: url("/images/haiti-map-hero.png");
   background-repeat: no-repeat;
-
   /* 🔧 Focus hard on the left side (Haiti) */
-  background-position: 0% center; /* shove image fully left */
-
+  background-position: 0% center;
+  /* shove image fully left */
   /* 🔧 Zoom more so the right-side globe & extra sea are out of frame */
   background-size: 220% auto;
-
-  opacity: 0.46; /* map still clearly visible */
+  opacity: 0.46;
+  /* map still clearly visible */
   transform: scale(1);
   transition: transform 10s ease-out;
 }
 
 /* Gentle zoom */
+
 .na-hero:hover .na-hero-bg-map {
   transform: scale(1.05);
 }
 
 /* Secondary button */
+
 .na-btn-secondary {
   padding: 0.75rem 1.8rem;
   border-radius: 999px;
-
   font-weight: 600;
   font-size: 0.95rem;
-
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.7);
   color: #ffffff;
-
   backdrop-filter: blur(8px);
   transition: all 0.15s ease-out;
 }
@@ -651,11 +667,13 @@ body {
   background-color: rgba(255, 255, 255, 0.12);
   transform: translateY(-1px);
 }
+
 /* =========================================================
    HERO BUTTONS — HAITI NATIONAL COLORS
    ========================================================= */
 
 /* 🔴 Watch Videos (primary) */
+
 .na-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -664,8 +682,8 @@ body {
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.95rem;
-
-  background: linear-gradient(135deg, #d21034, #a50c2a); /* Haitian red */
+  background: linear-gradient(135deg, #d21034, #a50c2a);
+  /* Haitian red */
   color: #ffffff;
   border: none;
   box-shadow: 0 10px 28px rgba(210, 16, 52, 0.55);
@@ -679,12 +697,12 @@ body {
 }
 
 /* ⚫ Read the Vision (secondary) */
+
 .na-btn-secondary {
   padding: 0.85rem 1.9rem;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.95rem;
-
   background: #000000;
   color: #ffffff;
   border: none;
@@ -700,11 +718,13 @@ body {
 }
 
 /* Responsive */
+
 @media (max-width: 768px) {
   .na-hero {
     margin-top: 3.25rem;
     padding: 2.25rem 1rem 3rem;
   }
+
   .na-hero-inner {
     text-align: center;
     align-items: center;
@@ -925,17 +945,21 @@ body {
   padding: 1.5rem;
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
 }
+
 .na-section-title {
   font-size: 1.35rem;
   font-weight: 700;
 }
+
 /* --- Logo image in topbar --- */
+
 .na-topbar-logo-img {
   border-radius: 9999px;
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
 }
 
 /* --- Tiny "Join the movement" CTA --- */
+
 .na-topbar-cta {
   display: inline-flex;
   align-items: center;
@@ -960,6 +984,7 @@ body {
   box-shadow: 0 14px 30px rgba(79, 70, 229, 0.6);
   filter: brightness(1.05);
 }
+
 /* ============================================
    FINAL OVERRIDE — TOPBAR CTA (HAITI RED)
    ============================================ */
@@ -973,12 +998,11 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-
-  background: #d21034 !important; /* 🔴 Haitian red */
+  background: #d21034 !important;
+  /* 🔴 Haitian red */
   color: #ffffff !important;
   box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45) !important;
   white-space: nowrap;
-
   transition:
     transform 150ms ease,
     box-shadow 150ms ease,
@@ -991,12 +1015,15 @@ body {
   box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65) !important;
   filter: brightness(1.03);
 }
+
 /* ===== FIX: Trim map overflow on the right ===== */
+
 .na-hero {
   overflow: hidden !important;
 }
 
 /* Hard block: no images on blog pages */
+
 .blog-page img {
   display: none !important;
 }
@@ -1016,7 +1043,8 @@ body {
 }
 
 .na-blog-main {
-  max-width: 72rem; /* ~1152px */
+  max-width: 72rem;
+  /* ~1152px */
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
 }
@@ -1047,6 +1075,7 @@ body {
 }
 
 /* Grid of cards */
+
 .na-blog-grid {
   display: grid;
   gap: 1.5rem;
@@ -1134,7 +1163,8 @@ body {
 }
 
 .na-blog-main {
-  max-width: 72rem; /* ~1152px */
+  max-width: 72rem;
+  /* ~1152px */
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
 }
@@ -1165,6 +1195,7 @@ body {
 }
 
 /* Grid of cards */
+
 .na-blog-grid {
   display: grid;
   gap: 1.5rem;
