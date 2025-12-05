@@ -37,7 +37,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Root "/" → "/en"
+  // Root "/" → "/en" (locale home with hero)
   if (pathname === "/") {
     const url = req.nextUrl.clone();
     url.pathname = `/${DEFAULT_LOCALE}`;
