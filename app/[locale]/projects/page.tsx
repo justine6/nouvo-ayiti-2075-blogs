@@ -1,80 +1,43 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+import { locales } from "@/lib/i18n/settings";
 import { getProjects } from "@/lib/get-projects";
-import { getDictionary } from "../../../lib/i18n/get-dictionary";
-import { normalizeLocale } from "../../../lib/i18n/settings";
 
-type PageProps = {
-  params: {
-    locale: string;
-  };
+type ProjectsPageProps = {
+  params: { locale: string };
 };
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const locale = normalizeLocale(params.locale);
-  const dict = await getDictionary(locale);
-
-  const title = dict.blogSection?.title ?? "Ayiti 2075 Projects";
-  const description =
-    dict.blogSection?.subtitle ??
-    "Pilot initiatives and community projects connected to the Nouvo Ayiti 2075 vision.";
-
-  return {
-    title,
-    description,
-  };
-}
-
-export default async function ProjectsIndexPage({ params }: PageProps) {
-  const locale = normalizeLocale(params.locale);
+export default function ProjectsPage({}: ProjectsPageProps) {
   const projects = getProjects();
 
   return (
-    <main className="min-h-screen bg-white py-10">
-      <section className="mx-auto max-w-6xl px-4">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold">Ayiti 2075 Projects</h1>
-            <p className="mt-2 text-sm text-neutral-600">
-              Early pilots and stories that show what a renewed Ayiti could look
-              like.
-            </p>
-          </div>
-        </div>
+    <main className="min-h-screen bg-gray-50 px-4 py-16">
+      <section className="max-w-6xl mx-auto text-center">
+        <h1 className="text-3xl font-bold mb-4">Our Projects</h1>
 
-        <div className="mt-8 space-y-6">
+        <p className="text-lg text-gray-600 mb-4">
+          Discover our key initiatives to restore dignity, rebuild hope, and
+          renew vision across Haiti.
+        </p>
+
+        <p className="text-xl italic font-medium text-gray-800 mb-10">
+          Each project is a promise to the future.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
           {projects.map((project) => (
-            <article
+            <div
               key={project.slug}
-              className="border-b pb-4 last:border-none"
+              className="bg-white rounded-xl shadow-md border border-purple-100 p-6"
             >
-              <h2 className="text-lg font-semibold">
-                <Link href={`/${locale}/projects/${project.slug}`}>
-                  {project.title}
-                </Link>
-              </h2>
-
-              {project.date && (
-                <p className="mt-1 text-xs text-neutral-500">
-                  {new Date(project.date).toLocaleDateString(
-                    locale === "ht" ? "en-US" : locale,
-                    { year: "numeric", month: "short", day: "numeric" },
-                  )}
-                </p>
-              )}
-
-              <Link
-                href={`/${locale}/projects/${project.slug}`}
-                className="mt-2 inline-flex text-sm font-semibold underline underline-offset-4"
-              >
-                Learn more
-              </Link>
-            </article>
+              <h2 className="text-lg font-semibold mb-2">{project.title}</h2>
+              <p className="text-sm text-gray-600">{project.summary}</p>
+            </div>
           ))}
         </div>
       </section>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
 }

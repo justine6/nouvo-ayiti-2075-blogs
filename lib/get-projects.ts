@@ -1,43 +1,42 @@
-// lib/get-projects.ts
-
-export interface Project {
+export type Project = {
   slug: string;
   title: string;
   summary: string;
-  content: string;
-  status?: string;
-  date?: string;
-}
+};
 
-// Example data – keep / expand your own
 const PROJECTS: Project[] = [
   {
-    slug: "clean-water-pilot",
-    title: "Clean Water Pilot",
-    summary:
-      "Bringing safe, affordable drinking water to vulnerable communities.",
-    content: `This pilot focuses on clean, accessible drinking water as a
-foundation for health, education, and economic dignity in Haiti.`,
-    status: "planned",
-    date: "2025-01-10",
+    slug: "clean-water",
+    title: "Clean Water",
+    summary: "Providing safe drinking water for communities across Haiti.",
+  },
+  {
+    slug: "education",
+    title: "Education",
+    summary: "Schools and learning opportunities for the next generation.",
+  },
+  {
+    slug: "healthcare",
+    title: "Healthcare",
+    summary: "Improving access to clinics, hospitals, and medical support.",
+  },
+  {
+    slug: "infrastructure",
+    title: "Infrastructure",
+    summary: "Rebuilding roads, bridges, and essential public services.",
+  },
+  {
+    slug: "agriculture",
+    title: "Agriculture",
+    summary: "Supporting local farmers and sustainable food systems.",
+  },
+  {
+    slug: "technology",
+    title: "Technology",
+    summary: "Digital inclusion, connectivity, and tech training programs.",
   },
 ];
 
-export function getProjects(locale?: string): Project[] {
-  // use the param to satisfy eslint even if we don’t branch by locale yet
-  void locale;
+export function getProjects(): Project[] {
   return PROJECTS;
-}
-
-export function getAllProjectSlugs(locale?: string): string[] {
-  void locale;
-  return PROJECTS.map((p) => p.slug);
-}
-
-export function getProjectBySlug(
-  slug: string,
-  locale?: string,
-): Project | undefined {
-  void locale;
-  return PROJECTS.find((p) => p.slug === slug);
 }
