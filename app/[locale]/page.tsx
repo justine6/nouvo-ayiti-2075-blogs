@@ -32,6 +32,11 @@ type HomeDictShape = {
   blog?: BlogSectionDict;
 };
 
+// Slugs / URLs used by hero CTAs
+const VISION_SLUG = "welcome-to-ayiti-2075-blog";
+const MAIN_SITE_URL = "https://nouvoayiti2075.com";
+const JOIN_URL = "https://nouvoayiti2075.com/join";
+
 export default async function LocaleHome({ params }: HomePageProps) {
   const rawLocale = params.locale;
 
@@ -84,26 +89,34 @@ export default async function LocaleHome({ params }: HomePageProps) {
             <p className="na-hero-subtitle">{heroSubtitle}</p>
 
             <div className="na-hero-actions">
-              <Link
-                href={`/${locale}/vision#videos`}
-                className="na-btn-primary"
-              >
+              {/* Watch videos → /{locale}/videos */}
+              <Link href={`/${locale}/videos`} className="na-btn-primary">
                 {heroPrimaryLabel}
               </Link>
 
-              <Link href={`/${locale}/vision`} className="na-btn-secondary">
+              {/* Read the vision → /{locale}/blog/welcome-to-ayiti-2075-blog */}
+              <Link
+                href={`/${locale}/blog/${VISION_SLUG}`}
+                className="na-btn-secondary"
+              >
                 {heroSecondaryLabel}
               </Link>
             </div>
 
             <div className="na-hero-links">
-              <Link href={`/${locale}/join`} className="na-link-strong mr-4">
-                {joinNowLabel}
-              </Link>
-
-              {/* Optional: link out to the main Nouvo Ayiti 2075 site */}
+              {/* Join the movement → main site /join */}
               <a
-                href="https://nouvoayiti2075.com"
+                href={JOIN_URL}
+                className="na-link-strong mr-4"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {joinNowLabel}
+              </a>
+
+              {/* Main site */}
+              <a
+                href={MAIN_SITE_URL}
                 className="na-link-subtle"
                 target="_blank"
                 rel="noreferrer"
