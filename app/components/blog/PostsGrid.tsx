@@ -1,37 +1,30 @@
-// src/components/blog/PostsGrid.tsx
+// components/blog/PostsGrid.tsx
 import PostCard from "@/components/blog/PostCard";
-import type { Locale } from "@/lib/i18n/settings";
 import type { Post } from "@/lib/get-all-posts";
+import type { Locale } from "@/lib/i18n/settings";
 
 type PostsGridProps = {
-  locale: Locale;
   posts: Post[];
+  locale: Locale;
   variant?: "blog" | "more";
 };
 
 export default function PostsGrid({
-  locale,
   posts,
-  variant = "more",
+  locale,
+  variant = "blog",
 }: PostsGridProps) {
-  if (!posts || posts.length === 0) {
-    return (
-      <p className="text-sm text-neutral-600">
-        No posts are available yet. Please check back soon.
-      </p>
-    );
-  }
-
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
         <PostCard
           key={post.slug}
           locale={locale}
-          post={post}
+          slug={post.slug}
+          title={post.title}
+          date={post.date}
+          excerpt={post.summary ?? post.excerpt ?? ""}
           variant={variant}
-          // You can localize this later if you want:
-          readMoreLabel="Read the vision"
         />
       ))}
     </div>
