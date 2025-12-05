@@ -1,12 +1,13 @@
 // lib/get-all-posts.ts
 
-// Shape of a post used by the blog list & detail pages
 export interface Post {
   slug: string;
   title: string;
-  date: string; // ISO string
-  summary: string;
+  date: string;
+  summary?: string; // optional: older posts may use this
+  excerpt?: string; // optional: newer components prefer this
   content: string;
+  coverImage?: string; // optional, used by hero cards etc.
 }
 
 // Static list of posts for now.

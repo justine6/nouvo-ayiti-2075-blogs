@@ -1,26 +1,41 @@
-// app/[locale]/posts/page.tsx
-import Link from "next/link";
+// app/[locale]/blog/page.tsx
 import type { Metadata } from "next";
+import PostCard from "@/components/blog/PostCard";
 import { getAllPosts, type Post } from "@/lib/get-all-posts";
-import { normalizeLocale, type Locale } from "@/lib/i18n/settings";
+import {
+  SUPPORTED_LOCALES,
+  normalizeLocale,
+  type Locale,
+} from "@/lib/i18n/settings";
 
-type PageProps = {
-  params: {
-    locale: string;
-  };
+type PageParams = {
+  locale: string;
 };
 
+type PageProps = {
+  params: PageParams;
+};
+
+// Pre-generate static params for all locales
+export function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+}
+
+// Optional – basic metadata; tweak later
 export function generateMetadata({ params }: PageProps): Metadata {
   const locale = normalizeLocale(params.locale);
 
   return {
-    title: `All posts – Ayiti 2075 (${locale})`,
+    title: "Ayiti 2075 Blog",
     description:
-      "Browse all posts from the Nouvo Ayiti 2075 blog: stories of hope, progress, and collective action.",
+      "All Nouvo Ayiti 2075 blog posts – stories, updates, and vision for a renewed Haiti.",
+    alternates: {
+      canonical: `/${locale}/blog`,
+    },
   };
 }
 
-export default function PostsIndexPage({ params }: PageProps) {
+export default function BlogIndexPage({ params }: PageProps) {
   const locale: Locale = normalizeLocale(params.locale);
   const posts: Post[] = getAllPosts();
 
@@ -40,34 +55,17 @@ export default function PostsIndexPage({ params }: PageProps) {
             No posts are available yet. Please check back soon.
           </p>
         ) : (
-          <ul className="space-y-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <li
+              <PostCard
                 key={post.slug}
-                className="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm hover:border-purple-300 hover:shadow-md transition"
-              >
-                <h2 className="mt-3 text-lg font-semibold text-amber-800">
-                  {/* Keep detail pages under /blog/[slug] */}
-                  <Link href={`/${locale}/blog/${post.slug}`}>
-                    {post.title}
-                  </Link>
-                </h2>
-                <p className="mt-1 text-xs text-neutral-500">
-                  {new Date(post.date).toLocaleDateString(
-                    locale === "ht" ? "en-US" : locale,
-                    { year: "numeric", month: "short", day: "numeric" },
-                  )}
-                </p>
-                <p className="mt-2 text-sm text-neutral-700">{post.summary}</p>
-                <Link
-                  href={`/${locale}/blog/${post.slug}`}
-                  className="mt-3 inline-flex text-sm font-semibold underline underline-offset-4"
-                >
-                  Read full story
-                </Link>
-              </li>
+                locale={locale}
+                post={post}
+                // You can localize this later if you want:
+                readMoreLabel="Read the vision"
+              />
             ))}
-          </ul>
+          </div>
         )}
       </section>
     </main>
