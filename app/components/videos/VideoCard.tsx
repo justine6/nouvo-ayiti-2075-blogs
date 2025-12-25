@@ -1,13 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import type { KeyboardEvent } from "react";
+import { useMemo, useState, type KeyboardEvent } from "react";
 import type { VideoEntry } from "@/lib/videos/catalog";
 
 type Platform = "youtube" | "facebook";
 
 type VideoCardProps = {
-  locale: string; // used for data attribute / future i18n tweaks
+  locale: string;
   dict: {
     tabYoutube?: string;
     tabFacebook?: string;
@@ -86,7 +85,7 @@ export default function VideoCard({
   return (
     <section
       data-locale={locale}
-      className="mx-auto w-full max-w-4xl rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200"
+      className="na-videos-card mx-auto w-full max-w-4xl"
     >
       {/* Text copy */}
       <div className="space-y-1">
@@ -105,7 +104,7 @@ export default function VideoCard({
           <div
             role="tablist"
             aria-label={dict.ariaTabListLabel || "Choose a platform"}
-            className="inline-flex rounded-xl bg-slate-100 p-1"
+            className="inline-flex rounded-full bg-slate-100 p-1 shadow-inner"
           >
             {tabs.map((p, idx) => {
               const selected = active === p;
@@ -123,7 +122,7 @@ export default function VideoCard({
                   onKeyDown={(e) => onKeyDown(e, idx)}
                   onClick={() => setActive(p)}
                   className={[
-                    "px-3 py-1.5 text-sm font-semibold rounded-lg transition",
+                    "px-3 py-1.5 text-sm font-semibold rounded-full transition",
                     selected
                       ? "bg-white text-slate-900 shadow-sm"
                       : "text-slate-700 hover:text-slate-900",
@@ -138,7 +137,7 @@ export default function VideoCard({
       ) : null}
 
       {/* Player */}
-      <div className="mt-4">
+      <div className="mt-4 space-y-4">
         {/* YouTube panel */}
         {youtubeOk ? (
           <div
@@ -151,7 +150,7 @@ export default function VideoCard({
           >
             {video.youtubeEmbed && (
               <div className="flex justify-center">
-                <div className="w-full max-w-4xl aspect-video overflow-hidden rounded-2xl bg-black shadow-lg">
+                <div className="na-video-frame w-full max-w-4xl aspect-video">
                   <iframe
                     src={video.youtubeEmbed}
                     title={copy.title}
@@ -188,7 +187,7 @@ export default function VideoCard({
           >
             {video.facebookEmbed && (
               <div className="flex justify-center">
-                <div className="w-full max-w-4xl aspect-video overflow-hidden rounded-2xl bg-black shadow-lg">
+                <div className="na-video-frame w-full max-w-4xl aspect-video">
                   <iframe
                     src={video.facebookEmbed}
                     title={copy.title}

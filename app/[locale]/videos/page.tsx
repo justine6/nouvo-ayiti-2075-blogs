@@ -57,25 +57,24 @@ export default async function VideosPage({ params }: PageProps) {
   const videosDict = await getVideosDict(params.locale);
 
   return (
-    <main className="flex justify-center px-6 py-12">
-      {/* Inner centered column */}
-      <div className="w-full max-w-6xl space-y-12">
+    <main className="na-videos-page">
+      <div className="na-videos-page-inner space-y-10">
         <header className="space-y-3 max-w-3xl mx-auto text-center">
           <p className="text-sm">
             <Link
               href={`/${locale}`}
-              className="text-xs text-slate-600 hover:underline"
+              className="text-xs text-slate-100/80 hover:underline"
             >
               ← {videosDict.backToHome || "Back to Home"}
             </Link>
           </p>
 
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl font-bold text-slate-50">
             {videosDict.title || "Vision Videos"}
           </h1>
 
           {videosDict.description ? (
-            <p className="max-w-3xl text-sm text-slate-700 mx-auto">
+            <p className="max-w-3xl text-sm text-slate-100/90 mx-auto">
               {videosDict.description}
             </p>
           ) : null}
@@ -86,7 +85,7 @@ export default async function VideosPage({ params }: PageProps) {
                 href={videosDict.youtubePlaylistUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-red-500 px-4 py-1.5 text-sm font-semibold text-red-600 hover:bg-red-50"
+                className="inline-flex items-center gap-2 rounded-full border border-red-400/70 bg-red-500/10 px-4 py-1.5 text-xs font-semibold text-red-100 hover:bg-red-500/20"
               >
                 {videosDict.youtubePlaylistLabel || "Open YouTube playlist"}
               </a>
@@ -94,8 +93,8 @@ export default async function VideosPage({ params }: PageProps) {
           ) : null}
         </header>
 
-        {/* Video cards, centered */}
-        <div className="mx-auto w-full max-w-4xl">
+        {/* Video cards */}
+        <div className="space-y-8">
           <VideosClient
             locale={locale}
             dict={videosDict}

@@ -19,11 +19,6 @@ type VisionDict = {
 async function getVisionDict(locale: Locale): Promise<VisionDict> {
   const dict = await getDictionary(locale as Locale);
 
-  // If your dictionaries are nested, eg:
-  // {
-  //   "pages": { "vision": { ... } }
-  // }
-  // this will pick that first; otherwise it falls back to dict.vision.
   const visionDict =
     (dict.pages && (dict.pages as any).vision) ||
     (dict.vision as any) ||
@@ -59,15 +54,14 @@ export default async function VisionPage({ params }: PageProps) {
 
   const dict = await getVisionDict(locale);
 
-  const title =
-    dict.title ?? "Our Vision";
+  const title = dict.title ?? "Our Vision";
   const intro =
     dict.intro ??
     "Our vision is to restore dignity, empower communities, and renew hope for Haiti's future.";
   const points = dict.points ?? [];
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10 space-y-6">
+    <main className="mx-auto max-w-4xl space-y-6 px-4 py-10">
       <header className="space-y-4">
         <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
         <p className="text-sm text-slate-700">{intro}</p>

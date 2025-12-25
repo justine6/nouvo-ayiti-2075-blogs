@@ -676,3 +676,165 @@ main {
   font-size: 0.85rem;
   color: #475569;
 }
+//* =========================
+   Vision Videos — Page Shell
+   ========================= */
+.na-videos-page {
+  min-height: 100vh;
+  padding: 2.5rem 0 4rem;
+
+  /* Soft blue wash */
+  background:
+    radial-gradient(circle at 10% -10%, rgba(30, 64, 175, 0.18), transparent 50%),
+    radial-gradient(circle at 90% 0%, rgba(14, 165, 233, 0.16), transparent 55%),
+    linear-gradient(to bottom, #f1f5f9 0%, #ffffff 65%);
+}
+
+/* keep everything centered */
+.na-videos-page-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+
+/* =========================
+   Vision Videos — Cards
+   ========================= */
+.na-videos-card {
+  border-radius: 18px;
+  border: 1px solid rgba(71, 85, 105, 0.35); /* slate tone */
+  background: rgba(255, 255, 255, 0.96);
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
+
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease;
+}
+
+.na-videos-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 20px 48px rgba(30, 58, 138, 0.22),
+    0 0 0 1px rgba(30, 64, 175, 0.12);
+}
+
+/* text polish */
+.na-videos-card h2 {
+  color: #0f172a;
+}
+
+.na-videos-card p {
+  color: #334155;
+}
+
+.na-videos-card a {
+  color: #1d4ed8;
+}
+
+.na-videos-card a:hover {
+  color: #2563eb;
+}
+
+
+/* =========================
+   Video Frame styling
+   ========================= */
+.na-video-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #020617;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.na-video-frame:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+}
+/* =========================
+   Vision Videos — Page Shell
+   ========================= */
+.na-videos-page {
+  min-height: 100vh;
+  padding: 2.5rem 0 4rem;
+
+  /* Soft blue wash */
+  background:
+    radial-gradient(circle at 10% -10%, rgba(30, 64, 175, 0.18), transparent 50%),
+    radial-gradient(circle at 90% 0%, rgba(14, 165, 233, 0.16), transparent 55%),
+    linear-gradient(to bottom, #f1f5f9 0%, #ffffff 65%);
+}
+
+/* keep everything centered */
+.na-videos-page-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+
+/* =========================
+   Vision Videos — Cards
+   ========================= */
+.na-videos-card {
+  border-radius: 18px;
+  border: 1px solid rgba(71, 85, 105, 0.35); /* slate tone */
+  background: rgba(255, 255, 255, 0.96);
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
+
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease;
+}
+
+.na-videos-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 20px 48px rgba(30, 58, 138, 0.22),
+    0 0 0 1px rgba(30, 64, 175, 0.12);
+}
+
+/* text polish */
+.na-videos-card h2 {
+  color: #0f172a;
+}
+
+.na-videos-card p {
+  color: #334155;
+}
+
+.na-videos-card a {
+  color: #1d4ed8;
+}
+
+.na-videos-card a:hover {
+  color: #2563eb;
+}
+
+
+/* =========================
+   Video Frame styling
+   ========================= */
+.na-video-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #020617;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.na-video-frame:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+}
