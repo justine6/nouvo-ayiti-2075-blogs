@@ -1,3 +1,19 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Baseline === */
+* { box-sizing: border-box; }
+html, body { padding: 0; margin: 0; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #0f172a; background: #fff; }
+a { color: inherit; }
+
+/* === Page shell === */
+.na-page-shell { width: 100%; }
+.na-page { padding: 24px 0 80px; }
+
+/* ...rest of your CSS stays exactly as-is... */
 /* === Baseline === */
 * { box-sizing: border-box; }
 html, body { padding: 0; margin: 0; }
@@ -121,9 +137,6 @@ a { color: inherit; }
   height: 64px;
   gap: 1rem;
 }
-
-
-
 
 /* =========================
    HERO POLISH (Nouvo Ayiti)
@@ -633,4 +646,33 @@ a { color: inherit; }
   .na-video-frame iframe{
     height:min(62vw, 420px);
   }
+}
+/* ===== Global Page Layout ===== */
+main {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+/* Optional: make text more readable */
+main {
+  line-height: 1.65;
+}
+/* Footer container (optional) */
+.na-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  background: #ffffff;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.na-footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  color: #475569;
 }

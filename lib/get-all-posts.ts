@@ -2,8 +2,10 @@ export interface Post {
   slug: string;
   title: string;
   date: string;
-  summary: string;
+  summary?: string;    // optional, if you use it anywhere
+  excerpt?: string;    // ✅ used by blog/[slug] and PostCard
   content: string;
+  coverImage?: string; // ✅ used by PostCard, optional
 }
 
 const POSTS: Post[] = [
