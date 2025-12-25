@@ -17,7 +17,7 @@ npm run check-topbar-footer:strict
 # ---- 4) Video catalog must match locale JSON ids ----
 npm run guardian:videos
 
-# ---- 5) Run ESLint+Prettier only on staged files ----
+# ---- 5) Run ESLint + Prettier only on staged files ----
 npx lint-staged
 
 echo "✅ All checks passed — committing!"
