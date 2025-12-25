@@ -1,0 +1,59 @@
+cd C:\Users\justi\projects\nouvo-ayiti-2075-blogs
+
+# Backup first
+Copy-Item .\app\globals.css .\app\globals.css.bak -Force
+
+# Write minimal globals.css
+@'
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal baseline */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: transparent;
+  color: inherit;
+}
+
+/* Animation used by pages */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out both;
+}
+
+/* Optional: tiny toggle (providers/team) if you want CSS classes instead of Tailwind */
+.na-toggle {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.na-toggle-btn {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.na-toggle-btn[aria-pressed="true"] {
+  background: #0f172a;
+  color: #fff;
+}
+'@ | Set-Content -Path .\app\globals.css -Encoding UTF8

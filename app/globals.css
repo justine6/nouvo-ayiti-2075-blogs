@@ -1,1238 +1,636 @@
-/* app/globals.css */
+/* === Baseline === */
+* { box-sizing: border-box; }
+html, body { padding: 0; margin: 0; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #0f172a; background: #fff; }
+a { color: inherit; }
 
-/* ========== BASIC RESET + TYPOGRAPHY ========== */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* === Page shell === */
+.na-page-shell { width: 100%; }
+.na-page { padding: 24px 0 80px; }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* === Topbar === */
+.na-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15,23,42,0.08);
 }
-
-body {
-  margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  background: transparent;
-  color: inherit; /* lets Tailwind utilities take over */
+.na-topbar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
+.na-topbar-brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.na-topbar-title { font-weight: 700; font-size: 14px; white-space: nowrap; }
+.na-topbar-nav { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.na-topbar-link { font-size: 13px; text-decoration: none; opacity: 0.8; }
+.na-topbar-link:hover { opacity: 1; text-decoration: underline; }
+.na-topbar-link--active { opacity: 1; font-weight: 700; text-decoration: underline; }
 
-/* ========== PAGE WRAPPERS ========== */
+.na-topbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.na-topbar-profile { display: inline-flex; align-items: center; gap: 8px; opacity: 0.9; }
+.na-topbar-avatar { border-radius: 999px; }
+.na-topbar-signature { font-size: 12px; white-space: nowrap; opacity: 0.85; }
 
-.na-page {
-  max-width: 960px;
-  margin: 2.5rem auto;
-  padding: 0 1.5rem 3rem;
+.na-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 8px 20px rgba(220,38,38,0.22);
 }
+.na-topbar-cta:hover { filter: brightness(0.95); transform: translateY(-1px); }
 
-/* Shell that pushes content below the fixed topbar */
-.na-page-shell {
-  padding-top: 5rem; /* adjust if your topbar height changes */
+.na-topbar-locales { display: inline-flex; gap: 6px; padding: 6px; border-radius: 999px; border: 1px solid rgba(15,23,42,0.10); }
+.na-locale-link { font-size: 12px; text-decoration: none; padding: 6px 8px; border-radius: 999px; opacity: 0.75; }
+.na-locale-link--active { background: #0f172a; color: #fff; opacity: 1; }
+
+/* === Hero === */
+.na-hero { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(15,23,42,0.08); }
+.na-hero-inner { position: relative; padding: 48px 28px; min-height: 240px; display: flex; align-items: center; }
+.na-hero-bg-map { position: absolute; inset: 0; }
+.na-hero-bg-img { width: 100%; height: 100%; object-fit: cover; }
+.na-hero-bg-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.65); }
+.na-hero-copy { position: relative; max-width: 520px; }
+.na-hero-title { font-size: 40px; line-height: 1.1; margin: 0 0 10px; }
+.na-hero-subtitle { margin: 0 0 18px; opacity: 0.85; }
+
+.na-hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.na-btn-primary, .na-btn-secondary {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 14px; border-radius: 999px; text-decoration: none;
+  font-weight: 700; font-size: 13px;
 }
+.na-btn-primary { background: #dc2626; color: #fff; }
+.na-btn-secondary { border: 1px solid rgba(15,23,42,0.16); background: #fff; }
 
-/* Optional generic page hero */
-.na-page-hero {
-  margin-bottom: 2rem;
-  text-align: center;
-}
+.na-hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.na-link-strong { font-weight: 700; text-decoration: none; }
+.na-link-strong:hover { text-decoration: underline; }
+.na-link-subtle { opacity: 0.75; text-decoration: none; }
+.na-link-subtle:hover { opacity: 1; text-decoration: underline; }
 
-.na-page-title {
-  font-size: 2.25rem;
-  margin-bottom: 0.5rem;
-}
+/* === Sections / cards === */
+.na-section-title { font-size: 22px; margin: 0; }
+.na-section-subtitle { margin: 6px 0 0; opacity: 0.75; }
+.na-card { background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(15,23,42,0.04); }
+.na-card-title { margin: 0; font-size: 16px; font-weight: 800; }
+.na-card-meta { margin: 8px 0 0; font-size: 12px; opacity: 0.65; }
+.na-card-body { margin: 10px 0 0; opacity: 0.85; }
+.na-card-link { margin-top: 12px; display: inline-flex; font-weight: 700; text-decoration: none; }
+.na-card-link:hover { text-decoration: underline; }
 
-.na-page-lead {
-  margin: 0;
-  color: #4b5563;
-}
-
-/* ================== TOPBAR (POLISHED) ================== */
+/* === Blog grid === */
+.na-blog-preview { margin-top: 24px; }
+.na-blog-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.na-blog-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 980px) { .na-blog-grid { grid-template-columns: 1fr; } }
+/* ============================= */
+/* Topbar layout foundation */
+/* ============================= */
 
 .na-topbar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 40;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  z-index: 50;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* push content down so hero isn’t hidden by topbar */
-.na-page-shell {
-  padding-top: 4.25rem;
+.na-topbar-container {
+  max-width: 1280px; /* ~max-w-7xl */
+  margin: 0 auto;
+  padding: 0 1.25rem;
 }
 
 .na-topbar-inner {
-  max-width: 72rem; /* ~1152px */
-  margin: 0 auto;
-  padding: 0.55rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
+  height: 64px;
+  gap: 1rem;
 }
 
-/* ----- Brand left ----- */
 
-.na-topbar-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  color: #111827;
-}
 
-.na-topbar-logo-circle {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* Ensures clean round crop */
-  background: #ffffff; /* Clean white background */
-  box-shadow: 0 4px 18px rgba(212, 0, 0, 0.25); /* 🔴 subtle red glow */
-}
 
-.na-topbar-logo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Keeps proportions */
-}
-
-.na-topbar-brand-text {
-  display: flex;
-  flex-direction: column;
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-.na-topbar-tagline {
-  font-weight: 400;
-  font-size: 0.75rem;
-  color: #6b7280;
-}
-
-/* ----- Nav center ----- */
-
-.na-topbar-nav-wrap {
-  flex: 1;
-}
-
-.na-topbar-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1.75rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 0.9rem;
-}
-
-.na-topbar-link {
-  position: relative;
-  text-decoration: none;
-  color: #374151;
-  padding-bottom: 0.15rem;
-  transition: color 150ms ease;
-}
-
-.na-topbar-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.2rem;
-  width: 0;
-  height: 2px;
-  background: #d40000; /* 🔴 red underline */
-  border-radius: 999px;
-  transition: width 150ms ease-out;
-}
-
-.na-topbar-link:hover {
-  color: #111827;
-}
-
-.na-topbar-link:hover::after {
-  width: 100%;
-}
-
-.na-topbar-link-active {
-  color: #111827;
-  font-weight: 600;
-}
-
-.na-topbar-link-active::after {
-  width: 100%;
-}
-
-/* ----- Right: language pills + signature ----- */
-
-.na-topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-/* Language switcher pills */
-
-.na-lang-switch {
-  display: inline-flex;
-  padding: 0.15rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  gap: 0.1rem;
-}
-
-.na-lang-btn {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #ffffff80;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: 0.2s ease;
-}
-
-.na-lang-btn:hover {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.25);
-}
-
-/* Base language pill */
-.na-lang-pill {
-  min-width: 2.4rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #222222;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #f5f5f5;
-  border: 1px solid #dddddd;
-  transition:
-    background-color 140ms ease,
-    color 140ms ease,
-    transform 140ms ease,
-    box-shadow 140ms ease;
-}
-
-.na-lang-pill:hover {
-  background-color: #e5e5e5;
-  color: #000000;
-}
-
-/* Active — black pill */
-.na-lang-pill-active {
-  background: #000000; /* ⚫ black */
-  color: #ffffff;
-  border-color: #000000;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
-  transform: translateY(-1px);
-}
-/* --- Tiny "Join the movement" CTA — HAITI RED --- */
-.na-topbar-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.15rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-
-  background: #d21034; /* Haitian red */
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45);
-  white-space: nowrap;
-  transition:
-    transform 150ms ease,
-    box-shadow 150ms ease,
-    filter 150ms ease;
-}
-
-.na-topbar-cta:hover {
-  background: #b50e2c;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65);
-  filter: brightness(1.03);
-}
-
-/* Signature */
-
-.na-topbar-signature {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  color: #6b7280;
-}
-
-.na-topbar-signature-person {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.na-topbar-signature-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  object-fit: cover;
-  box-shadow:
-    0 0 0 2px #f9fafb,
-    0 10px 30px rgba(0, 0, 0, 0.45); /* ⚫ darker, neutral shadow */
-}
-
-.na-topbar-signature-name {
-  font-weight: 600;
-  color: #111827;
-}
-
-/* ----- Responsive tweaks ----- */
-
-@media (max-width: 900px) {
-  .na-topbar-inner {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .na-topbar-nav {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .na-topbar-right {
-    order: 2;
-  }
-
-  .na-page-shell {
-    padding-top: 4.75rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .na-topbar-inner {
-    padding-inline: 1rem;
-  }
-
-  .na-topbar-brand-text {
-    display: none; /* keep things clean on tiny screens */
-  }
-
-  .na-topbar-nav {
-    gap: 0.75rem;
-    font-size: 0.8rem;
-  }
-
-  .na-topbar-signature {
-    display: none;
-  }
-}
-
-/* Small screens (alternate breakpoint) */
-
-@media (max-width: 768px) {
-  .na-topbar-inner {
-    padding-inline: 0.75rem;
-    gap: 0.5rem;
-  }
-
-  .na-topbar-nav {
-    gap: 0.75rem;
-    font-size: 0.8rem;
-  }
-
-  .na-page-shell {
-    padding-top: 5rem;
-  }
-}
-
-/* ========== SECONDARY NAVBAR (IF USED ON OTHER PAGES) ========== */
-
-.na-navbar {
-  border-bottom: 1px solid #eee;
-  background: #ffffff;
-}
-
-.na-navbar-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.na-navbar-brand {
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  color: #111827;
-}
-
-.na-navbar-links {
-  display: flex;
-  gap: 1.25rem;
-  font-size: 0.9rem;
-}
-
-.na-navbar-link {
-  text-decoration: none;
-  color: #374151;
-}
-
-.na-navbar-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.na-navbar-link-active {
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.na-navbar-tagline {
-  font-size: 0.8rem;
-  color: #6b7280;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .na-navbar-inner {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .na-navbar-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .na-navbar-tagline {
-    width: 100%;
-    text-align: center;
-  }
-}
-/* --- Logo image in topbar --- */
-.na-topbar-logo-img {
-  border-radius: 9999px;
-  /* subtle Haitian-red glow instead of purple */
-  box-shadow: 0 8px 20px rgba(210, 16, 52, 0.35);
-}
-
-/* --- Tiny "Join the movement" CTA — HAITI RED --- */
-.na-topbar-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-
-  background: #d21034; /* Haitian flag red */
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45);
-  white-space: nowrap;
-  transition:
-    transform 150ms ease,
-    box-shadow 150ms ease,
-    filter 150ms ease;
-}
-
-.na-topbar-cta:hover {
-  background: #b50e2c;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65);
-  filter: brightness(1.03);
-}
-
-/* ============================================
-   HERO (POLISHED BAND, CROPPED MAP)
-   ============================================ */
+/* =========================
+   HERO POLISH (Nouvo Ayiti)
+   ========================= */
 
 .na-hero {
-  margin: 3.25rem auto 3rem;
-  padding: 2.25rem 1.5rem 3rem;
-  max-width: 1040px; /* keeps it as a nice band */
-  border-radius: 1.5rem;
-  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.1);
-}
-
-/* Background wrapper */
-.na-hero-bg {
   position: relative;
-  isolation: isolate;
-  min-height: 360px;
+  margin: 24px auto 0;
+  width: min(1200px, calc(100% - 48px));
+  border-radius: 24px;
   overflow: hidden;
-  border-radius: 1.5rem;
-  color: #ffffff;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(2, 6, 23, 0.08);
 }
 
-/* -------------- Background Map (Final Crop) -------------- */
-.na-hero-bg-map {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background-image: url("/images/haiti-map-hero.png");
-  background-repeat: no-repeat;
-
-  /* 🎯 Force the map to stay LEFT so the right extension disappears */
-  background-position: left center;
-
-  /* 🎯 Zoom in so Haiti fills the hero and cuts off the right side cleanly */
-  background-size: 165% auto;
-
-  opacity: 0.48; /* Map now clearly visible */
-  transform: scale(1);
-  transition: transform 10s ease-out;
-}
-
-/* Gentle zoom hover */
-.na-hero:hover .na-hero-bg-map {
-  transform: scale(1.05);
-}
-
-/* -------------- Overlay -------------- */
-.na-hero-bg-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-
-  /* Softer overlay: keep dignity glow but don’t hide the map */
-  background:
-    radial-gradient(circle at 18% 20%, rgba(0, 0, 0, 0.28), transparent 60%),
-    linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.08));
-  mix-blend-mode: multiply;
-}
-
-/* -------------- Foreground Content -------------- */
+/* Control hero height */
 .na-hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-
-  padding: 2rem 1.25rem 0;
+  min-height: 280px;
+  padding: 48px 48px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: center;
 }
 
-/* -------------- Foreground Content -------------- */
-.na-hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 1100px;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-
-  padding: 2rem 1rem;
+.na-hero-copy {
+  max-width: 560px;
 }
 
-/* Headline + subtitle */
 .na-hero-title {
-  font-size: clamp(2.4rem, 4vw, 3.1rem);
+  font-size: 40px;
+  line-height: 1.1;
   font-weight: 800;
-  letter-spacing: 0.03em;
-  margin: 0 0 0.5rem;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  margin: 0 0 10px;
 }
 
 .na-hero-subtitle {
-  font-size: 1rem;
-  opacity: 0.95;
-  max-width: 420px;
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: rgba(15, 23, 42, 0.72);
 }
 
 /* Buttons */
 .na-hero-actions {
-  margin-top: 1.5rem;
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
 }
 
-/* Primary button */
-.na-btn-primary {
+.na-btn-primary,
+.na-btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  padding: 0.75rem 1.8rem;
+  height: 36px;
+  padding: 0 14px;
   border-radius: 999px;
-
-  font-weight: 600;
-  font-size: 0.95rem;
-
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: white;
-
-  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.6);
-  transition: all 0.15s ease-out;
-}
-
-.na-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 50px rgba(79, 70, 229, 0.75);
-}
-/* -------------- Background Map (tight Haiti crop) -------------- */
-.na-hero-bg-map {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background-image: url("/images/haiti-map-hero.png");
-  background-repeat: no-repeat;
-
-  /* 🔧 Focus hard on the left side (Haiti) */
-  background-position: 0% center; /* shove image fully left */
-
-  /* 🔧 Zoom more so the right-side globe & extra sea are out of frame */
-  background-size: 220% auto;
-
-  opacity: 0.46; /* map still clearly visible */
-  transform: scale(1);
-  transition: transform 10s ease-out;
-}
-
-/* Gentle zoom */
-.na-hero:hover .na-hero-bg-map {
-  transform: scale(1.05);
-}
-
-/* Secondary button */
-.na-btn-secondary {
-  padding: 0.75rem 1.8rem;
-  border-radius: 999px;
-
-  font-weight: 600;
-  font-size: 0.95rem;
-
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  color: #ffffff;
-
-  backdrop-filter: blur(8px);
-  transition: all 0.15s ease-out;
-}
-
-.na-btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-1px);
-}
-/* =========================================================
-   HERO BUTTONS — HAITI NATIONAL COLORS
-   ========================================================= */
-
-/* 🔴 Watch Videos (primary) */
-.na-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.85rem 1.9rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
-
-  background: linear-gradient(135deg, #d21034, #a50c2a); /* Haitian red */
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 10px 28px rgba(210, 16, 52, 0.55);
-  transition: all 0.25s ease;
-}
-
-.na-btn-primary:hover {
-  background: linear-gradient(135deg, #b50e2c, #8c0a24);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(210, 16, 52, 0.7);
-}
-
-/* ⚫ Read the Vision (secondary) */
-.na-btn-secondary {
-  padding: 0.85rem 1.9rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
-
-  background: #000000;
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
-  backdrop-filter: none;
-  transition: all 0.25s ease;
-}
-
-.na-btn-secondary:hover {
-  background: #111111;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .na-hero {
-    margin-top: 3.25rem;
-    padding: 2.25rem 1rem 3rem;
-  }
-  .na-hero-inner {
-    text-align: center;
-    align-items: center;
-  }
-}
-
-/* ========== BLOG PREVIEW (HOME) ========== */
-
-.na-blog-preview {
-  margin-top: 3rem;
-}
-
-.na-blog-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.na-section-title {
-  font-size: 1.3rem;
+  font-size: 12px;
   font-weight: 700;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-.na-section-subtitle {
-  margin-top: 0.4rem;
-  font-size: 0.9rem;
-  color: #4b5563;
+.na-btn-primary {
+  background: #dc2626;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(220, 38, 38, 0.18);
+}
+.na-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(220, 38, 38, 0.24); }
+
+.na-btn-secondary {
+  background: rgba(255, 255, 255, 0.78);
+  color: #0f172a;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+}
+.na-btn-secondary:hover { transform: translateY(-1px); }
+
+/* Links under buttons */
+.na-hero-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .na-link-strong {
-  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: underline;
+  color: #0f172a;
+}
+.na-link-subtle {
   font-weight: 600;
-  color: #4f46e5;
-  text-decoration: none;
+  color: rgba(15, 23, 42, 0.65);
+  text-decoration: underline;
 }
 
+/* Background map */
+.na-hero-bg-map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.na-hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 75% 45%;
+  filter: blur(1px) saturate(1.05);
+  transform: scale(1.03);
+}
+.na-hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(900px 300px at 15% 45%, rgba(255,255,255,0.92), rgba(255,255,255,0.55) 55%, rgba(255,255,255,0.18) 100%),
+    linear-gradient(to right, rgba(255,255,255,0.92), rgba(255,255,255,0.10));
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .na-hero { width: calc(100% - 24px); }
+  .na-hero-inner {
+    grid-template-columns: 1fr;
+    padding: 28px 18px;
+    min-height: 240px;
+  }
+  .na-hero-title { font-size: 30px; }
+  .na-hero-bg-img { object-position: 70% 35%; }
+}
+
+/* =========================
+   Layout: single centered container
+   ========================= */
+.na-page{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+
+/* Sections spacing */
+.na-blog-preview,
+.na-section{
+  margin-top: 28px;
+}
+
+/* Make section headers align nicely */
+.na-blog-header{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+/* =========================
+   Hero: remove “too tall / floating” feel
+   ========================= */
+.na-hero{
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+}
+
+.na-hero-inner{
+  position: relative;
+  z-index: 2;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Background map layer */
+.na-hero-bg-map{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.na-hero-bg-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+}
+
+.na-hero-bg-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.65);
+}
+
+/* Buttons spacing (keeps hero compact) */
+.na-hero-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.na-hero-links{
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .na-page{ padding: 18px 14px 70px; }
+  .na-hero-inner{ padding: 18px; }
+  .na-blog-header{ flex-direction: column; align-items: flex-start; }
+}
+
+/* ================================
+   HERO POLISH
+================================ */
+.na-hero {
+  margin-top: 24px;
+}
+
+.na-hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 28px;
+  min-height: 260px;
+}
+
+.na-hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+}
+
+.na-hero-title {
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px 0;
+}
+
+.na-hero-subtitle {
+  margin: 0 0 14px 0;
+  color: #475569;
+}
+
+.na-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.na-hero-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Make bottom links look intentional */
+.na-link-strong {
+  font-weight: 700;
+  text-decoration: none;
+}
 .na-link-strong:hover {
   text-decoration: underline;
 }
 
-/* Mini-grid of blog cards */
-
-.na-blog-grid {
-  margin-top: 1.5rem;
-  display: grid;
-  gap: 1.5rem;
+.na-link-subtle {
+  color: #64748b;
+  text-decoration: none;
+}
+.na-link-subtle:hover {
+  text-decoration: underline;
 }
 
-@media (min-width: 768px) {
-  .na-blog-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+/* Background image behavior */
+.na-hero-bg-map {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.na-hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.na-hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+/* Make hero content feel like a soft card */
+.na-hero-copy {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 18px;
+  padding: 18px 18px;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+}
+
+/* Desktop layout: push copy left, let map breathe */
+@media (min-width: 960px) {
+  .na-hero-inner {
+    grid-template-columns: 560px 1fr;
+    align-items: center;
+    min-height: 300px;
+    padding: 34px;
+  }
+
+  .na-hero-copy {
+    margin-left: 10px;
   }
 }
 
-.na-card {
-  border-radius: 1rem;
-  padding: 1.5rem;
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
-  transition:
-    transform 150ms ease,
-    box-shadow 150ms ease,
-    border-color 150ms ease;
-}
-
-.na-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-  border-color: #4f46e5;
-}
-
-.na-card-title {
-  font-size: 0.98rem;
-  font-weight: 600;
-}
-
-.na-card-title a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.na-card-title a:hover {
-  text-decoration: underline;
-}
-
-.na-card-meta {
-  margin-top: 0.4rem;
-  font-size: 0.75rem;
-  color: #6b7280;
-}
-
-.na-card-body {
-  margin-top: 0.6rem;
-  font-size: 0.88rem;
-  color: #4b5563;
-}
-
-.na-card-link {
-  margin-top: 0.9rem;
-  display: inline-flex;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #4f46e5;
-  text-decoration: none;
-}
-
-.na-card-link:hover {
-  text-decoration: underline;
-}
-
-/* Legacy blog-mini-grid hook (if used somewhere else) */
-
-.na-blog-mini-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.na-blog-card {
-  border-radius: 0.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
-}
-
-.na-blog-card-link {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #5b21ff;
-  text-decoration: none;
-}
-
-.na-blog-card-link:hover {
-  text-decoration: underline;
-}
-
-/* ========== PROJECTS PAGE GRID ========== */
-
-.na-project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.na-project-card {
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
-  padding: 1.25rem 1.5rem;
-  background: #ffffff;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-}
-
-.na-project-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-}
-
-.na-project-body {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #4b5563;
-}
-
-/* ========== BLOG LIST PAGE ========== */
-
-.na-post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.na-post-card {
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1.25rem;
-}
-
-.na-post-title {
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
-.na-post-date {
-  font-size: 0.85rem;
-  color: #6b7280;
-  margin-bottom: 0.5rem;
-}
-
-.na-post-read {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2563eb;
-  text-decoration: none;
-}
-
-.na-post-read:hover {
-  text-decoration: underline;
-}
-
-/* Generic grid + card hook (used by multiple sections) */
-
-.na-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.75rem;
-}
-
-.na-card {
-  border-radius: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: #ffffff;
-  padding: 1.5rem;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
-}
-.na-section-title {
-  font-size: 1.35rem;
-  font-weight: 700;
-}
-/* --- Logo image in topbar --- */
-.na-topbar-logo-img {
-  border-radius: 9999px;
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
-}
-
-/* --- Tiny "Join the movement" CTA --- */
-.na-topbar-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: none;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: #ffffff;
-  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.45);
-  white-space: nowrap;
-  transition:
-    transform 140ms ease,
-    box-shadow 140ms ease,
-    filter 140ms ease;
-}
-
-.na-topbar-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.6);
-  filter: brightness(1.05);
-}
-/* ============================================
-   FINAL OVERRIDE — TOPBAR CTA (HAITI RED)
-   ============================================ */
-
-.na-topbar-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-
-  background: #d21034 !important; /* 🔴 Haitian red */
-  color: #ffffff !important;
-  box-shadow: 0 8px 24px rgba(210, 16, 52, 0.45) !important;
-  white-space: nowrap;
-
-  transition:
-    transform 150ms ease,
-    box-shadow 150ms ease,
-    filter 150ms ease;
-}
-
-.na-topbar-cta:hover {
-  background: #b50e2c !important;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(210, 16, 52, 0.65) !important;
-  filter: brightness(1.03);
-}
-/* ===== FIX: Trim map overflow on the right ===== */
-.na-hero {
-  overflow: hidden !important;
-}
-
-/* Hard block: no images on blog pages */
-.blog-page img {
-  display: none !important;
-}
-
-/* ==== Blog layout ==== */
-
-.na-blog-page {
-  min-height: 100vh;
-  background: #f9fafb;
-  color: #111827;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-}
-
-.na-blog-main {
-  max-width: 72rem; /* ~1152px */
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-}
-
-.na-blog-header {
-  margin-bottom: 2rem;
-}
-
-.na-blog-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.25rem;
-}
-
-.na-blog-subtitle {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #6b7280;
-}
-
-.na-blog-empty {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #6b7280;
-  font-style: italic;
-  text-align: center;
-}
-
-/* Grid of cards */
-.na-blog-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.na-blog-card {
-  background: #ffffff;
-  border-radius: 1rem;
-  padding: 1.25rem 1.25rem 1rem;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition:
-    transform 120ms ease,
-    box-shadow 120ms ease;
-}
-
-.na-blog-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
-}
-
-.na-blog-card-date {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  color: #0369a1;
-  margin: 0 0 0.4rem;
-}
-
-.na-blog-card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 0.4rem;
-}
+/* Mobile: tighter padding */
+@media (max-width: 520px) {
+  .na-hero-inner {
+    padding: 16px;
+    min-height: 240px;
+  }
 
-.na-blog-card-title a {
-  color: inherit;
-  text-decoration: none;
+  .na-hero-copy {
+    padding: 14px;
+  }
+}
+
+/* =========================
+   Videos page (na-videos-*)
+   ========================= */
+.na-videos-header{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:16px;
 }
 
-.na-blog-card-title a:hover {
-  text-decoration: underline;
+.na-videos-card{
+  border:1px solid rgba(148,163,184,.35);
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(2,6,23,.06);
+  overflow:hidden;
 }
 
-.na-blog-card-excerpt {
-  font-size: 0.9rem;
-  color: #4b5563;
-  margin: 0 0 0.75rem;
+.na-videos-tabs{
+  display:flex;
+  gap:10px;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(148,163,184,.25);
+  background:linear-gradient(to bottom, #ffffff, #f8fafc);
+}
+
+.na-tab{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:12px;
+  border:1px solid rgba(148,163,184,.35);
+  color:#0f172a;
+  text-decoration:none;
+  transition:transform .12s ease, box-shadow .12s ease;
 }
 
-.na-blog-card-footer {
-  margin-top: auto;
+.na-tab:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(2,6,23,.08);
 }
 
-.na-blog-card-link {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #0369a1;
-  text-decoration: none;
+.na-tab--active{
+  border-color:rgba(239,68,68,.35);
+  box-shadow:0 10px 25px rgba(239,68,68,.12);
 }
-
-.na-blog-card-link:hover {
-  color: #0f172a;
-  text-decoration: underline;
-}
-
-/* ==== Blog layout ==== */
 
-.na-blog-page {
-  min-height: 100vh;
-  background: #f9fafb;
-  color: #111827;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+.na-video-panel{
+  padding:16px;
 }
 
-.na-blog-main {
-  max-width: 72rem; /* ~1152px */
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+.na-video-frame{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(148,163,184,.25);
+  background:#0b1220;
 }
 
-.na-blog-header {
-  margin-bottom: 2rem;
+.na-video-frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
 }
 
-.na-blog-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.25rem;
+.na-video-actions{
+  margin-top:10px;
+  display:flex;
+  gap:12px;
 }
 
-.na-blog-subtitle {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #6b7280;
+.na-videos-note{
+  padding:0 16px 16px;
+  margin:0;
+  color:#475569;
+  font-size:13px;
 }
 
-.na-blog-empty {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #6b7280;
-  font-style: italic;
-  text-align: center;
+@media (max-width: 900px){
+  .na-videos-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 }
 
-/* Grid of cards */
-.na-blog-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+/* =========================
+   Videos page (na-videos-*)
+   ========================= */
+.na-videos-header{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:16px;
 }
 
-.na-blog-card {
-  background: #ffffff;
-  border-radius: 1rem;
-  padding: 1.25rem 1.25rem 1rem;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition:
-    transform 120ms ease,
-    box-shadow 120ms ease;
+.na-videos-card{
+  padding:18px;
 }
 
-.na-blog-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+.na-videos-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
 }
 
-.na-blog-card-date {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  color: #0369a1;
-  margin: 0 0 0.4rem;
+.na-tab{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border:1px solid #e5e7eb;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  color:#0f172a;
+  background:#fff;
+  text-decoration:none;
 }
 
-.na-blog-card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 0.4rem;
+.na-tab--active{
+  border-color:#fecaca;
+  box-shadow:0 6px 18px rgba(239,68,68,0.15);
 }
 
-.na-blog-card-title a {
-  color: inherit;
-  text-decoration: none;
+.na-video-panel{
+  padding-top:6px;
 }
 
-.na-blog-card-title a:hover {
-  text-decoration: underline;
+.na-video-frame{
+  width:100%;
+  border-radius:16px;
+  overflow:hidden;
+  background:#0b1220;
+  box-shadow:0 10px 30px rgba(2,6,23,0.12);
 }
 
-.na-blog-card-excerpt {
-  font-size: 0.9rem;
-  color: #4b5563;
-  margin: 0 0 0.75rem;
+.na-video-frame iframe{
+  width:100%;
+  height:min(56vw, 520px);
+  border:0;
+  display:block;
 }
 
-.na-blog-card-footer {
-  margin-top: auto;
+.na-video-actions{
+  margin-top:10px;
+  display:flex;
+  gap:12px;
 }
 
-.na-blog-card-link {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #0369a1;
-  text-decoration: none;
+.na-videos-note{
+  margin-top:10px;
+  color:#475569;
+  font-size:13px;
 }
 
-.na-blog-card-link:hover {
-  color: #0f172a;
-  text-decoration: underline;
+@media (max-width: 900px){
+  .na-videos-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .na-video-frame iframe{
+    height:min(62vw, 420px);
+  }
 }

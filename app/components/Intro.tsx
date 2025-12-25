@@ -1,10 +1,6 @@
-type Props = {
-  title?: string;
-  subtitle?: string;
-  locale: string;
-};
+type IntroProps = {};
 
-export default function Intro({ title, subtitle, locale }: Props) {
+export default function Intro() {
   return (
     <section className="text-center py-10">
       <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">

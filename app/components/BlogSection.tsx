@@ -60,7 +60,7 @@ export default function BlogSection({
             post ? (
               <article
                 key={post.slug}
-                className="border-b pb-4 last:border-none"
+                className="border-b border-slate-200 pb-4 last:border-none"
               >
                 <h3 className="text-lg font-semibold">
                   <Link href={`/${locale}/blog/${post.slug}`}>

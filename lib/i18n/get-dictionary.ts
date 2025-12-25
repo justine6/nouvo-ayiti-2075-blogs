@@ -9,6 +9,7 @@ export type DictionarySection =
   | "about"
   | "contact"
   | "vision"
+  | "videos"
   | "footer"
   | "newsletter"
   | "topbar"

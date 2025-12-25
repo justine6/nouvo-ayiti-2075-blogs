@@ -1,0 +1,31 @@
+{
+  "metaDescription": "Gade videyo ki pataje vizyon, pwojè, ak temwayaj Nouvo Ayiti 2075.",
+  "intro": "Istwa espwa, diyite, ak rebati pou Ayiti.",
+  "description": "Gade mesaj enpòtan, moman kle nan pwojè yo, ak temwayaj mouvman Nouvo Ayiti 2075. Videyo sa yo ede pataje vizyon an epi envite lòt moun vin patisipe.",
+  "metaTitle": "Videyo Vizyon an | Nouvo Ayiti 2075",
+  "youtubePlaylistUrl": "https://www.youtube.com/",
+  "youtubePlaylistLabel": "Louvri playlist YouTube la",
+  "title": "Videyo Vizyon an",
+  "backToHome": "Retounen lakay",
+  "viewModeCards": "Kat",
+  "viewModeGrid": "Shorts / Reels",
+  "tabYoutube": "YouTube",
+  "tabFacebook": "Facebook",
+  "openInNewTab": "Louvri nan yon nouvo onglet",
+  "watchOnYoutube": "Gade sou YouTube →",
+  "watchOnFacebook": "Gade sou Facebook →",
+  "ariaTabListLabel": "Chwazi yon platfòm pou gade videyo sa a",
+  "ariaTabPanelLabel": "Lektè videyo",
+  "items": {
+    "kiawel-1": {
+      "title": "Nouvo Ayiti 2075 — Videyo prensipal",
+      "subtitle": "Yon mesaj pou ini epi rebati",
+      "description": "Gade mesaj prensipal la epi pataje li ak kominote w."
+    },
+    "kiawel-2": {
+      "title": "Mesaj pou pèp ayisyen an",
+      "subtitle": "Yon apèl pou espwa ak aksyon",
+      "description": ""
+    }
+  }
+}

@@ -1,18 +1,23 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🔍 Running pre-commit checks..."
+echo "🔍 Running pre-commit checks…"
 
-# Step 1: Auto-patch dictionaries
-npm run patch-missing
+# ---- 1) Validate + Repair JSON ----
+npm run validate:repair
 
-# Step 2: Rebuild dictionaries
-npm run patch-dicts
+# ---- 2) Sync locale dictionaries ----
+npm run sync
 
-# Step 3: Validate metadata + dictionaries
-npm run validated
+# ---- 3) Strict dictionary + translation checks ----
+npm run check-dicts:strict
+npm run check-translation-sync:strict
+npm run check-topbar-footer:strict
 
-# Step 4: ESLint + Prettier only on staged files
+# ---- 4) Video catalog must match locale JSON ids ----
+npm run guardian:videos
+
+# ---- 5) Run ESLint+Prettier only on staged files ----
 npx lint-staged
 
-echo "✅ Pre-commit checks passed!"
+echo "✅ All checks passed — committing!"

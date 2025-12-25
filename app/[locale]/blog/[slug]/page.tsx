@@ -1,105 +1,48 @@
-import Link from "next/link";
-import type { Metadata } from "next";
-import { getAllPostSlugs, getPostBySlug } from "../../../../lib/get-all-posts";
-import { getDictionary } from "../../../../lib/i18n/get-dictionary";
-import {
-  SUPPORTED_LOCALES,
-  normalizeLocale,
-} from "../../../../lib/i18n/settings";
-
-type PageParams = {
-  locale: string;
-  slug: string;
-};
+import { getAllPostSlugs, getPostBySlug } from "@/lib/get-all-posts";
+import { normalizeLocale, type Locale } from "@/lib/i18n/settings";
 
 type PageProps = {
-  params: PageParams;
+  params: {
+    locale: string;
+    slug: string;
+  };
 };
 
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
-
-  const params: PageParams[] = [];
-  for (const locale of SUPPORTED_LOCALES) {
-    for (const slug of slugs) {
-      params.push({ locale, slug });
-    }
-  }
-  return params;
-}
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const locale = normalizeLocale(params.locale);
-  const dict = await getDictionary(locale);
-  const post = getPostBySlug(params.slug);
-
-  const baseTitle = dict.blogSection?.title ?? "Ayiti 2075 Blog";
-
-  if (!post) {
-    return {
-      title: `${baseTitle} – Post not found`,
-    };
-  }
-
-  return {
-    title: `${post.title} – ${baseTitle}`,
-    description: post.summary,
-  };
+  return ["en", "fr", "ht", "es"].flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug })),
+  );
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const locale = normalizeLocale(params.locale);
-  const dictionary = await getDictionary(locale);
+  const locale: Locale = normalizeLocale(params.locale);
   const post = getPostBySlug(params.slug);
-
-  const labels = dictionary.postPage ?? {};
 
   if (!post) {
     return (
-      <main className="min-h-screen bg-white py-10">
-        <div className="mx-auto max-w-3xl px-4">
-          <p className="text-sm text-neutral-600">
-            Post not found.{" "}
-            <Link
-              href={`/${locale}/blog`}
-              className="underline underline-offset-4"
-            >
-              {labels.backToBlog ?? "Back to all posts"}
-            </Link>
-          </p>
-        </div>
+      <main className="min-h-screen bg-white py-12">
+        <section className="mx-auto max-w-3xl px-4">
+          <p className="text-sm text-slate-500">Post not found.</p>
+        </section>
       </main>
     );
   }
 
-  const formattedDate = new Date(post.date).toLocaleDateString(
-    locale === "ht" ? "en-US" : locale,
-    { year: "numeric", month: "short", day: "numeric" },
-  );
-
   return (
-    <main className="min-h-screen bg-white py-10">
-      <article className="mx-auto max-w-3xl px-4">
-        <p className="text-xs text-neutral-500">
-          {labels.publishedOn ?? "Published on"} {formattedDate}
+    <main className="min-h-screen bg-white py-12">
+      <section className="mx-auto max-w-3xl px-4">
+        <p className="text-xs text-slate-500 mb-2">
+          {new Date(post.date).toLocaleDateString(
+            locale === "ht" ? "en-US" : locale,
+            { year: "numeric", month: "short", day: "numeric" },
+          )}
         </p>
-        <h1 className="mt-2 text-3xl font-semibold">{post.title}</h1>
-
-        <div className="mt-6 space-y-4 text-sm leading-relaxed text-neutral-800 whitespace-pre-line">
+        <h1 className="text-3xl font-bold text-slate-900 mb-4">{post.title}</h1>
+        <article className="prose max-w-none whitespace-pre-line">
           {post.content}
-        </div>
-
-        <div className="mt-8">
-          <Link
-            href={`/${locale}/blog`}
-            className="text-sm font-semibold underline underline-offset-4"
-          >
-            {labels.backToBlog ?? "Back to all posts"}
-          </Link>
-        </div>
-      </article>
+        </article>
+      </section>
     </main>
   );
 }

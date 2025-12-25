@@ -2,8 +2,35 @@
   "metaDescription": "Watch videos that share the vision, projects, and testimonies of Nouvo Ayiti 2075.",
   "intro": "Stories of hope, dignity, and rebuilding for Haiti.",
   "description": "Watch key messages, project highlights, and testimonies from the Nouvo Ayiti 2075 movement. These videos help share the vision and invite others to join.",
-  "metaTitle": "Vision Videos – Nouvo Ayiti 2075",
+  "metaTitle": "Vision Videos | Nouvo Ayiti 2075",
   "youtubePlaylistUrl": "https://www.youtube.com/",
   "youtubePlaylistLabel": "Open YouTube playlist",
-  "title": "Vision Videos"
+  "title": "Vision Videos",
+
+  "backToHome": "Back to Home",
+
+  "viewModeCards": "Cards",
+  "viewModeGrid": "Shorts/Reels",
+
+  "tabYoutube": "YouTube",
+  "tabFacebook": "Facebook",
+  "openInNewTab": "Open in a new tab",
+  "watchOnYoutube": "Watch on YouTube →",
+  "watchOnFacebook": "Watch on Facebook →",
+
+  "ariaTabListLabel": "Choose a platform to watch this video",
+  "ariaTabPanelLabel": "Video player",
+
+  "items": {
+    "kiawel-1": {
+      "title": "Nouvo Ayiti 2075 — Featured Video",
+      "subtitle": "A message to unite and rebuild",
+      "description": "Watch the featured message and share it with your community."
+    },
+    "kiawel-2": {
+      "title": "Message to the Haitian People",
+      "subtitle": "A call to hope and action",
+      "description": ""
+    }
+  }
 }

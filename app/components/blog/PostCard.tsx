@@ -1,86 +1,74 @@
-// app/components/blog/PostCard.tsx
 import Link from "next/link";
+import Image from "next/image";
 import type { Locale } from "@/lib/i18n/settings";
 import type { Post } from "@/lib/get-all-posts";
 
 type PostCardProps = {
   locale: Locale;
-
-  // New style (preferred)
-  post?: Post;
-
-  // Legacy style (still supported)
-  slug?: string;
-  title?: string;
-  date?: string;
-  excerpt?: string;
-
-  readMoreLabel?: string;
-  variant?: "blog" | "more";
+  post: Post;
 };
 
-export default function PostCard({
-  locale,
-  post,
-  slug,
-  title,
-  date,
-  excerpt,
-  readMoreLabel = "Read the vision",
-  variant = "blog",
-}: PostCardProps) {
-  // 🔁 Unify all inputs: prefer `post`, fall back to individual props
-  const effectiveSlug = post?.slug ?? slug ?? "";
-  const effectiveTitle = post?.title ?? title ?? "";
-  const effectiveDate = post?.date ?? date ?? "";
-  const effectiveExcerpt = post?.excerpt ?? post?.summary ?? excerpt ?? "";
+export default function PostCard({ locale, post }: PostCardProps) {
+  const { slug, title, date, summary, coverImage } = post;
 
-  // Safety: don't render if we still don't have a slug
-  if (!effectiveSlug) return null;
+  if (!slug) return null;
 
-  const href = `/${locale}/blog/${effectiveSlug}`;
+  const href = `/${locale}/blog/${slug}`;
 
   const formattedDate =
-    effectiveDate && effectiveDate.trim().length > 0
-      ? new Date(effectiveDate).toLocaleDateString(
-          locale === "ht" ? "en-US" : locale,
-          { year: "numeric", month: "short", day: "numeric" },
-        )
+    date && date.trim().length > 0
+      ? new Date(date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })
       : "";
 
-  const isBlog = variant === "blog";
+  const imageSrc = coverImage || "/images/nouvoayiti2075-logo.png";
 
   return (
-    <article
-      className={[
-        "flex h-full flex-col rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
-        isBlog ? "p-4" : "p-3",
-      ].join(" ")}
-    >
-      <header className="mb-2">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur transition hover:-translate-y-1 hover:border-emerald-400/80 hover:shadow-lg">
+      <div className="relative h-44 w-full overflow-hidden">
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-5">
         {formattedDate && (
-          <p className="text-xs text-slate-500">{formattedDate}</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-emerald-700/80">
+            {formattedDate}
+          </p>
         )}
-        <h2 className="mt-1 text-sm font-semibold leading-snug text-slate-900">
-          <Link href={href} className="hover:underline">
-            {effectiveTitle}
-          </Link>
+
+        <h2 className="line-clamp-2 text-lg font-semibold text-slate-900 group-hover:text-emerald-700">
+          {title}
         </h2>
-      </header>
 
-      {effectiveExcerpt && (
-        <p className="mb-3 line-clamp-3 text-xs text-slate-600">
-          {effectiveExcerpt}
-        </p>
-      )}
+        <p className="line-clamp-3 text-sm text-slate-600">{summary}</p>
 
-      <div className="mt-auto pt-2">
-        <Link
-          href={href}
-          className="text-xs font-semibold text-sky-700 hover:text-sky-800"
-        >
-          {readMoreLabel}
-        </Link>
+        <div className="mt-4 flex items-center justify-between gap-2">
+          <Link
+            href={href}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-700 hover:text-emerald-800"
+          >
+            Read more
+            <span
+              aria-hidden="true"
+              className="transition group-hover:translate-x-0.5"
+            >
+              →
+            </span>
+          </Link>
+
+          <span className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
+            Nouvo Ayiti 2075
+          </span>
+        </div>
       </div>
     </article>
   );

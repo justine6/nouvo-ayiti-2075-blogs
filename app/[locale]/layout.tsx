@@ -9,17 +9,17 @@ type LayoutProps = {
 };
 
 export default function LocaleLayout({ children, params }: LayoutProps) {
-  const rawLocale = params.locale;
-  const locale: Locale = locales.includes(rawLocale as Locale)
-    ? (rawLocale as Locale)
-    : defaultLocale;
+  const raw = params?.locale;
+
+  const locale: Locale =
+    raw && locales.includes(raw as Locale) ? (raw as Locale) : defaultLocale;
 
   return (
-    <div className="na-page-shell">
-      {/* ✅ Global top bar with Kiawel avatar, red CTA & language pills */}
+    <>
       <Topbar locale={locale} />
-
-      <div className="na-page-shell-inner">{children}</div>
-    </div>
+      <main className="na-page-shell">
+        <div className="mx-auto max-w-7xl px-6 py-10">{children}</div>
+      </main>
+    </>
   );
 }

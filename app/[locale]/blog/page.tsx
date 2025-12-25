@@ -1,36 +1,32 @@
-// app/[locale]/blog/page.tsx
-import { getAllPosts, type Post } from "@/lib/get-all-posts";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { normalizeLocale, type Locale } from "@/lib/i18n/settings";
+import type { Metadata } from "next";
 import PostsGrid from "@/components/blog/PostsGrid";
+import { getAllPosts } from "@/lib/get-all-posts";
+import { SUPPORTED_LOCALES, normalizeLocale } from "@/lib/i18n/settings";
 
 type PageProps = {
-  params: { locale: string };
+  params: {
+    locale: string;
+  };
 };
 
-export default async function BlogIndexPage({ params }: PageProps) {
-  const locale: Locale = normalizeLocale(params.locale);
-  const dict = await getDictionary(locale);
-  const labels = dict.blogSection ?? {};
+export async function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+}
 
-  const posts: Post[] = getAllPosts();
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  return {
+    title: "Blog – Nouvo Ayiti 2075",
+  };
+}
+
+export default async function BlogPage({ params }: PageProps) {
+  const posts = getAllPosts();
 
   return (
-    <main className="min-h-screen bg-white py-12">
-      <div className="mx-auto max-w-5xl px-4">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900">
-            {labels.title ?? "Our Blog"}
-          </h1>
-
-          <p className="mt-2 text-neutral-600">
-            {labels.subtitle ?? "Stories, updates, and visions for the future."}
-          </p>
-        </header>
-
-        {/* 🔥 Unified polished UI using same grid/cards as homepage */}
-        <PostsGrid locale={locale} posts={posts} variant="blog" />
-      </div>
+    <main className="min-h-screen bg-slate-50 pb-16 pt-10">
+      <PostsGrid locale={normalizeLocale(params.locale)} posts={posts} />
     </main>
   );
 }

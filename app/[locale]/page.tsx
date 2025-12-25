@@ -179,7 +179,7 @@ export default async function LocaleHome({ params }: HomePageProps) {
           </Link>
         </header>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="na-projects-grid">
           {projects.map((project) => (
             <article
               key={project.slug}

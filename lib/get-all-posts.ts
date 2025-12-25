@@ -1,17 +1,11 @@
-// lib/get-all-posts.ts
-
 export interface Post {
   slug: string;
   title: string;
   date: string;
-  summary?: string; // optional: older posts may use this
-  excerpt?: string; // optional: newer components prefer this
+  summary: string;
   content: string;
-  coverImage?: string; // optional, used by hero cards etc.
 }
 
-// Static list of posts for now.
-// Later we can swap this to real markdown/MDX.
 const POSTS: Post[] = [
   {
     slug: "welcome-to-ayiti-2075-blog",
@@ -45,19 +39,14 @@ Here are practical ways to stay connected, encourage the team, and help keep the
   },
 ];
 
-// --- Public helpers ---
-
-// All posts, newest first
 export function getAllPosts(): Post[] {
   return [...POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-// Just the slugs (for generateStaticParams)
 export function getAllPostSlugs(): string[] {
   return POSTS.map((post) => post.slug);
 }
 
-// Single post lookup (for the detail page)
 export function getPostBySlug(slug: string): Post | undefined {
   return POSTS.find((post) => post.slug === slug);
 }
